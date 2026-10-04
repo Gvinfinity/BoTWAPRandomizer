@@ -1,6 +1,0 @@
-/home/gvinfinity/Programming/BoTWAPRandomizer/src/client/obj/Debug/net8.0/BotWClient.csproj.AssemblyReference.cache
-/home/gvinfinity/Programming/BoTWAPRandomizer/src/client/obj/Debug/net8.0/BotWClient.GeneratedMSBuildEditorConfig.editorconfig
-/home/gvinfinity/Programming/BoTWAPRandomizer/src/client/obj/Debug/net8.0/BotWClient.AssemblyInfoInputs.cache
-/home/gvinfinity/Programming/BoTWAPRandomizer/src/client/obj/Debug/net8.0/BotWClient.AssemblyInfo.cs
-/home/gvinfinity/Programming/BoTWAPRandomizer/src/client/obj/Debug/net8.0/BotWClient.csproj.CoreCompileInputs.cache
-/home/gvinfinity/Programming/BoTWAPRandomizer/src/client/obj/Debug/net8.0/BotWClient.sourcelink.json

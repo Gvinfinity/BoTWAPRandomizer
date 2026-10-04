@@ -28,14 +28,14 @@ namespace BotWClient.Archipelago
             }
         }
 
-        private void OnItemReceived(global::Archipelago.MultiClient.Net.Helper.ReceivedItemsHelper helper)
+        private void OnItemReceived(global::Archipelago.MultiClient.Net.Helpers.ReceivedItemsHelper helper)
         {
             var item = helper.DequeueItem();
             Console.WriteLine($"Received item: {item.ItemName}");
             // Route to memory reader
             _memoryReader.WriteIncomingItem(new IncomingItem 
             { 
-                ApItemId = (uint)item.Item,
+                ApItemId = (uint)item.ItemId,
                 ActorName = "Weapon_Sword_001", // Placeholder translation
                 Quantity = 1
             });

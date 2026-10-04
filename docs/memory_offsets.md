@@ -30,6 +30,23 @@ These addresses can be used as code cave jump targets or native C++ DLL calls.
   * Base Pointer: `0x105B8B1C` (LibreVR verified static pointer to Pouch Content)
   * Note: We avoid direct RAM modification and instead use native API calls.
 
-## Hook / Mailbox Target Addresses
-* The Cemu Graphic Pack will allocate an unused block of memory (e.g., in `BSS` or explicitly requested heap block) for the Shared Memory Mailbox.
-* **Mailbox Base Address**: `0x11000000` (Example standard extended heap address, to be formalized in patches.txt)
+## Hook / Mailbox Addresses
+
+### Mailbox Base Address
+* **Guest (PPC) Address**: `0x11000000`
+* **Host Address Calculation**: `memory_base + 0x11000000`
+
+Cemu reserves a contiguous 4GB (`0x100000000`) virtual address block as `memory_base` for the entire PPC address space. Guest address `X` maps to host address `memory_base + X`. The C# client finds `memory_base` by parsing `/proc/PID/maps` for large (≥512MB) anonymous `rw-p` mappings, then validates the mailbox magic at the computed offset.
+
+### Mailbox Layout (Total: 12,384 bytes / 0x3260)
+| Offset from Base | Size | Description |
+| :--- | :--- | :--- |
+| `0x0000` | 32 B | Header (magic, version, status, heads/tails, tick_count) |
+| `0x0020` | 8192 B | Incoming Queue (256 × 32-byte items) |
+| `0x2020` | 4096 B | Outgoing Queue (256 × 16-byte checks) |
+| `0x3020` | 64 B | Debug message buffer (hook → client) |
+
+### Debug Fields
+* **`status`** (offset `0x08`): Set to `2` ("In Game") by the hook on its first tick. If `0`, the hook hasn't executed yet.
+* **`tick_count`** (offset `0x1C`): Incremented each game tick. Use for liveness monitoring.
+* **`debug_msg`** (offset `0x3020`): 64-byte ASCII string written by the hook with diagnostic messages.

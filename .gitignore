@@ -1,0 +1,4 @@
+src/client/bin
+src/client/obj
+**/__pycache__/**
+src/hook/CMakeFiles
