@@ -28,13 +28,15 @@ namespace BotWClient.Archipelago
             }
         }
 
-        private void OnItemReceived(Archipelago.MultiClient.Net.Models.NetworkItem item)
+        private void OnItemReceived(global::Archipelago.MultiClient.Net.Helper.ReceivedItemsHelper helper)
         {
-            Console.WriteLine($"Received item: {item.Item}");
+            var item = helper.DequeueItem();
+            Console.WriteLine($"Received item: {item.ItemName}");
             // Route to memory reader
             _memoryReader.WriteIncomingItem(new IncomingItem 
             { 
                 ApItemId = (uint)item.Item,
+                ActorName = "Weapon_Sword_001", // Placeholder translation
                 Quantity = 1
             });
         }
@@ -42,7 +44,7 @@ namespace BotWClient.Archipelago
         public void DispatchLocationCheck(OutgoingCheck check)
         {
             Console.WriteLine($"Dispatching check: {check.ApLocationId}");
-            _session.Locations.CompleteLocationChecks(check.ApLocationId);
+            _session.Locations.CompleteLocationChecks((long)check.ApLocationId);
         }
     }
 }
