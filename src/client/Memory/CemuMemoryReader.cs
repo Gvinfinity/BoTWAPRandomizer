@@ -33,8 +33,8 @@ namespace BotWClient.Memory
         private const int OFF_TICK_COUNT = 0x1C;
         
         private const int OFF_INCOMING_QUEUE = 0x20;
-        private const int OFF_OUTGOING_QUEUE = 0x2020;
-        private const int OFF_DEBUG_MSG  = 0x3020;
+        // Incoming Queue is now 256 * 64 = 16384 (0x4000) bytes!
+        private const int OFF_OUTGOING_QUEUE = 0x4020;
 
         private Process? _cemuProcess;
         private ulong _hostMailboxAddress = 0;
@@ -81,7 +81,7 @@ namespace BotWClient.Memory
                 ulong end = Convert.ToUInt64(addrRange[1], 16);
                 ulong size = end - start;
 
-                if (size > 2UL * 1024 * 1024 * 1024) continue;
+                if (size > 2000UL * 1024 * 1024) continue;
 
                 try {
                     fs.Position = (long)start;
@@ -151,18 +151,20 @@ namespace BotWClient.Memory
                 fs.Position = (long)_hostMailboxAddress + OFF_IN_TAIL;
                 uint inTail = BinaryPrimitives.ReverseEndianness(br.ReadUInt32());
 
-                if (inHead - inTail >= 256) return false; // Queue full
+                if (inHead - inTail >= 256) return false;
 
-                ulong itemOffset = _hostMailboxAddress + OFF_INCOMING_QUEUE + ((inHead % 256) * 32);
+                // Incoming item is now 64 bytes!
+                ulong itemOffset = _hostMailboxAddress + OFF_INCOMING_QUEUE + ((inHead % 256) * 64);
                 fs.Position = (long)itemOffset;
 
                 bw.Write(BinaryPrimitives.ReverseEndianness(item.SeqId));
                 bw.Write(BinaryPrimitives.ReverseEndianness(item.ApItemId));
 
-                byte[] nameBytes = new byte[16];
+                // Name is now 48 bytes maximum.
+                byte[] nameBytes = new byte[48];
                 if (!string.IsNullOrEmpty(item.ActorName))
                 {
-                    Encoding.ASCII.GetBytes(item.ActorName, 0, Math.Min(item.ActorName.Length, 15), nameBytes, 0);
+                    Encoding.ASCII.GetBytes(item.ActorName, 0, Math.Min(item.ActorName.Length, 47), nameBytes, 0);
                 }
                 bw.Write(nameBytes);
                 bw.Write(BinaryPrimitives.ReverseEndianness(item.Quantity));
@@ -192,7 +194,7 @@ namespace BotWClient.Memory
                 fs.Position = (long)_hostMailboxAddress + OFF_OUT_TAIL;
                 uint outTail = BinaryPrimitives.ReverseEndianness(br.ReadUInt32());
 
-                if (outTail == outHead) return null; // Queue empty
+                if (outTail == outHead) return null;
 
                 ulong checkOffset = _hostMailboxAddress + OFF_OUTGOING_QUEUE + ((outTail % 256) * 16);
                 fs.Position = (long)checkOffset;
@@ -200,7 +202,6 @@ namespace BotWClient.Memory
                 OutgoingCheck check = new OutgoingCheck
                 {
                     SeqId = BinaryPrimitives.ReverseEndianness(br.ReadUInt32()),
-                    // Read UInt64, but remember PPC is Big Endian
                     ApLocationId = BinaryPrimitives.ReverseEndianness(br.ReadUInt64()),
                     IsShop = BinaryPrimitives.ReverseEndianness(br.ReadUInt32())
                 };

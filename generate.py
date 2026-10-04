@@ -6,7 +6,7 @@ moduleMatches = 0x6267BFD0
 .origin = codecave
 
 # =============================================================================
-# 1. MAILBOX ALLOCATION (PURE ASM - NO DLL REQUIRED)
+# 1. MAILBOX ALLOCATION
 # =============================================================================
 _AP_Mailbox_Base:
 .int 0x41504D42          # [0x00] Magic Header Part 1: APMB
@@ -19,8 +19,7 @@ _AP_Mailbox_Base:
 .int 0x00000000          # [0x1C] Tick Count
 """
 
-# Allocate Mailbox Queues (12KB)
-for _ in range(96):
+for _ in range(161):
     asm += ".int " + ", ".join(["0"] * 32) + "\n"
 
 asm += """
@@ -28,19 +27,36 @@ _AP_Is_Injecting:
 .int 0x00000000
 
 # =============================================================================
-# 2. MAIN LOOP HOOK (TICKS & RECEIVES ITEMS)
+# 2. MAIN LOOP HOOK (Application::calc - Prologue)
 # =============================================================================
 _AP_MainTick_Hook:
-    # 1. Back up volatile registers safely
-    addi r1, r1, -0x40
+    # Hooked via 'bla', so LR = 0x0303E4C4.
+    # Because we are at the very beginning of the function, Volatile FPRs/VRs 
+    # are safely dead and won't be corrupted by acquireItem!
+
+    # 1. Standard Stack Frame (0x80 bytes is perfectly EABI compliant)
+    stwu r1, -0x80(r1)
+    
+    # 2. Backup r0 
+    stw r0, 0x30(r1)
+
+    # 3. Backup LR inside OUR frame (0x7C)
+    mflr r0
+    stw r0, 0x7C(r1)
+
+    # 4. Backup all volatile GPRs (Application::calc arguments + scratch)
     stw r3, 0x08(r1)
     stw r4, 0x0C(r1)
     stw r5, 0x10(r1)
-    stw r9, 0x14(r1)
-    stw r10, 0x18(r1)
-    stw r11, 0x1C(r1)
-    stw r12, 0x20(r1)
+    stw r6, 0x14(r1)
+    stw r7, 0x18(r1)
+    stw r8, 0x1C(r1)
+    stw r9, 0x20(r1)
+    stw r10, 0x24(r1)
+    stw r11, 0x28(r1)
+    stw r12, 0x2C(r1)
 
+    # 5. Mailbox Logic
     lis r11, _AP_Mailbox_Base@ha
     addi r11, r11, _AP_Mailbox_Base@l
     
@@ -51,51 +67,45 @@ _AP_MainTick_Hook:
     addi r12, r12, 1
     stw r12, 0x1C(r11)
 
-    # Check for incoming items (in_tail < in_head)
-    lwz r12, 0x10(r11)  # r12 = in_tail
-    lwz r10, 0x0C(r11)  # r10 = in_head
+    # Check incoming queue
+    lwz r12, 0x10(r11)  # tail
+    lwz r10, 0x0C(r11)  # head
     cmpw r12, r10
-    bge tick_done       # No items waiting
+    bge tick_done
 
-    # Check if actSysPtr is ready
+    # We have an item! Setup actSysPtr (r3)
     lis r9, 0x105B
     ori r9, r9, 0x8C00
     lwz r3, 0(r9)
     cmpwi r3, 0
-    beq tick_done       # Engine not fully booted yet
+    beq tick_done
 
-    # We have an item! We must create a secure stack frame for the bctrl call
-    stwu r1, -0x80(r1)
-    mflr r0
-    stw r0, 0x84(r1)
-
-    # Set is_injecting = 1 (so our outgoing hook ignores this grant)
+    # Set is_injecting flag
     lis r9, _AP_Is_Injecting@ha
     addi r9, r9, _AP_Is_Injecting@l
     li r10, 1
     stw r10, 0(r9)
 
-    # Calculate item pointer: base + 0x20 + ( (in_tail % 256) * 32 )
+    # Setup string pointer (r4) and quantity (r5)
     clrlwi r9, r12, 24
-    slwi r9, r9, 5
+    slwi r9, r9, 6
     addi r9, r9, 0x20
     add r9, r11, r9
+    addi r4, r9, 8
+    lwz r5, 0x38(r9)
 
-    # Set args for ksys::act::acquireItem
-    # r3 = actSysPtr (already set above)
-    addi r4, r9, 8      # r4 = ActorName string pointer
-    lwz r5, 24(r9)      # r5 = Quantity
+    # Zero optional params
+    li r6, 0
+    li r7, 0
+    li r8, 0
+    li r9, 0
+    li r10, 0
 
-    # Execute function
+    # Call acquireItem directly!
     lis r12, 0x0374
     ori r12, r12, 0x1B20
     mtctr r12
     bctrl
-
-    # Restore LR and tear down inner stack frame
-    lwz r0, 0x84(r1)
-    mtlr r0
-    addi r1, r1, 0x80
 
     # Clear is_injecting flag
     lis r9, _AP_Is_Injecting@ha
@@ -103,7 +113,7 @@ _AP_MainTick_Hook:
     li r10, 0
     stw r10, 0(r9)
 
-    # Increment in_tail to acknowledge receipt
+    # Increment tail
     lis r11, _AP_Mailbox_Base@ha
     addi r11, r11, _AP_Mailbox_Base@l
     lwz r12, 0x10(r11)
@@ -111,83 +121,104 @@ _AP_MainTick_Hook:
     stw r12, 0x10(r11)
 
 tick_done:
+    # Restore all GPRs (This perfectly restores the original arguments to Application::calc)
     lwz r3, 0x08(r1)
     lwz r4, 0x0C(r1)
     lwz r5, 0x10(r1)
-    lwz r9, 0x14(r1)
-    lwz r10, 0x18(r1)
-    lwz r11, 0x1C(r1)
-    lwz r12, 0x20(r1)
-    addi r1, r1, 0x40
+    lwz r6, 0x14(r1)
+    lwz r7, 0x18(r1)
+    lwz r8, 0x1C(r1)
+    lwz r9, 0x20(r1)
+    lwz r10, 0x24(r1)
+    lwz r11, 0x28(r1)
+    lwz r12, 0x2C(r1)
+    
+    # Restore LR (0x0303E4C4)
+    lwz r0, 0x7C(r1)
+    mtlr r0
+    
+    # Restore r0
+    lwz r0, 0x30(r1)
 
-    cmpwi r3, 0x0
-    b 0x0313B844
+    # Pop stack frame
+    addi r1, r1, 0x80
+
+    # Execute original instruction we replaced!
+    lis r9, 0x1048
+
+    # Branch using the Link Register seamlessly back to the engine (0x0303E4C4)
+    blr
 
 # =============================================================================
-# 3. ACQUIRE ITEM HOOK (INTERCEPTS VANILLA CHESTS TO SEND TO AP)
+# 3. ACQUIRE ITEM HOOK (Outgoing Intercept)
 # =============================================================================
 _AP_AcquireItem_Hook:
-    addi r1, r1, -0x40
-    stw r3, 0x08(r1)
-    stw r4, 0x0C(r1)
-    stw r9, 0x10(r1)
-    stw r10, 0x14(r1)
-    stw r11, 0x18(r1)
-    stw r12, 0x1C(r1)
+    # Backup registers
+    addi r1, r1, -0x30
+    stw r9, 0x08(r1)
+    stw r10, 0x0C(r1)
+    stw r11, 0x10(r1)
+    stw r12, 0x14(r1)
 
-    # Check is_injecting. If 1, this item came from AP, don't echo it back!
+    # Prevent loop if we are the ones injecting
     lis r11, _AP_Is_Injecting@ha
     addi r11, r11, _AP_Is_Injecting@l
     lwz r12, 0(r11)
     cmpwi r12, 1
     beq skip_intercept
 
-    # Write to Outgoing Queue
     lis r11, _AP_Mailbox_Base@ha
     addi r11, r11, _AP_Mailbox_Base@l
-    
-    lwz r12, 0x14(r11)  # r12 = out_head
+
+    # Write to Outgoing Queue
+    lwz r12, 0x14(r11)  # out_head
     clrlwi r10, r12, 24
-    
-    # offset = base + 0x2020 + (r10 * 16)
     slwi r10, r10, 4
     lis r9, 0
-    ori r9, r9, 0x2020
+    ori r9, r9, 0x4020
     add r10, r10, r9
     add r10, r10, r11
     
-    # Write SeqID = out_head
     stw r12, 0(r10)
-    
-    # Write AP_LocationID = 5000 + out_head (High bits 0)
     li r9, 0
     stw r9, 4(r10)
+    
+    # Send dummy location 5000 + out_head
     lis r9, 0
     ori r9, r9, 5000
     add r9, r9, r12
     stw r9, 8(r10)
     
-    # Write isShop = 0
     li r9, 0
     stw r9, 12(r10)
 
-    # out_head++
     addi r12, r12, 1
     stw r12, 0x14(r11)
 
 skip_intercept:
-    lwz r3, 0x08(r1)
-    lwz r4, 0x0C(r1)
-    lwz r9, 0x10(r1)
-    lwz r10, 0x14(r1)
-    lwz r11, 0x18(r1)
-    lwz r12, 0x1C(r1)
-    addi r1, r1, 0x40
+    # Setup long-distance branch target into CTR to be safe
+    lis r12, 0x0374
+    ori r12, r12, 0x1B24
+    mtctr r12
+
+    # Restore registers
+    lwz r9, 0x08(r1)
+    lwz r10, 0x0C(r1)
+    lwz r11, 0x10(r1)
+    lwz r12, 0x14(r1)
+    addi r1, r1, 0x30
 
     stwu r1, -0x30(r1)
-    b 0x03741B24
+    
+    # Long-distance branch back
+    bctr
 
-0x0313B840 = b _AP_MainTick_Hook
+# --- Hooks ---
+
+# 1. Main Tick Hook (Application::calc - Prologue)
+0x0303E4C0 = bla _AP_MainTick_Hook
+
+# 2. AcquireItem Hook
 0x03741B20 = b _AP_AcquireItem_Hook
 """
 
