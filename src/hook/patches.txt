@@ -1,0 +1,4 @@
+[BotW_AP_Hook]
+module = U-King.rpx
+# This patch backs up registers and jumps to our C++ DLL hook during the main ksys tick
+0x03780D7C = bla AP_Hook_Trampoline

@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "botw-ap-patcher"
+version = "0.1.0"
+description = "Static World Patcher for BotW Archipelago"
+dependencies = [
+    "roead>=0.2.0",
+    "byml-v2>=0.2.0",
+    "PyYAML>=6.0"
+]

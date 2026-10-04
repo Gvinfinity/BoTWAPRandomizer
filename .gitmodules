@@ -1,0 +1,12 @@
+[submodule "external/uking"]
+	path = external/uking
+	url = https://github.com/leoetlino/uking.git
+[submodule "external/sead"]
+	path = external/sead
+	url = https://github.com/open-ead/sead.git
+[submodule "external/SpawnActors"]
+	path = external/SpawnActors
+	url = https://github.com/S41L0R/SpawnActors.git
+[submodule "external/BotW-APManual"]
+	path = external/BotW-APManual
+	url = https://github.com/JDLKMR/BotW-APManual.git
