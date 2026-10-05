@@ -23,3 +23,15 @@ class TestBotWGeneration(BotWTestBase):
         data = self.world.fill_slot_data()
         for code, name in data["locations"].items():
             self.assertEqual(name, check_actor_name(int(code)))
+
+    def test_slot_and_generated_hook_share_seed_identity(self):
+        from ..static.protocol import MAILBOX_VERSION, seed_fingerprint
+        from ..static.hook import build_seed_hook
+        data = self.world.fill_slot_data()
+        ids = [int(code) for code in data["locations"]]
+        self.assertEqual(data["protocol_version"], MAILBOX_VERSION)
+        self.assertEqual(data["player"], self.player)
+        self.assertEqual(data["seed_fingerprint"], seed_fingerprint(data["seed"], self.player, ids))
+        plan = {"seed": data["seed"], "player": self.player,
+                "locations": [{"id": code} for code in ids], "slot_data": data}
+        self.assertIn(b"_AP_FlushPendingChecks:", build_seed_hook(plan))

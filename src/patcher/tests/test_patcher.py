@@ -114,9 +114,19 @@ def test_patch_shops_success():
     assert modified is True
     
     # Verify shop contents
-    assert mock_bshop['Items'][0]['ItemName'] == 'AP_Dummy_Check'
-    assert mock_bshop['Items'][0]['AP_LocationID'] == 0x6001
+    assert mock_bshop['Items'][0]['ItemName'] == 'AP_Check_00006001'
+    assert 'AP_LocationID' not in mock_bshop['Items'][0]
     assert mock_bshop['Items'][0]['Price'] == 10  # Price should remain intact
     
-    assert mock_bshop['Items'][1]['ItemName'] == 'AP_Dummy_Check'
-    assert mock_bshop['Items'][1]['AP_LocationID'] == 0x6002
+    assert mock_bshop['Items'][1]['ItemName'] == 'AP_Check_00006002'
+    assert 'AP_LocationID' not in mock_bshop['Items'][1]
+
+
+def test_shop_helper_only_replaces_explicit_mapped_slots():
+    shops = {'Items': [{'ItemName': 'Item_Fruit_A'}, {'ItemName': 'Item_Ore_A'}]}
+    assert not patch_shop_byml(shops, {})
+    assert patch_shop_byml(shops, {1: 0xB1234567})
+    assert shops['Items'][0]['ItemName'] == 'Item_Fruit_A'
+    assert shops['Items'][1]['ItemName'] == 'AP_Check_B1234567'
+    with pytest.raises(ValueError, match='absent'):
+        patch_shop_byml(shops, {2: 0xB7654321})

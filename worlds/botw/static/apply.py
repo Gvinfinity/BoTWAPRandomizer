@@ -13,6 +13,7 @@ from .chests import patch_chest_byml
 from .plan import validate_plan
 from .resources import binary_modules, decode_byml, decompress, encode_byml, replace_members
 from .ui import build_check_messages
+from .hook import build_seed_hook
 
 RSTB_PATH = "content/System/Resource/ResourceSizeTable.product.srsizetable"
 
@@ -77,10 +78,11 @@ def apply_plan(plan: dict, dump, output: str) -> dict:
         'titleIds = 00050000101C9300,00050000101C9400,00050000101C9500\n'
         f'name = Archipelago - Player {plan["player"]} Static Checks\n'
         'path = "The Legend of Zelda: Breath of the Wild/Mods/Archipelago Static Checks"\n'
-        'description = Per-location chest markers. Requires the compatible AP acquisition hook.\n'
+        'description = Seed-bound chest markers and AP v2 acquisition/delivery hook. Enable only this AP pack.\n'
         'version = 7\n'
     ).encode()
     files["botw_patch.json"] = json.dumps(plan, indent=2, sort_keys=True).encode()
+    files["patch_Archipelago.asm"] = build_seed_hook(plan)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     # Publish only a complete zip, so a failed build cannot leave a usable-looking pack.
     with tempfile.NamedTemporaryFile(dir=output_path.parent, suffix=".tmp", delete=False) as temporary:

@@ -2,8 +2,9 @@
 
 This is the first static chest implementation for the Wii U v208 game. It
 generates Archipelago seeds and applies them to an extracted game as a Cemu
-Graphic Pack. It is an experimental foundation: the acquisition hook, native
-flag/progressive-item grants, and in-game victory reporting still need integration.
+Graphic Pack. The generated pack includes the seed-bound acquisition/delivery hook, and the
+client consumes APWorld slot data. Native flag/progressive-item grants and
+in-game victory reporting remain unfinished; this is not yet a playable integration.
 
 ## Chest identity and hook contract
 
@@ -19,20 +20,20 @@ visual prototype shares the diamond model and icon; its buying/selling prices
 are zero. Model, physics, and AI resources remain shared to keep each additional
 pack small. All installed language packs receive the AP labels (currently English).
 
-The acquisition hook must:
+The bundled acquisition hook now:
 
-1. Recognize exactly `AP_Check_` followed by eight uppercase hexadecimal digits.
-2. Decode the location ID and verify it against the current slot's `locations`
+1. Recognizes exactly `AP_Check_` followed by eight uppercase hexadecimal digits.
+2. Decodes the location ID and verify it against the current slot's `locations`
    allowlist, supplied in slot data or the local patch manifest.
-3. Queue that ID with a zero high word in the mailbox's 64-bit location field.
-4. Suppress native marker insertion into the pouch, while completing the chest
-   acquisition normally. Handle a full outgoing queue before consuming the check.
-5. Keep received-item injection separate from outgoing check detection. Repeated
+3. Queues that ID with a zero high word in the mailbox's 64-bit location field.
+4. Suppresses native marker insertion into the pouch, while completing the chest
+   acquisition normally. A full outgoing queue retains the check as pending.
+5. Keeps received-item injection separate from outgoing check detection. Repeated
    acquisitions of the same marker refer to the same AP check.
 
 Unknown or malformed marker names must not generate synthetic check IDs. The
-existing hook has not been changed by this implementation. Loading the static
-pack alone does not provide reliable checks or vanilla progression isolation.
+hook consumes the raw actor name, not the UI label. The generated pack includes
+the matching ASM and seed table; see `docs/mailbox_protocol.md` for protocol v2.
 
 ## File formats and patch application
 
@@ -82,8 +83,9 @@ python3.12 -m venv .venv-patcher
 
 Install `botw.apworld` in Archipelago's `custom_worlds` directory and generate
 with game `Breath of the Wild`. Extract the locally applied zip into Cemu's
-`graphicPacks` directory. The static overlay and compatible acquisition hook are
-separate Graphic Packs.
+`graphicPacks` directory. Enable only that generated AP pack; disable the standalone
+AP hook pack to avoid patching the same native entrypoints twice. Regenerate older
+seeds and packs to obtain protocol v2 slot data and a configured hook.
 
 Minimal player YAML:
 
@@ -143,11 +145,16 @@ Solo and two-player worlds passed Archipelago restrictive fill and beatability
 using the local AP installation. The applied 164-check zip was parsed back to
 verify encoded drops, ActorLinks, GeneralParamLists, sorted ActorInfo hashes,
 resource-size entries, and UI labels in all seven installed language packs.
-The six patcher tests and seven APWorld tests passed, covering chest identity,
-unmatched mappings, archive preservation, initial access, rune rules, and fill.
+The current 18 patcher/hook tests and 8 APWorld tests pass. The patcher and
+APWorld tests cover the static pipeline; protocol tests additionally
+exercise the actual hook instructions against simulated guest memory. C# self-tests
+cover seed verification, native acknowledgements, queue limits, journal recovery,
+and a real AP SDK exchange against a local WebSocket fixture.
+Coverage includes chest identity, unmatched mappings, archive preservation,
+initial access, rune rules, fill, hook backpressure, and partial native grants.
 These checks do not establish Cemu runtime stability, check latency, UI behavior,
 delivery accuracy, or Plateau fog bypass; the project acceptance metrics still
-require emulator validation after hook integration.
+require emulator validation of the integrated hook.
 
 ## References
 
@@ -156,3 +163,29 @@ require emulator validation after hook integration.
 - `external/BotW-APManual`: community logic, extracted from release v1.1.0.
 - `external/uking/src/KingSystem/Resource/resResourceActorLink.cpp`: ActorLink users.
 - Local Archipelago `worlds/Files.py`: custom `APPatch` output convention.
+
+## Network client
+
+Build with the installed .NET 10 SDK, then start after loading the generated pack:
+
+```sh
+dotnet build src/client
+dotnet run --project src/client -- --server localhost:38281 --slot Player
+dotnet run --project src/client -- --self-test
+```
+
+Use `--password`, `--state-dir`, and `--verbose` as needed. The default state
+directory is `BotWAP/state` under the user's local application-data directory.
+Keep that journal with the matching save. The Linux client requires permission
+to access Cemu's `/proc/<pid>/mem`. It verifies seed/player identity before
+writing the mailbox. Unsupported native grants are reported and retained.
+
+A generated pack can also be checked by the C# contract reader without Cemu:
+
+```sh
+dotnet run --project src/client -- --self-test-pack /path/to/BotW_AP_P1.zip
+```
+
+That check reads the pack's actual ASM allocation and compares its IDs and
+fingerprint with the manifest and AP slot data. The current catalog has 5
+native actor mappings and 176 explicitly unsupported grant mappings.

@@ -31,7 +31,7 @@ namespace BotWClient.Memory
                     try {
                         fs.Position = (long)start;
                         byte[] chunk = new byte[8];
-                        fs.Read(chunk, 0, 8);
+                        fs.ReadExactly(chunk, 0, 8);
                         
                         // We are looking for Application::calc -> 0x0303E4C0
                         // Since we don't know the host address of the .text segment, we can't easily find it.

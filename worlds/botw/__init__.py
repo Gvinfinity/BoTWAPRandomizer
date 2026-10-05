@@ -14,6 +14,7 @@ from .Regions import create_regions
 from .Rules import set_rules
 from .reference import categories, item_data, item_groups
 from .static.checks import PROTOCOL_VERSION, check_actor_name
+from .static.protocol import MAILBOX_VERSION, seed_fingerprint
 
 
 class BotWWebWorld(WebWorld):
@@ -91,7 +92,11 @@ class BotWWorld(World):
 
     def fill_slot_data(self):
         return {
-            "protocol_version": PROTOCOL_VERSION,
+            "protocol_version": MAILBOX_VERSION,
+            "seed": str(self.multiworld.seed_name),
+            "player": self.player,
+            "seed_fingerprint": seed_fingerprint(self.multiworld.seed_name, self.player,
+                                                 [entry["id"] for entry in self.active_chests]),
             "check_actor_prefix": "AP_Check_",
             "check_actor_id_format": "8 uppercase hexadecimal digits",
             "goal": "defeat_dark_beast_ganon",

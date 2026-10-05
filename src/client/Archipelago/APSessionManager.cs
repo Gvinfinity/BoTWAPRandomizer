@@ -1,50 +1,56 @@
-using System;
+using System.Text.Json;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
+using Archipelago.MultiClient.Net.Packets;
+using Archipelago.MultiClient.Net.Exceptions;
 using BotWClient.Memory;
+using Newtonsoft.Json;
 
-namespace BotWClient.Archipelago
+namespace BotWClient.Archipelago;
+
+public sealed class APSessionManager : IServerLink, IDisposable
 {
-    public class APSessionManager
+    private readonly ArchipelagoSession session;
+    public SlotContract Contract { get; }
+    public int Team { get; }
+    public int Slot { get; }
+    public bool Connected => session.Socket.Connected;
+    public IReadOnlyList<long> ReceivedItems => session.Items.AllItemsReceived.Select(item => item.ItemId).ToArray();
+    public APSessionManager(string uri, string slotName, string? password, Mailbox mailbox)
     {
-        private ArchipelagoSession _session;
-        private CemuMemoryReader _memoryReader;
-
-        public APSessionManager(string uri, string slotName, CemuMemoryReader memoryReader)
+        session = ArchipelagoSessionFactory.CreateSession(uri);
+        var result = session.TryConnectAndLogin("Breath of the Wild", slotName, ItemsHandlingFlags.AllItems, password: password);
+        if (result is not LoginSuccessful login)
         {
-            _session = ArchipelagoSessionFactory.CreateSession(uri);
-            _memoryReader = memoryReader;
-            
-            var result = _session.TryConnectAndLogin("Breath of the Wild", slotName, ItemsHandlingFlags.AllItems);
-            
-            if (result.Successful)
-            {
-                Console.WriteLine("Connected to Archipelago!");
-                _session.Items.ItemReceived += OnItemReceived;
-            }
-            else
-            {
-                Console.WriteLine("Failed to connect to Archipelago.");
-            }
+            Dispose();
+            throw new IOException("Archipelago login failed: " + string.Join("; ", ((LoginFailure)result).Errors));
         }
-
-        private void OnItemReceived(global::Archipelago.MultiClient.Net.Helpers.ReceivedItemsHelper helper)
+        Team = login.Team; Slot = login.Slot;
+        try
         {
-            var item = helper.DequeueItem();
-            Console.WriteLine($"Received item: {item.ItemName}");
-            // Route to memory reader
-            _memoryReader.WriteIncomingItem(new IncomingItem 
-            { 
-                ApItemId = (uint)item.ItemId,
-                ActorName = "Weapon_Sword_001", // Placeholder translation
-                Quantity = 1
-            });
+            using var data = JsonDocument.Parse(JsonConvert.SerializeObject(login.SlotData));
+            Contract = new SlotContract(data.RootElement, mailbox, Slot, session.RoomState.Seed, session.Locations.AllLocations);
         }
-
-        public void DispatchLocationCheck(OutgoingCheck check)
+        catch { Dispose(); throw; }
+    }
+    public void SendChecks(long[] ids)
+    {
+        try
         {
-            Console.WriteLine($"Dispatching check: {check.ApLocationId}");
-            _session.Locations.CompleteLocationChecks((long)check.ApLocationId);
+            // Await the actual socket send. The SDK helper may return an outer
+            // task before its nested async send completes, and marks checks locally.
+            session.Socket.SendPacketAsync(new LocationChecksPacket { Locations = ids }).GetAwaiter().GetResult();
         }
+        catch (Exception ex) when (ex is ArchipelagoSocketClosedException or System.Net.WebSockets.WebSocketException or System.Net.Sockets.SocketException or IOException)
+        {
+            Dispose();
+            throw new IOException("AP check submission failed; journal retained for reconnect", ex);
+        }
+    }
+    public void Dispose()
+    {
+        if (!session.Socket.Connected) return;
+        try { session.Socket.DisconnectAsync().GetAwaiter().GetResult(); }
+        catch (Exception ex) when (ex is System.Net.WebSockets.WebSocketException or System.Net.Sockets.SocketException or IOException) { }
     }
 }
