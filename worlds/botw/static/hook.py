@@ -17,7 +17,7 @@ def mailbox_assembly(location_ids=(), fingerprint="0" * 32) -> str:
         raise ValueError("Invalid seed location table")
     words = [0x41504D42, 0x424F5457] + [0] * 6
     words += [0] * ((p["extension_offset"] - 32) // 4)
-    words += [0x41505632, p["version"], p["capabilities"]["pouch_actor"], int(bool(ids)), len(ids), 0, 0, 0]
+    words += [0x41505632, p["version"], sum(p["capabilities"].values()), int(bool(ids)), len(ids), 0, 0, 0]
     words += [int(fingerprint[index:index + 8], 16) for index in range(0, 32, 8)]
     for index in range(p["max_locations"]):
         words += [ids[index] if index < len(ids) else 0, 0]

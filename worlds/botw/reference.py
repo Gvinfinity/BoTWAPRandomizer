@@ -27,12 +27,20 @@ native_items = {
     "Arrows (10)": ("NormalArrow", 10),
 }
 
+progression_items = {
+    "Heart Container": "heart_container", "Stamina Vessel": "stamina_vessel",
+    "Weapon Slot": "weapon_slot", "Bow Slot": "bow_slot", "Shield Slot": "shield_slot",
+}
+
 item_data = {}
 for index, item in enumerate(manual_items):
     entry = dict(item, id=0xB0100000 + index, count=int(item.get("count", 1)))
     if item["name"] in native_items:
         actor, quantity = native_items[item["name"]]
         entry.update(delivery={"kind": "actor", "actor": actor, "quantity": quantity})
+    elif item["name"] in progression_items:
+        entry.update(delivery={"kind": "progression", "name": item["name"],
+                               "command": progression_items[item["name"]], "quantity": 1})
     else:
         entry.update(delivery={"kind": "unimplemented", "name": item["name"]})
     item_data[item["name"]] = entry

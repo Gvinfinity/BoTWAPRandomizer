@@ -13,11 +13,16 @@ public sealed class CemuMemoryReader : IMemory
     private FileStream? producerLease;
     public int ProcessId { get; }
     private CemuMemoryReader(SafeFileHandle handle, long address, int pid) { this.handle = handle; this.address = address; ProcessId = pid; }
-    public static CemuMemoryReader Attach(bool verbose = false)
+    public static CemuMemoryReader Attach(bool verbose = false, Action<string>? log = null)
     {
+        if (verbose && log is null) log = new ClientLog(true).Write;
+        log?.Invoke("Searching for Cemu processes and a configured AP v2 mailbox.");
         if (!OperatingSystem.IsLinux()) throw new PlatformNotSupportedException("Cemu attachment currently uses Linux /proc");
         foreach (var process in Process.GetProcesses().Where(p => p.ProcessName.Equals("Cemu", StringComparison.OrdinalIgnoreCase)))
         {
+            var timer = Stopwatch.StartNew();
+            long scanned = 0;
+            log?.Invoke($"Scanning Cemu PID {process.Id}; opening /proc/{process.Id}/mem.");
             var producerLease = new FileStream(Path.Combine(Path.GetTempPath(), $"BotWAP-Cemu-{process.Id}.lock"),
                 FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
             SafeFileHandle handle;
@@ -39,6 +44,7 @@ public sealed class CemuMemoryReader : IMemory
                         try { read = RandomAccess.Read(handle, buffer.AsSpan(0, (int)Math.Min(buffer.Length, end - position)), position); }
                         catch (IOException) { break; }
                         if (read < 8) break;
+                        scanned += read;
                         for (int i = 0; i <= read - 8; i++)
                         {
                             if (!buffer.AsSpan(i, 8).SequenceEqual("APMBBOTW"u8)) continue;
@@ -49,10 +55,10 @@ public sealed class CemuMemoryReader : IMemory
                                 if (!identity.ToArray().AsSpan(0, 4).SequenceEqual("APV2"u8) || candidate.ReadWord(Protocol.Get("configured_offset")) != 1) continue;
                                 new Mailbox(candidate).Validate(); selected = true;
                                 candidate.producerLease = producerLease;
-                                if (verbose) Console.WriteLine($"Cemu PID {process.Id}, mailbox 0x{position + i:X}");
+                                log?.Invoke($"Cemu PID {process.Id}, mailbox 0x{position + i:X}; scanned {scanned / 1048576.0:F1} MiB in {timer.Elapsed.TotalSeconds:F2}s.");
                                 return candidate;
                             }
-                            catch (IOException) { }
+                            catch (IOException ex) { log?.Invoke($"Rejected mailbox candidate 0x{position + i:X}: {ex.Message}"); }
                         }
                     }
                 }

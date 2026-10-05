@@ -17,12 +17,16 @@ class PPC:
     def __init__(self, ids):
         self.memory = bytearray(0x200000)
         self.registers = [0] * 32
+        self.floats = [0.] * 32
         self.registers[1] = 0x1F0000
         self.link, self.ctr = 0, 0
         self.globals = {}
         self.native_call = lambda address: (_ for _ in ()).throw(AssertionError(f'Unexpected native call {address:X}'))
         self.labels, self.code = {}, []
         self.symbols = {'_AP_Mailbox_Base': 0x10000, '_AP_Is_Injecting': 0x10000 + P['mailbox_size']}
+        self.symbols['_AP_Progression_State'] = self.symbols['_AP_Is_Injecting'] + 4
+        self.symbols['_AP_Stamina_Constants'] = self.symbols['_AP_Is_Injecting'] + 12
+        struct.pack_into('>fff', self.memory, self.symbols['_AP_Stamina_Constants'], 1000., 200., 3000.)
         words = [int(word, 16) for word in re.findall(r'0x[0-9A-F]{8}', mailbox_assembly(ids))]
         self.memory[0x10000:0x10000 + len(words)*4] = struct.pack(f'>{len(words)}I', *words)
         for raw in (ROOT / 'src/hook/patch_Archipelago.asm').read_text().splitlines():
@@ -105,6 +109,13 @@ class PPC:
             elif op == 'bctrl': self.native_call(self.ctr)
             elif op == 'mflr': r[self.reg(a[0])] = self.link
             elif op == 'mtlr': self.link = r[self.reg(a[0])]
+            elif op == 'lfs': self.floats[self.reg(a[0])] = struct.unpack_from('>f', self.memory, self.address(a[1]))[0]
+            elif op == 'stfs': struct.pack_into('>f', self.memory, self.address(a[1]), self.floats[self.reg(a[0])])
+            elif op == 'fadds': self.floats[self.reg(a[0])] = self.floats[self.reg(a[1])] + self.floats[self.reg(a[2])]
+            elif op == 'fmr': self.floats[self.reg(a[0])] = self.floats[self.reg(a[1])]
+            elif op == 'fcmpu':
+                x, y = self.floats[self.reg(a[1])], self.floats[self.reg(a[2])]
+                compare = (x > y) - (x < y)
             elif op in ('sync', 'stfd', 'lfd'): pass
             else: raise AssertionError(f'Unsupported test instruction: {op}')
         raise AssertionError('Hook did not terminate')
@@ -217,7 +228,7 @@ def incoming_vm(failure=None, quantity=1, per_call_cap=None):
     write(entry+0x18, name)
     vm.word(12, 1); vm.word(P['incoming_offset'], 17)
     vm.word(P['incoming_offset'] + 56, quantity)
-    vm.word(P['incoming_offset'] + 60, int(failure == 'flags'))
+    vm.word(P['incoming_offset'] + 60, 99 if failure == 'flags' else 0)
     vm.memory[name:name+12] = b'NormalArrow\0'
     def native(address):
         calls.append(address)
@@ -261,3 +272,68 @@ def test_patch_plan_requires_matching_protocol_seed_and_location_data():
                          ('seed_fingerprint', '0'*32)]:
         bad = copy.deepcopy(plan); bad['slot_data'][field] = value
         with pytest.raises(ValueError, match='disagree'): validate_plan(bad)
+
+
+@pytest.mark.parametrize('command,handle,initial,delta,cap', [
+    (1, 0x10466AD4, 12, 4, 120), (2, None, 1000., 200., 3000.),
+    (3, 0x10467B04, 8, 1, 20), (4, 0x10464480, 5, 1, 14), (5, 0x104678CC, 4, 1, 20),
+])
+@pytest.mark.parametrize('at_cap', [False, True])
+def test_progression_waits_for_saved_value_without_repeating_setter(command, handle, initial, delta, cap, at_cap):
+    vm = PPC([0xB1234567])
+    vm.globals.update({0x1046D5B0: 0x50000, 0x10463F38: 0x60000})
+    struct.pack_into('>I', vm.memory, 0x60030, 0x70000)
+    if handle: vm.globals[handle] = 77
+    saved = cap if at_cap else initial
+    pending, calls = [], []
+    def native(address):
+        calls.append(address)
+        if address == 0x02E146A4:
+            assert vm.registers[3:5] == [77, 0]
+            vm.registers[3] = saved
+        elif address == 0x02E1AC6C: vm.floats[1] = saved
+        elif address == 0x02D4992C:
+            assert vm.registers[3] == 0x60000
+            pending.append(vm.registers[4])
+        elif address == 0x02E14848:
+            assert vm.registers[4:6] == [77, 0]
+            pending.append(vm.registers[3])
+        elif address == 0x02D49DFC:
+            assert vm.registers[3] == 0x60000
+            pending.append(vm.floats[1])
+        elif address == 0x02D49E88:
+            assert vm.registers[3] == 0x60000 and vm.floats[1] == pending[-1]
+        else: raise AssertionError(f'Unexpected progression native call {address:X}')
+    vm.native_call = native
+    vm.word(12, 1); vm.word(P['incoming_offset'], 22)
+    vm.word(P['incoming_offset']+56, 1); vm.word(P['incoming_offset']+60, command)
+    vm.run('_AP_MainTick_Hook')
+    if at_cap:
+        assert not pending and vm.word(16) == 1 and vm.word(P['ack_sequence_offset']) == 22
+        return
+    assert pending == [initial+delta]
+    for _ in range(5):
+        vm.run('_AP_MainTick_Hook')
+        assert pending == [initial+delta]  # setter is never repeated during async propagation
+        assert vm.word(16) == 0 and vm.word(P['ack_sequence_offset']) == 0
+        assert vm.word(P['delivery_error_offset']) == 5
+    saved = pending[0]
+    vm.run('_AP_MainTick_Hook')
+    assert vm.word(16) == 1 and vm.word(P['ack_sequence_offset']) == 22
+    assert vm.word(P['delivery_error_offset']) == 0
+    # Another receipt increments from the new saved value, once.
+    vm.word(12, 2); vm.word(P['incoming_offset']+64, 23)
+    vm.word(P['incoming_offset']+64+56, 1); vm.word(P['incoming_offset']+64+60, command)
+    vm.run('_AP_MainTick_Hook')
+    assert pending == [initial+delta, initial+2*delta]
+    assert vm.word(16) == 1
+
+
+@pytest.mark.parametrize('command', [1, 2, 3, 4, 5])
+def test_progression_without_game_data_retains_receipt(command):
+    vm = PPC([0xB1234567])
+    vm.word(12, 1); vm.word(P['incoming_offset'], 22)
+    vm.word(P['incoming_offset']+56, 1); vm.word(P['incoming_offset']+60, command)
+    vm.run('_AP_MainTick_Hook')
+    assert vm.word(16) == 0 and vm.word(P['ack_sequence_offset']) == 0
+    assert vm.word(P['delivery_error_offset']) == 3

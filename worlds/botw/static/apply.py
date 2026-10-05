@@ -15,19 +15,9 @@ from .resources import binary_modules, decode_byml, decompress, encode_byml, rep
 from .ui import build_check_messages
 from .hook import build_seed_hook
 from .starting import build_starting_resources
+from .resource_sizes import update_resource_sizes
 
 RSTB_PATH = "content/System/Resource/ResourceSizeTable.product.srsizetable"
-
-
-def _rstb_name(resource: str) -> str:
-    name = resource.split("!")[-1]
-    for prefix in ("content/", "aoc/0010/"):
-        name = name.removeprefix(prefix)
-    parent, _, basename = name.rpartition("/")
-    stem, dot, suffix = basename.rpartition(".")
-    if suffix.startswith("s"):
-        basename = stem + dot + suffix[1:]
-    return f"{parent}/{basename}" if parent else basename
 
 
 def apply_plan(plan: dict, dump, output: str) -> dict:
@@ -47,7 +37,7 @@ def apply_plan(plan: dict, dump, output: str) -> dict:
                 **entry,
                 "map_sha256": variant["map_sha256"],
             })
-    replacements, sizes = {}, {}
+    replacements = {}
     for resource, entries in sorted(maps.items()):
         original = dump.read(resource)
         checksum = hashlib.sha256(original).hexdigest()
@@ -58,49 +48,21 @@ def apply_plan(plan: dict, dump, output: str) -> dict:
         patched = encode_byml(data, original)
         outer, _, member = resource.partition("!")
         replacements.setdefault(outer, {})[member] = patched
-        sizes[_rstb_name(resource)] = len(decompress(patched))
     files = {}
     for outer, members in sorted(replacements.items()):
         files[outer] = replace_members(dump.read(outer), members)
-        sizes[_rstb_name(outer)] = len(decompress(files[outer]))
-    actor_files, actor_sizes = build_check_actors(dump, [entry["id"] for entry in plan["locations"]])
+    actor_files, _ = build_check_actors(dump, [entry["id"] for entry in plan["locations"]])
     files.update(actor_files)
-    sizes.update(actor_sizes)
-    message_files, message_sizes = build_check_messages(dump, [entry["id"] for entry in plan["locations"]])
+    message_files, _ = build_check_messages(dump, [entry["id"] for entry in plan["locations"]])
     files.update(message_files)
-    sizes.update(message_sizes)
     if plan.get("starting_state") is not None:
-        starting_files, starting_sizes = build_starting_resources(dump, plan["starting_state"])
+        starting_files, _ = build_starting_resources(dump, plan["starting_state"])
         if files.keys() & starting_files.keys():
             raise ValueError("Starting-state resources collide with another patch branch")
         files.update(starting_files)
-        sizes.update(starting_sizes)
     table_raw = dump.read(RSTB_PATH)
     table = rstb.ResourceSizeTable(decompress(table_raw), be=True)
-    # Do not synthesize large allocations for outer .pack resources that have
-    # no RSTB entry in the original game. Those archives are managed through
-    # their existing resource path and a guessed 2x serialized size can consume
-    # over a gigabyte across the world. Existing entries already include their
-    # format-specific parse allowance; keep that allowance and grow only to the
-    # new serialized size. New AP actors inherit the matching vanilla template
-    # actor's known allocation.
-    for name, size in sizes.items():
-        requested = ((size + 31) & ~31) + 4096
-        existing = table.get_size(name)
-        if existing:
-            table.set_size(name, max(existing, requested))
-        elif name.startswith("Actor/Pack/AP_Check_") and name.endswith(".bactorpack"):
-            template = table.get_size("Actor/Pack/Item_Ore_A.bactorpack")
-            if template:
-                table.set_size(name, max(template, requested))
-        elif name.startswith("Actor/ActorLink/AP_Check_") and name.endswith(".bxml"):
-            template = table.get_size("Actor/ActorLink/Item_Ore_A.bxml")
-            if template:
-                table.set_size(name, max(template, requested))
-        elif name.startswith("Actor/GeneralParamList/AP_Check_") and name.endswith(".bgparamlist"):
-            template = table.get_size("Actor/GeneralParamList/Item_Ore_A.bgparamlist")
-            if template:
-                table.set_size(name, max(template, requested))
+    update_resource_sizes(table, dump, files)
     stream = io.BytesIO()
     table.write(stream, be=True)
     files[RSTB_PATH] = bytes(binary_modules()[0].yaz0.compress(stream.getvalue()))

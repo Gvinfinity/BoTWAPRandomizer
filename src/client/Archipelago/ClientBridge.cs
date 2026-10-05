@@ -9,8 +9,10 @@ public sealed class SlotContract
     public HashSet<long> Locations { get; } = [];
     public Dictionary<long, int> StartingInventory { get; } = [];
     private readonly Dictionary<long, JsonElement> items = [];
+    private readonly Mailbox mailbox;
     public SlotContract(JsonElement data, Mailbox mailbox, int slot, string seed, IEnumerable<long> serverLocations)
     {
+        this.mailbox = mailbox;
         if (data.GetProperty("protocol_version").GetInt32() != Protocol.Get("version") ||
             data.GetProperty("check_actor_prefix").GetString() != "AP_Check_" ||
             data.GetProperty("player").GetInt32() != slot || data.GetProperty("seed").GetString() != seed)
@@ -54,9 +56,26 @@ public sealed class SlotContract
     {
         reason = null;
         if (!items.TryGetValue(id, out var delivery)) throw new InvalidDataException($"No delivery mapping for AP item {id}");
-        if (delivery.GetProperty("kind").GetString() != "actor")
+        string kind = delivery.GetProperty("kind").GetString()!;
+        // Existing servers advertise these five items as unimplemented. Upgrade
+        // their exact logical names only when the running hook supports them.
+        if (kind is "progression" or "unimplemented" && delivery.TryGetProperty("name", out var name))
         {
-            reason = $"AP item {id} requires an unimplemented native grant; delivery remains pending";
+            uint command = Protocol.ProgressionCommand(name.GetString()!);
+            if (command != 0)
+            {
+                if ((mailbox.Word(Protocol.Get("capabilities_offset")) & Protocol.Capability("progression")) == 0)
+                {
+                    reason = $"{name.GetString()} requires the updated progression hook; restart Cemu with the updated graphic pack";
+                    return null;
+                }
+                var grant = new IncomingItem(sequence, checked((uint)id), name.GetString()!, 1, command);
+                Protocol.Encode(grant); return grant;
+            }
+        }
+        if (kind != "actor")
+        {
+            reason = $"AP item {id} ({delivery.GetProperty("name").GetString()}) requires an unimplemented native grant; delivery remains pending";
             return null;
         }
         var item = new IncomingItem(sequence, checked((uint)id), delivery.GetProperty("actor").GetString()!,
@@ -94,12 +113,14 @@ public sealed class ClientBridge : IDisposable
     private readonly SlotContract contract;
     private readonly string path;
     private readonly FileStream lease;
+    private readonly Action<string>? log;
     private JournalState state;
     private bool checksDirty = true;
     public string? BlockReason { get; private set; }
     public int NextItem => state.NextItem;
-    public ClientBridge(Mailbox mailbox, SlotContract contract, string directory, int team, int slot)
+    public ClientBridge(Mailbox mailbox, SlotContract contract, string directory, int team, int slot, Action<string>? log = null)
     {
+        this.log = log;
         this.mailbox = mailbox; this.contract = contract;
         Directory.CreateDirectory(directory);
         path = Path.Combine(directory, $"{contract.Fingerprint}-T{team}-P{slot}.json");
@@ -122,6 +143,7 @@ public sealed class ClientBridge : IDisposable
                 mailbox.SetWord(Protocol.Get("reserved_offset"), epoch);
             }
             state.MailboxEpoch = epoch; Save();
+            log?.Invoke($"Journal ready: {path}; epoch={epoch}, next_item={state.NextItem}, checks={state.Checks.Count}, in_flight={state.InFlight?.ToString() ?? "none"}");
         }
         catch { lease.Dispose(); throw; }
     }
@@ -134,7 +156,7 @@ public sealed class ClientBridge : IDisposable
         }
         File.Move(temporary, path, overwrite: true);
     }
-    public void Reconnected() => checksDirty = true;
+    public void Reconnected() { checksDirty = true; log?.Invoke($"AP reconnected; replaying {state.Checks.Count} journaled checks, next_item={state.NextItem}."); }
     public void Pump(IServerLink server)
     {
         if (mailbox.Word(Protocol.Get("reserved_offset")) != state.MailboxEpoch)
@@ -146,6 +168,7 @@ public sealed class ClientBridge : IDisposable
                 throw new InvalidDataException("Hook reported a check absent from this seed's chest table");
             state.Checks.Add((long)check.ApLocationId); Save(); checksDirty = true;
             mailbox.AcknowledgeCheck(check.SeqId);
+            log?.Invoke($"Hook check journaled and acknowledged: location={check.ApLocationId}, sequence={check.SeqId}, server_connected={server.Connected}");
         }
         if (server.Connected && checksDirty)
         {
@@ -168,18 +191,19 @@ public sealed class ClientBridge : IDisposable
             if (mailbox.InTail == after && mailbox.AckSequence == flight.Sequence)
             {
                 state.NextItem++; state.InFlight = null; Save();
+                log?.Invoke($"Native item acknowledged: item={flight.ItemId}, sequence={flight.Sequence}, next_item={state.NextItem}");
             }
             else if (mailbox.InHead == flight.Head && mailbox.InTail == flight.Head)
             {
                 // Intent was saved, but the producer head was never published.
                 var item = contract.Delivery(flight.ItemId, flight.Sequence, out var reason);
                 if (item is null) { BlockReason = reason; return; }
-                mailbox.Enqueue(item.Value, flight.Head); return;
+                mailbox.Enqueue(item.Value, flight.Head); log?.Invoke($"Republished journaled item={flight.ItemId}, sequence={flight.Sequence}"); return;
             }
             else if (mailbox.InHead == after && mailbox.InTail == flight.Head)
             {
                 uint error = mailbox.DeliveryError;
-                if (error != 0) BlockReason = $"Native grant pending (hook error {error}: 1 invalid actor, 2 unsupported command, 3 not ready, 4 pouch unchanged/full)";
+                if (error != 0) BlockReason = $"Native grant pending (hook error {error}: 1 invalid actor, 2 unsupported command, 3 not ready, 4 pouch unchanged/full, 5 waiting for saved progression)";
                 return;
             }
             else throw new InvalidDataException("Mailbox reset or changed during an outstanding grant; manual recovery is required to avoid duplicate delivery");
@@ -197,6 +221,7 @@ public sealed class ClientBridge : IDisposable
             if (receipt.LocationId != -2 || applied >= contract.StartingInventory.GetValueOrDefault(receipt.ItemId)) break;
             state.StartingAcknowledged[receipt.ItemId] = applied + 1;
             state.NextItem++; Save();
+            log?.Invoke($"Acknowledged statically applied starting item={receipt.ItemId}, count={applied + 1}, next_item={state.NextItem}");
         }
         if (state.NextItem >= received.Count) return;
         uint sequence = checked((uint)state.NextItem + 1);
@@ -205,6 +230,7 @@ public sealed class ClientBridge : IDisposable
         if (next is null) { BlockReason = blocked; return; }
         state.InFlight = new Flight(state.NextItem, id, mailbox.InHead, sequence); Save();
         if (!mailbox.Enqueue(next.Value, state.InFlight.Head)) throw new InvalidDataException("Incoming producer head changed");
+        log?.Invoke($"Queued native delivery: item={id}, sequence={sequence}, command={next.Value.Flags}, item_name={next.Value.ActorName}; awaiting hook acknowledgement.");
     }
     public void Dispose() => lease.Dispose();
 }

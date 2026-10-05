@@ -10,13 +10,23 @@ public static class Protocol
     public static int Get(string name) => Schema.RootElement.GetProperty(name).GetInt32();
     public static uint Read(ReadOnlySpan<byte> bytes) => BinaryPrimitives.ReadUInt32BigEndian(bytes);
     public static void Write(Span<byte> bytes, uint value) => BinaryPrimitives.WriteUInt32BigEndian(bytes, value);
+    public static uint Command(string name) => Schema.RootElement.GetProperty("commands").GetProperty(name).GetUInt32();
+    public static uint Capability(string name) => Schema.RootElement.GetProperty("capabilities").GetProperty(name).GetUInt32();
+    public static uint ProgressionCommand(string name) => name switch
+    {
+        "Heart Container" => Command("heart_container"), "Stamina Vessel" => Command("stamina_vessel"),
+        "Weapon Slot" => Command("weapon_slot"), "Bow Slot" => Command("bow_slot"),
+        "Shield Slot" => Command("shield_slot"), _ => 0,
+    };
     public static byte[] Encode(IncomingItem item)
     {
-        if (item.SeqId == 0 || item.Quantity == 0 || item.Quantity > int.MaxValue || item.Flags != 0)
+        if (item.SeqId == 0 || item.Quantity == 0 || item.Quantity > int.MaxValue)
             throw new ArgumentException("Invalid item sequence, quantity, or command flags");
         if (string.IsNullOrEmpty(item.ActorName) || item.ActorName.Length >= Get("actor_name_size") ||
             item.ActorName.Any(c => c == 0 || c > 127) || item.ActorName.StartsWith("AP_Check_", StringComparison.Ordinal))
             throw new ArgumentException("Actor must be a native ASCII item name with a terminating NUL");
+        if (item.Flags != 0 && (item.Flags != ProgressionCommand(item.ActorName) || item.Quantity != 1))
+            throw new ArgumentException("Invalid progression command name or quantity");
         if (item.Quantity != 1 && item.ActorName.StartsWith("Weapon_", StringComparison.Ordinal))
             throw new ArgumentException("Weapon commands must grant exactly one actor");
         var bytes = new byte[Get("incoming_size")];

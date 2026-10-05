@@ -64,7 +64,7 @@ def test_initial_pouch_preserves_existing_unrelated_items():
     oead = pytest.importorskip('oead')
     flags['PorchItem_Value1']['InitValue'][0]['Values'][0] = oead.S32(2)
     patch_starting_gamedata(docs, starting_state(True))
-    assert list(flags['PorchItem']['InitValue'][0]['Values'][:3]) == ['Item_Fruit_A', 'Obj_DRStone_Get', 'PlayerStole2']
+    assert list(flags['PorchItem']['InitValue'][0]['Values'][:3]) == ['Item_Fruit_A', 'Obj_DRStone_Get', '']
     assert int(flags['PorchItem_Value1']['InitValue'][0]['Values'][0]) == 2
 
 

@@ -861,6 +861,10 @@ _AP_Mailbox_Base:
 .int 0x00000000, 0x00000000, 0x00000000, 0x00000000
 _AP_Is_Injecting:
 .int 0
+_AP_Progression_State:
+.int 0, 0
+_AP_Stamina_Constants:
+.int 0x447A0000, 0x43480000, 0x453B8000
 
 # -----------------------------------------------------------------------------
 
@@ -975,7 +979,7 @@ _AP_MainTick_Hook:
     stw r8, 0x78(r1)                 # complete unless blocked/partial
     lwz r8, 0x3C(r9)
     cmpwi r8, 0
-    bne incoming_unsupported
+    bne incoming_progression
 
     # The mailbox stores the raw item name at entry + 0x08.
     addi r8, r9, 0x08
@@ -1162,6 +1166,7 @@ injection_unlock:
     cmpwi r9, 0
     beq tick_done
 
+incoming_ack:
     # Publish delivery acknowledgement before releasing the incoming slot.
     lis r11, _AP_Mailbox_Base@ha
     addi r11, r11, _AP_Mailbox_Base@l
@@ -1174,6 +1179,166 @@ injection_unlock:
     addi r12, r12, 1
     stw r12, 0x10(r11)
     b tick_done
+
+# Non-pouch upgrades use native setters, then wait for the save-backed getter
+# on later ticks. Never repeat an asynchronous setter for the same token.
+incoming_progression:
+    cmplwi r8, 5
+    bgt incoming_unsupported
+    stw r8, 0x64(r1)                 # command
+    lwz r10, 0x38(r9)
+    cmpwi r10, 1
+    bne incoming_unsupported
+    lis r3, 0x1047
+    lwz r3, -0x2A50(r3)             # gdt::Manager::sInstance
+    cmpwi r3, 0
+    beq incoming_not_ready
+    lwz r8, 0x64(r1)
+    cmplwi r8, 2
+    bgt progression_stock
+    lis r3, 0x1046
+    lwz r3, 0x3F38(r3)              # PlayerInfo::sInstance
+    cmpwi r3, 0
+    beq incoming_not_ready
+    lwz r10, 0x30(r3)               # require a live player
+    cmpwi r10, 0
+    beq incoming_not_ready
+    stw r3, 0x58(r1)
+    cmpwi r8, 2
+    beq progression_stamina
+    lis r9, 0x1046
+    lwz r9, 0x6AD4(r9)              # MaxHartValue handle
+    li r10, 4                       # quarter hearts per container
+    li r8, 120                      # 30 heart cap
+    b progression_s32
+progression_stock:
+    li r10, 1
+    cmpwi r8, 3
+    beq progression_weapon_slot
+    cmpwi r8, 4
+    beq progression_bow_slot
+    lis r9, 0x1046
+    lwz r9, 0x78CC(r9)              # ShieldPorchStockNum handle
+    li r8, 20
+    b progression_s32
+progression_weapon_slot:
+    lis r9, 0x1046
+    lwz r9, 0x7B04(r9)              # WeaponPorchStockNum handle
+    li r8, 20
+    b progression_s32
+progression_bow_slot:
+    lis r9, 0x1046
+    lwz r9, 0x4480(r9)              # BowPorchStockNum handle
+    li r8, 14
+progression_s32:
+    cmpwi r9, -1
+    beq incoming_not_ready
+    stw r9, 0x70(r1)                 # native flag handle
+    stw r10, 0x60(r1)                # increment
+    stw r8, 0x74(r1)                 # cap
+    or r3, r9, r9
+    li r4, 0
+    lis r12, 0x02E1
+    ori r12, r12, 0x46A4             # gdt::getS32(handle, debug)
+    mtctr r12
+    bctrl
+    cmpwi r3, 1                     # defaults not loaded yet
+    blt incoming_not_ready
+    lis r9, _AP_Progression_State@ha
+    addi r9, r9, _AP_Progression_State@l
+    lwz r10, 0(r9)
+    lwz r8, 0x6C(r1)
+    cmpw r10, r8
+    beq progression_s32_verify
+    lwz r10, 0x74(r1)
+    cmpw r3, r10
+    bge incoming_ack                 # already at native cap
+    lwz r8, 0x60(r1)
+    add r4, r3, r8
+    cmpw r4, r10
+    ble progression_s32_target
+    or r4, r10, r10
+progression_s32_target:
+    stw r4, 4(r9)                    # latch target before setter
+    lwz r8, 0x6C(r1)
+    stw r8, 0(r9)
+    lwz r8, 0x64(r1)
+    cmpwi r8, 1
+    bne progression_stock_set
+    lwz r3, 0x58(r1)
+    lis r12, 0x02D4
+    ori r12, r12, 0x992C             # PlayerInfo::setMaxHeartValue(this, target)
+    mtctr r12
+    bctrl
+    b progression_wait
+progression_stock_set:
+    or r3, r4, r4                    # gdt::setS32(value, handle, debug)
+    lwz r4, 0x70(r1)
+    li r5, 0
+    lis r12, 0x02E1
+    ori r12, r12, 0x4848
+    mtctr r12
+    bctrl
+    b progression_wait
+progression_s32_verify:
+    lwz r10, 4(r9)
+    cmpw r3, r10
+    blt progression_wait
+    b incoming_ack
+progression_stamina:
+    li r3, 0
+    lis r12, 0x02E1
+    ori r12, r12, 0xAC6C             # getFlag_StaminaMax(debug) -> f1
+    mtctr r12
+    bctrl
+    lis r9, _AP_Stamina_Constants@ha
+    addi r9, r9, _AP_Stamina_Constants@l
+    lfs f0, 0(r9)                    # minimum 1000
+    fcmpu cr0, f1, f0
+    blt incoming_not_ready
+    lis r10, _AP_Progression_State@ha
+    addi r10, r10, _AP_Progression_State@l
+    lwz r8, 0(r10)
+    lwz r9, 0x6C(r1)
+    cmpw r8, r9
+    beq progression_stamina_verify
+    lis r9, _AP_Stamina_Constants@ha
+    addi r9, r9, _AP_Stamina_Constants@l
+    lfs f0, 8(r9)                    # maximum 3000
+    fcmpu cr0, f1, f0
+    bge incoming_ack
+    lfs f2, 4(r9)                    # vessel = 200
+    fadds f1, f1, f2
+    fcmpu cr0, f1, f0
+    ble progression_stamina_target
+    fmr f1, f0
+progression_stamina_target:
+    stfs f1, 4(r10)
+    lwz r9, 0x6C(r1)
+    stw r9, 0(r10)
+    lwz r3, 0x58(r1)
+    lis r12, 0x02D4
+    ori r12, r12, 0x9DFC             # PlayerInfo::setStaminaMax(this, f1)
+    mtctr r12
+    bctrl
+    # Also refresh the actor's max via its native setter (separate cache).
+    lis r9, _AP_Progression_State@ha
+    addi r9, r9, _AP_Progression_State@l
+    lfs f1, 4(r9)
+    lwz r3, 0x58(r1)
+    lis r12, 0x02D4
+    ori r12, r12, 0x9E88
+    mtctr r12
+    bctrl
+    b progression_wait
+progression_stamina_verify:
+    lfs f0, 4(r10)
+    fcmpu cr0, f1, f0
+    blt progression_wait
+    b incoming_ack
+progression_wait:
+    li r9, 5
+    b incoming_blocked
 
 incoming_invalid_actor:
     li r9, 1

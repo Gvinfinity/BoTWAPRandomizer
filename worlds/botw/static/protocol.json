@@ -22,6 +22,24 @@
   "location_entry_size": 8,
   "max_locations": 4096,
   "mailbox_size": 53328,
-  "capabilities": {"pouch_actor": 1},
-  "delivery_errors": {"none": 0, "invalid_actor": 1, "unsupported_command": 2, "not_ready": 3, "pouch_unchanged": 4}
+  "capabilities": {
+    "pouch_actor": 1,
+    "progression": 2
+  },
+  "delivery_errors": {
+    "none": 0,
+    "invalid_actor": 1,
+    "unsupported_command": 2,
+    "not_ready": 3,
+    "pouch_unchanged": 4,
+    "grant_pending": 5
+  },
+  "commands": {
+    "actor": 0,
+    "heart_container": 1,
+    "stamina_vessel": 2,
+    "weapon_slot": 3,
+    "bow_slot": 4,
+    "shield_slot": 5
+  }
 }
