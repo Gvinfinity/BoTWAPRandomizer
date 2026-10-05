@@ -2,3 +2,6 @@ src/client/bin
 src/client/obj
 **/__pycache__/**
 src/hook/CMakeFiles
+.venv-patcher/
+src/patcher/venv/
+out/

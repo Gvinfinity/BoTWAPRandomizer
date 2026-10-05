@@ -1,9 +1,11 @@
 from BaseClasses import Location
 
-class BotWLocation(Location):
-    game: str = "Breath of the Wild"
+from .reference import load_chests
 
-botw_locations = {
-    # Parsed from JDLKMR/BotW-APManual
-    "Oman Au Shrine - Chest": 0x5000,
-}
+
+class BotWLocation(Location):
+    game = "Breath of the Wild"
+
+
+chest_data = load_chests()
+botw_locations = {entry["name"]: entry["id"] for entry in chest_data}

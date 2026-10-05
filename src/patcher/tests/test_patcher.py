@@ -11,19 +11,20 @@ from patch_shops import patch_shop_byml
 def test_patch_chests_success():
     """
     Test that chests matching the location_map are successfully patched
-    to drop AP_Dummy_Check and are assigned the correct AP Location ID.
+    to drop a unique marker encoding the correct AP Location ID.
     """
     mock_byml = {
-        'Actors': [
+        'Objs': [
             {
-                'Gyml': 'TBox_Field_Iron',
+                'UnitConfigName': 'TBox_Field_Iron',
                 'HashId': 123456789,
                 '!Parameters': {
-                    'DropActor': 'Weapon_Sword_001'
+                    'DropActor': 'Weapon_Sword_001',
+                    'DropTable': 'Normal'
                 }
             },
             {
-                'Gyml': 'Enemy_Bokoblin_01',
+                'UnitConfigName': 'Enemy_Bokoblin_01',
                 'HashId': 987654321,
                 '!Parameters': {}
             }
@@ -37,13 +38,14 @@ def test_patch_chests_success():
     assert modified is True, "The BYML should have been modified."
     
     # Verify the chest was patched (Vanilla Isolation Metric)
-    chest_actor = mock_byml['Actors'][0]
-    assert chest_actor['!Parameters']['DropActor'] == 'AP_Dummy_Check'
-    assert chest_actor['!Parameters']['AP_LocationID'] == 0x5001
+    chest_actor = mock_byml['Objs'][0]
+    assert chest_actor['!Parameters']['DropActor'] == 'AP_Check_00005001'
+    assert 'AP_LocationID' not in chest_actor['!Parameters']
+    assert 'DropTable' not in chest_actor['!Parameters']
     
     # Verify the enemy was NOT patched
-    enemy_actor = mock_byml['Actors'][1]
-    assert enemy_actor['Gyml'] == 'Enemy_Bokoblin_01'
+    enemy_actor = mock_byml['Objs'][1]
+    assert enemy_actor['UnitConfigName'] == 'Enemy_Bokoblin_01'
     assert 'DropActor' not in enemy_actor['!Parameters']
 
 def test_patch_chests_no_match():
@@ -51,9 +53,9 @@ def test_patch_chests_no_match():
     Test that chests NOT in the location map are ignored.
     """
     mock_byml = {
-        'Actors': [
+        'Objs': [
             {
-                'Gyml': 'TBox_Field_Iron',
+                'UnitConfigName': 'TBox_Field_Iron',
                 'HashId': 111111111,
                 '!Parameters': {
                     'DropActor': 'Weapon_Sword_001'
@@ -63,11 +65,37 @@ def test_patch_chests_no_match():
     }
     
     # The map doesn't contain this chest's hash
-    location_map = {999999999: 0x5001}
+    location_map = {}
     modified = patch_chest_byml(mock_byml, location_map)
     
     assert modified is False, "The BYML should NOT have been modified."
-    assert mock_byml['Actors'][0]['!Parameters']['DropActor'] == 'Weapon_Sword_001'
+    assert mock_byml['Objs'][0]['!Parameters']['DropActor'] == 'Weapon_Sword_001'
+
+
+def test_missing_mapped_chest_fails():
+    with pytest.raises(ValueError, match='absent'):
+        patch_chest_byml({'Objs': []}, {999999999: 0x5001})
+
+
+def test_identity_roundtrip_and_malformed_names():
+    from botw_static.checks import check_actor_name, location_id_from_actor
+    assert location_id_from_actor(check_actor_name(0xB1234567)) == 0xB1234567
+    for name in ['Item_Ore_A', 'AP_Check_b1234567', 'AP_Check_00000000', 'AP_Check_B1234567_extra']:
+        assert location_id_from_actor(name) is None
+
+
+def test_nested_sarc_roundtrip_preserves_untracked_resources():
+    oead = pytest.importorskip('oead')
+    from botw_static.resources import replace_members
+    inner = oead.SarcWriter(oead.Endianness.Big)
+    inner.files['Map/test.smubin'] = b'original map'
+    inner.files['untouched.bin'] = b'keep me'
+    outer = oead.SarcWriter(oead.Endianness.Big)
+    outer.files['inner.pack'] = inner.write()[1]
+    result = replace_members(bytes(outer.write()[1]), {'inner.pack!Map/test.smubin': b'changed map'})
+    parsed = oead.Sarc(bytes(oead.Sarc(result).get_file('inner.pack').data))
+    assert bytes(parsed.get_file('untouched.bin').data) == b'keep me'
+    assert bytes(parsed.get_file('Map/test.smubin').data) == b'changed map'
 
 def test_patch_shops_success():
     """

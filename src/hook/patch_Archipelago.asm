@@ -480,48 +480,159 @@ tick_done:
 
 
 # =============================================================================
-# 3. EXISTING OUTGOING / TELEMETRY HOOK (OPTIONAL / UNRESOLVED)
+# 3. ARCHIPELAGO ITEM CHECK TOKEN HOOK
 # =============================================================================
+# `PauseMenuDataMgr::addItem(mgr, SafeString* name, ...)` receives a SafeString
+# in r4. Names matching `Archipelago Item N` are reserved check tokens:
+# enqueue location ID N and return without calling addItem, so the token never
+# occupies a pouch slot. Ordinary items execute the original function unchanged.
 #
-# DO NOT call 0x03741B20 as the game's item-add routine. Its identity/signature
-# is not established by the Wii U v208 symbol data.
+# The v208 Update RPX prologue at 0x02EB3DF0 begins with `stwu r1,-0x50(r1)`.
+# Replay that instruction for ordinary items before returning to +4.
 #
-# This hook is retained only because your original patch already used it as an
-# empirically discovered function entry. It records the natural r3 argument and
-# leaves the original prologue intact. It deliberately does NOT fabricate a
-# location event or call back into 0x03741B20.
-#
-# Remove/comment the hook assignment at the bottom until the argument layout of
-# this function is reverse-engineered well enough to identify the item name.
-#
-_AP_Outgoing_Telemetry_Hook:
-    addi r1, r1, -0x30
+# Outgoing check queue remains at mailbox +0x4020 (16-byte records). If it is
+# full, consume the token without adding it to the pouch. In normal operation
+# the client drains this queue continuously; a full queue drops this report.
+_AP_AddItem_Hook:
+    stwu r1, -0x20(r1)
     stw r9,  0x08(r1)
     stw r10, 0x0C(r1)
     stw r11, 0x10(r1)
     stw r12, 0x14(r1)
 
-    # Skip the telemetry entirely while an injected item is being added.
+    # r4 is a SafeString*: { const char* text; const void* vtable }.
+    lwz r12, 0(r4)
+    cmpwi r12, 0
+    beq additem_original
+
+    # Exact reserved prefix: "Archipelago Item " (17 bytes).
+    lbz r9, 0(r12)
+    cmpwi r9, 0x41
+    bne additem_original
+    lbz r9, 1(r12)
+    cmpwi r9, 0x72
+    bne additem_original
+    lbz r9, 2(r12)
+    cmpwi r9, 0x63
+    bne additem_original
+    lbz r9, 3(r12)
+    cmpwi r9, 0x68
+    bne additem_original
+    lbz r9, 4(r12)
+    cmpwi r9, 0x69
+    bne additem_original
+    lbz r9, 5(r12)
+    cmpwi r9, 0x70
+    bne additem_original
+    lbz r9, 6(r12)
+    cmpwi r9, 0x65
+    bne additem_original
+    lbz r9, 7(r12)
+    cmpwi r9, 0x6c
+    bne additem_original
+    lbz r9, 8(r12)
+    cmpwi r9, 0x61
+    bne additem_original
+    lbz r9, 9(r12)
+    cmpwi r9, 0x67
+    bne additem_original
+    lbz r9, 10(r12)
+    cmpwi r9, 0x6f
+    bne additem_original
+    lbz r9, 11(r12)
+    cmpwi r9, 0x20
+    bne additem_original
+    lbz r9, 12(r12)
+    cmpwi r9, 0x49
+    bne additem_original
+    lbz r9, 13(r12)
+    cmpwi r9, 0x74
+    bne additem_original
+    lbz r9, 14(r12)
+    cmpwi r9, 0x65
+    bne additem_original
+    lbz r9, 15(r12)
+    cmpwi r9, 0x6d
+    bne additem_original
+    lbz r9, 16(r12)
+    cmpwi r9, 0x20
+    bne additem_original
+
+    # Parse a non-empty decimal suffix, rejecting signs, spaces and trailing
+    # characters. The game hook writes the low 32-bit location ID; the mailbox
+    # record stores it in the low half of its uint64 field.
+    addi r12, r12, 17
+    li r10, 0
+    li r11, 0
+additem_parse_digit:
+    lbz r9, 0(r12)
+    cmpwi r9, 0x30
+    blt additem_digits_done
+    cmpwi r9, 0x39
+    bgt additem_digits_done
+    addi r9, r9, -0x30
+    mulli r10, r10, 10
+    add r10, r10, r9
+    addi r11, r11, 1
+    addi r12, r12, 1
+    b additem_parse_digit
+
+additem_digits_done:
+    cmpwi r11, 0
+    beq additem_original
+    cmpwi r9, 0
+    bne additem_original
+
+    # Custom token: skip the pouch add even if the outgoing ring is full.
+    # Suppress reporting for an item inserted by the AP incoming queue.
     lis r11, _AP_Is_Injecting@ha
     addi r11, r11, _AP_Is_Injecting@l
-    lwz r12, 0(r11)
-    cmpwi r12, 1
-    beq outgoing_return
+    lwz r9, 0(r11)
+    cmpwi r9, 1
+    beq additem_consume_token
 
-outgoing_return:
-    # 0x03741B20 was previously treated as a function entry whose first
-    # instruction is stwu r1,-0x30(r1). Preserve that original prologue here.
-    lis r12, 0x0374
-    ori r12, r12, 0x1B24
-    mtctr r12
+    lis r11, _AP_Mailbox_Base@ha
+    addi r11, r11, _AP_Mailbox_Base@l
+    lwz r9, 0x14(r11)              # outgoing producer head
+    lwz r12, 0x18(r11)              # outgoing consumer tail
+    subf r12, r12, r9
+    cmplwi r12, 256
+    bge additem_consume_token
 
+    # OutgoingCheck: { u32 SeqID, u64 AP_LocationID, u32 IsShop }.
+    clrlwi r12, r9, 24
+    slwi r12, r12, 4
+    addi r12, r12, 0x4020
+    add r12, r11, r12
+    stw r9, 0(r12)
+    li r9, 0
+    stw r9, 4(r12)                  # high 32 bits of location ID
+    stw r10, 8(r12)                 # location ID N
+    stw r9, 12(r12)                 # IsShop = 0
+    lwz r9, 0x14(r11)
+    addi r9, r9, 1
+    stw r9, 0x14(r11)
+
+additem_consume_token:
     lwz r9,  0x08(r1)
     lwz r10, 0x0C(r1)
     lwz r11, 0x10(r1)
     lwz r12, 0x14(r1)
-    addi r1, r1, 0x30
+    addi r1, r1, 0x20
+    blr
 
-    stwu r1, -0x30(r1)
+additem_original:
+    lwz r9,  0x08(r1)
+    lwz r10, 0x0C(r1)
+    lwz r11, 0x10(r1)
+    lwz r12, 0x14(r1)
+    addi r1, r1, 0x20
+
+    # Replay the replaced v208 prologue instruction, then continue at +4.
+    stwu r1, -0x50(r1)
+    lis r12, 0x02EB
+    ori r12, r12, 0x3DF4
+    mtctr r12
     bctr
 
 
@@ -547,9 +658,8 @@ _AP_Debug_ActorSpawn_Hook:
 # Main game-thread hook.
 0x0313B840 = b _AP_MainTick_Hook
 
-# OPTIONAL: retain your previously discovered function-entry telemetry hook.
-# This is NOT used as the injection target.
-0x03741B20 = b _AP_Outgoing_Telemetry_Hook
+# Reserved AP check tokens are intercepted before pouch insertion.
+0x02EB3DF0 = b _AP_AddItem_Hook
 
 # Existing actor-spawn telemetry.
 0x037B6040 = b _AP_Debug_ActorSpawn_Hook

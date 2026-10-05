@@ -1,10 +1,20 @@
-from BaseClasses import Item
+from BaseClasses import Item, ItemClassification
+
+from .reference import item_data
+
 
 class BotWItem(Item):
-    game: str = "Breath of the Wild"
+    game = "Breath of the Wild"
 
-botw_items = {
-    # Parsed from JDLKMR/BotW-APManual
-    "Paraglider": 0x4000,
-    "Master Sword": 0x4001,
-}
+
+botw_items = {name: entry["id"] for name, entry in item_data.items()}
+
+
+def classification(entry):
+    if entry.get("progression"):
+        return ItemClassification.progression
+    if entry.get("useful"):
+        return ItemClassification.useful
+    if entry.get("trap"):
+        return ItemClassification.trap
+    return ItemClassification.filler

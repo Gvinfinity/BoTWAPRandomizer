@@ -31,7 +31,11 @@ Ring buffer of items the player has received from AP.
 The hook is restored to the full-durability direct-inventory version from before actor spawning was introduced. It resolves maximum durability through `0x0308812C` for swords, bows, and shields; other item types use mailbox `Quantity` as the native item value. It does not trigger the pickup animation. `Flags` are ignored. Entries are consumed after processing, including when the pouch manager is unavailable or the name is invalid, matching that historical version.
 
 ### 1.3 Outgoing Queue (Hook -> Client) (Size: 256 * 16 = 4096 bytes)
-Ring buffer of checks the player has completed in-game.
+Ring buffer of checks the player has completed in-game. The hook also treats
+reserved pouch names `Archipelago Item N` as check tokens: it reports decimal
+`N` as the AP Location ID and returns before the native pouch insertion, so
+the token does not occupy an inventory slot. Ordinary item names continue
+through the game's original `addItem` function.
 
 **Outgoing Check Structure (Size: 16 bytes)**:
 * `uint32_t SeqID`: Unique monotonically increasing ID.
@@ -51,8 +55,13 @@ The mailbox is a 20,512-byte codecave allocation. The incoming queue begins at `
   2. Reads `Incoming_Queue[In_Tail % 256]`.
   3. Classifies and inserts the named item through `PauseMenuDataMgr::addItem`, saves the pouch to GameData, then increments `In_Tail`.
 * **Hook Sending Check**:
-  1. Writes Check struct to `Outgoing_Queue[Out_Head % 256]`.
-  2. Increments `Out_Head`.
+  1. On an `Archipelago Item N` add attempt, parses the decimal suffix and
+     writes it to `Outgoing_Queue[Out_Head % 256]` with `IsShop = 0`.
+  2. Returns without adding the token to the pouch.
+  3. For non-token names, replays the replaced `addItem` prologue instruction
+     and resumes the original function.
+  4. Increments `Out_Head` after writing the record. If the ring is full, the
+     token is still discarded and its report is dropped to avoid pouch pollution.
 * **Client Processing Check**:
   1. Checks if `Out_Tail < Out_Head`.
   2. Reads `Outgoing_Queue[Out_Tail % 256]`.
