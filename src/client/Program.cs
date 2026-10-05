@@ -67,7 +67,7 @@ namespace BotWClient
 
             Console.WriteLine("\n[Connected!] Live Memory Link established.");
             Console.WriteLine("In-game, pick up any vanilla item/weapon to send a location check.");
-            Console.WriteLine("Press 2 and enter to simulate receiving a Weapon_Sword_001 from Archipelago.");
+            Console.WriteLine("Press 2 and enter to add a full-durability Weapon_Sword_001 to the pouch.");
             Console.WriteLine("Press s and enter to print hook status.");
             
             // Poll for outgoing checks (Chest opens)

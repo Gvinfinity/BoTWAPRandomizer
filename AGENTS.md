@@ -25,26 +25,13 @@ An implementation task or milestone is only considered complete when it satisfie
 
 ---
 
-## 3. Reference Repositories & Submodules
-Agents must inspect these reference repositories in `external/` before writing boilerplate from scratch:
-* **`S41L0R/SpawnActors` (`external/SpawnActors`)**: Base template for Cemu V3 ASM register backup (`r3`-`r10`), DLL injection, and calling native functions on the game loop.
-* **`leoetlino/uking` (`external/uking`)**: Decompiled C++ headers for the *Breath of the Wild* `KingSystem` (`ksys`) engine, actor system, and `GameData` flags.
-* **`open-ead/sead` (`external/sead`)**: Decompiled Nintendo standard library headers required for strings, buffers, and heap management.
-* **`JDLKMR/BotW-APManual` (`external/BotW-APManual`)**: Pre-mapped JSON files containing Archipelago item IDs, location IDs, region connections, and access rules.
-* **`MelonSpeedruns/BotwRandomizer` (`external/BotwRandomizer`)**: Reference for modifying Cemu Graphic Pack `.bdrop` and `.bshop` files.
-* **`LibreVR/Breath-of-the-Wild-Memory-Editor`**: Reference for verified Wii U v208 memory offsets and inventory structures.
-
----
-
-## 4. Repository Structure
+## 3. Repository Structure
 ```text
 /
 ├── AGENTS.md                 # Master architectural spec and agent instructions
 ├── docs/
-│   ├── memory_offsets.md     # Verified U-King.rpx v208 function & mailbox addresses
 │   └── mailbox_protocol.md   # Byte layout for Incoming/Outgoing shared memory
 ├── external/                 # Read-only reference submodules (DO NOT modify)
-│   ├── uking/                # leoetlino/uking C++ engine headers
 │   ├── sead/                 # open-ead/sead standard library headers
 │   ├── SpawnActors/          # S41L0R/SpawnActors ASM + DLL hook base
 │   └── BotW-APManual/        # JDLKMR/BotW-APManual JSON logic & location lists

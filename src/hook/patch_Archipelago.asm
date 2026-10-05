@@ -4,17 +4,35 @@ moduleMatches = 0x6267BFD0
 .origin = codecave
 
 # =============================================================================
-# 1. MAILBOX ALLOCATION
+# 1. DATA SEGMENT (Mailbox & Globals)
 # =============================================================================
+# Mailbox layout used by the existing Python/C++ side:
+#   +0x08 status
+#   +0x0C incoming head  (client produces this)
+#   +0x10 incoming tail  (game consumes this)
+#   +0x14 outgoing head  (game produces this)
+#   +0x20 incoming ring, 0x40 bytes per entry
+#
+# Incoming entry layout:
+#   +0x08 char[] item name
+#   +0x38 s32 quantity/value
+#
+# Allocate the mailbox in Cemu's codecave. The client discovers this block by
+# scanning Cemu's mapped guest memory for the 8-byte magic "APMBBOTW".
+# Keep this layout in sync with CemuMemoryReader.cs:
+#   incoming queue: 256 * 0x40 bytes at +0x20
+#   outgoing queue: 256 * 0x10 bytes at +0x4020
 _AP_Mailbox_Base:
-.int 0x41504D42          # [0x00] Magic Header Part 1: APMB
-.int 0x424F5457          # [0x04] Magic Header Part 2: BOTW
-.int 0x00000000          # [0x08] Status
-.int 0x00000000          # [0x0C] In Head
-.int 0x00000000          # [0x10] In Tail
-.int 0x00000000          # [0x14] Out Head
-.int 0x00000000          # [0x18] Out Tail
-.int 0x00000000          # [0x1C] Tick Count
+.int 0x41504D42          # "APMB"
+.int 0x424F5457          # "BOTW"
+.int 0                    # status
+.int 0                    # incoming head (client produces)
+.int 0                    # incoming tail (game consumes)
+.int 0                    # outgoing head (game produces)
+.int 0                    # outgoing tail (client consumes)
+.int 0                    # tick count
+# Reserve 256 incoming entries (64 bytes each) and 256 outgoing checks
+# (16 bytes each), matching offsets 0x20 and 0x4020 in the client.
 .int 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 .int 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 .int 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -175,27 +193,51 @@ _AP_Mailbox_Base:
 .int 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 .int 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 .int 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-.int 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-
+#
 _AP_Is_Injecting:
-.int 0x00000000
+.int 0
+
+# -----------------------------------------------------------------------------
 
 # =============================================================================
-# 2. MAIN LOOP HOOK (Safe Actor Tick Hook from SpawnActors)
+# 2. MAIN LOOP HOOK (Safe Actor Tick Hook)
 # =============================================================================
+#
+# IMPORTANT:
+# The old patch treated 0x03741B20 as an `acquireItem()` function and called it
+# to inject items. That is not supported by the Wii U v208 RE data.
+#
+# The verified Wii U path is:
+#   PauseMenuDataMgr singleton  : *(void**)0x10469978
+#   lock                        : 0x030BB668(mgr + 0x10)
+#   getPouchItemType            : 0x02EAE914(name, 0)
+#   addItem                     : 0x02EB3DF0(mgr, name, type, mgr + 0x4c,
+#                                             value, 0, 0, 0)
+#   post-add                    : 0x02EB58A8(mgr, name)
+#   saveToGameData              : 0x02EB3764(mgr, mgr + 0x4c)
+#   unlock                      : 0x030BB69C(mgr + 0x10)
+#
+# SafeString on Wii U is { const char* text; const void* vtable }.
+# The game vtable is 0x10263910.
+#
 _AP_MainTick_Hook:
-    # Hooked via 'b', preserving LR.
-    # We allocate 0xF0 bytes for the stack frame:
-    # 0x00 - 0x7F: Standard frame + GPRs + LR
-    # 0x80 - 0xEF: FPR backups (f0-f13)
+    # 0xF0-byte frame:
+    #   0x00-0x7F normal stack/volatile register backups
+    #   0x50      SafeString.text
+    #   0x54      SafeString.vtable
+    #   0x58      cached PauseMenuDataMgr*
+    #   0x5C      cached incoming head
+#   0x60      cached item value (quantity or full durability)
+    #   0x64      cached PouchItemType
+    #   0x80-0xEF FPR0-FPR13 backups
 
     stwu r1, -0xF0(r1)
-    
+
     stw r0, 0x30(r1)
     mflr r0
     stw r0, 0x7C(r1)
 
-    # Backup GPRs
+    # Backup GPRs touched by this hook/callees.
     stw r3, 0x08(r1)
     stw r4, 0x0C(r1)
     stw r5, 0x10(r1)
@@ -207,7 +249,7 @@ _AP_MainTick_Hook:
     stw r11, 0x28(r1)
     stw r12, 0x2C(r1)
 
-    # Backup FPRs (f0-f13) because acquireItem will clobber them mid-physics!
+    # Caller-visible FPRs are volatile under the PPC ABI.
     stfd f0,  0x80(r1)
     stfd f1,  0x88(r1)
     stfd f2,  0x90(r1)
@@ -223,72 +265,184 @@ _AP_MainTick_Hook:
     stfd f12, 0xE0(r1)
     stfd f13, 0xE8(r1)
 
-    # Mailbox Logic
+    # -------------------------------------------------------------------------
+    # Mailbox / queue check (codecave mailbox)
+    # -------------------------------------------------------------------------
     lis r11, _AP_Mailbox_Base@ha
     addi r11, r11, _AP_Mailbox_Base@l
-    
-    # Status = 2, Tick++
+
     li r12, 2
-    stw r12, 0x08(r11)
+    stw r12, 0x08(r11)               # status = 2 (game alive)
+
+    # Monotonic heartbeat for the host client.
     lwz r12, 0x1C(r11)
     addi r12, r12, 1
     stw r12, 0x1C(r11)
 
-    # Check incoming queue
-    lwz r12, 0x10(r11)  # tail
-    lwz r10, 0x0C(r11)  # head
+    # Client owns head; game owns tail. Consume until tail catches head.
+    lwz r10, 0x0C(r11)               # producer head
+    lwz r12, 0x10(r11)               # consumer tail / next entry
     cmpw r12, r10
-    bge tick_done
+    beq tick_done                    # queue empty
 
-    # Setup actSysPtr (r3)
-    lis r9, 0x105B
-    ori r9, r9, 0x8C00
-    lwz r3, 0(r9)
+    # Cache tail so it survives calls.
+    stw r12, 0x5C(r1)
+
+    # -------------------------------------------------------------------------
+    # Locate the incoming entry: mailbox + 0x20 + ((tail & 0xff) * 0x40)
+    # -------------------------------------------------------------------------
+    clrlwi r9, r12, 24
+    slwi r9, r9, 6
+    addi r9, r9, 0x20
+    add r9, r11, r9
+
+    # The mailbox stores the raw item name at entry + 0x08.
+    addi r8, r9, 0x08
+    stw r8, 0x50(r1)                 # SafeString.text
+
+    lis r8, 0x1026
+    ori r8, r8, 0x3910
+    stw r8, 0x54(r1)                 # SafeString.vtable
+
+    # Incoming quantity/value is entry + 0x38; weapon durability is resolved
+    # from actor-info after the pouch item type is known.
+    lwz r8, 0x38(r9)
+    stw r8, 0x60(r1)
+
+    # -------------------------------------------------------------------------
+    # Load PauseMenuDataMgr singleton.
+    # Verified as: lis r3,0x1047 ; lwz r3,-0x6688(r3)
+    # -------------------------------------------------------------------------
+    lis r3, 0x1047
+    lwz r3, -0x6688(r3)
     cmpwi r3, 0
-    beq tick_done
+    beq drop_incoming_entry
+    stw r3, 0x58(r1)
 
-    # Set is_injecting flag
+    # Mark this transaction so any separate outgoing hook can suppress a loop.
     lis r9, _AP_Is_Injecting@ha
     addi r9, r9, _AP_Is_Injecting@l
     li r10, 1
     stw r10, 0(r9)
 
-    # Setup string pointer (r4) and quantity (r5)
-    clrlwi r9, r12, 24
-    slwi r9, r9, 6       # 64 byte structure
-    addi r9, r9, 0x20
-    add r9, r11, r9
-    addi r4, r9, 8
-    lwz r5, 0x38(r9)
+    # -------------------------------------------------------------------------
+    # Lock PauseMenuDataMgr's critical section.
+    # -------------------------------------------------------------------------
+    addi r3, r3, 0x10
+    lis r12, 0x030B
+    ori r12, r12, 0xB668
+    mtctr r12
+    bctrl
 
-    # Zero optional params
-    li r6, 0
-    li r7, 0
+    # -------------------------------------------------------------------------
+    # type = getPouchItemType(&SafeString, 0)
+    # -------------------------------------------------------------------------
+    addi r3, r1, 0x50
+    li r4, 0
+    lis r12, 0x02EA
+    ori r12, r12, 0xE914
+    mtctr r12
+    bctrl
+
+    # Keep the returned type for addItem.
+    stw r3, 0x64(r1)
+
+    # Invalid/non-pouch name: unlock and consume the mailbox entry rather than
+    # retrying it forever.
+    cmpwi r3, -1
+    beq injection_unlock
+
+    # The fifth addItem argument is mValue: durability for weapon classes,
+    # quantity for arrows and stackable items. Resolve max durability for
+    # swords (0), bows (1), and shields (3), matching the game's refill path
+    # through 0x0308812C. Preserve the mailbox quantity for every other type.
+    lwz r5, 0x64(r1)
+    cmpwi r5, 0
+    beq get_weapon_max_value
+    cmpwi r5, 1
+    beq get_weapon_max_value
+    cmpwi r5, 3
+    bne pouch_value_ready
+
+get_weapon_max_value:
+    addi r3, r1, 0x50                # PouchItem::mName SafeString*
+    lis r12, 0x0308
+    ori r12, r12, 0x812C
+    mtctr r12
+    bctrl
+    stw r3, 0x60(r1)                 # full durability
+
+pouch_value_ready:
+
+    # -------------------------------------------------------------------------
+    # addItem(mgr, &SafeString, type, mgr + 0x4c, value, 0, 0, 0)
+    # -------------------------------------------------------------------------
+    lwz r3, 0x58(r1)                 # mgr
+    addi r4, r1, 0x50                # SafeString*
+    lwz r5, 0x64(r1)                 # PouchItemType
+    addi r6, r3, 0x4C                # OffsetList head
+    lwz r7, 0x60(r1)                 # value / full durability
     li r8, 0
     li r9, 0
     li r10, 0
 
-    # Call acquireItem directly!
-    lis r12, 0x0374
-    ori r12, r12, 0x1B20
+    lis r12, 0x02EB
+    ori r12, r12, 0x3DF0
     mtctr r12
     bctrl
 
-    # Clear is_injecting flag
+    # -------------------------------------------------------------------------
+    # The 0x02EB58A8 follow-up is used by the game's food-tagged add wrapper.
+    # Calling it for weapons crashes in its actor-info path (observed at
+    # 0x02EC216C). Keep it limited to PouchItemType 8 (Food).
+    # -------------------------------------------------------------------------
+    lwz r5, 0x64(r1)
+    cmpwi r5, 8
+    bne save_item_data
+
+    lwz r3, 0x58(r1)
+    addi r4, r1, 0x50
+    lis r12, 0x02EB
+    ori r12, r12, 0x58A8
+    mtctr r12
+    bctrl
+
+save_item_data:
+    lwz r3, 0x58(r1)
+    addi r4, r3, 0x4C
+    lis r12, 0x02EB
+    ori r12, r12, 0x3764
+    mtctr r12
+    bctrl
+
+injection_unlock:
+    # unlock(mgr + 0x10)
+    lwz r3, 0x58(r1)
+    addi r3, r3, 0x10
+    lis r12, 0x030B
+    ori r12, r12, 0xB69C
+    mtctr r12
+    bctrl
+
+    # Clear injection guard.
     lis r9, _AP_Is_Injecting@ha
     addi r9, r9, _AP_Is_Injecting@l
     li r10, 0
     stw r10, 0(r9)
 
-    # Increment tail
+# Consume the current incoming mailbox entry even if the manager was unavailable
+# or the name was not recognized. A bad entry should not wedge the queue forever.
+drop_incoming_entry:
     lis r11, _AP_Mailbox_Base@ha
     addi r11, r11, _AP_Mailbox_Base@l
-    lwz r12, 0x10(r11)
+    lwz r12, 0x10(r11)               # current consumer tail
     addi r12, r12, 1
     stw r12, 0x10(r11)
 
+# -----------------------------------------------------------------------------
+# Return to the original function.
+# -----------------------------------------------------------------------------
 tick_done:
-    # Restore FPRs
     lfd f0,  0x80(r1)
     lfd f1,  0x88(r1)
     lfd f2,  0x90(r1)
@@ -304,7 +458,6 @@ tick_done:
     lfd f12, 0xE0(r1)
     lfd f13, 0xE8(r1)
 
-    # Restore GPRs
     lwz r3, 0x08(r1)
     lwz r4, 0x0C(r1)
     lwz r5, 0x10(r1)
@@ -315,84 +468,88 @@ tick_done:
     lwz r10, 0x24(r1)
     lwz r11, 0x28(r1)
     lwz r12, 0x2C(r1)
-    
+
     lwz r0, 0x7C(r1)
     mtlr r0
     lwz r0, 0x30(r1)
     addi r1, r1, 0xF0
 
-    # Execute original instruction we replaced at 0x0313B840
+    # Original instruction replaced at 0x0313B840.
     cmpwi r3, 0
     b 0x0313B844
 
+
 # =============================================================================
-# 3. ACQUIRE ITEM HOOK (Outgoing Intercept)
+# 3. EXISTING OUTGOING / TELEMETRY HOOK (OPTIONAL / UNRESOLVED)
 # =============================================================================
-_AP_AcquireItem_Hook:
-    # Backup registers
+#
+# DO NOT call 0x03741B20 as the game's item-add routine. Its identity/signature
+# is not established by the Wii U v208 symbol data.
+#
+# This hook is retained only because your original patch already used it as an
+# empirically discovered function entry. It records the natural r3 argument and
+# leaves the original prologue intact. It deliberately does NOT fabricate a
+# location event or call back into 0x03741B20.
+#
+# Remove/comment the hook assignment at the bottom until the argument layout of
+# this function is reverse-engineered well enough to identify the item name.
+#
+_AP_Outgoing_Telemetry_Hook:
     addi r1, r1, -0x30
-    stw r9, 0x08(r1)
+    stw r9,  0x08(r1)
     stw r10, 0x0C(r1)
     stw r11, 0x10(r1)
     stw r12, 0x14(r1)
 
-    # Prevent loop if we are the ones injecting
+    # Skip the telemetry entirely while an injected item is being added.
     lis r11, _AP_Is_Injecting@ha
     addi r11, r11, _AP_Is_Injecting@l
     lwz r12, 0(r11)
     cmpwi r12, 1
-    beq skip_intercept
+    beq outgoing_return
 
-    lis r11, _AP_Mailbox_Base@ha
-    addi r11, r11, _AP_Mailbox_Base@l
-
-    # Write to Outgoing Queue
-    lwz r12, 0x14(r11)  # out_head
-    clrlwi r10, r12, 24
-    slwi r10, r10, 4
-    lis r9, 0
-    ori r9, r9, 0x4020
-    add r10, r10, r9
-    add r10, r10, r11
-    
-    stw r12, 0(r10)
-    li r9, 0
-    stw r9, 4(r10)
-    
-    # Send dummy location 5000 + out_head
-    lis r9, 0
-    ori r9, r9, 5000
-    add r9, r9, r12
-    stw r9, 8(r10)
-    
-    li r9, 0
-    stw r9, 12(r10)
-
-    addi r12, r12, 1
-    stw r12, 0x14(r11)
-
-skip_intercept:
-    # Setup long-distance branch target into CTR to be safe
+outgoing_return:
+    # 0x03741B20 was previously treated as a function entry whose first
+    # instruction is stwu r1,-0x30(r1). Preserve that original prologue here.
     lis r12, 0x0374
     ori r12, r12, 0x1B24
     mtctr r12
 
-    # Restore registers
-    lwz r9, 0x08(r1)
+    lwz r9,  0x08(r1)
     lwz r10, 0x0C(r1)
     lwz r11, 0x10(r1)
     lwz r12, 0x14(r1)
     addi r1, r1, 0x30
 
     stwu r1, -0x30(r1)
-    
-    # Long-distance branch back
     bctr
 
-# --- Hooks ---
 
-# 1. Main Tick Hook (Safe Actor Tick Hook from SpawnActors)
+# =============================================================================
+# 4. DEBUG TELEMETRY HOOK (Actor Spawn)
+# =============================================================================
+_AP_Debug_ActorSpawn_Hook:
+    stwu r1, -0x20(r1)
+    stw r11, 0x08(r1)
+
+    lwz r11, 0x08(r1)
+    addi r1, r1, 0x20
+
+    # Execute original instruction for 0x037B6040.
+    stwu r1, -0x38(r1)
+    b 0x037B6044
+
+
+# =============================================================================
+# 5. HOOK INSTALLATION
+# =============================================================================
+
+# Main game-thread hook.
 0x0313B840 = b _AP_MainTick_Hook
 
-# 2. AcquireItem Hook
-0x03741B20 = b _AP_AcquireItem_Hook
+# OPTIONAL: retain your previously discovered function-entry telemetry hook.
+# This is NOT used as the injection target.
+0x03741B20 = b _AP_Outgoing_Telemetry_Hook
+
+# Existing actor-spawn telemetry.
+0x037B6040 = b _AP_Debug_ActorSpawn_Hook

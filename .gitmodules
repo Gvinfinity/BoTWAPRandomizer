@@ -10,3 +10,6 @@
 [submodule "external/BotW-APManual"]
 	path = external/BotW-APManual
 	url = https://github.com/JDLKMR/BotW-APManual.git
+[submodule "external/BotwRandomizer"]
+	path = external/BotwRandomizer
+	url = https://github.com/MelonSpeedruns/BotwRandomizer.git
