@@ -54,8 +54,17 @@ for every field and ownership rule. `status` at +8 stays 2 after the first tick;
 
 ## Unimplemented native features
 
-Pickup banners, GameData flag delivery, progression upgrades, Plateau fog bypass,
+Pickup banners, GameData flag delivery, progression upgrades, live Plateau flag delivery,
 and victory detection are not wired into this mailbox. Earlier placeholder UI
 and GameData function addresses are intentionally not presented as callable APIs.
 Candidate native flags and functions must be checked against the v208 symbol
 sheet and validated at runtime before adding new capability/command types.
+
+## Fresh-save Plateau skip
+
+The static patcher sets `IsGet_PlayerStole2` in Bootup GameData defaults and
+adds `PlayerStole2` to the initial pouch. The v208 symbol sheet records a live
+observation that this flag independently controls Plateau fog/return containment,
+even with the four shrine completion flags false. The pouch is separate: it must
+also contain the key item to use the Paraglider. This startup path needs no
+injected GameData setter and applies before the new save's actors/caches load.

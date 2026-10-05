@@ -7,6 +7,7 @@ public sealed class SlotContract
 {
     public string Fingerprint { get; }
     public HashSet<long> Locations { get; } = [];
+    public Dictionary<long, int> StartingInventory { get; } = [];
     private readonly Dictionary<long, JsonElement> items = [];
     public SlotContract(JsonElement data, Mailbox mailbox, int slot, string seed, IEnumerable<long> serverLocations)
     {
@@ -26,6 +27,28 @@ public sealed class SlotContract
         if (!Locations.SetEquals(mailbox.Validate()) || !Locations.SetEquals(serverLocations))
             throw new InvalidDataException("Server, slot data, and hook location tables disagree");
         foreach (var item in data.GetProperty("items").EnumerateObject()) items.Add(long.Parse(item.Name), item.Value.Clone());
+        if (data.TryGetProperty("starting_state", out var start))
+        {
+            if (start.GetProperty("version").GetInt32() != 1)
+                throw new InvalidDataException("Unsupported starting-state profile");
+            var logical = start.GetProperty("logical_inventory");
+            var appliedNames = new HashSet<string>();
+            foreach (var item in data.GetProperty("starting_inventory").EnumerateObject())
+            {
+                long id = long.Parse(item.Name); int count = item.Value.GetInt32();
+                if (!items.ContainsKey(id) || count < 1 || count > 32)
+                    throw new InvalidDataException("Invalid applied starting inventory");
+                var mapping = items[id];
+                string? name = mapping.GetProperty("kind").GetString() == "actor"
+                    ? mapping.GetProperty("actor").GetString() == "PlayerStole2" ? "Paraglider" : null
+                    : mapping.GetProperty("name").GetString();
+                if (name is null || !logical.TryGetProperty(name, out var expected) || expected.GetInt32() != count || !appliedNames.Add(name))
+                    throw new InvalidDataException("Applied starting inventory disagrees with the starting-state profile");
+                StartingInventory.Add(id, count);
+            }
+            if (!appliedNames.SetEquals(logical.EnumerateObject().Select(item => item.Name)))
+                throw new InvalidDataException("Starting inventory is missing an applied default");
+        }
     }
     public IncomingItem? Delivery(long id, uint sequence, out string? reason)
     {
@@ -45,8 +68,12 @@ public sealed class SlotContract
 public interface IServerLink
 {
     bool Connected { get; }
-    IReadOnlyList<long> ReceivedItems { get; }
+    IReadOnlyList<ReceivedItem> ReceivedItems { get; }
     void SendChecks(long[] ids);
+}
+public readonly record struct ReceivedItem(long ItemId, long LocationId)
+{
+    public static implicit operator ReceivedItem(long id) => new(id, 0);
 }
 
 public sealed class JournalState
@@ -55,6 +82,7 @@ public sealed class JournalState
     public int NextItem { get; set; }
     public Flight? InFlight { get; set; }
     public HashSet<long> Checks { get; set; } = [];
+    public Dictionary<long, int> StartingAcknowledged { get; set; } = [];
 }
 public sealed record Flight(int Index, long ItemId, uint Head, uint Sequence);
 
@@ -80,6 +108,9 @@ public sealed class ClientBridge : IDisposable
         {
             state = File.Exists(path) ? JsonSerializer.Deserialize<JournalState>(File.ReadAllText(path))! : new JournalState();
             if (state.NextItem < 0 || !state.Checks.IsSubsetOf(contract.Locations)) throw new InvalidDataException("Invalid client journal");
+            if (state.StartingAcknowledged.Any(pair => pair.Value < 0 ||
+                    pair.Value > contract.StartingInventory.GetValueOrDefault(pair.Key)))
+                throw new InvalidDataException("Client journal exceeds the statically applied starting inventory");
             if (!File.Exists(path) && (mailbox.InHead != 0 || mailbox.InTail != 0 || mailbox.AckSequence != 0))
                 throw new InvalidDataException("This running mailbox already delivered items, but its client journal is missing");
             uint epoch = mailbox.Word(Protocol.Get("reserved_offset"));
@@ -131,7 +162,7 @@ public sealed class ClientBridge : IDisposable
                 return;
             }
             if (flight.Index != state.NextItem || flight.Sequence != checked((uint)flight.Index + 1) ||
-                received[flight.Index] != flight.ItemId)
+                received[flight.Index].ItemId != flight.ItemId)
                 throw new InvalidDataException("Received item history disagrees with the pending journal entry");
             uint after = unchecked(flight.Head + 1);
             if (mailbox.InTail == after && mailbox.AckSequence == flight.Sequence)
@@ -156,8 +187,20 @@ public sealed class ClientBridge : IDisposable
         if (state.NextItem >= received.Count) return;
         if (mailbox.InHead != mailbox.InTail) throw new InvalidDataException("Incoming mailbox contains an item from another producer");
         if (mailbox.Word(8) != 2) { BlockReason = "Waiting for active gameplay"; return; }
+        // AP reserves location -2 for precollected inventory. Only acknowledge
+        // the exact counts already initialized by this seed's static pack.
+        // An ordinary reward with the same item ID must still use native delivery.
+        while (state.NextItem < received.Count)
+        {
+            var receipt = received[state.NextItem];
+            int applied = state.StartingAcknowledged.GetValueOrDefault(receipt.ItemId);
+            if (receipt.LocationId != -2 || applied >= contract.StartingInventory.GetValueOrDefault(receipt.ItemId)) break;
+            state.StartingAcknowledged[receipt.ItemId] = applied + 1;
+            state.NextItem++; Save();
+        }
+        if (state.NextItem >= received.Count) return;
         uint sequence = checked((uint)state.NextItem + 1);
-        long id = received[state.NextItem];
+        long id = received[state.NextItem].ItemId;
         var next = contract.Delivery(id, sequence, out var blocked);
         if (next is null) { BlockReason = blocked; return; }
         state.InFlight = new Flight(state.NextItem, id, mailbox.InHead, sequence); Save();

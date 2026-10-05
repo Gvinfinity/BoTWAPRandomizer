@@ -15,6 +15,7 @@ from .Rules import set_rules
 from .reference import categories, item_data, item_groups
 from .static.checks import PROTOCOL_VERSION, check_actor_name
 from .static.protocol import MAILBOX_VERSION, seed_fingerprint
+from .static.starting import starting_state
 
 
 class BotWWebWorld(WebWorld):
@@ -50,10 +51,9 @@ class BotWWorld(World):
                               and (self.options.chest_shuffle or "Overworld Chests" not in entry.get("category", []))]
         if not self.active_chests:
             raise ValueError("No mapped checks; create worlds/botw/data/chests.json using the static patcher")
-        # Reference default starting inventory. These are logical precollects;
-        # native flag/capacity synchronization is a separate hook milestone.
-        for name, count in (("Great Plateau Tower", 1), ("Heart Container", 3),
-                            ("Weapon Slot", 8), ("Bow Slot", 5), ("Shield Slot", 4)):
+        self.starting_state = starting_state(bool(self.options.skip_great_plateau))
+        # The static patch initializes these exact defaults before a new save.
+        for name, count in self.starting_state["logical_inventory"].items():
             for _ in range(count):
                 self.multiworld.push_precollected(self.create_item(name))
 
@@ -96,7 +96,10 @@ class BotWWorld(World):
             "seed": str(self.multiworld.seed_name),
             "player": self.player,
             "seed_fingerprint": seed_fingerprint(self.multiworld.seed_name, self.player,
-                                                 [entry["id"] for entry in self.active_chests]),
+                                                 [entry["id"] for entry in self.active_chests], self.starting_state),
+            "starting_state": self.starting_state,
+            "starting_inventory": {str(item_data[name]["id"]): count
+                                   for name, count in self.starting_state["logical_inventory"].items()},
             "check_actor_prefix": "AP_Check_",
             "check_actor_id_format": "8 uppercase hexadecimal digits",
             "goal": "defeat_dark_beast_ganon",
@@ -114,6 +117,7 @@ class BotWWorld(World):
         digest = hashlib.sha256(json.dumps(entries, sort_keys=True).encode()).hexdigest()
         plan = {"version": PROTOCOL_VERSION, "game": self.game, "player": self.player,
                 "player_name": self.player_name, "seed": str(self.multiworld.seed_name),
-                "catalog_digest": digest, "locations": entries, "slot_data": self.fill_slot_data()}
+                "catalog_digest": digest, "locations": entries, "starting_state": self.starting_state,
+                "slot_data": self.fill_slot_data()}
         filename = Path(output_directory) / (self.multiworld.get_out_file_name_base(self.player) + ".apbotw")
         BotWPatch(str(filename), self.player, self.player_name, plan=plan).write()

@@ -36,7 +36,7 @@ def main() -> None:
         with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
             archive.writestr("archipelago.json", json.dumps({
                 "game": "Breath of the Wild", "version": 7, "compatible_version": 7,
-                "world_version": "0.3.0", "minimum_ap_version": "0.6.0"
+                "world_version": "0.4.0", "minimum_ap_version": "0.6.0"
             }))
             archive.write(ROOT / "src/hook/patch_Archipelago.asm", "botw/static/hook_template.asm")
             for path in sorted((ROOT / "worlds/botw").rglob("*")):

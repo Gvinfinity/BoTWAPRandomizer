@@ -16,7 +16,9 @@ The patcher bundles the core ASM with an immutable seed location table. Slot dat
 contains protocol version, player, seed name, fingerprint, location names and item
 delivery metadata. The fingerprint is the first 16 SHA-256 bytes of compact,
 key-sorted JSON containing `seed` (string), `player` (integer), and `locations`
-(sorted integer IDs). The client compares slot data, server locations, and the
+(sorted integer IDs). New seeds also include the canonical `starting_state`
+object in that JSON identity. Legacy seeds without a starting-state object
+retain their original fingerprint calculation. The client compares slot data, server locations, and the
 resident hook table before writing any items or sending any checks.
 
 Enable the generated pack as the **only** AP hook pack. The source hook's empty
@@ -102,6 +104,15 @@ is in flight at a time. The client saves its intent before publication and advan
 the AP history index only after both native tail advancement and matching token.
 The journal lock prevents concurrent access to that seed/player state.
 
+For seeds with a starting-state profile, `starting_inventory` lists the exact
+counts already applied to a fresh save by the static pack. Received-item records
+retain both item ID and source location. The client acknowledges only those
+counts with AP's precollected source location `-2`, saves their applied counters
+in the journal, and advances the history index without a second native grant.
+Later chest/cheat rewards with the same item ID still follow native delivery.
+Tokens continue to use AP history indices, so the first native token may be
+greater than one after starting receipts are acknowledged.
+
 A Cemu restart during an outstanding grant is detected through the lifetime nonce
 and requires reconciliation rather than guessing whether delivery happened.
 Keep the state directory with the corresponding game save. Loading an older save,
@@ -113,10 +124,12 @@ before the client journals them are not durable across a Cemu crash.
 
 The client implements real AP login, history delivery, check submission, and
 reconnection. Unsupported `kind: unimplemented` grants remain at the front of the
-history with a visible reason; later items wait. Reference precollects can therefore
-block delivery until their native grants exist. Native flags, towers, runes,
-progressive equipment, pouch/heart/stamina upgrades, pickup banners, Plateau fog
-bypass, shop resources, and actual victory reporting remain unfinished.
+history with a visible reason; later items wait. Legacy seeds without applied-starting metadata can therefore block on reference
+precollects. New seeds acknowledge their statically initialized defaults. Native flags, towers, runes,
+progressive equipment, pouch/heart/stamina upgrades, pickup banners, shop
+resources, and actual victory reporting remain unfinished. The Plateau skip
+initializes its containment flag and pouch statically on a fresh save; live
+Paraglider flag delivery remains a separate feature.
 
 The pouch measurement uses the v208 symbol sheet and sead list layout. Source
 interpreter tests and assembly compilation do not establish emulator stability,

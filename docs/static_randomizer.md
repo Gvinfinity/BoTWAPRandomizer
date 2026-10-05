@@ -3,7 +3,8 @@
 This is the first static chest implementation for the Wii U v208 game. It
 generates Archipelago seeds and applies them to an extracted game as a Cemu
 Graphic Pack. The generated pack includes the seed-bound acquisition/delivery hook, and the
-client consumes APWorld slot data. Native flag/progressive-item grants and
+client consumes APWorld slot data. New saves skip the Great Plateau tutorial
+by default and start with the Paraglider. Native received-flag/progressive-item grants and
 in-game victory reporting remain unfinished; this is not yet a playable integration.
 
 ## Chest identity and hook contract
@@ -96,6 +97,7 @@ Breath of the Wild:
   progression_balancing: 50
   accessibility: full
   chest_shuffle: true
+  skip_great_plateau: true
   enable_the_master_trials_dlc: false
   enable_the_champions_ballad_dlc: false
 ```
@@ -129,14 +131,15 @@ Rules support the Manual's `|Item|`, `|Item:count|`, `|@Category|`, parentheses,
 Paraglider additionally required outside the Plateau. The item pool includes
 all enabled progression copies, subtracts precollected inventory, samples optional
 items into the remaining slots, and fills any spare slots with arrows. Insufficient
-checks fail generation rather than discarding progression. The reference's default
-starting tower, hearts, and pouch capacities are logical precollects.
+checks fail generation rather than discarding progression. The fresh-save starting inventory is precollected in AP logic and initialized
+in the game resources. With the default Plateau skip, this includes its tower
+and Paraglider; vanilla hearts and pouch capacities are also represented.
 
 The reference assumes progression items and flags have been synchronized into
 the game. Slot data exposes delivery metadata; grants without an implemented
 native mapping are explicitly `kind: unimplemented`. Tower unlocks, runes,
-progressive equipment, capacities, event flags, and starting inventory still need
-native delivery. Dark Beast Ganon is a logical goal event; the hook/client must
+progressive equipment, capacities, and received event flags still need native
+delivery. The initial defaults are applied statically before a new save begins. Dark Beast Ganon is a logical goal event; the hook/client must
 report its actual defeat. Shop patching is not integrated in this first pass.
 
 ## Validation performed
@@ -145,7 +148,7 @@ Solo and two-player worlds passed Archipelago restrictive fill and beatability
 using the local AP installation. The applied 164-check zip was parsed back to
 verify encoded drops, ActorLinks, GeneralParamLists, sorted ActorInfo hashes,
 resource-size entries, and UI labels in all seven installed language packs.
-The current 18 patcher/hook tests and 8 APWorld tests pass. The patcher and
+The current 24 patcher/hook/startup tests and 17 APWorld tests pass. The patcher and
 APWorld tests cover the static pipeline; protocol tests additionally
 exercise the actual hook instructions against simulated guest memory. C# self-tests
 cover seed verification, native acknowledgements, queue limits, journal recovery,
@@ -153,7 +156,7 @@ and a real AP SDK exchange against a local WebSocket fixture.
 Coverage includes chest identity, unmatched mappings, archive preservation,
 initial access, rune rules, fill, hook backpressure, and partial native grants.
 These checks do not establish Cemu runtime stability, check latency, UI behavior,
-delivery accuracy, or Plateau fog bypass; the project acceptance metrics still
+delivery accuracy, or actual startup/Plateau behavior; the project acceptance metrics still
 require emulator validation of the integrated hook.
 
 ## References
@@ -189,3 +192,35 @@ dotnet run --project src/client -- --self-test-pack /path/to/BotW_AP_P1.zip
 That check reads the pack's actual ASM allocation and compares its IDs and
 fingerprint with the manifest and AP slot data. The current catalog has 5
 native actor mappings and 176 explicitly unsupported grant mappings.
+
+## Starting after the Great Plateau tutorial
+
+`skip_great_plateau` is enabled by default. Set it explicitly in the player YAML:
+
+```yaml
+Breath of the Wild:
+  skip_great_plateau: true
+```
+
+Generate a new seed, apply it to your extracted game, enable the resulting AP
+graphic pack, and choose **New Game**. Start with the Plateau tower/map enabled,
+its main tutorial quests finished, and the Sheikah Slate and Paraglider in the
+pouch. `IsGet_PlayerStole2` is initialized true to remove the Plateau containment
+without playing the Old Man gift sequence. The AP client is not needed to apply
+these fresh-save defaults.
+
+This uses the reference randomizer's Bootup GameData initialization approach.
+The patch adds the two key items to the native `PorchItem` arrays, preserves other
+entries, and updates the RSTB for the rebuilt resources. Shrine completion and
+rune flags remain unchanged; shrine chests are still checks.
+
+Slot data records the exact applied AP starting-item counts. The client accepts
+only that many precollected receipts (AP location `-2`) as already applied; ordinary
+rewards with the same ID still require delivery. The starting-state profile is
+included in the seed fingerprint, so packs with different startup settings cannot
+be interchanged.
+
+Existing saves retain their saved flags/inventory and are not migrated by these
+initial defaults. Set `skip_great_plateau: false` for the original tutorial and
+keep the Paraglider in the randomized item pool. Native runtime validation of
+this startup patch in Cemu is still required.

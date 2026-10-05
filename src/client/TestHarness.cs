@@ -2,6 +2,7 @@ using System.Text;
 using System.Text.Json;
 using System.IO.Compression;
 using System.Text.RegularExpressions;
+using System.Text.Json.Nodes;
 using BotWClient.Archipelago;
 using BotWClient.Memory;
 
@@ -48,7 +49,7 @@ internal static class TestHarness
     private sealed class Server : IServerLink
     {
         public bool Connected { get; set; } = true;
-        public IReadOnlyList<long> ReceivedItems { get; set; } = [];
+        public IReadOnlyList<ReceivedItem> ReceivedItems { get; set; } = [];
         public List<long> Sent { get; } = [];
         public bool FailSend { get; set; }
         public void SendChecks(long[] ids) { if (FailSend) throw new IOException("Simulated network failure"); Sent.AddRange(ids); }
@@ -133,13 +134,40 @@ internal static class TestHarness
                 Require(mailbox.InHead == 1 && Protocol.Read(ram.Read(Protocol.Get("incoming_offset") + 4, 4)) == item, "AP network item did not reach the mailbox");
                 Require(fixture.Checks.Task.WaitAsync(TimeSpan.FromSeconds(5)).GetAwaiter().GetResult().Contains(location), "Mailbox check did not reach the AP socket");
             }
+            // Precollected flags already applied to a fresh save must not block
+            // the live item history or discard later rewards with the same ID.
+            mailbox.SetWord(12, 0); mailbox.SetWord(16, 0); mailbox.SetWord(20, 0); mailbox.SetWord(24, 0);
+            mailbox.SetWord(Protocol.Get("ack_sequence_offset"), 0); mailbox.SetWord(Protocol.Get("reserved_offset"), 0);
+            var startNode = JsonNode.Parse(data.RootElement.GetRawText())!;
+            startNode["starting_state"] = JsonSerializer.SerializeToNode(new { version = 1, logical_inventory = new Dictionary<string, int> { ["Tower"] = 1 } });
+            startNode["starting_inventory"] = JsonSerializer.SerializeToNode(new Dictionary<string, int> { [unsupported.ToString()] = 1 });
+            using var startData = JsonDocument.Parse(startNode.ToJsonString());
+            var startContract = new SlotContract(startData.RootElement, mailbox, 1, "test", [location]);
+            server.ReceivedItems = [new ReceivedItem(unsupported, -2), item, new ReceivedItem(unsupported, -2)];
+            string startDirectory = Path.Combine(directory, "starting");
+            using (var bridge = new ClientBridge(mailbox, startContract, startDirectory, 0, 1))
+            {
+                bridge.Pump(server);
+                Require(bridge.NextItem == 1 && mailbox.InHead == 1 && Protocol.Read(ram.Read(Protocol.Get("incoming_offset"), 4)) == 2,
+                    "Applied starting item blocked delivery or changed the received-item sequence");
+                mailbox.SetWord(Protocol.Get("ack_sequence_offset"), 2); mailbox.SetWord(16, 1);
+                bridge.Pump(server);
+                Require(bridge.NextItem == 2 && bridge.BlockReason is not null, "Starting count limit discarded an additional precollected item");
+            }
+            using (var bridge = new ClientBridge(mailbox, startContract, startDirectory, 0, 1))
+            {
+                server.ReceivedItems = [new ReceivedItem(unsupported, -2), item, new ReceivedItem(unsupported, location)];
+                bridge.Pump(server);
+                Require(bridge.NextItem == 2 && mailbox.InHead == 1 && bridge.BlockReason is not null,
+                    "Reconnect replayed defaults or discarded a chest reward with a starting item ID");
+            }
             // Ring counters wrap unsigned; a full ring never overwrites its consumer.
             mailbox.SetWord(12, uint.MaxValue); mailbox.SetWord(16, uint.MaxValue);
             Require(mailbox.Enqueue(new IncomingItem(2, item, "Item_Ore_A", 1), uint.MaxValue) && mailbox.InHead == 0, "Counter wrap failed");
             mailbox.SetWord(12, 256); mailbox.SetWord(16, 0);
             Require(!mailbox.Enqueue(new IncomingItem(3, item, "Item_Ore_A", 1), 256), "Full ring overwritten");
             mailbox.SetWord(Protocol.Get("version_offset"), 1); Reject(() => mailbox.Validate());
-            Console.WriteLine("PASS: shared wire format, identity checks, native acknowledgements, journal recovery, network failure, unsupported grants, queue capacity, counter wrap and real AP SDK WebSocket exchange");
+            Console.WriteLine("PASS: shared wire format, identity checks, applied starting inventory, native acknowledgements, journal recovery, network failure, unsupported grants, queue capacity, counter wrap and real AP SDK WebSocket exchange");
             return 0;
         }
         catch (Exception ex) { Console.Error.WriteLine(ex); return 1; }

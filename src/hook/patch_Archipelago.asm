@@ -1169,7 +1169,7 @@ injection_unlock:
     stw r9, 0x5038(r11)
     li r9, 0
     stw r9, 0x5034(r11)
-    sync
+    .int 0x7C0004AC                 # PPC sync (Cemu assembler lacks the mnemonic)
     lwz r12, 0x5C(r1)
     addi r12, r12, 1
     stw r12, 0x10(r11)
@@ -1339,7 +1339,7 @@ additem_location_found:
     bne additem_consume_token
     li r9, 1
     stw r9, 4(r11)                   # pending; survives an outgoing full ring
-    sync
+    .int 0x7C0004AC                 # PPC sync (Cemu assembler lacks the mnemonic)
 additem_consume_token:
     lwz r9,  0x08(r1)
     lwz r10, 0x0C(r1)
@@ -1390,7 +1390,7 @@ flush_checks_loop:
     stw r0, 12(r12)
     lwz r0, 0(r9)
     stw r0, 8(r12)
-    sync
+    .int 0x7C0004AC                 # PPC sync (Cemu assembler lacks the mnemonic)
     lwz r12, 0x14(r11)
     addi r12, r12, 1
     stw r12, 0x14(r11)

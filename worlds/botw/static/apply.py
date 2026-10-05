@@ -14,6 +14,7 @@ from .plan import validate_plan
 from .resources import binary_modules, decode_byml, decompress, encode_byml, replace_members
 from .ui import build_check_messages
 from .hook import build_seed_hook
+from .starting import build_starting_resources
 
 RSTB_PATH = "content/System/Resource/ResourceSizeTable.product.srsizetable"
 
@@ -41,6 +42,11 @@ def apply_plan(plan: dict, dump, output: str) -> dict:
     maps = {}
     for entry in plan["locations"]:
         maps.setdefault(entry["resource"], []).append(entry)
+        for variant in entry.get("resource_variants", []):
+            maps.setdefault(variant["resource"], []).append({
+                **entry,
+                "map_sha256": variant["map_sha256"],
+            })
     replacements, sizes = {}, {}
     for resource, entries in sorted(maps.items()):
         original = dump.read(resource)
@@ -63,13 +69,38 @@ def apply_plan(plan: dict, dump, output: str) -> dict:
     message_files, message_sizes = build_check_messages(dump, [entry["id"] for entry in plan["locations"]])
     files.update(message_files)
     sizes.update(message_sizes)
+    if plan.get("starting_state") is not None:
+        starting_files, starting_sizes = build_starting_resources(dump, plan["starting_state"])
+        if files.keys() & starting_files.keys():
+            raise ValueError("Starting-state resources collide with another patch branch")
+        files.update(starting_files)
+        sizes.update(starting_sizes)
     table_raw = dump.read(RSTB_PATH)
     table = rstb.ResourceSizeTable(decompress(table_raw), be=True)
-    # Conservative allocation bounds for expanded map/actor resources. Complex
-    # formats need parse allocations in addition to their serialized byte size.
+    # Do not synthesize large allocations for outer .pack resources that have
+    # no RSTB entry in the original game. Those archives are managed through
+    # their existing resource path and a guessed 2x serialized size can consume
+    # over a gigabyte across the world. Existing entries already include their
+    # format-specific parse allowance; keep that allowance and grow only to the
+    # new serialized size. New AP actors inherit the matching vanilla template
+    # actor's known allocation.
     for name, size in sizes.items():
-        requested = ((size * 2 + 31) & ~31) + 4096
-        table.set_size(name, max(table.get_size(name), requested))
+        requested = ((size + 31) & ~31) + 4096
+        existing = table.get_size(name)
+        if existing:
+            table.set_size(name, max(existing, requested))
+        elif name.startswith("Actor/Pack/AP_Check_") and name.endswith(".bactorpack"):
+            template = table.get_size("Actor/Pack/Item_Ore_A.bactorpack")
+            if template:
+                table.set_size(name, max(template, requested))
+        elif name.startswith("Actor/ActorLink/AP_Check_") and name.endswith(".bxml"):
+            template = table.get_size("Actor/ActorLink/Item_Ore_A.bxml")
+            if template:
+                table.set_size(name, max(template, requested))
+        elif name.startswith("Actor/GeneralParamList/AP_Check_") and name.endswith(".bgparamlist"):
+            template = table.get_size("Actor/GeneralParamList/Item_Ore_A.bgparamlist")
+            if template:
+                table.set_size(name, max(template, requested))
     stream = io.BytesIO()
     table.write(stream, be=True)
     files[RSTB_PATH] = bytes(binary_modules()[0].yaz0.compress(stream.getvalue()))

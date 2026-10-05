@@ -33,7 +33,8 @@ def build_seed_hook(plan):
         template = template_path.read_text()
     else:
         template = files(__package__).joinpath("hook_template.asm").read_text()
-    fingerprint = seed_fingerprint(plan["seed"], plan["player"], [entry["id"] for entry in plan["locations"]])
+    fingerprint = seed_fingerprint(plan["seed"], plan["player"], [entry["id"] for entry in plan["locations"]],
+                                   plan.get("starting_state"))
     if plan.get("slot_data", {}).get("seed_fingerprint") != fingerprint:
         raise ValueError("Patch/slot seed fingerprint mismatch; regenerate this seed")
     begin, end = template.index("_AP_Mailbox_Base:"), template.index("_AP_Is_Injecting:")

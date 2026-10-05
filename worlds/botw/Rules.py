@@ -9,7 +9,8 @@ def set_rules(world):
         return compile_requirement(expression, world.player, item_data, item_groups)
 
     for name, data in manual_regions.items():
-        requirement = rule(data.get("requires", ""))
+        # The starting area is reachable before its tower is activated.
+        requirement = rule("" if name == "Great Plateau" else data.get("requires", ""))
         if name != "Great Plateau":
             original = requirement
             requirement = lambda state, original=original: state.has("Paraglider", world.player) and original(state)

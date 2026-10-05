@@ -7,6 +7,8 @@ PROTOCOL = json.loads(files(__package__).joinpath("protocol.json").read_text())
 MAILBOX_VERSION = PROTOCOL["version"]
 
 
-def seed_fingerprint(seed: str, player: int, location_ids) -> str:
+def seed_fingerprint(seed: str, player: int, location_ids, starting_state=None) -> str:
     identity = {"seed": str(seed), "player": player, "locations": sorted(location_ids)}
+    if starting_state is not None:
+        identity["starting_state"] = starting_state
     return hashlib.sha256(json.dumps(identity, sort_keys=True, separators=(",", ":")).encode()).hexdigest()[:32]

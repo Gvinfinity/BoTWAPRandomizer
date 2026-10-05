@@ -65,7 +65,13 @@ def build_check_actors(dump, location_ids: list[int]) -> tuple[dict[str, bytes],
         resource_sizes[new_link] = len(writer.files[new_link])
         resource_sizes[new_gparam] = len(writer.files[new_gparam])
         resource_sizes[f"Actor/Pack/{name}.bactorpack"] = max(template_pack_size, len(raw))
-    info["Hashes"] = oead.byml.Array([oead.U32(code) for code in sorted(entries)])
+    # BYML distinguishes signed and unsigned integer nodes. The game reads
+    # ActorInfo hashes using typed getters, so preserve the source encoding:
+    # values whose high bit is set use U32; all others use S32.
+    info["Hashes"] = oead.byml.Array([
+        oead.U32(code) if code > 0x7FFFFFFF else oead.S32(code)
+        for code in sorted(entries)
+    ])
     info["Actors"] = oead.byml.Array([entries[code] for code in sorted(entries)])
     files["content/Actor/ActorInfo.product.sbyml"] = encode_byml(info, info_raw)
     resource_sizes["Actor/ActorInfo.product.byml"] = len(decompress(files["content/Actor/ActorInfo.product.sbyml"]))

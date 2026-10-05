@@ -51,5 +51,39 @@ def bind_reference(discovery: dict, dump, reference_dir: Path, randomizer_dir: P
         for chest, ref in zip(sorted(chests, key=lambda entry: entry["hash_id"]), refs):
             chest.update(name=ref["name"], region=ref["region"], requires=ref.get("requires", ""),
                          category=ref.get("category", []), binding="manual-shrine-equal-rule")
+
+    # The Trial of the Sword's final arena is represented by two mutually
+    # exclusive map variants in FinalTrial.pack. They contain the same seven
+    # physical chest HashIds. Give each physical chest one AP location and
+    # patch that same check into both map variants. These are deliberately
+    # named by HashId: the Manual lists floor checks, but does not identify
+    # which actor HashId belongs to each floor.
+    trial_maps = {
+        "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+        "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static_NoGrudgeMerge.smubin",
+    }
+    variants = {}
+    for chest in discovery["locations"]:
+        if chest["logical_map"] in trial_maps and chest["resource"].startswith("aoc/0010/Pack/FinalTrial.pack!"):
+            variants.setdefault(chest["hash_id"], []).append(chest)
+    for hash_id, chests in variants.items():
+        canonical = next((entry for entry in chests if entry["logical_map"].endswith("FinalTrial_Static.smubin")), None)
+        alternate = next((entry for entry in chests if entry["logical_map"].endswith("FinalTrial_Static_NoGrudgeMerge.smubin")), None)
+        if canonical is None:
+            continue
+        canonical.update(
+            name=f"Trial of the Sword (Final Trials) - Chest {hash_id:08X}",
+            region="Trial of the Sword (Final Trials)",
+            requires="",
+            category=["The Master Trials DLC"],
+            binding="master-trials-finaltrial-hash",
+        )
+        if alternate is not None:
+            canonical["resource_variants"] = [{
+                "resource": alternate["resource"],
+                "map_sha256": alternate["map_sha256"],
+            }]
+            discovery["locations"].remove(alternate)
+
     discovery["binding_warnings"] = warnings
     return discovery

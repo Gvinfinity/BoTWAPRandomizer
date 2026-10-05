@@ -15,7 +15,8 @@ public sealed class APSessionManager : IServerLink, IDisposable
     public int Team { get; }
     public int Slot { get; }
     public bool Connected => session.Socket.Connected;
-    public IReadOnlyList<long> ReceivedItems => session.Items.AllItemsReceived.Select(item => item.ItemId).ToArray();
+    public IReadOnlyList<ReceivedItem> ReceivedItems => session.Items.AllItemsReceived
+        .Select(item => new ReceivedItem(item.ItemId, item.LocationId)).ToArray();
     public APSessionManager(string uri, string slotName, string? password, Mailbox mailbox)
     {
         session = ArchipelagoSessionFactory.CreateSession(uri);

@@ -31,7 +31,29 @@ class TestBotWGeneration(BotWTestBase):
         ids = [int(code) for code in data["locations"]]
         self.assertEqual(data["protocol_version"], MAILBOX_VERSION)
         self.assertEqual(data["player"], self.player)
-        self.assertEqual(data["seed_fingerprint"], seed_fingerprint(data["seed"], self.player, ids))
+        self.assertEqual(data["seed_fingerprint"], seed_fingerprint(data["seed"], self.player, ids, data["starting_state"]))
         plan = {"seed": data["seed"], "player": self.player,
-                "locations": [{"id": code} for code in ids], "slot_data": data}
+                "locations": [{"id": code} for code in ids], "starting_state": data["starting_state"], "slot_data": data}
         self.assertIn(b"_AP_FlushPendingChecks:", build_seed_hook(plan))
+
+    def test_plateau_skip_starts_with_map_but_keeps_paraglider_in_pool(self):
+        data = self.world.fill_slot_data()
+        self.assertTrue(data["starting_state"]["skip_great_plateau"])
+        self.assertFalse(self.multiworld.state.has("Paraglider", self.player))
+        self.assertTrue(self.multiworld.state.has("Great Plateau Tower", self.player))
+        self.assertEqual(sum(item.name == "Paraglider" for item in self.multiworld.itempool), 1)
+        self.assertNotIn(str(self.world.item_name_to_id["Paraglider"]), data["starting_inventory"])
+
+
+class TestVanillaPlateauStart(BotWTestBase):
+    options = {"skip_great_plateau": False}
+
+    def test_paraglider_stays_in_pool_without_skip(self):
+        self.assertFalse(self.multiworld.state.has("Paraglider", self.player))
+        self.assertEqual(sum(item.name == "Paraglider" for item in self.multiworld.itempool), 1)
+        self.assertFalse(self.world.fill_slot_data()["starting_state"]["skip_great_plateau"])
+
+    def test_plateau_checks_reachable_before_tower(self):
+        self.assertFalse(self.multiworld.state.has("Great Plateau Tower", self.player))
+        self.assertTrue(any(location.can_reach(self.multiworld.state)
+                            for location in self.multiworld.get_unfilled_locations(self.player)))
