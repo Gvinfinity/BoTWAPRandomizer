@@ -7,6 +7,7 @@ internal static class Program
 {
     private static int Main(string[] args)
     {
+        if (args.Length == 2 && args[0] == "--cemu-test") return CemuIntegrationTest.Run(args[1]);
         if (args.Length == 2 && args[0] == "--self-test-pack") return TestHarness.ValidatePack(args[1]);
         if (args.Length == 2 && args[0] == "--self-test-tls") return TestHarness.Run(args[1]);
         if (args.Contains("--self-test") || args.Contains("--mock")) return TestHarness.Run();
@@ -37,7 +38,7 @@ internal static class Program
                 return 0;
             }
             using var mailbox = new Mailbox(CemuMemoryReader.Attach(verbose, log.Write));
-            log.Write($"Mailbox fingerprint={mailbox.Fingerprint}, incoming={mailbox.InHead}/{mailbox.InTail}, outgoing={mailbox.OutHead}/{mailbox.OutTail}, ack={mailbox.AckSequence}, delivery_error={mailbox.DeliveryError}");
+            log.Write($"Mailbox fingerprint={mailbox.Fingerprint}, guest_addr=0x{mailbox.GuestAddress:X8}, incoming={mailbox.InHead}/{mailbox.InTail}, outgoing={mailbox.OutHead}/{mailbox.OutTail}, ack={mailbox.AckSequence}");
             using var initial = new APSessionManager(endpoint.AbsoluteUri, slot, Option("--password"), mailbox, log.Write);
             using var bridge = new ClientBridge(mailbox, initial.Contract, directory, initial.Team, initial.Slot, log.Write);
             APSessionManager current = initial;

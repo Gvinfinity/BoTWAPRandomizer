@@ -1,11 +1,9 @@
 using System.Diagnostics;
 using System.Globalization;
-using System.Text;
 using Microsoft.Win32.SafeHandles;
 
 namespace BotWClient.Memory;
 
-// Linux /proc access. Scan bounded chunks rather than allocating an entire guest mapping.
 public sealed class CemuMemoryReader : IMemory
 {
     private readonly SafeFileHandle handle;
@@ -13,12 +11,12 @@ public sealed class CemuMemoryReader : IMemory
     private FileStream? producerLease;
     public int ProcessId { get; }
     private CemuMemoryReader(SafeFileHandle handle, long address, int pid) { this.handle = handle; this.address = address; ProcessId = pid; }
-    public static CemuMemoryReader Attach(bool verbose = false, Action<string>? log = null)
+    public static CemuMemoryReader Attach(bool verbose = false, Action<string>? log = null, int? processId = null)
     {
         if (verbose && log is null) log = new ClientLog(true).Write;
         log?.Invoke("Searching for Cemu processes and a configured AP v2 mailbox.");
         if (!OperatingSystem.IsLinux()) throw new PlatformNotSupportedException("Cemu attachment currently uses Linux /proc");
-        foreach (var process in Process.GetProcesses().Where(p => p.ProcessName.Equals("Cemu", StringComparison.OrdinalIgnoreCase)))
+        foreach (var process in Process.GetProcesses().Where(p => p.ProcessName.Equals("Cemu", StringComparison.OrdinalIgnoreCase) && (!processId.HasValue || p.Id == processId.Value)))
         {
             var timer = Stopwatch.StartNew();
             long scanned = 0;
@@ -58,7 +56,10 @@ public sealed class CemuMemoryReader : IMemory
                                 log?.Invoke($"Cemu PID {process.Id}, mailbox 0x{position + i:X}; scanned {scanned / 1048576.0:F1} MiB in {timer.Elapsed.TotalSeconds:F2}s.");
                                 return candidate;
                             }
-                            catch (IOException ex) { log?.Invoke($"Rejected mailbox candidate 0x{position + i:X}: {ex.Message}"); }
+                            catch (Exception ex) when (ex is IOException or InvalidDataException)
+                            {
+                                log?.Invoke($"Rejected mailbox candidate 0x{position + i:X}: {ex.Message}");
+                            }
                         }
                     }
                 }
@@ -68,15 +69,23 @@ public sealed class CemuMemoryReader : IMemory
         throw new IOException("No configured AP v2 mailbox found. Load the seed's graphic pack in Cemu first.");
     }
     private uint ReadWord(int offset) => Protocol.Read(Read(offset, 4));
-    public byte[] Read(int offset, int length)
+    private byte[] ReadAt(long hostAddress, int length)
     {
+        if (hostAddress < 0) throw new InvalidDataException("Invalid guest memory address");
         byte[] bytes = new byte[length]; int total = 0;
         while (total < length)
         {
-            int count = RandomAccess.Read(handle, bytes.AsSpan(total), address + offset + total);
-            if (count == 0) throw new EndOfStreamException("Cemu memory is unavailable"); total += count;
+            int count = RandomAccess.Read(handle, bytes.AsSpan(total), hostAddress + total);
+            if (count == 0) throw new EndOfStreamException("Cemu memory is unavailable");
+            total += count;
         }
         return bytes;
+    }
+    public byte[] Read(int offset, int length) => ReadAt(address + offset, length);
+    public byte[] ReadGuest(uint guestAddress, uint mailboxGuestAddress, int length)
+    {
+        if (mailboxGuestAddress == 0) throw new InvalidDataException("Guest mailbox address is not initialized");
+        return ReadAt(address + ((long)guestAddress - (long)mailboxGuestAddress), length);
     }
     public void Write(int offset, byte[] bytes) => RandomAccess.Write(handle, bytes, address + offset);
     public void Dispose() { handle.Dispose(); producerLease?.Dispose(); }

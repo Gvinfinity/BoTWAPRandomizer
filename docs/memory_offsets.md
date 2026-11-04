@@ -25,7 +25,7 @@ acknowledgement behavior still needs validation in Cemu.
 Native add arguments are `(manager, &SafeString, type, manager + 0x4C, value, 0, 0, 0)`.
 Sword/bow/shield types 0/1/3 use full durability; other supported actors use the
 remaining quantity. Type 8 receives the food post-add call. A void return is not
-proof of delivery: the hook measures live named entries before and after the add.
+proof of delivery: the client observes live named entries before and after the add.
 
 ## Measurement layout
 
@@ -35,7 +35,8 @@ count, and node offset. See `external/sead/include/container/seadListImpl.h` and
 A linked node's next pointer is +4; subtract the list's node offset to obtain its
 PouchItem. The v208 sheet identifies PouchItem `mType` at +8, `mValue` at +`0x10`,
 and `mName.text` at +`0x18`. Zero-value entries are inactive. Traversal is bounded
-at 420 nodes and runs while holding the native manager lock.
+at 420 nodes. The client repeats observations for stability without holding the
+native manager lock; the RPC add/save batch itself takes that lock.
 
 ## Checks and mailbox
 
@@ -46,7 +47,7 @@ pending; gameplay ticks flush them into the outgoing ring. A full ring keeps the
 pending state. Duplicate pickups are suppressed within the running Cemu lifetime.
 `_AP_Is_Injecting` prevents incoming grants from producing outgoing checks.
 
-The dynamic codecave label `_AP_Mailbox_Base` owns a `0xD050` byte allocation.
+The dynamic codecave label `_AP_Mailbox_Base` owns a `0xD150` byte allocation.
 The client scans for `APMBBOTW`, then validates the `APV2` extension, configured
 state, fingerprint and location table. See [mailbox_protocol.md](mailbox_protocol.md)
 for every field and ownership rule. `status` at +8 stays 2 after the first tick;
@@ -54,11 +55,11 @@ for every field and ownership rule. `status` at +8 stays 2 after the first tick;
 
 ## Unimplemented native features
 
-Pickup banners, GameData flag delivery, progression upgrades, live Plateau flag delivery,
-and victory detection are not wired into this mailbox. Earlier placeholder UI
-and GameData function addresses are intentionally not presented as callable APIs.
-Candidate native flags and functions must be checked against the v208 symbol
-sheet and validated at runtime before adding new capability/command types.
+Pickup banners, general GameData flag delivery, live Plateau flag delivery, and
+victory detection remain unfinished. The client uses native GameData and player
+functions for selected heart, stamina, and pouch-slot progression grants.
+Check candidate native flags and functions against the v208 symbol sheet and
+validate them at runtime before using them in RPC calls.
 
 ## Fresh-save Plateau skip
 

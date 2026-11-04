@@ -27,7 +27,8 @@ Protocol v1 packs and slot data must be regenerated.
 
 ## Layout
 
-Total allocation: **53,328 bytes (`0xD050`)**. Both rings have 256 entries.
+Total allocation: **53,584 bytes (`0xD150`)**. Both rings have 256 entries.
+Offsets are relative to `_AP_Mailbox_Base`.
 
 | Offset | Size | Meaning / writer |
 | :--- | :--- | :--- |
@@ -42,39 +43,56 @@ Total allocation: **53,328 bytes (`0xD050`)**. Both rings have 256 entries.
 | `0x4020` | `0x1000` | Outgoing ring, 256 × 16 bytes |
 | `0x5020` | 4 | `APV2` extension signature |
 | `0x5024` | 4 | Protocol version: 2 |
-| `0x5028` | 4 | Capability bits: bit 0 = native pouch actor command |
+| `0x5028` | 4 | Capability bits: `0x1` pouch actors, `0x2` progression, `0x4` RPC |
 | `0x502C` | 4 | Configured: 1 for a seed pack |
 | `0x5030` | 4 | Location table count (1–4096) |
-| `0x5034` | 4 | Current native delivery error / hook |
-| `0x5038` | 4 | Last completed incoming delivery token / hook |
+| `0x5034` | 4 | Guest address of the mailbox / hook |
+| `0x5038` | 4 | Sequence of the last completed RPC / hook |
 | `0x503C` | 4 | Client-assigned Cemu lifetime nonce; initially zero |
 | `0x5040` | 16 | Seed/player fingerprint |
 | `0x5050` | `0x8000` | 4096 entries: u32 location ID, u32 check state |
+| `0xD050` | `0x100` | Client scratch space for guest-visible arguments |
 
 Status stays at 2 after the first gameplay tick; it is not a current pause/loading
 indicator. Pausing stops tick advancement and consumption. Unused table entries
 are zero. Check states: 0 unseen, 1 pending, 2 published to the outgoing ring.
 
-### Incoming entry (64 bytes)
+### Incoming RPC entry (64 bytes)
+
+The client writes one call per entry. Addresses and pointer arguments are Wii U
+guest addresses. The hook loads the argument registers and calls the address on
+the gameplay thread. Floating-point values are IEEE 754 single precision.
 
 | Offset | Size | Meaning |
 | :--- | :--- | :--- |
-| `0x00` | 4 | Token: received-item history index + 1 (nonzero) |
-| `0x04` | 4 | AP item ID (metadata; native action uses actor name) |
-| `0x08` | 48 | ASCII native actor name with NUL terminator; maximum 47 bytes |
-| `0x38` | 4 | Outstanding quantity, 1–`INT_MAX` |
-| `0x3C` | 4 | Command flags; currently **must be zero** |
+| `0x00` | 4 | Nonzero RPC sequence ID |
+| `0x04` | 4 | Guest function address |
+| `0x08`–`0x24` | 32 | Integer/pointer arguments `r3`–`r10`, in register order |
+| `0x28`–`0x34` | 16 | Floating-point arguments `f1`–`f4`, in register order |
+| `0x38` | 4 | Returned `r3`, written by the hook |
+| `0x3C` | 4 | Returned `f1`, written by the hook |
 
-Weapons use native maximum durability and one actor per command. Stack quantities
-are measured before/after the native add. A partial add updates the outstanding
-quantity and retains the entry. Already owned unique key items acknowledge
-idempotently. The hook saves changed pouch data through the native function.
+The client publishes a batch by writing every entry, then advancing incoming
+head once. On a gameplay tick the hook snapshots head and executes the available
+calls in order. For each call it writes the results and acknowledgement sequence,
+then advances tail. Calls published after the snapshot wait for a later tick.
+The client waits for the whole batch to be consumed and checks the last sequence
+before reading results. Completion means the function returned; it does not prove
+that an item was granted or that an asynchronous game state change was saved.
 
-`addItem` returns void. The hook acknowledges only after observing an increased
-live entry count or value sum under the pouch manager lock. An unavailable
-manager, invalid actor, unsupported command, or unchanged/full pouch leaves the
-entry queued. Errors: 0 none, 1 invalid actor, 2 unsupported command, 3 manager
-unavailable, 4 pouch unchanged/full. Nonzero errors are diagnostic, not success.
+The hook calls the supplied address directly; it does not validate the function,
+arguments, or pointers. The client must use correct v208 addresses and the native
+calling convention. Actor calls use a `sead::SafeString` in scratch space: a guest
+text pointer, a vtable pointer, then a NUL-terminated ASCII actor name. Scratch
+arguments must remain valid until all calls using them finish.
+
+For item delivery, the client classifies the actor and, for weapons, queries its
+maximum durability. It queues native lock, add, optional food post-add, save and
+unlock calls. The client compares stable pouch observations before and after the
+batch, retries an unchanged/full pouch, and tracks partial stack grants. An already
+owned unique key item is treated as delivered. Progression grants use native
+getters and setters, then poll for the target value. These checks and retries are
+client behavior, not RPC-level guarantees.
 
 ### Outgoing entry (16 bytes)
 
@@ -101,7 +119,8 @@ The client durably journals a check **before** releasing its outgoing slot. The
 journal retains the complete checked set and resends it on login; AP checks are
 idempotent. A network failure does not lose a freed ring entry. One received item
 is in flight at a time. The client saves its intent before publication and advances
-the AP history index only after both native tail advancement and matching token.
+the AP history index only after the grant-specific verification succeeds. RPC
+sequences identify calls, independently of AP history indices.
 The journal lock prevents concurrent access to that seed/player state.
 
 For seeds with a starting-state profile, `starting_inventory` lists the exact
@@ -110,8 +129,7 @@ retain both item ID and source location. The client acknowledges only those
 counts with AP's precollected source location `-2`, saves their applied counters
 in the journal, and advances the history index without a second native grant.
 Later chest/cheat rewards with the same item ID still follow native delivery.
-Tokens continue to use AP history indices, so the first native token may be
-greater than one after starting receipts are acknowledged.
+RPC sequences are assigned separately from AP history indices.
 
 A Cemu restart during an outstanding grant is detected through the lifetime nonce
 and requires reconciliation rather than guessing whether delivery happened.
@@ -122,18 +140,19 @@ before the client journals them are not durable across a Cemu crash.
 
 ## Current limits
 
-The client implements real AP login, history delivery, check submission, and
-reconnection. Unsupported `kind: unimplemented` grants remain at the front of the
-history with a visible reason; later items wait. Legacy seeds without applied-starting metadata can therefore block on reference
-precollects. New seeds acknowledge their statically initialized defaults. Native flags, towers, runes,
-progressive equipment, pouch/heart/stamina upgrades, pickup banners, shop
-resources, and actual victory reporting remain unfinished. The Plateau skip
-initializes its containment flag and pouch statically on a fresh save; live
-Paraglider flag delivery remains a separate feature.
+The client supports AP login, received-item history, checks, reconnection, actor
+grants, and selected heart, stamina, and pouch-slot progression grants. Unsupported
+`kind: unimplemented` grants block later history entries with a visible reason.
+Legacy seeds without applied-starting metadata can block on reference precollects.
+Pickup banners, shop checks, live Paraglider flag delivery, and victory reporting
+remain unfinished. The Plateau skip sets its containment flag and pouch statically
+on a fresh save.
 
-The pouch measurement uses the v208 symbol sheet and sead list layout. Source
-interpreter tests and assembly compilation do not establish emulator stability,
-latency, save behavior, or correct runtime native offsets.
+Pouch observation reads guest memory from the client and uses repeated reads for
+stability; it does not hold the game lock while measuring. The native call batch
+locks around the add and save. Source interpreter tests and assembly compilation
+do not establish emulator stability, latency, save behavior, or correct runtime
+native offsets. Test these in Cemu before relying on them.
 
 ## SDK references
 

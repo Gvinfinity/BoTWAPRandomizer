@@ -3,27 +3,6 @@ moduleMatches = 0x6267BFD0
 
 .origin = codecave
 
-# =============================================================================
-# 1. DATA SEGMENT (Mailbox & Globals)
-# =============================================================================
-# Protocol v2: worlds/botw/static/protocol.json (big-endian guest memory).
-# The patcher replaces this unconfigured mailbox with the seed fingerprint/table.
-# Core mailbox layout:
-#   +0x08 status
-#   +0x0C incoming head  (client produces this)
-#   +0x10 incoming tail  (game consumes this)
-#   +0x14 outgoing head  (game produces this)
-#   +0x20 incoming ring, 0x40 bytes per entry
-#
-# Incoming entry layout:
-#   +0x08 char[] item name
-#   +0x38 s32 quantity/value
-#
-# Allocate the mailbox in Cemu's codecave. The client discovers this block by
-# scanning Cemu's mapped guest memory for the 8-byte magic "APMBBOTW".
-# Shared schema is embedded by the C# client:
-#   incoming queue: 256 * 0x40 bytes at +0x20
-#   outgoing queue: 256 * 0x10 bytes at +0x4020
 _AP_Mailbox_Base:
 .int 0x41504D42, 0x424F5457, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
 .int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
@@ -345,7 +324,11 @@ _AP_Mailbox_Base:
 .int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
 .int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
 .int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
-.int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x41505632, 0x00000002, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+.int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x41505632, 0x00000002, 0x00000007, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+.int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+.int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+.int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+.int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
 .int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
 .int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
 .int 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
@@ -861,54 +844,14 @@ _AP_Mailbox_Base:
 .int 0x00000000, 0x00000000, 0x00000000, 0x00000000
 _AP_Is_Injecting:
 .int 0
-_AP_Progression_State:
-.int 0, 0
-_AP_Stamina_Constants:
-.int 0x447A0000, 0x43480000, 0x453B8000
 
-# -----------------------------------------------------------------------------
-
-# =============================================================================
-# 2. MAIN LOOP HOOK (Safe Actor Tick Hook)
-# =============================================================================
-#
-# IMPORTANT:
-# The old patch treated 0x03741B20 as an `acquireItem()` function and called it
-# to inject items. That is not supported by the Wii U v208 RE data.
-#
-# The verified Wii U path is:
-#   PauseMenuDataMgr singleton  : *(void**)0x10469978
-#   lock                        : 0x030BB668(mgr + 0x10)
-#   getPouchItemType            : 0x02EAE914(name, 0)
-#   addItem                     : 0x02EB3DF0(mgr, name, type, mgr + 0x4c,
-#                                             value, 0, 0, 0)
-#   post-add                    : 0x02EB58A8(mgr, name)
-#   saveToGameData              : 0x02EB3764(mgr, mgr + 0x4c)
-#   unlock                      : 0x030BB69C(mgr + 0x10)
-#
-# SafeString on Wii U is { const char* text; const void* vtable }.
-# The game vtable is 0x10263910.
-#
 _AP_MainTick_Hook:
-    # 0xF0-byte frame:
-    #   0x00-0x7F normal stack/volatile register backups
-    #   0x50      SafeString.text
-    #   0x54      SafeString.vtable
-    #   0x58      cached PauseMenuDataMgr*
-    #   0x5C      cached incoming tail
-    #   0x60      cached item value (quantity or full durability)
-    #   0x64      cached PouchItemType
-    #   0x68-0x78 entry pointer, delivery token, before-value/count, completion
-    #   0x7C      original LR
-    #   0x80-0xEF FPR0-FPR13 backups
-
     stwu r1, -0xF0(r1)
 
     stw r0, 0x30(r1)
     mflr r0
     stw r0, 0x7C(r1)
 
-    # Backup GPRs touched by this hook/callees.
     stw r3, 0x08(r1)
     stw r4, 0x0C(r1)
     stw r5, 0x10(r1)
@@ -920,7 +863,6 @@ _AP_MainTick_Hook:
     stw r11, 0x28(r1)
     stw r12, 0x2C(r1)
 
-    # Caller-visible FPRs are volatile under the PPC ABI.
     stfd f0,  0x80(r1)
     stfd f1,  0x88(r1)
     stfd f2,  0x90(r1)
@@ -936,436 +878,90 @@ _AP_MainTick_Hook:
     stfd f12, 0xE0(r1)
     stfd f13, 0xE8(r1)
 
-    # -------------------------------------------------------------------------
-    # Mailbox / queue check (codecave mailbox)
-    # -------------------------------------------------------------------------
     lis r11, _AP_Mailbox_Base@ha
     addi r11, r11, _AP_Mailbox_Base@l
+    stw r11, 0x5034(r11)
+    .int 0x7C0004AC
 
     li r12, 2
-    stw r12, 0x08(r11)               # status = 2 (game alive)
+    stw r12, 0x08(r11)
 
-    # Monotonic heartbeat for the host client.
     lwz r12, 0x1C(r11)
     addi r12, r12, 1
     stw r12, 0x1C(r11)
 
-    # Flush seed-bound pending checks. A full ring leaves table entries pending.
     bl _AP_FlushPendingChecks
+
     lis r11, _AP_Mailbox_Base@ha
     addi r11, r11, _AP_Mailbox_Base@l
+    lwz r10, 0x0C(r11)
+    lwz r12, 0x10(r11)
+    subf r0, r12, r10
+    cmplwi r0, 256
+    bgt tick_done
+    stw r10, 0x58(r1)
 
-    # Client owns head; game owns tail. Consume until tail catches head.
-    lwz r10, 0x0C(r11)               # producer head
-    lwz r12, 0x10(r11)               # consumer tail / next entry
+rpc_loop:
+    lis r11, _AP_Mailbox_Base@ha
+    addi r11, r11, _AP_Mailbox_Base@l
+    lwz r10, 0x58(r1)
+    lwz r12, 0x10(r11)
     cmpw r12, r10
-    beq tick_done                    # queue empty
+    beq tick_done
 
-    # Cache tail so it survives calls.
     stw r12, 0x5C(r1)
 
-    # -------------------------------------------------------------------------
-    # Locate the incoming entry: mailbox + 0x20 + ((tail & 0xff) * 0x40)
-    # -------------------------------------------------------------------------
     clrlwi r9, r12, 24
     slwi r9, r9, 6
     addi r9, r9, 0x20
     add r9, r11, r9
+    stw r9, 0x68(r1)
 
-    stw r9, 0x68(r1)                 # cache current incoming entry
-    lwz r8, 0(r9)
-    stw r8, 0x6C(r1)                 # delivery token (AP received index + 1)
-    li r8, 1
-    stw r8, 0x78(r1)                 # complete unless blocked/partial
-    lwz r8, 0x3C(r9)
-    cmpwi r8, 0
-    bne incoming_progression
+    lwz r0, 0x04(r9)
+    cmpwi r0, 0
+    beq rpc_complete
 
-    # The mailbox stores the raw item name at entry + 0x08.
-    addi r8, r9, 0x08
-    stw r8, 0x50(r1)                 # SafeString.text
+    lis r11, _AP_Is_Injecting@ha
+    addi r11, r11, _AP_Is_Injecting@l
+    li r12, 1
+    stw r12, 0(r11)
 
-    lis r8, 0x1026
-    ori r8, r8, 0x3910
-    stw r8, 0x54(r1)                 # SafeString.vtable
-
-    # Incoming quantity/value is entry + 0x38; weapon durability is resolved
-    # from actor-info after the pouch item type is known.
-    lwz r8, 0x38(r9)
-    stw r8, 0x60(r1)
-
-    # -------------------------------------------------------------------------
-    # Load PauseMenuDataMgr singleton.
-    # Verified as: lis r3,0x1047 ; lwz r3,-0x6688(r3)
-    # -------------------------------------------------------------------------
-    lis r3, 0x1047
-    lwz r3, -0x6688(r3)
-    cmpwi r3, 0
-    beq incoming_not_ready
-    stw r3, 0x58(r1)
-
-    # Mark this transaction so any separate outgoing hook can suppress a loop.
-    lis r9, _AP_Is_Injecting@ha
-    addi r9, r9, _AP_Is_Injecting@l
-    li r10, 1
-    stw r10, 0(r9)
-
-    # -------------------------------------------------------------------------
-    # Lock PauseMenuDataMgr's critical section.
-    # -------------------------------------------------------------------------
-    addi r3, r3, 0x10
-    lis r12, 0x030B
-    ori r12, r12, 0xB668
-    mtctr r12
+    mtctr r0
+    lfs f1, 0x28(r9)
+    lfs f2, 0x2C(r9)
+    lfs f3, 0x30(r9)
+    lfs f4, 0x34(r9)
+    lwz r3, 0x08(r9)
+    lwz r4, 0x0C(r9)
+    lwz r5, 0x10(r9)
+    lwz r6, 0x14(r9)
+    lwz r7, 0x18(r9)
+    lwz r8, 0x1C(r9)
+    lwz r10, 0x24(r9)
+    lwz r9, 0x20(r9)
     bctrl
 
-    # -------------------------------------------------------------------------
-    # type = getPouchItemType(&SafeString, 0)
-    # -------------------------------------------------------------------------
-    addi r3, r1, 0x50
-    li r4, 0
-    lis r12, 0x02EA
-    ori r12, r12, 0xE914
-    mtctr r12
-    bctrl
-
-    # Keep the returned type for addItem.
-    stw r3, 0x64(r1)
-
-    # Invalid/non-pouch name: unlock and retain the entry with an error.
-    cmpwi r3, -1
-    beq incoming_invalid_actor
-
-    # The fifth addItem argument is mValue: durability for weapon classes,
-    # quantity for arrows and stackable items. Resolve max durability for
-    # swords (0), bows (1), and shields (3), matching the game's refill path
-    # through 0x0308812C. Preserve the mailbox quantity for every other type.
-    lwz r5, 0x64(r1)
-    cmpwi r5, 0
-    beq get_weapon_max_value
-    cmpwi r5, 1
-    beq get_weapon_max_value
-    cmpwi r5, 3
-    bne pouch_value_ready
-
-get_weapon_max_value:
-    addi r3, r1, 0x50                # PouchItem::mName SafeString*
-    lis r12, 0x0308
-    ori r12, r12, 0x812C
-    mtctr r12
-    bctrl
-    stw r3, 0x60(r1)                 # full durability
-
-pouch_value_ready:
-    # Measure the named entry under the native manager lock. addItem returns
-    # void, so tail must not advance solely because the call returned.
-    lwz r3, 0x58(r1)
-    lwz r4, 0x50(r1)
-    bl _AP_MeasureNamedPouch
-    stw r3, 0x70(r1)
-    stw r4, 0x74(r1)
-    lwz r5, 0x64(r1)
-    cmpwi r5, 9
-    bne pouch_add_ready
-    cmpwi r4, 0
-    bne save_item_data               # an already-owned unique key item
-pouch_add_ready:
-
-    # -------------------------------------------------------------------------
-    # addItem(mgr, &SafeString, type, mgr + 0x4c, value, 0, 0, 0)
-    # -------------------------------------------------------------------------
-    lwz r3, 0x58(r1)                 # mgr
-    addi r4, r1, 0x50                # SafeString*
-    lwz r5, 0x64(r1)                 # PouchItemType
-    addi r6, r3, 0x4C                # OffsetList head
-    lwz r7, 0x60(r1)                 # value / full durability
-    li r8, 0
-    li r9, 0
-    li r10, 0
-
-    lis r12, 0x02EB
-    ori r12, r12, 0x3DF0
-    mtctr r12
-    bctrl
-
-    lwz r3, 0x58(r1)
-    lwz r4, 0x50(r1)
-    bl _AP_MeasureNamedPouch
-    lwz r9, 0x70(r1)
-    lwz r10, 0x74(r1)
-    cmplw r4, r10
-    bgt pouch_add_changed
-    cmplw r3, r9
-    ble incoming_pouch_unchanged
-pouch_add_changed:
-    # Stack/arrow adds may hit their native count cap. Retain only the
-    # outstanding quantity in the same entry until the rest fits.
-    lwz r5, 0x64(r1)
-    cmpwi r5, 2
-    beq pouch_check_partial
-    cmpwi r5, 7
-    beq pouch_check_partial
-    cmpwi r5, 8
-    bne pouch_partial_done
-pouch_check_partial:
-    subf r9, r9, r3
-    lwz r10, 0x60(r1)
-    cmplw r9, r10
-    bge pouch_partial_done
-    subf r10, r9, r10
     lwz r9, 0x68(r1)
-    stw r10, 0x38(r9)
-    li r9, 0
-    stw r9, 0x78(r1)
-pouch_partial_done:
+    stw r3, 0x38(r9)
+    stfs f1, 0x3C(r9)
+
+    lis r11, _AP_Is_Injecting@ha
+    addi r11, r11, _AP_Is_Injecting@l
+    li r12, 0
+    stw r12, 0(r11)
+
+rpc_complete:
     lis r11, _AP_Mailbox_Base@ha
     addi r11, r11, _AP_Mailbox_Base@l
-    li r9, 0
-    stw r9, 0x5034(r11)              # this native add made progress
-
-    # -------------------------------------------------------------------------
-    # The 0x02EB58A8 follow-up is used by the game's food-tagged add wrapper.
-    # Calling it for weapons crashes in its actor-info path (observed at
-    # 0x02EC216C). Keep it limited to PouchItemType 8 (Food).
-    # -------------------------------------------------------------------------
-    lwz r5, 0x64(r1)
-    cmpwi r5, 8
-    bne save_item_data
-
-    lwz r3, 0x58(r1)
-    addi r4, r1, 0x50
-    lis r12, 0x02EB
-    ori r12, r12, 0x58A8
-    mtctr r12
-    bctrl
-
-save_item_data:
-    lwz r3, 0x58(r1)
-    addi r4, r3, 0x4C
-    lis r12, 0x02EB
-    ori r12, r12, 0x3764
-    mtctr r12
-    bctrl
-
-injection_unlock:
-    # unlock(mgr + 0x10)
-    lwz r3, 0x58(r1)
-    addi r3, r3, 0x10
-    lis r12, 0x030B
-    ori r12, r12, 0xB69C
-    mtctr r12
-    bctrl
-
-    # Clear injection guard.
-    lis r9, _AP_Is_Injecting@ha
-    addi r9, r9, _AP_Is_Injecting@l
-    li r10, 0
-    stw r10, 0(r9)
-
-    lwz r9, 0x78(r1)
-    cmpwi r9, 0
-    beq tick_done
-
-incoming_ack:
-    # Publish delivery acknowledgement before releasing the incoming slot.
-    lis r11, _AP_Mailbox_Base@ha
-    addi r11, r11, _AP_Mailbox_Base@l
-    lwz r9, 0x6C(r1)
-    stw r9, 0x5038(r11)
-    li r9, 0
-    stw r9, 0x5034(r11)
-    .int 0x7C0004AC                 # PPC sync (Cemu assembler lacks the mnemonic)
+    lwz r9, 0x68(r1)
+    lwz r0, 0x00(r9)
+    stw r0, 0x5038(r11)
+    .int 0x7C0004AC
     lwz r12, 0x5C(r1)
     addi r12, r12, 1
     stw r12, 0x10(r11)
-    b tick_done
+    b rpc_loop
 
-# Non-pouch upgrades use native setters, then wait for the save-backed getter
-# on later ticks. Never repeat an asynchronous setter for the same token.
-incoming_progression:
-    cmplwi r8, 5
-    bgt incoming_unsupported
-    stw r8, 0x64(r1)                 # command
-    lwz r10, 0x38(r9)
-    cmpwi r10, 1
-    bne incoming_unsupported
-    lis r3, 0x1047
-    lwz r3, -0x2A50(r3)             # gdt::Manager::sInstance
-    cmpwi r3, 0
-    beq incoming_not_ready
-    lwz r8, 0x64(r1)
-    cmplwi r8, 2
-    bgt progression_stock
-    lis r3, 0x1046
-    lwz r3, 0x3F38(r3)              # PlayerInfo::sInstance
-    cmpwi r3, 0
-    beq incoming_not_ready
-    lwz r10, 0x30(r3)               # require a live player
-    cmpwi r10, 0
-    beq incoming_not_ready
-    stw r3, 0x58(r1)
-    cmpwi r8, 2
-    beq progression_stamina
-    lis r9, 0x1046
-    lwz r9, 0x6AD4(r9)              # MaxHartValue handle
-    li r10, 4                       # quarter hearts per container
-    li r8, 120                      # 30 heart cap
-    b progression_s32
-progression_stock:
-    li r10, 1
-    cmpwi r8, 3
-    beq progression_weapon_slot
-    cmpwi r8, 4
-    beq progression_bow_slot
-    lis r9, 0x1046
-    lwz r9, 0x78CC(r9)              # ShieldPorchStockNum handle
-    li r8, 20
-    b progression_s32
-progression_weapon_slot:
-    lis r9, 0x1046
-    lwz r9, 0x7B04(r9)              # WeaponPorchStockNum handle
-    li r8, 20
-    b progression_s32
-progression_bow_slot:
-    lis r9, 0x1046
-    lwz r9, 0x4480(r9)              # BowPorchStockNum handle
-    li r8, 14
-progression_s32:
-    cmpwi r9, -1
-    beq incoming_not_ready
-    stw r9, 0x70(r1)                 # native flag handle
-    stw r10, 0x60(r1)                # increment
-    stw r8, 0x74(r1)                 # cap
-    or r3, r9, r9
-    li r4, 0
-    lis r12, 0x02E1
-    ori r12, r12, 0x46A4             # gdt::getS32(handle, debug)
-    mtctr r12
-    bctrl
-    cmpwi r3, 1                     # defaults not loaded yet
-    blt incoming_not_ready
-    lis r9, _AP_Progression_State@ha
-    addi r9, r9, _AP_Progression_State@l
-    lwz r10, 0(r9)
-    lwz r8, 0x6C(r1)
-    cmpw r10, r8
-    beq progression_s32_verify
-    lwz r10, 0x74(r1)
-    cmpw r3, r10
-    bge incoming_ack                 # already at native cap
-    lwz r8, 0x60(r1)
-    add r4, r3, r8
-    cmpw r4, r10
-    ble progression_s32_target
-    or r4, r10, r10
-progression_s32_target:
-    stw r4, 4(r9)                    # latch target before setter
-    lwz r8, 0x6C(r1)
-    stw r8, 0(r9)
-    lwz r8, 0x64(r1)
-    cmpwi r8, 1
-    bne progression_stock_set
-    lwz r3, 0x58(r1)
-    lis r12, 0x02D4
-    ori r12, r12, 0x992C             # PlayerInfo::setMaxHeartValue(this, target)
-    mtctr r12
-    bctrl
-    b progression_wait
-progression_stock_set:
-    or r3, r4, r4                    # gdt::setS32(value, handle, debug)
-    lwz r4, 0x70(r1)
-    li r5, 0
-    lis r12, 0x02E1
-    ori r12, r12, 0x4848
-    mtctr r12
-    bctrl
-    b progression_wait
-progression_s32_verify:
-    lwz r10, 4(r9)
-    cmpw r3, r10
-    blt progression_wait
-    b incoming_ack
-progression_stamina:
-    li r3, 0
-    lis r12, 0x02E1
-    ori r12, r12, 0xAC6C             # getFlag_StaminaMax(debug) -> f1
-    mtctr r12
-    bctrl
-    lis r9, _AP_Stamina_Constants@ha
-    addi r9, r9, _AP_Stamina_Constants@l
-    lfs f0, 0(r9)                    # minimum 1000
-    fcmpu cr0, f1, f0
-    blt incoming_not_ready
-    lis r10, _AP_Progression_State@ha
-    addi r10, r10, _AP_Progression_State@l
-    lwz r8, 0(r10)
-    lwz r9, 0x6C(r1)
-    cmpw r8, r9
-    beq progression_stamina_verify
-    lis r9, _AP_Stamina_Constants@ha
-    addi r9, r9, _AP_Stamina_Constants@l
-    lfs f0, 8(r9)                    # maximum 3000
-    fcmpu cr0, f1, f0
-    bge incoming_ack
-    lfs f2, 4(r9)                    # vessel = 200
-    fadds f1, f1, f2
-    fcmpu cr0, f1, f0
-    ble progression_stamina_target
-    fmr f1, f0
-progression_stamina_target:
-    stfs f1, 4(r10)
-    lwz r9, 0x6C(r1)
-    stw r9, 0(r10)
-    lwz r3, 0x58(r1)
-    lis r12, 0x02D4
-    ori r12, r12, 0x9DFC             # PlayerInfo::setStaminaMax(this, f1)
-    mtctr r12
-    bctrl
-    # Also refresh the actor's max via its native setter (separate cache).
-    lis r9, _AP_Progression_State@ha
-    addi r9, r9, _AP_Progression_State@l
-    lfs f1, 4(r9)
-    lwz r3, 0x58(r1)
-    lis r12, 0x02D4
-    ori r12, r12, 0x9E88
-    mtctr r12
-    bctrl
-    b progression_wait
-progression_stamina_verify:
-    lfs f0, 4(r10)
-    fcmpu cr0, f1, f0
-    blt progression_wait
-    b incoming_ack
-progression_wait:
-    li r9, 5
-    b incoming_blocked
-
-incoming_invalid_actor:
-    li r9, 1
-    b incoming_blocked_locked
-incoming_pouch_unchanged:
-    li r9, 4
-incoming_blocked_locked:
-    lis r11, _AP_Mailbox_Base@ha
-    addi r11, r11, _AP_Mailbox_Base@l
-    stw r9, 0x5034(r11)
-    li r9, 0
-    stw r9, 0x78(r1)
-    b injection_unlock
-incoming_unsupported:
-    li r9, 2
-    b incoming_blocked
-incoming_not_ready:
-    li r9, 3
-incoming_blocked:
-    lis r11, _AP_Mailbox_Base@ha
-    addi r11, r11, _AP_Mailbox_Base@l
-    stw r9, 0x5034(r11)
-    b tick_done
-
-# -----------------------------------------------------------------------------
-# Return to the original function.
-# -----------------------------------------------------------------------------
 tick_done:
     lfd f0,  0x80(r1)
     lfd f1,  0x88(r1)
@@ -1398,16 +994,9 @@ tick_done:
     lwz r0, 0x30(r1)
     addi r1, r1, 0xF0
 
-    # Original instruction replaced at 0x0313B840.
     cmpwi r3, 0
     b 0x0313B844
 
-
-# =============================================================================
-# 3. SEED-BOUND ARCHIPELAGO CHECKS (PauseMenuDataMgr::addItem)
-# =============================================================================
-# The raw actor name is AP_Check_ followed by exactly eight uppercase hex
-# digits. Localized "Archipelago Item [...]" labels are UI text only.
 _AP_AddItem_Hook:
     stwu r1, -0x20(r1)
     stw r9,  0x08(r1)
@@ -1421,7 +1010,9 @@ _AP_AddItem_Hook:
     beq additem_original
     lbz r9, 0(r12)
     cmpwi r9, 0x41
-    bne additem_original
+    beq additem_check_p
+    b additem_original
+additem_check_p:
     lbz r9, 1(r12)
     cmpwi r9, 0x50
     bne additem_original
@@ -1503,15 +1094,15 @@ additem_location_found:
     cmpwi r9, 0
     bne additem_consume_token
     li r9, 1
-    stw r9, 4(r11)                   # pending; survives an outgoing full ring
-    .int 0x7C0004AC                 # PPC sync (Cemu assembler lacks the mnemonic)
+    stw r9, 4(r11)
+    .int 0x7C0004AC
 additem_consume_token:
     lwz r9,  0x08(r1)
     lwz r10, 0x0C(r1)
     lwz r11, 0x10(r1)
     lwz r12, 0x14(r1)
     addi r1, r1, 0x20
-    blr                              # original function returns void
+    blr
 additem_original:
     lwz r9,  0x08(r1)
     lwz r10, 0x0C(r1)
@@ -1555,7 +1146,7 @@ flush_checks_loop:
     stw r0, 12(r12)
     lwz r0, 0(r9)
     stw r0, 8(r12)
-    .int 0x7C0004AC                 # PPC sync (Cemu assembler lacks the mnemonic)
+    .int 0x7C0004AC
     lwz r12, 0x14(r11)
     addi r12, r12, 1
     stw r12, 0x14(r11)
@@ -1568,98 +1159,5 @@ flush_checks_next:
 flush_checks_done:
     blr
 
-# Count/sum a named actor in the native pouch while the manager is locked.
-# r3=mgr, r4=raw name; returns r3=sum(mValue), r4=live matching entries.
-# sead::OffsetList at mgr+0x4C: {prev, next, count, nodeOffset}.
-# PouchItem::mType +8, mValue +0x10, mName.text +0x18 (v208 symbol sheet).
-_AP_MeasureNamedPouch:
-    stwu r1, -0x30(r1)
-    stw r4, 0x08(r1)
-    addi r9, r3, 0x4C
-    stw r9, 0x0C(r1)
-    lwz r10, 0x50(r3)
-    stw r10, 0x10(r1)
-    lwz r10, 0x58(r3)
-    stw r10, 0x14(r1)
-    li r9, 0
-    stw r9, 0x18(r1)
-    stw r9, 0x1C(r1)
-    li r9, 420
-    stw r9, 0x20(r1)
-measure_pouch_loop:
-    lwz r10, 0x10(r1)
-    lwz r9, 0x0C(r1)
-    cmpw r10, r9
-    beq measure_pouch_done
-    cmpwi r10, 0
-    beq measure_pouch_done
-    lwz r9, 0x20(r1)
-    cmpwi r9, 0
-    beq measure_pouch_done
-    addi r9, r9, -1
-    stw r9, 0x20(r1)
-    lwz r9, 0x14(r1)
-    subf r11, r9, r10
-    lwz r12, 0x18(r11)
-    cmpwi r12, 0
-    beq measure_pouch_next
-    lwz r9, 0x08(r1)
-measure_pouch_string:
-    lbz r3, 0(r9)
-    lbz r4, 0(r12)
-    cmpw r3, r4
-    bne measure_pouch_next
-    cmpwi r3, 0
-    beq measure_pouch_match
-    addi r9, r9, 1
-    addi r12, r12, 1
-    b measure_pouch_string
-measure_pouch_match:
-    lwz r12, 0x10(r11)
-    cmpwi r12, 0
-    ble measure_pouch_next
-    lwz r9, 0x18(r1)
-    add r9, r9, r12
-    stw r9, 0x18(r1)
-    lwz r9, 0x1C(r1)
-    addi r9, r9, 1
-    stw r9, 0x1C(r1)
-measure_pouch_next:
-    lwz r9, 0x10(r1)
-    lwz r9, 4(r9)
-    stw r9, 0x10(r1)
-    b measure_pouch_loop
-measure_pouch_done:
-    lwz r3, 0x18(r1)
-    lwz r4, 0x1C(r1)
-    addi r1, r1, 0x30
-    blr
-
-
-# =============================================================================
-# 4. DEBUG TELEMETRY HOOK (Actor Spawn)
-# =============================================================================
-_AP_Debug_ActorSpawn_Hook:
-    stwu r1, -0x20(r1)
-    stw r11, 0x08(r1)
-
-    lwz r11, 0x08(r1)
-    addi r1, r1, 0x20
-
-    # Execute original instruction for 0x037B6040.
-    stwu r1, -0x38(r1)
-    b 0x037B6044
-
-
-# =============================================================================
-# 5. HOOK INSTALLATION
-# =============================================================================
-
-# Main game-thread hook.
 0x0313B840 = b _AP_MainTick_Hook
-
-# Reserved AP check tokens are intercepted before pouch insertion.
 0x02EB3DF0 = b _AP_AddItem_Hook
-
-# Existing actor-spawn telemetry.
-0x037B6040 = b _AP_Debug_ActorSpawn_Hook

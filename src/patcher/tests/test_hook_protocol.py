@@ -1,14 +1,9 @@
-"""Execute the check hook's integer instructions against a byte mailbox.
-
-This bounded interpreter checks the actual source's parser and queue operations;
-it does not replace Cemu validation of native calls or the hook addresses.
-"""
 import re
 import struct
-from pathlib import Path
 
 import pytest
 from src.patcher.core import ROOT
+from src.patcher.update_hook import upgrade_hook
 from botw_static.hook import mailbox_assembly, build_seed_hook
 from botw_static.protocol import PROTOCOL as P, seed_fingerprint
 
@@ -24,9 +19,6 @@ class PPC:
         self.native_call = lambda address: (_ for _ in ()).throw(AssertionError(f'Unexpected native call {address:X}'))
         self.labels, self.code = {}, []
         self.symbols = {'_AP_Mailbox_Base': 0x10000, '_AP_Is_Injecting': 0x10000 + P['mailbox_size']}
-        self.symbols['_AP_Progression_State'] = self.symbols['_AP_Is_Injecting'] + 4
-        self.symbols['_AP_Stamina_Constants'] = self.symbols['_AP_Is_Injecting'] + 12
-        struct.pack_into('>fff', self.memory, self.symbols['_AP_Stamina_Constants'], 1000., 200., 3000.)
         words = [int(word, 16) for word in re.findall(r'0x[0-9A-F]{8}', mailbox_assembly(ids))]
         self.memory[0x10000:0x10000 + len(words)*4] = struct.pack(f'>{len(words)}I', *words)
         for raw in (ROOT / 'src/hook/patch_Archipelago.asm').read_text().splitlines():
@@ -42,6 +34,23 @@ class PPC:
         if value is not None:
             struct.pack_into('>I', self.memory, address, value & 0xFFFFFFFF)
         return struct.unpack_from('>I', self.memory, address)[0]
+
+    def float_word(self, offset, value=None):
+        address = self.symbols['_AP_Mailbox_Base'] + offset
+        if value is not None:
+            struct.pack_into('>f', self.memory, address, value)
+        return struct.unpack_from('>f', self.memory, address)[0]
+
+    def enqueue_rpc(self, slot, seq_id, target, gprs=(), fprs=()):
+        base = P['incoming_offset'] + (slot % P['ring_capacity']) * P['incoming_size']
+        for i in range(0, P['incoming_size'], 4):
+            self.word(base + i, 0)
+        self.word(base, seq_id)
+        self.word(base + 4, target)
+        for index, val in enumerate(gprs):
+            self.word(base + 8 + index * 4, val)
+        for index, val in enumerate(fprs):
+            self.float_word(base + 40 + index * 4, val)
 
     def reg(self, name):
         return int(name[1:])
@@ -69,7 +78,6 @@ class PPC:
             if op == 'li': r[self.reg(a[0])] = self.immediate(a[1]) & 0xFFFFFFFF
             elif op == 'lis': r[self.reg(a[0])] = self.immediate(a[1]) << 16
             elif op == 'addi':
-                # PPC addi treats rA=0 as literal zero, unlike register arithmetic.
                 base = r[self.reg(a[1])] if self.reg(a[1]) else 0
                 r[self.reg(a[0])] = (base + self.immediate(a[2])) & 0xFFFFFFFF
             elif op in ('or', 'ori', 'add', 'subf'):
@@ -172,23 +180,6 @@ def test_actual_hook_outgoing_counter_wrap():
     assert vm.word(offset + 8) == 0xB1234567
 
 
-def test_actual_pouch_measurement_uses_offset_list_and_live_values():
-    vm = PPC([])
-    mgr, name = 0x40000, 0x50000
-    vm.registers[3], vm.registers[4] = mgr, name
-    vm.memory[name:name+11] = b'Item_Ore_A\0'
-    def write(address, value): struct.pack_into('>I', vm.memory, address, value)
-    write(mgr+0x50, mgr+0x100+0x30); write(mgr+0x58, 0x30)
-    for index, value in enumerate([5, 7, 0]):
-        entry = mgr+0x100+index*0x100
-        write(entry+0x18, name); write(entry+0x10, value)
-        write(entry+0x34, entry+0x100+0x30 if index < 2 else mgr+0x4C)
-    stack = vm.registers[1]
-    vm.run('_AP_MeasureNamedPouch')
-    assert vm.registers[3:5] == [12, 2]
-    assert vm.registers[1] == stack
-
-
 def test_seed_hook_table_and_fingerprint_are_the_apworld_contract():
     ids = [0xB1234567, 0xB7654321]
     fingerprint = seed_fingerprint('test', 2, ids)
@@ -201,60 +192,100 @@ def test_seed_hook_table_and_fingerprint_are_the_apworld_contract():
     assert len(data) == P['mailbox_size']
     assert data[P['seed_fingerprint_offset']:P['location_table_offset']].hex() == fingerprint
     assert struct.unpack_from('>I', data, P['version_offset'])[0] == P['version']
+    assert struct.unpack_from('>I', data, P['capabilities_offset'])[0] & P['capabilities']['rpc']
     assert struct.unpack_from('>I', data, P['configured_offset'])[0] == 1
     assert [struct.unpack_from('>I', data, P['location_table_offset'] + i*8)[0] for i in range(2)] == sorted(ids)
     plan['slot_data']['seed_fingerprint'] = '0'*32
     with pytest.raises(ValueError, match='fingerprint'): build_seed_hook(plan)
 
 
-@pytest.mark.parametrize('failure,error', [('manager', 3), ('actor', 1), ('full', 4), ('flags', 2)])
-def test_actual_incoming_hook_retains_failed_native_grants(failure, error):
-    vm, calls = incoming_vm(failure)
-    vm.run('_AP_MainTick_Hook')
-    assert vm.word(16) == 0
-    assert vm.word(P['ack_sequence_offset']) == 0
-    assert vm.word(P['delivery_error_offset']) == error
-    if failure in ('actor', 'full'):
-        assert calls.count(0x030BB668) == calls.count(0x030BB69C) == 1
+def test_actual_rpc_hook_dispatches_batch_calls_and_writes_return_values():
+    vm = PPC([0xB1234567])
+    stack = vm.registers[1]
+    vm.registers[3:11] = [0x11111111 + i for i in range(8)]
+    saved_caller = list(vm.registers[3:11])
+    calls = []
 
-
-def incoming_vm(failure=None, quantity=1, per_call_cap=None):
-    vm, calls = PPC([0xB1234567]), []
-    mgr, entry = 0x40000, 0x40100
-    vm.globals[0x10469978] = 0 if failure == 'manager' else mgr
-    def write(address, value): struct.pack_into('>I', vm.memory, address, value)
-    write(mgr+0x50, entry+0x30); write(mgr+0x58, 0x30); write(entry+0x34, mgr+0x4C)
-    name = vm.symbols['_AP_Mailbox_Base'] + P['incoming_offset'] + 8
-    write(entry+0x18, name)
-    vm.word(12, 1); vm.word(P['incoming_offset'], 17)
-    vm.word(P['incoming_offset'] + 56, quantity)
-    vm.word(P['incoming_offset'] + 60, 99 if failure == 'flags' else 0)
-    vm.memory[name:name+12] = b'NormalArrow\0'
     def native(address):
-        calls.append(address)
-        if address == 0x02EAE914: vm.registers[3] = 0xFFFFFFFF if failure == 'actor' else 2
-        elif address == 0x02EB3DF0 and failure != 'full':
-            value = struct.unpack_from('>I', vm.memory, entry+0x10)[0]
-            write(entry+0x10, value + min(vm.registers[7], per_call_cap or vm.registers[7]))
-            vm.registers[3] = 0xDEADBEEF  # void return is deliberately unusable as an acknowledgement
-        elif address not in (0x030BB668, 0x030BB69C, 0x02EB3764, 0x02EB3DF0):
-            raise AssertionError(f'Unexpected native call {address:X}')
+        injecting = struct.unpack_from('>I', vm.memory, vm.symbols['_AP_Is_Injecting'])[0]
+        assert injecting == 1
+        calls.append((address, list(vm.registers[3:11]), list(vm.floats[1:5])))
+        if address == 0x02EAE914:
+            vm.registers[3] = 2
+        elif address == 0x02E1AC6C:
+            vm.floats[1] = 1400.0
+        elif address == 0x02EB3DF0:
+            vm.registers[3] = 0xCAFEBABE
+
     vm.native_call = native
-    return vm, calls
+    vm.enqueue_rpc(0, 10, 0x02EAE914, gprs=[0x23450, 0])
+    vm.enqueue_rpc(1, 11, 0x02E1AC6C, gprs=[0], fprs=[1200.0, 200.0, 3.0, 4.0])
+    vm.enqueue_rpc(2, 12, 0x02EB3DF0, gprs=[1, 2, 3, 4, 5, 6, 7, 8])
+    vm.word(12, 3)
+
+    assert vm.run('_AP_MainTick_Hook') == 'native'
+    assert vm.registers[1] == stack
+    assert vm.registers[3:11] == saved_caller
+    assert struct.unpack_from('>I', vm.memory, vm.symbols['_AP_Is_Injecting'])[0] == 0
+    assert vm.word(8) == 2
+    assert vm.word(P['mailbox_address_offset']) == vm.symbols['_AP_Mailbox_Base']
+    assert vm.word(16) == 3
+    assert vm.word(P['ack_sequence_offset']) == 12
+
+    assert len(calls) == 3
+    assert calls[0][0] == 0x02EAE914 and calls[0][1][:2] == [0x23450, 0]
+    assert calls[1][0] == 0x02E1AC6C and calls[1][2] == [1200.0, 200.0, 3.0, 4.0]
+    assert calls[2][0] == 0x02EB3DF0 and calls[2][1] == [1, 2, 3, 4, 5, 6, 7, 8]
+
+    assert vm.word(P['incoming_offset'] + 56) == 2
+    assert vm.float_word(P['incoming_offset'] + 64 + 60) == 1400.0
+    assert vm.word(P['incoming_offset'] + 128 + 56) == 0xCAFEBABE
 
 
-def test_actual_incoming_hook_acknowledges_only_a_measured_native_change():
-    vm, calls = incoming_vm(quantity=10, per_call_cap=3)
-    for outstanding in (7, 4, 1):
-        vm.run('_AP_MainTick_Hook')
-        assert vm.word(16) == 0
-        assert vm.word(P['ack_sequence_offset']) == 0
-        assert vm.word(P['incoming_offset']+56) == outstanding
+def test_actual_rpc_hook_counter_wrap_and_corrupt_ring_guard():
+    vm = PPC([0xB1234567])
+    called = []
+    vm.native_call = lambda address: called.append(address)
+
+    vm.word(12, 0x00000001)
+    vm.word(16, 0xFFFFFFFF)
+    vm.enqueue_rpc(0xFFFFFFFF, 41, 0x030BB668, gprs=[0x40010])
+    vm.enqueue_rpc(0, 42, 0x030BB69C, gprs=[0x40010])
     vm.run('_AP_MainTick_Hook')
+    assert called == [0x030BB668, 0x030BB69C]
     assert vm.word(16) == 1
-    assert vm.word(P['ack_sequence_offset']) == 17
-    assert vm.word(P['delivery_error_offset']) == 0
-    assert calls.count(0x02EB3764) == calls.count(0x030BB69C) == 4
+    assert vm.word(P['ack_sequence_offset']) == 42
+
+    called.clear()
+    vm.word(12, 300)
+    vm.word(16, 1)
+    vm.run('_AP_MainTick_Hook')
+    assert called == []
+    assert vm.word(16) == 1
+
+
+def test_update_hook_upgrades_legacy_seed_hook_to_rpc_layout():
+    ids = [0xB1234567]
+    fingerprint = seed_fingerprint('legacy', 1, ids)
+    legacy_words = [0x41504D42, 0x424F5457] + [0] * 6
+    legacy_words += [0] * ((P['extension_offset'] - 32) // 4)
+    legacy_words += [0x41505632, P['version'], 1, 1, 1, 0, 0, 0]
+    legacy_words += [int(fingerprint[i:i + 8], 16) for i in range(0, 32, 8)]
+    for index in range(P['max_locations']):
+        legacy_words += [ids[index] if index < len(ids) else 0, 0]
+    assert len(legacy_words) * 4 == P['scratch_offset']
+    legacy_block = '_AP_Mailbox_Base:\n' + '\n'.join(
+        '.int ' + ', '.join(f'0x{w:08X}' for w in legacy_words[i:i + 16])
+        for i in range(0, len(legacy_words), 16)) + '\n'
+    legacy_source = legacy_block + '_AP_Is_Injecting:\n.int 0\n'
+    upgraded = upgrade_hook(legacy_source)
+    block = upgraded.split('_AP_Mailbox_Base:\n')[1].split('_AP_Is_Injecting:')[0]
+    words = [int(w, 16) for w in re.findall(r'0x[0-9A-F]{8}', block)]
+    data = struct.pack(f'>{len(words)}I', *words)
+    assert len(data) == P['mailbox_size']
+    assert data[P['seed_fingerprint_offset']:P['location_table_offset']].hex() == fingerprint
+    assert struct.unpack_from('>I', data, P['capabilities_offset'])[0] & P['capabilities']['rpc']
+    assert struct.unpack_from('>I', data, P['location_table_offset'])[0] == 0xB1234567
 
 
 def test_patch_plan_requires_matching_protocol_seed_and_location_data():
@@ -272,68 +303,3 @@ def test_patch_plan_requires_matching_protocol_seed_and_location_data():
                          ('seed_fingerprint', '0'*32)]:
         bad = copy.deepcopy(plan); bad['slot_data'][field] = value
         with pytest.raises(ValueError, match='disagree'): validate_plan(bad)
-
-
-@pytest.mark.parametrize('command,handle,initial,delta,cap', [
-    (1, 0x10466AD4, 12, 4, 120), (2, None, 1000., 200., 3000.),
-    (3, 0x10467B04, 8, 1, 20), (4, 0x10464480, 5, 1, 14), (5, 0x104678CC, 4, 1, 20),
-])
-@pytest.mark.parametrize('at_cap', [False, True])
-def test_progression_waits_for_saved_value_without_repeating_setter(command, handle, initial, delta, cap, at_cap):
-    vm = PPC([0xB1234567])
-    vm.globals.update({0x1046D5B0: 0x50000, 0x10463F38: 0x60000})
-    struct.pack_into('>I', vm.memory, 0x60030, 0x70000)
-    if handle: vm.globals[handle] = 77
-    saved = cap if at_cap else initial
-    pending, calls = [], []
-    def native(address):
-        calls.append(address)
-        if address == 0x02E146A4:
-            assert vm.registers[3:5] == [77, 0]
-            vm.registers[3] = saved
-        elif address == 0x02E1AC6C: vm.floats[1] = saved
-        elif address == 0x02D4992C:
-            assert vm.registers[3] == 0x60000
-            pending.append(vm.registers[4])
-        elif address == 0x02E14848:
-            assert vm.registers[4:6] == [77, 0]
-            pending.append(vm.registers[3])
-        elif address == 0x02D49DFC:
-            assert vm.registers[3] == 0x60000
-            pending.append(vm.floats[1])
-        elif address == 0x02D49E88:
-            assert vm.registers[3] == 0x60000 and vm.floats[1] == pending[-1]
-        else: raise AssertionError(f'Unexpected progression native call {address:X}')
-    vm.native_call = native
-    vm.word(12, 1); vm.word(P['incoming_offset'], 22)
-    vm.word(P['incoming_offset']+56, 1); vm.word(P['incoming_offset']+60, command)
-    vm.run('_AP_MainTick_Hook')
-    if at_cap:
-        assert not pending and vm.word(16) == 1 and vm.word(P['ack_sequence_offset']) == 22
-        return
-    assert pending == [initial+delta]
-    for _ in range(5):
-        vm.run('_AP_MainTick_Hook')
-        assert pending == [initial+delta]  # setter is never repeated during async propagation
-        assert vm.word(16) == 0 and vm.word(P['ack_sequence_offset']) == 0
-        assert vm.word(P['delivery_error_offset']) == 5
-    saved = pending[0]
-    vm.run('_AP_MainTick_Hook')
-    assert vm.word(16) == 1 and vm.word(P['ack_sequence_offset']) == 22
-    assert vm.word(P['delivery_error_offset']) == 0
-    # Another receipt increments from the new saved value, once.
-    vm.word(12, 2); vm.word(P['incoming_offset']+64, 23)
-    vm.word(P['incoming_offset']+64+56, 1); vm.word(P['incoming_offset']+64+60, command)
-    vm.run('_AP_MainTick_Hook')
-    assert pending == [initial+delta, initial+2*delta]
-    assert vm.word(16) == 1
-
-
-@pytest.mark.parametrize('command', [1, 2, 3, 4, 5])
-def test_progression_without_game_data_retains_receipt(command):
-    vm = PPC([0xB1234567])
-    vm.word(12, 1); vm.word(P['incoming_offset'], 22)
-    vm.word(P['incoming_offset']+56, 1); vm.word(P['incoming_offset']+60, command)
-    vm.run('_AP_MainTick_Hook')
-    assert vm.word(16) == 0 and vm.word(P['ack_sequence_offset']) == 0
-    assert vm.word(P['delivery_error_offset']) == 3

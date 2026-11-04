@@ -21,6 +21,7 @@ def mailbox_assembly(location_ids=(), fingerprint="0" * 32) -> str:
     words += [int(fingerprint[index:index + 8], 16) for index in range(0, 32, 8)]
     for index in range(p["max_locations"]):
         words += [ids[index] if index < len(ids) else 0, 0]
+    words += [0] * (p["scratch_size"] // 4)
     assert len(words) * 4 == p["mailbox_size"]
     return "_AP_Mailbox_Base:\n" + "\n".join(
         ".int " + ", ".join(f"0x{word:08X}" for word in words[index:index + 16])

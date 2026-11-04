@@ -10,14 +10,15 @@ namespace BotWClient;
 internal sealed class ProtocolServerFixture : IDisposable
 {
     private readonly HttpListener listener = new();
-    private readonly CancellationTokenSource stop = new(TimeSpan.FromSeconds(15));
+    private readonly CancellationTokenSource stop;
     private readonly Task worker;
     private readonly JsonElement slotData;
     private readonly uint location, item;
     public string Uri { get; }
     public TaskCompletionSource<long[]> Checks { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
-    public ProtocolServerFixture(JsonElement slotData, uint location, uint item)
+    public ProtocolServerFixture(JsonElement slotData, uint location, uint item, TimeSpan? timeout = null)
     {
+        stop = new CancellationTokenSource(timeout ?? TimeSpan.FromSeconds(15));
         this.slotData = slotData.Clone(); this.location = location; this.item = item;
         var probe = new TcpListener(IPAddress.Loopback, 0); probe.Start();
         int port = ((IPEndPoint)probe.LocalEndpoint).Port; probe.Stop();

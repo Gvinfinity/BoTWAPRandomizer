@@ -13,7 +13,7 @@
   "capabilities_offset": 20520,
   "configured_offset": 20524,
   "location_count_offset": 20528,
-  "delivery_error_offset": 20532,
+  "mailbox_address_offset": 20532,
   "ack_sequence_offset": 20536,
   "reserved_offset": 20540,
   "seed_fingerprint_offset": 20544,
@@ -21,25 +21,12 @@
   "location_table_offset": 20560,
   "location_entry_size": 8,
   "max_locations": 4096,
-  "mailbox_size": 53328,
+  "scratch_offset": 53328,
+  "scratch_size": 256,
+  "mailbox_size": 53584,
   "capabilities": {
     "pouch_actor": 1,
-    "progression": 2
-  },
-  "delivery_errors": {
-    "none": 0,
-    "invalid_actor": 1,
-    "unsupported_command": 2,
-    "not_ready": 3,
-    "pouch_unchanged": 4,
-    "grant_pending": 5
-  },
-  "commands": {
-    "actor": 0,
-    "heart_container": 1,
-    "stamina_vessel": 2,
-    "weapon_slot": 3,
-    "bow_slot": 4,
-    "shield_slot": 5
+    "progression": 2,
+    "rpc": 4
   }
 }

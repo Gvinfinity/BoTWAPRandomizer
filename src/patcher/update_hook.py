@@ -18,20 +18,21 @@ def upgrade_hook(source: str) -> str:
     block = source[begin:end]
     words = re.findall(r'0x[0-9A-F]{8}', block)
     data = bytearray(struct.pack(f'>{len(words)}I', *(int(word, 16) for word in words)))
-    if (len(data) != P['mailbox_size'] or data[:8] != b'APMBBOTW'
+    if (len(data) not in (P['scratch_offset'], P['mailbox_size']) or data[:8] != b'APMBBOTW'
             or data[P['extension_offset']:P['extension_offset']+4] != b'APV2'
             or struct.unpack_from('>I', data, P['version_offset'])[0] != P['version']
             or struct.unpack_from('>I', data, P['configured_offset'])[0] != 1):
         raise ValueError('A configured protocol v2 seed hook is required')
-    # Keep every seed-bound byte, including the legacy starting-state identity.
-    index = P['capabilities_offset'] // 4
-    capability = int(words[index], 16) | sum(P['capabilities'].values())
-    matches = list(re.finditer(r'0x[0-9A-F]{8}', block))
-    span = matches[index].span()
-    block = block[:span[0]] + f'0x{capability:08X}' + block[span[1]:]
+    values = [int(word, 16) for word in words]
+    values[P['capabilities_offset'] // 4] |= sum(P['capabilities'].values())
+    if len(values) * 4 == P['scratch_offset']:
+        values += [0] * (P['scratch_size'] // 4)
+    rendered = '_AP_Mailbox_Base:\n' + '\n'.join(
+        '.int ' + ', '.join(f'0x{word:08X}' for word in values[index:index + 16])
+        for index in range(0, len(values), 16)) + '\n'
     template = (ROOT / 'src/hook/patch_Archipelago.asm').read_text()
     start, stop = template.index('_AP_Mailbox_Base:\n'), template.index('_AP_Is_Injecting:')
-    return template[:start] + block + template[stop:]
+    return template[:start] + rendered + template[stop:]
 
 
 def main():
