@@ -97,7 +97,7 @@ def prepare(args, run):
         element = root.find(name)
         if element is None: element = ET.SubElement(root,name)
         element.text = value
-    root.find('Graphic/api').text = '1' if args.display else '0'
+    root.find('Graphic/api').text = '0' if args.headless else '1'
     old = root.find('GraphicPack')
     if old is not None: root.remove(old)
     gp = ET.SubElement(root,'GraphicPack')
@@ -136,12 +136,17 @@ def main():
     parser.add_argument('--catalog',type=Path,default=ROOT/'out/chests-dlc-fixed.json')
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--timeout',type=int,default=600)
-    parser.add_argument('--display', help='Existing X display for hardware rendering; default creates private Xvfb')
+    parser.add_argument('--display', default=os.environ.get('DISPLAY'),
+                        help='X display to use (defaults to DISPLAY; Vulkan acceleration is enabled)')
+    parser.add_argument('--headless', action='store_true',
+                        help='Use private Xvfb with OpenGL software rendering')
     parser.add_argument('--prepare-only',action='store_true')
     args=parser.parse_args()
     lease=open('/tmp/botw-cemu-integration.lock','a')
     try: fcntl.flock(lease,fcntl.LOCK_EX|fcntl.LOCK_NB)
     except BlockingIOError: parser.error('Another integration runner is active')
+    if not args.display and not args.headless:
+        parser.error('No X display found; set DISPLAY or pass --headless')
     if not 30 <= args.timeout <= 1800: parser.error('--timeout must be between 30 and 1800 seconds')
     run=args.output.resolve(); run.mkdir(parents=True,exist_ok=False)
     children=[]; logs=[]; started=time.monotonic(); result={'passed':False}
@@ -167,8 +172,8 @@ def main():
             result={'prepared':True,'passed':False}; return 0
         env=os.environ.copy();env.update(XDG_CONFIG_HOME=str(run/'config'),XDG_DATA_HOME=str(run/'data'),
                                         XDG_CACHE_HOME=str(run/'cache'),GDK_BACKEND='x11')
-        # Allocate a private display without touching the user's active desktop.
-        if args.display:
+        # Use the user's accelerated display unless headless mode was requested.
+        if args.display and not args.headless:
             env['DISPLAY']=args.display
         else:
             read_fd,write_fd=os.pipe()
@@ -211,10 +216,16 @@ def main():
         result['error']=str(error);print(error,file=sys.stderr);return 1
     finally:
         for child in reversed(children):
-            if child.poll() is None:
-                os.killpg(child.pid,signal.SIGTERM)
-                try:child.wait(timeout=5)
-                except subprocess.TimeoutExpired:os.killpg(child.pid,signal.SIGKILL);child.wait()
+            # Signal the whole group even if its leader exited; Cemu can leave
+            # renderer/helper children behind after its main process terminates.
+            try: os.killpg(child.pid,signal.SIGTERM)
+            except ProcessLookupError: pass
+            try: child.wait(timeout=5)
+            except subprocess.TimeoutExpired: pass
+            try: os.killpg(child.pid,signal.SIGKILL)
+            except ProcessLookupError: pass
+            try: child.wait(timeout=1)
+            except subprocess.TimeoutExpired: pass
         for log in logs:log.close()
         result['elapsed_seconds']=time.monotonic()-started
         (run/'result.json').write_text(json.dumps(result,indent=2))

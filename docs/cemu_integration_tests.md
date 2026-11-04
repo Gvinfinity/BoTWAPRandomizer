@@ -12,12 +12,13 @@ the local AP WebSocket. A timeout, Cemu exit, missing prerequisite or failed
 assertion returns nonzero. `--prepare-only` only builds the fixture and reports
 `prepared: true, passed: false`.
 
-Requirements: Cemu, .NET 10 with client NuGet dependencies already restored, the patcher Python dependencies, Xvfb, xdotool,
-ImageMagick `import`, and a graphics driver supporting OpenGL on Xvfb. No mouse,
-controller or keyboard interaction is needed during the run. The private X display
-keeps test input away from the user's desktop. On a machine with a hardware-backed
-X display, `--display :0` uses it with Vulkan instead; this focuses the test window
-and should run in a dedicated desktop session.
+Requirements: Cemu, .NET 10 with client NuGet dependencies already restored, the
+patcher Python dependencies, an X11 display, xdotool and ImageMagick `import`.
+The runner uses `DISPLAY` by default and starts Cemu with Vulkan. It focuses the
+Cemu window to send controller input, so the screen appears while the test runs.
+No manual input is needed. Use `--display :0` to select another X display. Pass
+`--headless` only when no usable display is available; that mode uses Xvfb and
+software OpenGL.
 
 ## Fixture
 
@@ -43,7 +44,7 @@ seed identity. The client receives one apple (`Item_Fruit_A`).
 
 1. Create a separate Cemu configuration, graphic pack, MLC save and client journal.
    Installed game directories are linked into the test MLC; they are not patched.
-2. Start Cemu on a private Xvfb display with OpenGL and a keyboard controller.
+2. Start Cemu on the selected X display with Vulkan and a keyboard controller.
 3. Send A presses through Continue, save selection and load confirmation, then
    use A to open the chest immediately in front of Link.
 4. Attach the production memory reader to the launched PID. Require gameplay tick
@@ -84,6 +85,11 @@ Keyboard mapping uses Cemu's raw Linux key codes; see
 On 2026-11-03, an isolated real-game run passed in 223 seconds using the local
 v208 installation and generated save. The apple measurement changed from zero
 to one, and the AP fixture received location `3074647772` after the chest was
-opened. The run used software OpenGL and the copied 320x180 Graphics preset.
+opened. The run used software OpenGL and the copied 320x180 Graphics preset. Hardware
+acceleration is now the default; `--headless` opts into the slower fallback.
 The save-editor unit tests and client regression tests also passed. This records
 one end-to-end smoke pass, not the long-session acceptance target.
+
+On 2026-11-04, the default-display Vulkan run passed in 141 seconds on an NVIDIA
+GeForce RTX 4050 Laptop GPU. The Cemu log confirms Vulkan selected that GPU. The
+runner exited without leaving Cemu or Xvfb processes behind.
