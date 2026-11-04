@@ -2,6 +2,16 @@ from . import BotWTestBase
 
 
 class TestBotWGeneration(BotWTestBase):
+    def test_all_items_have_delivery_implementations(self):
+        from ..reference import item_data, native_grants
+        self.assertTrue(item_data)
+        for name, entry in item_data.items():
+            delivery = entry["delivery"]
+            self.assertIn(delivery["kind"], {"actor", "rupees", "progression", "native"}, name)
+            if delivery["kind"] == "native":
+                self.assertIn(name, native_grants)
+                self.assertTrue(native_grants[name]["Tiers"])
+
     def test_itempool_matches_checks(self):
         checks = self.multiworld.get_unfilled_locations(self.player)
         self.assertEqual(len(checks), len(self.multiworld.itempool))

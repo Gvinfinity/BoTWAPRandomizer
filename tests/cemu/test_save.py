@@ -8,6 +8,7 @@ import pytest
 spec = importlib.util.spec_from_file_location('cemu_runner', Path(__file__).with_name('run.py'))
 runner = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(runner)
+from items import world_reference
 
 
 def fixture():
@@ -48,3 +49,53 @@ def test_wrong_version_rejected():
     source[:4] = b'\x00\x00\x47\x1e'
     with pytest.raises(ValueError, match='v208'):
         runner.patch_save(source, [1,2,3], 180, 123)
+
+
+def test_item_modes_cover_production_items_and_categories():
+    full = runner.scenarios('full')
+    partial = runner.scenarios('partial')
+    simplified = runner.scenarios('simplified')
+    reference = world_reference()
+    assert {case['name'] for case in full} == set(reference.item_data)
+    assert len(simplified) == 1
+    assert {case['category'] for case in partial} == {case['category'] for case in full}
+    for category in {case['category'] for case in partial}:
+        assert len({case['item'] for case in partial if case['category'] == category}) == 1
+    for name, profile in reference.native_grants.items():
+        assert len([case for case in full if case['name'] == name]) == len(profile['Tiers'])
+    with pytest.raises(ValueError, match='Unknown test mode'):
+        runner.scenarios('unknown')
+
+
+def test_delivery_save_reset_clears_pouch_and_flags_without_changing_hashes():
+    reference = world_reference()
+    names = {flag['Name'] for profile in reference.native_grants.values()
+             for tier in profile['Tiers'] for flag in tier['Writes']}
+    names.discard('GreatFairy_ArmorRank')  # transient, absent from real saves
+    names.update(['MaxHartValue', 'WeaponPorchStockNum', 'BowPorchStockNum', 'ShieldPorchStockNum',
+                  'CurrentRupee', 'IsGet_PlayerStole2', 'StaminaMax', 'StaminaCurrentMax',
+                  'PorchItem', 'PorchItem_Value1', 'PorchItem_EquipFlag'])
+    names.update(f'RevivalGreatFairy{i}' for i in range(1, 5))
+    source = bytearray(1027208)
+    struct.pack_into('>I', source, 0, 0x471b)
+    at = 12; positions = {}
+    for name in sorted(names):
+        positions[name] = at + 4
+        struct.pack_into('>II', source, at, zlib.crc32(name.encode()), 123)
+        at += 8
+    # Multiple records for string/array data must all be reset.
+    struct.pack_into('>II', source, at, zlib.crc32(b'PorchItem'), 456)
+    end = at + 8
+    original = bytes(source)
+    reset = runner.reset_delivery_state(source)
+    assert bytes(source) == original
+    assert reset[:12] == source[:12] and reset[end:] == source[end:]
+    assert all(reset[i:i+4] == source[i:i+4] for i in range(12, end, 8))
+    assert struct.unpack_from('>I', reset, positions['MaxHartValue'])[0] == 12
+    assert struct.unpack_from('>f', reset, positions['StaminaMax'])[0] == 1000
+    assert struct.unpack_from('>I', reset, positions['PorchItem'])[0] == 0
+    assert struct.unpack_from('>I', reset, at + 4)[0] == 0
+    assert struct.unpack_from('>I', reset, positions['IsGet_Obj_DLC_HeroSoul_Rito'])[0] == 0
+    struct.pack_into('>I', source, positions['MaxHartValue'] - 4, 0)
+    with pytest.raises(ValueError, match='MaxHartValue'):
+        runner.reset_delivery_state(source)

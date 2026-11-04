@@ -14,11 +14,32 @@ internal sealed class ProtocolServerFixture : IDisposable
     private readonly Task worker;
     private readonly JsonElement slotData;
     private readonly uint location, item;
+    private readonly bool manualItems;
+    private readonly SemaphoreSlim sendLock = new(1);
+    private readonly TaskCompletionSource<WebSocket> connectedSocket = new(TaskCreationOptions.RunContinuationsAsynchronously);
+    private int sentItems;
+
+    private async Task Send(WebSocket socket, params object[] packets)
+    {
+        await sendLock.WaitAsync(stop.Token);
+        try { await socket.SendAsync(JsonSerializer.SerializeToUtf8Bytes(packets), WebSocketMessageType.Text, true, stop.Token); }
+        finally { sendLock.Release(); }
+    }
+
+    public async Task PublishItem(uint nextItem)
+    {
+        if (!manualItems) throw new InvalidOperationException("Fixture is not in manual delivery mode");
+        var socket = await connectedSocket.Task.WaitAsync(stop.Token);
+        await Send(socket, new { cmd = "ReceivedItems", index = sentItems,
+            items = new[] { new { item = nextItem, location, player = 1, flags = 1, @class = "NetworkItem" } } });
+        sentItems++;
+    }
     public string Uri { get; }
     public TaskCompletionSource<long[]> Checks { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
-    public ProtocolServerFixture(JsonElement slotData, uint location, uint item, TimeSpan? timeout = null)
+    public ProtocolServerFixture(JsonElement slotData, uint location, uint item, TimeSpan? timeout = null, bool manualItems = false)
     {
         stop = new CancellationTokenSource(timeout ?? TimeSpan.FromSeconds(15));
+        this.manualItems = manualItems;
         this.slotData = slotData.Clone(); this.location = location; this.item = item;
         var probe = new TcpListener(IPAddress.Loopback, 0); probe.Start();
         int port = ((IPEndPoint)probe.LocalEndpoint).Port; probe.Stop();
@@ -32,17 +53,14 @@ internal sealed class ProtocolServerFixture : IDisposable
         {
             var context = await listener.GetContextAsync().WaitAsync(stop.Token);
             using var socket = (await context.AcceptWebSocketAsync(null)).WebSocket;
-            async Task Send(params object[] packets)
-            {
-                byte[] bytes = JsonSerializer.SerializeToUtf8Bytes(packets);
-                await socket.SendAsync(bytes, WebSocketMessageType.Text, true, stop.Token);
-            }
+            Task SendPackets(params object[] packets) => Send(socket, packets);
             var package = new Dictionary<string, object> { ["Breath of the Wild"] = new {
-                item_name_to_id = new Dictionary<string, long> { ["Master Sword"] = item },
+                item_name_to_id = slotData.GetProperty("items").EnumerateObject().ToDictionary(
+                    entry => $"Test Item {entry.Name}", entry => long.Parse(entry.Name)),
                 location_name_to_id = new Dictionary<string, long> { ["Test Chest"] = location },
                 checksum = "botw-local-protocol-fixture-v2"
             }};
-            await Send(new { cmd = "RoomInfo", password = false, games = new[] { "Breath of the Wild" }, tags = new[] { "AP" },
+            await SendPackets(new { cmd = "RoomInfo", password = false, games = new[] { "Breath of the Wild" }, tags = new[] { "AP" },
                 version = new { major = 0, minor = 6, build = 0, @class = "Version" }, seed_name = "test",
                 permissions = new { release = 1, collect = 1, remaining = 1 }, hint_cost = 10, location_check_points = 1,
                 datapackage_checksums = new Dictionary<string, string> { ["Breath of the Wild"] = "botw-local-protocol-fixture-v2" }, time = 0.0 });
@@ -66,16 +84,23 @@ internal sealed class ProtocolServerFixture : IDisposable
                 {
                     switch (packet.GetProperty("cmd").GetString())
                     {
-                        case "GetDataPackage": await Send(new { cmd = "DataPackage", data = new { games = package } }); break;
+                        case "GetDataPackage": await SendPackets(new { cmd = "DataPackage", data = new { games = package } }); break;
                         case "Connect":
-                            await Send(new { cmd = "Connected", team = 0, slot = 1,
+                            await SendPackets(new { cmd = "Connected", team = 0, slot = 1,
                                 players = new[] { new { team = 0, slot = 1, alias = "Test", name = "Test", @class = "NetworkPlayer" } },
                                 missing_locations = new[] { location }, checked_locations = Array.Empty<long>(),
                                 slot_info = new Dictionary<string, object> { ["1"] = new { name = "Test", game = "Breath of the Wild", type = 1, group_members = Array.Empty<int>() } },
                                 hint_points = 0, slot_data = slotData });
-                            // Replay arrives separately from login: the bridge must wait for it.
-                            await Send(new { cmd = "ReceivedItems", index = 0,
-                                items = new[] { new { item, location, player = 1, flags = 1, @class = "NetworkItem" } } });
+                            // Live suites release one receipt at a time so independent
+                            // observations cannot race the next production grant.
+                            if (manualItems)
+                            {
+                                await SendPackets(new { cmd = "ReceivedItems", index = 0, items = Array.Empty<object>() });
+                                connectedSocket.TrySetResult(socket);
+                            }
+                            else
+                                await SendPackets(new { cmd = "ReceivedItems", index = 0,
+                                    items = new[] { new { item, location, player = 1, flags = 1, @class = "NetworkItem" } } });
                             break;
                         case "LocationChecks":
                             Checks.TrySetResult(packet.GetProperty("locations").EnumerateArray().Select(x => x.GetInt64()).ToArray());

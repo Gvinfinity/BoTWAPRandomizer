@@ -3,7 +3,7 @@ using BotWClient.Memory;
 
 namespace BotWClient.Archipelago;
 
-public enum GrantKind { Actor, HeartContainer, StaminaVessel, WeaponSlot, BowSlot, ShieldSlot }
+public enum GrantKind { Actor, HeartContainer, StaminaVessel, WeaponSlot, BowSlot, ShieldSlot, Rupees, Native }
 public readonly record struct ItemGrant(GrantKind Kind, string Name, uint Quantity);
 
 public sealed class SlotContract
@@ -87,6 +87,19 @@ public sealed class SlotContract
                 return new ItemGrant(progressionKind, logicalName, 1);
             }
         }
+        if (kind is "native" or "unimplemented" && delivery.TryGetProperty("name", out var nativeName) &&
+            NativeGrants.Profiles.ContainsKey(nativeName.GetString()!))
+        {
+            if (delivery.TryGetProperty("quantity", out var nativeQuantity) && nativeQuantity.GetUInt32() != 1)
+                throw new InvalidDataException("Invalid native grant quantity");
+            return new ItemGrant(GrantKind.Native, nativeName.GetString()!, 1);
+        }
+        if (kind == "rupees")
+        {
+            uint amount = delivery.GetProperty("quantity").GetUInt32();
+            if (amount is not (1 or 50 or 100 or 200)) throw new InvalidDataException("Invalid rupee grant");
+            return new ItemGrant(GrantKind.Rupees, "CurrentRupee", amount);
+        }
         if (kind != "actor")
         {
             reason = $"AP item {id} ({delivery.GetProperty("name").GetString()}) requires an unimplemented native grant; delivery remains pending";
@@ -134,13 +147,17 @@ public sealed class Flight
     public uint BeforeSum { get; set; }
     public uint BeforeCount { get; set; }
     public bool AlreadyOwnedKeyItem { get; set; }
+    public int NativeTier { get; set; }
+    public int NativeWrite { get; set; }
+    public bool NativeTierSelected { get; set; }
+    public bool NativeActorPending { get; set; }
     public bool SetterCalled { get; set; }
     public int TargetInt { get; set; }
     public float TargetFloat { get; set; }
     public string? LastError { get; set; }
 }
 
-public sealed class ClientBridge : IDisposable
+public sealed partial class ClientBridge : IDisposable
 {
     private readonly Mailbox mailbox;
     private readonly SlotContract contract;
@@ -224,6 +241,13 @@ public sealed class ClientBridge : IDisposable
 
     private void CompleteFlight(Flight flight)
     {
+        if (flight.NativeActorPending)
+        {
+            flight.NativeActorPending = false;
+            flight.Stage = "NativeActorDone";
+            Save();
+            return;
+        }
         state.NextItem++;
         state.InFlight = null;
         Save();
@@ -288,6 +312,7 @@ public sealed class ClientBridge : IDisposable
 
     private bool AdvanceFlight(Flight flight, ItemGrant grant)
     {
+        if (grant.Kind == GrantKind.Native) return AdvanceNative(flight, grant);
         if (flight.PendingCalls is { Length: > 0 } pending)
         {
             uint expectedEnd = unchecked(flight.PendingHead + (uint)pending.Length);
@@ -366,6 +391,27 @@ public sealed class ClientBridge : IDisposable
                     }
                     CompleteFlight(flight);
                     return true;
+                case "RupeesRead":
+                case "RupeesVerify":
+                    if (mailbox.ReadResult(completedHead).R3 == 0)
+                    {
+                        flight.Stage = flight.Stage == "RupeesRead" ? "Init" : "RupeesPoll";
+                        Save(); BlockReason = "Waiting for wallet GameData"; return false;
+                    }
+                    int wallet = unchecked((int)mailbox.ReadGuestWord(mailbox.ScratchResultAddress));
+                    if (flight.Stage == "RupeesRead")
+                    {
+                        if (wallet < 0 || wallet > 999999) throw new InvalidDataException("Invalid wallet value");
+                        flight.TargetInt = Math.Min(wallet + (int)grant.Quantity, 999999);
+                        if (wallet >= flight.TargetInt) { CompleteFlight(flight); return true; }
+                        flight.Stage = "RupeesAdd";
+                    }
+                    else if (wallet >= flight.TargetInt) { CompleteFlight(flight); return true; }
+                    else flight.Stage = "RupeesPoll";
+                    break;
+                case "RupeesAdded":
+                    flight.Stage = "RupeesPoll";
+                    break;
                 case "ReadInitial":
                     if (grant.Kind == GrantKind.StaminaVessel)
                     {
@@ -418,6 +464,29 @@ public sealed class ClientBridge : IDisposable
             return false;
         }
 
+        if (grant.Kind == GrantKind.Rupees)
+        {
+            uint manager = mailbox.ReadGuestWord(GameOffsets.GdtManagerPtr);
+            if (manager == 0) { Save(); BlockReason = "Waiting for wallet GameData"; return false; }
+            if (flight.Stage is "Init" or "RupeesPoll")
+            {
+                uint core = mailbox.GameDataCore(manager, 0x700);
+                if (core == 0) { Save(); BlockReason = "Waiting for wallet GameData"; return false; }
+                uint name = mailbox.WriteSafeString("CurrentRupee");
+                // Flags occupy the high byte of this big-endian word.
+                uint flags = mailbox.ReadGuestWord(manager + 0x704) >> 24;
+                QueueRpc(flight, flight.Stage == "Init" ? "RupeesRead" : "RupeesVerify", [
+                    NextCall(GameOffsets.GdtGetS32ByName, r3: core, r4: mailbox.ScratchResultAddress,
+                        r5: name, r6: flags, r7: 1)]);
+            }
+            else if (flight.Stage == "RupeesAdd")
+            {
+                flight.SetterCalled = true;
+                QueueRpc(flight, "RupeesAdded", [NextCall(GameOffsets.IncreaseCurrentRupee, r3: grant.Quantity, r4: 0)]);
+            }
+            else throw new InvalidDataException($"Unexpected wallet grant stage {flight.Stage}");
+            return false;
+        }
         if (grant.Kind == GrantKind.Actor)
         {
             uint mgr = mailbox.ReadGuestWord(GameOffsets.PauseMenuDataMgrPtr);

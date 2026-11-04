@@ -61,6 +61,8 @@ internal static class TestHarness
 
         public bool Locked { get; private set; }
         public bool PouchFull { get; set; }
+        public bool HoldChampionRemoval;
+        public List<string> RemovedChampionItems = [];
         public uint? PerCallStackCap { get; set; }
         public List<uint> Calls { get; } = [];
         public Dictionary<uint, int> SavedS32 { get; } = new()
@@ -79,6 +81,12 @@ internal static class TestHarness
         {
             WriteGuestWord(GameOffsets.PauseMenuDataMgrPtr, PauseMgrAddr);
             WriteGuestWord(GameOffsets.GdtManagerPtr, GdtMgrAddr);
+            WriteGuestWord(GdtMgrAddr + 0x700, 0x22003000);
+            WriteGuestWord(0x22003000, 0x22000000);
+            WriteGuestWord(GdtMgrAddr + 0x70C, 0x22003004);
+            WriteGuestWord(0x22003004, 0x22001000);
+            WriteGuestWord(GameOffsets.MapManagerPtr, 0x22002000);
+            WriteGuestWord(GdtMgrAddr + 0x704, 0x01000000);
             WriteGuestWord(GameOffsets.PlayerInfoPtr, PlayerInfoAddr);
             WriteGuestWord(PlayerInfoAddr + GameOffsets.PlayerInfoActorOffset, PlayerActorAddr);
             WriteGuestWord(GameOffsets.MaxHeartValueHandle, 101);
@@ -180,6 +188,11 @@ internal static class TestHarness
                 uint nameAddr = entryAddr + 0x80u;
                 byte[] encoded = Encoding.ASCII.GetBytes(pouch[i].Name + '\0');
                 WriteGuestBytes(nameAddr, encoded);
+                uint type = pouch[i].Name.StartsWith("Armor_", StringComparison.Ordinal)
+                    ? pouch[i].Name.EndsWith("_Head", StringComparison.Ordinal) ? 4u
+                        : pouch[i].Name.EndsWith("_Upper", StringComparison.Ordinal) ? 5u : 6u : 0u;
+                WriteGuestWord(entryAddr + GameOffsets.PouchItemTypeOffset, type);
+                WriteGuestBytes(entryAddr + GameOffsets.PouchItemActiveOffset, [1]);
                 WriteGuestWord(entryAddr + GameOffsets.PouchItemValueOffset, unchecked((uint)pouch[i].Value));
                 WriteGuestWord(entryAddr + GameOffsets.PouchItemNameOffset, nameAddr);
                 uint nextNode = i + 1 < pouch.Count ? PouchArenaBase + (uint)(i + 1) * 0x100u + NodeOffset : listHead;
@@ -187,10 +200,19 @@ internal static class TestHarness
             }
         }
 
+        public Dictionary<string, uint> NativeValues = [];
+        public Dictionary<string, uint> PendingNativeValues = [];
+        public bool CommitNativeImmediately = true;
+        public uint Wallet = 123;
+        public uint? PendingWallet;
+
         public void CommitProgression()
         {
             foreach (var pair in PendingS32) SavedS32[pair.Key] = pair.Value;
             PendingS32.Clear();
+            foreach (var pair in PendingNativeValues) NativeValues[pair.Key] = pair.Value;
+            PendingNativeValues.Clear();
+            if (PendingWallet is { } wallet) { Wallet = wallet; PendingWallet = null; }
             if (PendingStamina is { } stamina) { SavedStamina = stamina; PendingStamina = null; }
         }
 
@@ -241,15 +263,37 @@ internal static class TestHarness
                                 _ when classifyName.StartsWith("Weapon_Bow_", StringComparison.Ordinal) => 1u,
                                 "NormalArrow" => 2u,
                                 _ when classifyName.StartsWith("Weapon_Shield_", StringComparison.Ordinal) => 3u,
+                                _ when classifyName.StartsWith("Armor_", StringComparison.Ordinal) =>
+                                    classifyName.EndsWith("_Head", StringComparison.Ordinal) ? 4u :
+                                    classifyName.EndsWith("_Upper", StringComparison.Ordinal) ? 5u : 6u,
                                 _ when classifyName.StartsWith("Item_Ore_", StringComparison.Ordinal) => 7u,
                                 _ when classifyName.StartsWith("Item_Cook_", StringComparison.Ordinal) => 8u,
                                 "PlayerStole2" => 9u,
+                                _ when classifyName.StartsWith("Obj_", StringComparison.Ordinal) => 9u,
                                 _ => 0xFFFFFFFFu,
                             };
                             break;
                         case GameOffsets.GetWeaponMaxValue:
                             _ = ReadSafeString(r3);
                             retR3 = 40u;
+                            break;
+                        case GameOffsets.PauseMenuChangeItem:
+                            Require(!Locked && r3 == PauseMgrAddr && r5 == uint.MaxValue && r7 == 0,
+                                "Invalid native pouch removal ABI");
+                            Require(ReadGuest(r6, MailboxBase, 1)[0] == 1,
+                                "Removal must pass a pointer to allowEquipped=true");
+                            string removeName = ReadSafeString(r4);
+                            Require(removeName.StartsWith("Obj_HeroSoul_", StringComparison.Ordinal),
+                                "Removal targeted an upgraded or unrelated item");
+                            if (!HoldChampionRemoval)
+                            {
+                                int removeIndex = pouch.FindIndex(p => p.Name == removeName && p.Value > 0);
+                                if (removeIndex >= 0) pouch.RemoveAt(removeIndex);
+                                RemovedChampionItems.Add(removeName);
+                                RebuildPouchMemory();
+                            }
+                            // Deliberately return garbage: the real native method is void.
+                            retR3 = 0xDEADBEEF;
                             break;
                         case GameOffsets.PauseMenuAddItem:
                             Require(Locked && r3 == PauseMgrAddr && r6 == PauseMgrAddr + GameOffsets.PauseMenuItemListOffset, "Invalid addItem call");
@@ -261,7 +305,7 @@ internal static class TestHarness
                                 if (r5 is 2 or 7 && existing >= 0)
                                     pouch[existing] = (addName, pouch[existing].Value + (int)amount);
                                 else
-                                    pouch.Add((addName, (int)amount));
+                                    pouch.Add((addName, r5 is 4 or 5 or 6 ? -1 : (int)amount));
                                 RebuildPouchMemory();
                             }
                             retR3 = 0xDEADBEEFu;
@@ -272,6 +316,45 @@ internal static class TestHarness
                             break;
                         case GameOffsets.PauseMenuSaveToGameData:
                             Require(Locked && r3 == PauseMgrAddr && r4 == PauseMgrAddr + GameOffsets.PauseMenuItemListOffset, "Invalid saveToGameData call");
+                            break;
+                        case GameOffsets.MapLoadTowerCentres:
+                        case GameOffsets.MapLoadTowerScaleLevels:
+                        case GameOffsets.MapInitTowerRecords:
+                            Require(r3 == 0x22002000, "Invalid map manager pointer");
+                            break;
+                        case GameOffsets.GdtSetBoolTyped:
+                        case GameOffsets.GdtSetS32Typed:
+                            Require(r3 == 0x22001000 && r6 == 0 && r7 == 1 && Protocol.Read(span.Slice(28)) == 0,
+                                "Event-only flag setter must use native permission path without forcing latches");
+                            goto case GameOffsets.GdtSetBoolByName;
+                        case GameOffsets.GdtSetBoolByName:
+                        case GameOffsets.GdtSetS32ByName:
+                            if (target is GameOffsets.GdtSetBoolByName or GameOffsets.GdtSetS32ByName)
+                                Require(r3 == GdtMgrAddr, "Invalid native setter manager");
+                            string flagName = ReadSafeString(r5);
+                            if (CommitNativeImmediately) NativeValues[flagName] = r4;
+                            else PendingNativeValues[flagName] = r4;
+                            retR3 = 1;
+                            break;
+                        case GameOffsets.GdtGetBoolByName:
+                        case GameOffsets.GdtGetS32ByName when ReadSafeString(r5) != "CurrentRupee":
+                            Require(r3 == 0x22000000 && r6 == 1 && r7 == 1, "Invalid native flag read ABI");
+                            uint flagValue = NativeValues.GetValueOrDefault(ReadSafeString(r5));
+                            // Bool output is one byte at the big-endian out address.
+                            if (target == GameOffsets.GdtGetBoolByName)
+                                WriteGuestBytes(r4, [(byte)flagValue]);
+                            else WriteGuestWord(r4, flagValue);
+                            retR3 = 1;
+                            break;
+                        case GameOffsets.GdtGetS32ByName:
+                            Require(r3 == 0x22000000 && ReadSafeString(r5) == "CurrentRupee" && r6 == 1 && r7 == 1,
+                                "Invalid wallet read ABI");
+                            WriteGuestWord(r4, Wallet);
+                            retR3 = 1;
+                            break;
+                        case GameOffsets.IncreaseCurrentRupee:
+                            Require(r4 == 0, "Invalid rupee delta tag");
+                            PendingWallet = Math.Min(Wallet + r3, 999999);
                             break;
                         case GameOffsets.GdtGetS32:
                             Require(r4 == 0, "Invalid getS32 debug flag");
@@ -485,6 +568,159 @@ internal static class TestHarness
             }
 
             ConfigureMailbox(sim, mailbox, location);
+            using (var walletData = JsonDocument.Parse("""
+                {"protocol_version":2,"check_actor_prefix":"AP_Check_","player":1,"seed":"test",
+                 "seed_fingerprint":"00000000000000000000000000000000",
+                 "locations":{"2953983062":"AP_Check_B0123456"},
+                 "items":{"700":{"kind":"rupees","name":"100 Rupees","quantity":100}}}
+                """))
+            {
+                var walletContract = new SlotContract(walletData.RootElement, mailbox, 1, "test", [location]);
+                var walletServer = new Server { ReceivedItems = [700] };
+                using var walletBridge = new ClientBridge(mailbox, walletContract, Path.Combine(directory, "wallet"), 0, 1);
+                for (int i = 0; i < 12; i++) { walletBridge.Pump(walletServer); sim.Tick(); }
+                Require(walletBridge.NextItem == 0 && sim.PendingWallet == 223 && sim.Wallet == 123,
+                    "Wallet must wait for asynchronous delta to commit");
+                Require(sim.Calls.Count(c => c == GameOffsets.IncreaseCurrentRupee) == 1,
+                    "Wallet delta must be issued exactly once");
+                sim.CommitProgression();
+                DriveUntilIdle(walletBridge, walletServer, sim);
+                Require(walletBridge.NextItem == 1 && sim.Wallet == 223, "Wallet receipt not acknowledged after commit");
+            }
+
+            ConfigureMailbox(sim, mailbox, location);
+            sim.NativeValues.Clear();
+            sim.CommitNativeImmediately = false;
+            using (var recoveryData = JsonDocument.Parse(JsonSerializer.Serialize(new {
+                protocol_version = 2, player = 1, seed = "test", seed_fingerprint = new string('0', 32),
+                check_actor_prefix = "AP_Check_", locations = new Dictionary<string,string> { [location.ToString()] = "AP_Check_B0123456" },
+                items = new Dictionary<string,object> { ["800"] = new { kind = "native", name = "Progressive Stasis", quantity = 1 } } })))
+            {
+                var recoveryContract = new SlotContract(recoveryData.RootElement, mailbox, 1, "test", [location]);
+                var recoveryServer = new Server { ReceivedItems = [800] };
+                string recoveryDirectory = Path.Combine(directory, "native-recovery");
+                using (var first = new ClientBridge(mailbox, recoveryContract, recoveryDirectory, 0, 1))
+                {
+                    DriveUntilIdle(first, recoveryServer, sim, maxSteps: 6);
+                    Require(first.NextItem == 0 && sim.PendingNativeValues.GetValueOrDefault("IsGet_Obj_StopTimer") == 1,
+                        "Native grant acknowledged before saved flag commit");
+                }
+                sim.CommitProgression();
+                using (var resumed = new ClientBridge(mailbox, recoveryContract, recoveryDirectory, 0, 1))
+                {
+                    DriveUntilIdle(resumed, recoveryServer, sim, maxSteps: 15);
+                    Require(resumed.NextItem == 1 && sim.NativeValues["IsGet_Obj_StopTimer"] == 1 &&
+                        sim.NativeValues.GetValueOrDefault("IsGet_Obj_StopTimerLv2") == 0,
+                        "Reconnect advanced a partly applied receipt to the next progressive tier");
+                }
+            }
+            sim.CommitNativeImmediately = true;
+            sim.NativeValues.Clear();
+            ConfigureMailbox(sim, mailbox, location);
+            var nativeItems = new Dictionary<string, object>();
+            var nativeReceipts = new List<ReceivedItem>();
+            long nativeId = 1000;
+            foreach (var pair in NativeGrants.Profiles)
+            {
+                nativeItems[(nativeId).ToString()] = new { kind = "native", name = pair.Key, quantity = 1 };
+                for (int i = 0; i < pair.Value.Tiers.Length + 1; i++) nativeReceipts.Add(nativeId);
+                nativeId++;
+            }
+            using (var nativeData = JsonDocument.Parse(JsonSerializer.Serialize(new {
+                protocol_version = 2, player = 1, seed = "test", seed_fingerprint = new string('0', 32),
+                check_actor_prefix = "AP_Check_", locations = new Dictionary<string,string> { [location.ToString()] = "AP_Check_B0123456" },
+                items = nativeItems })))
+            {
+                var nativeContract = new SlotContract(nativeData.RootElement, mailbox, 1, "test", [location]);
+                var nativeServer = new Server { ReceivedItems = nativeReceipts };
+                using var nativeBridge = new ClientBridge(mailbox, nativeContract, Path.Combine(directory, "native"), 0, 1);
+                DriveUntilIdle(nativeBridge, nativeServer, sim, maxSteps: 2500);
+                Require(nativeBridge.NextItem == nativeReceipts.Count, "Native receipts failed to drain");
+                Require(sim.NativeValues["IsGet_Obj_RemoteBombLv2"] == 1 && sim.NativeValues["IsGet_Obj_RemoteBombCube2"] == 1 &&
+                    sim.NativeValues["GreatFairy_ArmorRank"] == 4 && sim.NativeValues["MasterSword_Add_Power"] == 30 &&
+                    sim.NativeValues["Open_MasterSword_FullPower"] == 1 && sim.NativeValues["MapTower_07"] == 1 &&
+                    sim.NativeValues["IsGet_App_FinalTrial"] == 1, "Native tiers or caps incorrect");
+                foreach (string race in new[] { "Rito", "Goron", "Zora", "Gerudo" })
+                {
+                    Require(sim.TotalPouchValue("Obj_HeroSoul_" + race) == 0 &&
+                        sim.TotalPouchValue("Obj_DLC_HeroSoul_" + race) == 1,
+                        "Champion upgrade must replace the base key item for " + race);
+                }
+                Require(sim.Calls.Contains(GameOffsets.MapInitTowerRecords), "Tower grant omitted native map refresh");
+            }
+
+            // Stop after an upgrade has queued removal, reconnect with the batch
+            // journaled but unpublished, then reconnect again after native execution.
+            ConfigureMailbox(sim, mailbox, location);
+            sim.ClearPouch();
+            sim.SetPouchItem("Obj_HeroSoul_Rito", 1);
+            sim.SetPouchItem("PlayerStole2", 1);
+            sim.NativeValues.Clear();
+            sim.NativeValues["IsGet_Obj_HeroSoul_Rito"] = 1;
+            using (var championData = JsonDocument.Parse(JsonSerializer.Serialize(new {
+                protocol_version = 2, player = 1, seed = "test", seed_fingerprint = new string('0', 32),
+                check_actor_prefix = "AP_Check_", locations = new Dictionary<string,string> { [location.ToString()] = "AP_Check_B0123456" },
+                items = new Dictionary<string,object> { ["900"] = new { kind = "native", name = "Progressive Revali's Gale", quantity = 1 } } })))
+            {
+                var championContract = new SlotContract(championData.RootElement, mailbox, 1, "test", [location]);
+                var championServer = new Server { ReceivedItems = [900] };
+                string championDirectory = Path.Combine(directory, "champion-removal");
+                bool queuedRemoval = false;
+                using (var first = new ClientBridge(mailbox, championContract, championDirectory, 0, 1))
+                {
+                    for (int i = 0; i < 50; i++)
+                    {
+                        first.Pump(championServer);
+                        using var journal = JsonDocument.Parse(File.ReadAllText(Directory.GetFiles(championDirectory, "*.json").Single()));
+                        queuedRemoval = journal.RootElement.GetProperty("InFlight").GetProperty("Stage").GetString() == "NativeRemove";
+                        if (queuedRemoval) break;
+                        sim.Tick();
+                    }
+                    Require(queuedRemoval && first.NextItem == 0 && sim.TotalPouchValue("Obj_DLC_HeroSoul_Rito") == 1 &&
+                        sim.NativeValues["IsGet_Obj_DLC_HeroSoul_Rito"] == 1, "Base removed before upgraded grant was confirmed");
+                }
+                // Recreate the crash window between journal save and ring publication.
+                mailbox.SetWord(12, mailbox.InTail);
+                mailbox.WriteSafeString("UnrelatedScratchContents");
+                sim.HoldChampionRemoval = true;
+                using (var second = new ClientBridge(mailbox, championContract, championDirectory, 0, 1))
+                {
+                    DriveUntilIdle(second, championServer, sim, maxSteps: 8);
+                    Require(second.NextItem == 0 && sim.TotalPouchValue("Obj_HeroSoul_Rito") == 1,
+                        "Receipt acknowledged while base removal was pending");
+                    sim.HoldChampionRemoval = false;
+                    // Execute removal without consuming its acknowledgement.
+                    second.Pump(championServer);
+                    sim.Tick();
+                }
+                int removalsBeforeResume = sim.RemovedChampionItems.Count;
+                using (var third = new ClientBridge(mailbox, championContract, championDirectory, 0, 1))
+                {
+                    DriveUntilIdle(third, championServer, sim, maxSteps: 10);
+                    Require(third.NextItem == 1 && sim.TotalPouchValue("Obj_HeroSoul_Rito") == 0 &&
+                        sim.TotalPouchValue("Obj_DLC_HeroSoul_Rito") == 1 && sim.TotalPouchValue("PlayerStole2") == 1,
+                        "Removal recovery failed or changed unrelated pouch entries");
+                    Require(sim.RemovedChampionItems.Count == removalsBeforeResume,
+                        "Already executed champion removal was repeated after reconnect");
+                }
+            }
+
+            ConfigureMailbox(sim, mailbox, location);
+            using (var armorData = JsonDocument.Parse(JsonSerializer.Serialize(new {
+                protocol_version = 2, player = 1, seed = "test", seed_fingerprint = new string('0', 32),
+                check_actor_prefix = "AP_Check_", locations = new Dictionary<string,string> { [location.ToString()] = "AP_Check_B0123456" },
+                items = new Dictionary<string,object> { ["901"] = new { kind = "actor", actor = "Armor_029_Head", quantity = 1 } } })))
+            {
+                var armorContract = new SlotContract(armorData.RootElement, mailbox, 1, "test", [location]);
+                var armorServer = new Server { ReceivedItems = [901] };
+                using var armorBridge = new ClientBridge(mailbox, armorContract, Path.Combine(directory, "armor-sentinel"), 0, 1);
+                DriveUntilIdle(armorBridge, armorServer, sim);
+                var measured = mailbox.MeasureStablePouch(GuestSimulator.PauseMgrAddr, "Armor_029_Head");
+                Require(armorBridge.NextItem == 1 && measured.Count == 1 && measured.Sum == 1,
+                    "Armor sentinel values must not cause duplicate grants or a blocked queue");
+            }
+
+            ConfigureMailbox(sim, mailbox, location);
             sim.PerCallStackCap = 3;
             sim.SetPouchItem("PlayerStole2", 1);
             var batchServer = new Server { ReceivedItems = [arrowItem, foodItem, keyItem, badActorItem] };
@@ -590,7 +826,7 @@ internal static class TestHarness
             mailbox.SetWord(Protocol.Get("capabilities_offset"), 7);
             mailbox.SetWord(Protocol.Get("version_offset"), 1); Reject(() => mailbox.Validate());
 
-            Console.WriteLine("PASS: RPC wire format, Wii U v208 offsets, weapon/stackable/food/key-item grants, progression async setters, journal recovery, network failure, starting inventory, queue capacity, counter wrap and real AP SDK WebSocket exchange");
+            Console.WriteLine("PASS: RPC wire format, Wii U v208 offsets, weapon/stackable/food/key-item grants, progression async setters, all native profiles and caps, champion replacement and removal recovery, native reconnect recovery, journal recovery, network failure, starting inventory, queue capacity, counter wrap and real AP SDK WebSocket exchange");
             if (tlsCertificate is null && OperatingSystem.IsLinux()) TestTlsSubprocess(directory);
             return 0;
         }

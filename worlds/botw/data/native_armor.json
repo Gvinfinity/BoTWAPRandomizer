@@ -1,0 +1,430 @@
+{
+  "Amber Earrings": [
+    "Armor_029_Head",
+    1
+  ],
+  "Ancient Helm": [
+    "Armor_021_Head",
+    1
+  ],
+  "Vah Medoh Divine Helm": [
+    "Armor_182_Head",
+    1
+  ],
+  "Vah Naboris Divine Helm": [
+    "Armor_184_Head",
+    1
+  ],
+  "Vah Rudania Divine Helm": [
+    "Armor_183_Head",
+    1
+  ],
+  "Vah Ruta Divine Helm": [
+    "Armor_181_Head",
+    1
+  ],
+  "Ancient Cuirass": [
+    "Armor_021_Upper",
+    1
+  ],
+  "Ancient Greaves": [
+    "Armor_021_Lower",
+    1
+  ],
+  "Barbarian Helm": [
+    "Armor_048_Head",
+    1
+  ],
+  "Barbarian Armor": [
+    "Armor_048_Upper",
+    1
+  ],
+  "Barbarian Leg Wraps": [
+    "Armor_048_Lower",
+    1
+  ],
+  "Bokoblin Mask": [
+    "Armor_022_Head",
+    1
+  ],
+  "Champion's Tunic": [
+    "Armor_116_Upper",
+    1
+  ],
+  "Climber's Bandanna": [
+    "Armor_014_Head",
+    1
+  ],
+  "Climbing Gear": [
+    "Armor_014_Upper",
+    1
+  ],
+  "Climbing Boots": [
+    "Armor_014_Lower",
+    1
+  ],
+  "Dark Hood": [
+    "Armor_160_Head",
+    1
+  ],
+  "Dark Tunic": [
+    "Armor_160_Upper",
+    1
+  ],
+  "Dark Trousers": [
+    "Armor_160_Lower",
+    1
+  ],
+  "Desert Voe Headband": [
+    "Armor_008_Head",
+    1
+  ],
+  "Desert Voe Spaulder": [
+    "Armor_008_Upper",
+    1
+  ],
+  "Desert Voe Trousers": [
+    "Armor_008_Lower",
+    1
+  ],
+  "Diamond Circlet": [
+    "Armor_024_Head",
+    1
+  ],
+  "Fierce Deity Mask": [
+    "Armor_225_Head",
+    1
+  ],
+  "Fierce Deity Armor": [
+    "Armor_225_Upper",
+    1
+  ],
+  "Fierce Deity Boots": [
+    "Armor_225_Lower",
+    1
+  ],
+  "Flamebreaker Helm": [
+    "Armor_011_Head",
+    1
+  ],
+  "Flamebreaker Armor": [
+    "Armor_011_Upper",
+    1
+  ],
+  "Flamebreaker Boots": [
+    "Armor_011_Lower",
+    1
+  ],
+  "Gerudo Veil": [
+    "Armor_053_Head",
+    1
+  ],
+  "Gerudo Top": [
+    "Armor_053_Upper",
+    1
+  ],
+  "Gerudo Sirwal": [
+    "Armor_053_Lower",
+    1
+  ],
+  "Cap of the Hero": [
+    "Armor_230_Head",
+    1
+  ],
+  "Tunic of the Hero": [
+    "Armor_230_Upper",
+    1
+  ],
+  "Trousers of the Hero": [
+    "Armor_230_Lower",
+    1
+  ],
+  "Cap of Time": [
+    "Armor_200_Head",
+    1
+  ],
+  "Tunic of Time": [
+    "Armor_200_Upper",
+    1
+  ],
+  "Trousers of Time": [
+    "Armor_200_Lower",
+    1
+  ],
+  "Cap of Twilight": [
+    "Armor_210_Head",
+    1
+  ],
+  "Tunic of Twilight": [
+    "Armor_210_Upper",
+    1
+  ],
+  "Trousers of Twilight": [
+    "Armor_210_Lower",
+    1
+  ],
+  "Cap of the Wind": [
+    "Armor_205_Head",
+    1
+  ],
+  "Tunic of the Wind": [
+    "Armor_205_Upper",
+    1
+  ],
+  "Trousers of the Wind": [
+    "Armor_205_Lower",
+    1
+  ],
+  "Cap of the Sky": [
+    "Armor_215_Head",
+    1
+  ],
+  "Tunic of the Sky": [
+    "Armor_215_Upper",
+    1
+  ],
+  "Trousers of the Sky": [
+    "Armor_215_Lower",
+    1
+  ],
+  "Cap of the Wild": [
+    "Armor_005_Head",
+    1
+  ],
+  "Tunic of the Wild": [
+    "Armor_005_Upper",
+    1
+  ],
+  "Trousers of the Wild": [
+    "Armor_005_Lower",
+    1
+  ],
+  "Hylian Hood": [
+    "Armor_001_Head",
+    1
+  ],
+  "Hylian Tunic": [
+    "Armor_001_Upper",
+    1
+  ],
+  "Hylian Trousers": [
+    "Armor_001_Lower",
+    1
+  ],
+  "Island Lobster Shirt": [
+    "Armor_175_Upper",
+    1
+  ],
+  "Korok Mask": [
+    "Armor_176_Head",
+    1
+  ],
+  "Lizalfos Mask": [
+    "Armor_055_Head",
+    1
+  ],
+  "Lynel Mask": [
+    "Armor_056_Head",
+    1
+  ],
+  "Majora's Mask": [
+    "Armor_172_Head",
+    1
+  ],
+  "Midna's Helmet": [
+    "Armor_173_Head",
+    1
+  ],
+  "Moblin Mask": [
+    "Armor_045_Head",
+    1
+  ],
+  "Nintendo Switch Shirt": [
+    "Armor_170_Upper",
+    1
+  ],
+  "Opal Earrings": [
+    "Armor_028_Head",
+    1
+  ],
+  "Phantom Helmet": [
+    "Armor_171_Head",
+    1
+  ],
+  "Phantom Armor": [
+    "Armor_171_Upper",
+    1
+  ],
+  "Phantom Greaves": [
+    "Armor_171_Lower",
+    1
+  ],
+  "Phantom Ganon Skull": [
+    "Armor_180_Head",
+    1
+  ],
+  "Phantom Ganon Armor": [
+    "Armor_180_Upper",
+    1
+  ],
+  "Phantom Ganon Greaves": [
+    "Armor_180_Lower",
+    1
+  ],
+  "Radiant Mask": [
+    "Armor_017_Head",
+    1
+  ],
+  "Radiant Shirt": [
+    "Armor_017_Upper",
+    1
+  ],
+  "Radiant Tights": [
+    "Armor_017_Lower",
+    1
+  ],
+  "Ravio's Hood": [
+    "Armor_177_Head",
+    1
+  ],
+  "Royal Guard Cap": [
+    "Armor_179_Head",
+    1
+  ],
+  "Royal Guard Uniform": [
+    "Armor_179_Upper",
+    1
+  ],
+  "Royal Guard Boots": [
+    "Armor_179_Lower",
+    1
+  ],
+  "Rubber Helm": [
+    "Armor_046_Head",
+    1
+  ],
+  "Rubber Armor": [
+    "Armor_046_Upper",
+    1
+  ],
+  "Rubber Tights": [
+    "Armor_046_Lower",
+    1
+  ],
+  "Ruby Circlet": [
+    "Armor_025_Head",
+    1
+  ],
+  "Salvager Headwear": [
+    "Armor_185_Head",
+    1
+  ],
+  "Salvager Vest": [
+    "Armor_185_Upper",
+    1
+  ],
+  "Salvager Trousers": [
+    "Armor_185_Lower",
+    1
+  ],
+  "Sand Boots": [
+    "Armor_049_Lower",
+    1
+  ],
+  "Sapphire Circlet": [
+    "Armor_026_Head",
+    1
+  ],
+  "Sheik's Mask": [
+    "Armor_220_Head",
+    1
+  ],
+  "Snow Boots": [
+    "Armor_140_Lower",
+    1
+  ],
+  "Snowquill Headdress": [
+    "Armor_009_Head",
+    1
+  ],
+  "Snowquill Tunic": [
+    "Armor_009_Upper",
+    1
+  ],
+  "Snowquill Trousers": [
+    "Armor_009_Lower",
+    1
+  ],
+  "Soldier's Helm": [
+    "Armor_020_Head",
+    1
+  ],
+  "Soldier's Armor": [
+    "Armor_020_Upper",
+    1
+  ],
+  "Soldier's Greaves": [
+    "Armor_020_Lower",
+    1
+  ],
+  "Stealth Mask": [
+    "Armor_012_Head",
+    1
+  ],
+  "Stealth Chest Guard": [
+    "Armor_012_Upper",
+    1
+  ],
+  "Stealth Tights": [
+    "Armor_012_Lower",
+    1
+  ],
+  "Thunder Helm": [
+    "Armor_115_Head",
+    1
+  ],
+  "Tingle's Hood": [
+    "Armor_174_Head",
+    1
+  ],
+  "Tingle's Shirt": [
+    "Armor_174_Upper",
+    1
+  ],
+  "Tingle's Tights": [
+    "Armor_174_Lower",
+    1
+  ],
+  "Topaz Earrings": [
+    "Armor_027_Head",
+    1
+  ],
+  "Warm Doublet": [
+    "Armor_044_Upper",
+    1
+  ],
+  "Old Shirt": [
+    "Armor_043_Upper",
+    1
+  ],
+  "Well-Worn Trousers": [
+    "Armor_043_Lower",
+    1
+  ],
+  "Zant's Helmet": [
+    "Armor_178_Head",
+    1
+  ],
+  "Zora Helm": [
+    "Armor_006_Head",
+    1
+  ],
+  "Zora Armor": [
+    "Armor_006_Upper",
+    1
+  ],
+  "Zora Greaves": [
+    "Armor_006_Lower",
+    1
+  ]
+}

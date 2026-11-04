@@ -1,0 +1,867 @@
+{
+  "Magnesis": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_Magnetglove",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Cryonis": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_IceMaker",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Master Cycle Zero": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_Motorcycle",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Camera": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_Album",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_Obj_PictureBook",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_Obj_Camera",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Progressive Remote Bomb": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_RemoteBombBall",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_Obj_RemoteBombCube",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_Obj_RemoteBomb",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      },
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_RemoteBombBall2",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_Obj_RemoteBombCube2",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_Obj_RemoteBombLv2",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Progressive Stasis": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_StopTimer",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      },
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_StopTimerLv2",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Progressive Sheikah Sensor": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_SheikSensor",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      },
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_SheikSensorLv2",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Travel Medallion": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_WarpDLC",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_WarpDLC"
+      }
+    ]
+  },
+  "Vah Medoh Controls": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "RemainsWind_AccessDownload",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_Obj_RemainInsideMap",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_App_WindRelic",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Vah Medoh Cleared": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Clear_RemainsWind",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Vah Rudania Controls": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "RemainsFire_OpenWindow",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_Obj_RemainInsideMap",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_App_FireRelic",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Vah Rudania Cleared": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Clear_RemainsFire",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Vah Ruta Controls": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_RemainInsideMap",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_App_WaterRelic",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Vah Ruta Cleared": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Clear_RemainsWater",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Vah Naboris Controls": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_RemainInsideMap",
+            "Type": "bool",
+            "Value": 1
+          },
+          {
+            "Name": "IsGet_App_ElectricRelic",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Vah Naboris Cleared": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Clear_RemainsElectric",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Final Trial Controls": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_App_FinalTrial",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Progressive Armor Upgrade": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "GreatFairy_ArmorRank",
+            "Type": "s32",
+            "Value": 1
+          }
+        ]
+      },
+      {
+        "Writes": [
+          {
+            "Name": "GreatFairy_ArmorRank",
+            "Type": "s32",
+            "Value": 2
+          }
+        ]
+      },
+      {
+        "Writes": [
+          {
+            "Name": "GreatFairy_ArmorRank",
+            "Type": "s32",
+            "Value": 3
+          }
+        ]
+      },
+      {
+        "Writes": [
+          {
+            "Name": "GreatFairy_ArmorRank",
+            "Type": "s32",
+            "Value": 4
+          }
+        ]
+      }
+    ]
+  },
+  "Revali's Gale": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_HeroSoul_Rito",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_HeroSoul_Rito"
+      }
+    ]
+  },
+  "Progressive Revali's Gale": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_HeroSoul_Rito",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_HeroSoul_Rito"
+      },
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_DLC_HeroSoul_Rito",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_DLC_HeroSoul_Rito",
+        "RemoveActor": "Obj_HeroSoul_Rito"
+      }
+    ]
+  },
+  "Daruk's Protection": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_HeroSoul_Goron",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_HeroSoul_Goron"
+      }
+    ]
+  },
+  "Progressive Daruk's Protection": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_HeroSoul_Goron",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_HeroSoul_Goron"
+      },
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_DLC_HeroSoul_Goron",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_DLC_HeroSoul_Goron",
+        "RemoveActor": "Obj_HeroSoul_Goron"
+      }
+    ]
+  },
+  "Mipha's Grace": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_HeroSoul_Zora",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_HeroSoul_Zora"
+      }
+    ]
+  },
+  "Progressive Mipha's Grace": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_HeroSoul_Zora",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_HeroSoul_Zora"
+      },
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_DLC_HeroSoul_Zora",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_DLC_HeroSoul_Zora",
+        "RemoveActor": "Obj_HeroSoul_Zora"
+      }
+    ]
+  },
+  "Urbosa's Fury": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_HeroSoul_Gerudo",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_HeroSoul_Gerudo"
+      }
+    ]
+  },
+  "Progressive Urbosa's Fury": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_HeroSoul_Gerudo",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_HeroSoul_Gerudo"
+      },
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Obj_DLC_HeroSoul_Gerudo",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Obj_DLC_HeroSoul_Gerudo",
+        "RemoveActor": "Obj_HeroSoul_Gerudo"
+      }
+    ]
+  },
+  "Progressive Master Sword": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "IsGet_Weapon_Sword_070",
+            "Type": "bool",
+            "Value": 1
+          }
+        ],
+        "Actor": "Weapon_Sword_070"
+      },
+      {
+        "Writes": [
+          {
+            "Name": "MasterSword_Add_Power",
+            "Type": "s32",
+            "Value": 10
+          }
+        ]
+      },
+      {
+        "Writes": [
+          {
+            "Name": "MasterSword_Add_Power",
+            "Type": "s32",
+            "Value": 20
+          }
+        ]
+      },
+      {
+        "Writes": [
+          {
+            "Name": "MasterSword_Add_Power",
+            "Type": "s32",
+            "Value": 30
+          },
+          {
+            "Name": "Open_MasterSword_FullPower",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Hebra Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower01",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_01",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Tabantha Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower02",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_02",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Gerudo Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower03",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_03",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Wasteland Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower04",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_04",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Woodland Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower05",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_05",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Central Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower06",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_06",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Great Plateau Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower07",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_07",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Dueling Peaks Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower08",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_08",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Lake Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower09",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_09",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Eldin Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower10",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_10",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Akkala Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower11",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_11",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Lanayru Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower12",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_12",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Hateno Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower13",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_13",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Faron Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower14",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_14",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "Ridgeland Tower": {
+    "Tiers": [
+      {
+        "Writes": [
+          {
+            "Name": "Location_MapTower15",
+            "Type": "s32",
+            "Value": 1
+          },
+          {
+            "Name": "MapTower_15",
+            "Type": "bool",
+            "Value": 1,
+            "EventOnly": true
+          }
+        ]
+      }
+    ],
+    "Refresh": "map"
+  },
+  "One-Hit Obliterator": {
+    "Tiers": [
+      {
+        "Actor": "Weapon_Sword_502",
+        "Writes": [
+          {
+            "Name": "IsGet_Weapon_Sword_502",
+            "Type": "bool",
+            "Value": 1
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -16,6 +16,9 @@ import xml.etree.ElementTree as ET
 import zipfile
 import zlib
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from items import scenarios, reset_delivery_state
+
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
@@ -60,11 +63,12 @@ def prepare(args, run):
     dump = GameDump(titles/f'00050000/{title}/content', titles/f'0005000e/{title}/content',
                     titles/f'0005000c/{title}/content')
     chest = next(c for c in json.loads(args.catalog.read_text())['locations'] if c['hash_id'] == 2009260213)
-    location, item = chest['id'], 4000000001
+    cases = scenarios(args.items)
+    location, item = chest['id'], cases[0]["item"]
     fingerprint = seed_fingerprint('test', 1, [location])
     slot = dict(protocol_version=2, player=1, seed='test', seed_fingerprint=fingerprint,
                 check_actor_prefix='AP_Check_', locations={str(location):f'AP_Check_{location:08X}'},
-                items={str(item):dict(kind='actor', actor='Item_Fruit_A', quantity=1)})
+                items={str(case['item']): case['delivery'] for case in cases})
     plan = dict(version=1, game='Breath of the Wild', player=1, seed='test', locations=[chest], slot_data=slot)
     (run/'plan.json').write_text(json.dumps(plan, indent=2))
     config, data = run/'config/Cemu', run/'data/Cemu'
@@ -86,6 +90,7 @@ def prepare(args, run):
         x,y,z = chest['position']
         # Unrotated stone chest faces +Z; face it from the front.
         edited = patch_save(original, [x,y+0.1,z+1.7], 180.0, chest['hash_id'])
+        edited = reset_delivery_state(edited)
         (save/'0/game_data.sav').write_bytes(edited)
         for filename in ('caption.sav','caption.jpg'):
             (save/'0'/filename).write_bytes(archive.read(prefix+'0/'+filename))
@@ -122,7 +127,8 @@ def prepare(args, run):
         ET.SubElement(entry,'mapping').text=str(mapping); ET.SubElement(entry,'button').text=str(key)
     (config/'controllerProfiles').mkdir()
     ET.ElementTree(controller).write(config/'controllerProfiles/controller0.xml')
-    scenario = dict(slot_data=slot, location=location, item=item, actor='Item_Fruit_A',
+    scenario = dict(slot_data=slot, location=location, cases=cases, mode=args.items,
+                    item_timeout_seconds=args.item_timeout, progress_path=str(run/'progress.json'),
                     timeout_seconds=args.timeout, state_directory=str(run/'journal'), result_path=str(run/'probe.json'))
     (run/'scenario.json').write_text(json.dumps(scenario,indent=2))
     return titles/f'00050000/{title}/code/U-King.rpx', mlc
@@ -135,6 +141,9 @@ def main():
     parser.add_argument('--save-source',type=Path,default=ROOT/'out/botw-save-backup-20261005-014705.zip')
     parser.add_argument('--catalog',type=Path,default=ROOT/'out/chests-dlc-fixed.json')
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--items', choices=('simplified', 'partial', 'full'), default='simplified',
+                        help='One item, one item type per delivery category (all its tiers), or every item and tier')
+    parser.add_argument('--item-timeout', type=int, default=15, help='Maximum seconds per receipt; advances immediately on success')
     parser.add_argument('--timeout',type=int,default=600)
     parser.add_argument('--display', default=os.environ.get('DISPLAY'),
                         help='X display to use (defaults to DISPLAY; Vulkan acceleration is enabled)')
@@ -145,8 +154,9 @@ def main():
     lease=open('/tmp/botw-cemu-integration.lock','a')
     try: fcntl.flock(lease,fcntl.LOCK_EX|fcntl.LOCK_NB)
     except BlockingIOError: parser.error('Another integration runner is active')
-    if not args.display and not args.headless:
+    if not args.display and not args.headless and not args.prepare_only:
         parser.error('No X display found; set DISPLAY or pass --headless')
+    if not 1 <= args.item_timeout <= 120: parser.error('--item-timeout must be between 1 and 120 seconds')
     if not 30 <= args.timeout <= 1800: parser.error('--timeout must be between 30 and 1800 seconds')
     run=args.output.resolve(); run.mkdir(parents=True,exist_ok=False)
     children=[]; logs=[]; started=time.monotonic(); result={'passed':False}
@@ -188,6 +198,12 @@ def main():
         scenario=json.loads((run/'scenario.json').read_text());scenario['cemu_pid']=cemu.pid
         (run/'scenario.json').write_text(json.dumps(scenario))
         def command(*parts): return subprocess.run(parts,env=env,check=True,capture_output=True,timeout=10).stdout
+        probe=launch(['dotnet',str(ROOT/'src/client/bin/Debug/net10.0/BotWClient.dll'),
+                      '--cemu-test',str(run/'scenario.json')],'client',env)
+        def capture():
+            try: subprocess.run(['import','-window',window,str(run/'screen.png')], env=env,
+                                capture_output=True, timeout=2, check=False)
+            except (subprocess.TimeoutExpired, OSError): pass
         window=None
         while time.monotonic()-started<args.timeout:
             if cemu.poll() is not None: raise RuntimeError('Cemu exited during startup')
@@ -197,20 +213,24 @@ def main():
         if window is None: raise TimeoutError('Cemu window')
         command('xdotool','windowfocus',window)
         # Press A through title/Continue/save confirmation. The probe establishes gameplay readiness.
-        probe=None;last_capture=0
+        last_capture=0; last_press=0
         while time.monotonic()-started<args.timeout:
-            if cemu.poll() is not None: raise RuntimeError('Cemu exited')
-            command('xdotool','keydown','e');time.sleep(.5);command('xdotool','keyup','e')
-            if time.monotonic()-started>25 and probe is None:
-                probe=launch(['dotnet',str(ROOT/'src/client/bin/Debug/net10.0/BotWClient.dll'),
-                              '--cemu-test',str(run/'scenario.json')],'client',env)
+            if cemu.poll() is not None:
+                if (run/'probe.json').exists(): result=json.loads((run/'probe.json').read_text())
+                raise RuntimeError('Cemu exited; see client.log and data/Cemu/log.txt')
+            progress_path = run/'progress.json'
+            try: progress = json.loads(progress_path.read_text()) if progress_path.exists() else {}
+            except (ValueError, OSError): progress = {}
+            if (not progress.get('chest_checked') or progress.get('completed', 0) == 0) and time.monotonic()-last_press >= .7:
+                command('xdotool','keydown','e');time.sleep(.08);command('xdotool','keyup','e')
+                last_press=time.monotonic()
             if probe is not None and probe.poll() is not None:
-                command('import','-window',window,str(run/'screen.png'))
-                if probe.returncode: raise RuntimeError('Live probe failed; see client.log')
-                result=json.loads((run/'probe.json').read_text());return 0
+                result=json.loads((run/'probe.json').read_text())
+                if probe.returncode: return 1
+                capture();return 0
             if time.monotonic()-last_capture>10:
-                command('import','-window',window,str(run/'screen.png'));last_capture=time.monotonic()
-            time.sleep(1)
+                capture();last_capture=time.monotonic()
+            time.sleep(.1)
         raise TimeoutError('End-to-end deadline exceeded')
     except Exception as error:
         result['error']=str(error);print(error,file=sys.stderr);return 1

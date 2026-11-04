@@ -20,6 +20,8 @@ public static class GameOffsets
     public const uint PauseMenuItemListOffset = 0x4C;
     public const uint PauseMenuItemListHeadOffset = 0x50;
     public const uint PauseMenuItemListNodeOffset = 0x58;
+    public const uint PouchItemTypeOffset = 0x08;
+    public const uint PouchItemActiveOffset = 0x15;
     public const uint PouchItemValueOffset = 0x10;
     public const uint PouchItemNameOffset = 0x18;
     public const uint PlayerInfoActorOffset = 0x30;
@@ -28,9 +30,21 @@ public static class GameOffsets
     public const uint UnlockCritSection = 0x030BB69C;
     public const uint GetPouchItemType = 0x02EAE914;
     public const uint GetWeaponMaxValue = 0x0308812C;
+    public const uint PauseMenuChangeItem = 0x02EB8180;
     public const uint PauseMenuAddItem = 0x02EB3DF0;
     public const uint PauseMenuPostAddFood = 0x02EB58A8;
     public const uint PauseMenuSaveToGameData = 0x02EB3764;
+    public const uint GdtSetBoolTyped = 0x032163CC;
+    public const uint GdtSetS32Typed = 0x03216440;
+    public const uint MapManagerPtr = 0x104698F8;
+    public const uint MapLoadTowerCentres = 0x02E9EC9C;
+    public const uint MapLoadTowerScaleLevels = 0x02E9F044;
+    public const uint MapInitTowerRecords = 0x02E9F114;
+    public const uint GdtGetBoolByName = 0x0320FA78;
+    public const uint GdtSetBoolByName = 0x032002D4;
+    public const uint GdtSetS32ByName = 0x0320400C;
+    public const uint GdtGetS32ByName = 0x0320FADC;
+    public const uint IncreaseCurrentRupee = 0x02E17F58;
     public const uint GdtGetS32 = 0x02E146A4;
     public const uint GdtSetS32 = 0x02E14848;
     public const uint GdtGetFlagStaminaMax = 0x02E1AC6C;
@@ -179,6 +193,14 @@ public sealed class Mailbox(IMemory memory) : IDisposable
         return unchecked(baseAddr + (uint)scratchOffset);
     }
 
+    public uint ScratchResultAddress => unchecked(GuestAddress + (uint)Protocol.Get("scratch_offset") + 64);
+
+    public uint GameDataCore(uint manager, uint offset)
+    {
+        uint holder = ReadGuestWord(unchecked(manager + offset));
+        return holder == 0 ? 0 : ReadGuestWord(holder);
+    }
+
     public uint ReadGuestWord(uint guestAddress) => Protocol.Read(memory.ReadGuest(guestAddress, GuestAddress, 4));
 
     public (uint Sum, uint Count) MeasureNamedPouch(uint mgr, string actorName)
@@ -196,7 +218,15 @@ public sealed class Mailbox(IMemory memory) : IDisposable
             if (namePtr != 0 && memory.ReadGuest(namePtr, baseAddr, expected.Length).AsSpan().SequenceEqual(expected))
             {
                 int value = unchecked((int)Protocol.Read(memory.ReadGuest(unchecked(itemPtr + GameOffsets.PouchItemValueOffset), baseAddr, 4)));
-                if (value > 0) { sum = unchecked(sum + (uint)value); count++; }
+                uint type = ReadGuestWord(unchecked(itemPtr + GameOffsets.PouchItemTypeOffset));
+                if (type is 4 or 5 or 6)
+                {
+                    // Armor has no stack/durability value; native entries may use -1.
+                    // Count active pieces rather than treating their sentinel as empty.
+                    if (memory.ReadGuest(unchecked(itemPtr + GameOffsets.PouchItemActiveOffset), baseAddr, 1)[0] != 0)
+                    { sum++; count++; }
+                }
+                else if (value > 0) { sum = unchecked(sum + (uint)value); count++; }
             }
             node = Protocol.Read(memory.ReadGuest(unchecked(node + 4), baseAddr, 4));
         }

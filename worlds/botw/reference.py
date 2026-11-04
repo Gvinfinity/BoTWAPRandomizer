@@ -17,15 +17,38 @@ manual_locations = _read("manual/locations")["data"]
 categories = _read("manual/categories")
 game_data = _read("manual/game")
 
-# These mappings have distinct delivery semantics. A missing actor means the
-# native flag/progressive grant still needs implementing; never guess an actor.
+# Actor, wallet, stat and native-profile grants have distinct delivery semantics.
 native_items = {
     "Master Sword": ("Weapon_Sword_070", 1),
     "Hylian Shield": ("Weapon_Shield_030", 1),
     "Bow of Light": ("Weapon_Bow_071", 1),
     "Paraglider": ("PlayerStole2", 1),
     "Arrows (10)": ("NormalArrow", 10),
+    "Arrows (20)": ("NormalArrow", 20),
+    "Arrows (50)": ("NormalArrow", 50),
+    "Fire Arrows (15)": ("FireArrow", 15),
+    "Ice Arrows (15)": ("IceArrow", 15),
+    "Shock Arrows (15)": ("ElectricArrow", 15),
+    "Bomb Arrows (15)": ("BombArrow_A", 15),
+    "Ancient Arrows (5)": ("AncientArrow", 5),
+    "Royal Broadsword": ("Weapon_Sword_024", 1),
+    "Royal Shield": ("Weapon_Shield_022", 1),
+    "Royal Bow": ("Weapon_Bow_036", 1),
+    "Savage Lynel Shield": ("Weapon_Shield_018", 1),
+    "Savage Lynel Bow": ("Weapon_Bow_032", 1),
+    "Diamond": ("Item_Ore_A", 1),
+    "Wood Bundles (10)": ("Obj_FireWoodBundle", 10),
+    "Farosh's Scale": ("Item_Enemy_53", 1),
+    "Dinraal's Scale": ("Item_Enemy_38", 1),
+    "Naydra's Scale": ("Item_Enemy_49", 1),
 }
+
+# Base armor IDs verified against EU English messages and ActorInfo rank metadata.
+native_items.update(_read("native_armor"))
+
+rupee_items = {"50 Rupees": 50, "100 Rupees": 100, "200 Rupees": 200, "Greg the Green Rupee": 1}
+
+native_grants = _read("native_grants")
 
 progression_items = {
     "Heart Container": "heart_container", "Stamina Vessel": "stamina_vessel",
@@ -38,9 +61,13 @@ for index, item in enumerate(manual_items):
     if item["name"] in native_items:
         actor, quantity = native_items[item["name"]]
         entry.update(delivery={"kind": "actor", "actor": actor, "quantity": quantity})
+    elif item["name"] in rupee_items:
+        entry.update(delivery={"kind": "rupees", "name": item["name"], "quantity": rupee_items[item["name"]]})
     elif item["name"] in progression_items:
         entry.update(delivery={"kind": "progression", "name": item["name"],
                                "command": progression_items[item["name"]], "quantity": 1})
+    elif item["name"] in native_grants:
+        entry.update(delivery={"kind": "native", "name": item["name"], "quantity": 1})
     else:
         entry.update(delivery={"kind": "unimplemented", "name": item["name"]})
     item_data[item["name"]] = entry

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Archipelago.MultiClient.Net" Version="6.3.0" />
+    <EmbeddedResource Include="../../worlds/botw/data/native_grants.json" LogicalName="BotWClient.native_grants.json" />
     <EmbeddedResource Include="../../worlds/botw/static/protocol.json" LogicalName="BotWClient.protocol.json" />
   </ItemGroup>
 
