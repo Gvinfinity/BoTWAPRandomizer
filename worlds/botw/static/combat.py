@@ -34,7 +34,7 @@ def validate_watches(dump, locations):
 
 
 def hook_assembly(locations, all_ids):
-    encounters = [e for e in locations if e.get('kind') in {'miniboss', 'boss', 'shrine'}]
+    encounters = [e for e in locations if e.get('kind') in {'miniboss', 'boss', 'shrine', 'objective'}]
     if not encounters:
         return ''
     offsets = {value: index * 8 + 0x5054 for index, value in enumerate(sorted(all_ids))}

@@ -7,8 +7,8 @@ from botw_static.protocol import seed_fingerprint, PROTOCOL as P
 from test_hook_protocol import PPC
 
 
-def watch_vm(count=2):
-    entries = [dict(id=0xC1000000+i, kind='miniboss' if i % 2 == 0 else 'boss',
+def watch_vm(count=2, kind=None):
+    entries = [dict(id=0xC1000000+i, kind=kind or ('miniboss' if i % 2 == 0 else 'boss'),
                     watch_flag=f'PhysicalDeath{i}', watch_type='bool' if i % 2 == 0 else 's32', watch_threshold=1)
                for i in range(count)]
     ids = [e['id'] for e in entries]
@@ -42,6 +42,16 @@ def watch_vm(count=2):
         r[3] = result
     vm.native_call = native
     return vm
+
+
+def test_native_goal_objective_waits_for_its_completion_flag():
+    vm = watch_vm(count=1, kind='objective')
+    vm.run('_AP_PollKillChecks'); vm.run('_AP_FlushPendingChecks')
+    assert vm.word(20) == 0
+    vm.values[0] = 1
+    vm.run('_AP_PollKillChecks'); vm.run('_AP_FlushPendingChecks')
+    assert vm.word(20) == 1
+    assert vm.word(P['outgoing_offset'] + 8) == 0xC1000000
 
 
 def test_native_death_watches_cache_indices_and_ignore_unrelated_progression():

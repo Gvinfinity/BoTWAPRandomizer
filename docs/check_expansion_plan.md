@@ -1,10 +1,11 @@
 # Shrine, tower and encounter checks
 
-The world now supports independent `shrine_checks`, `tower_checks`,
-`miniboss_checks` and `boss_checks` options. They default on. Existing tower-item
-region requirements remain intact; every physical tower check also explicitly
-requires its own tower item. The Plateau tower check is omitted when its tutorial
-is skipped.
+The world now supports independent `shrine_sanity`, `tower_sanity`,
+`miniboss_sanity` and `boss_sanity` options. They default on. `chest_sanity`
+adds mapped overworld chests; mapped shrine chests remain included. Tower items
+reveal maps without locking access to regions or their tower checks. The Plateau
+tower check is omitted when its tutorial is skipped. Boss checks required by the
+selected goal remain enabled with `boss_sanity` off.
 
 The supported catalog contains 120 base-game shrine completions, fifteen towers,
 84 base-game minibosses (40 Talus, 40 Hinox/Stalnox and four Molduga), and six

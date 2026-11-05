@@ -487,12 +487,67 @@ internal static class TestHarness
         Console.WriteLine("PASS: real AP SDK login, item delivery and checks over WSS with certificate validation");
     }
 
+    private static void TestGoalPrerequisites()
+    {
+        const uint goal = 0xC2000000, prerequisite = goal + 1;
+        using var sim = new GuestSimulator();
+        using var mailbox = new Mailbox(sim);
+        ConfigureMailbox(sim, mailbox, goal);
+        mailbox.SetWord(Protocol.Get("location_count_offset"), 2);
+        mailbox.SetWord(Protocol.Get("location_table_offset") + 8, prerequisite);
+        var data = JsonSerializer.SerializeToElement(new {
+            protocol_version = 2, player = 1, seed = "test",
+            seed_fingerprint = new string('0', 32), check_actor_prefix = "AP_Check_",
+            goal_location_id = goal, goal_required_location_ids = new[] { prerequisite },
+            locations = new Dictionary<string, string> {
+                [goal.ToString()] = $"AP_Check_{goal:X8}",
+                [prerequisite.ToString()] = $"AP_Check_{prerequisite:X8}"
+            }, items = new { }
+        });
+        var contract = new SlotContract(data, mailbox, 1, "test", [goal, prerequisite]);
+        var server = new Server();
+        string directory = Path.Combine(Path.GetTempPath(), "botw-goal-test-" + Guid.NewGuid().ToString("N"));
+        void Emit(uint index, uint location)
+        {
+            int offset = Protocol.Get("outgoing_offset") + (int)index * 16;
+            mailbox.SetWord(offset, index);
+            mailbox.SetWord(offset + 4, 0);
+            mailbox.SetWord(offset + 8, location);
+            mailbox.SetWord(offset + 12, 0);
+            mailbox.SetWord(20, index + 1);
+        }
+        try
+        {
+            using (var bridge = new ClientBridge(mailbox, contract, directory, 0, 1))
+            {
+                Emit(0, goal); bridge.Pump(server);
+                Require(server.Sent.Contains(goal) && server.GoalReports == 0,
+                        "Early Dark Beast check incorrectly reported Victory");
+            }
+            using (var bridge = new ClientBridge(mailbox, contract, directory, 0, 1))
+            {
+                bridge.Pump(server);
+                Require(server.GoalReports == 0, "Reconnect bypassed missing goal prerequisites");
+                Emit(1, prerequisite); bridge.Pump(server);
+                Require(server.Sent.Contains(prerequisite) && server.GoalReports == 1,
+                        "Completing the last prerequisite did not report Victory");
+            }
+            using (var bridge = new ClientBridge(mailbox, contract, directory, 0, 1))
+            {
+                bridge.Pump(server);
+                Require(server.GoalReports == 2, "Completed goal was not replayed after reconnect");
+            }
+        }
+        finally { if (Directory.Exists(directory)) Directory.Delete(directory, true); }
+    }
+
     public static int Run(string? tlsCertificate = null)
     {
         string directory = Path.Combine(Path.GetTempPath(), "botw-ap-client-test-" + Guid.NewGuid().ToString("N"));
         try
         {
             TestEndpoints();
+            TestGoalPrerequisites();
             const uint location = 0xB0123456, swordItem = 0xB0100001, unsupported = 0xB0100002,
                        arrowItem = 0xB0100003, foodItem = 0xB0100004, keyItem = 0xB0100005, badActorItem = 0xB0100006;
 

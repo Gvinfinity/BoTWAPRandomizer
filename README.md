@@ -28,6 +28,45 @@ The patcher uses extracted game content as input; it does not include game files
 
 ## Install and play on Cemu
 
+Set the goal in your Archipelago player YAML:
+
+```yaml
+name: Player
+game: Breath of the Wild
+Breath of the Wild:
+  goal: all_divine_beasts_and_trials
+  chest_sanity: true
+  shrine_sanity: true
+  tower_sanity: true
+  miniboss_sanity: true
+  boss_sanity: true
+  enable_the_master_trials_dlc: true
+  trial_of_the_sword: false
+```
+
+| `goal` value | Required checks for Victory |
+| --- | --- |
+| `dark_beast_ganon` | Dark Beast Ganon only |
+| `all_divine_beasts` | All four Blight defeats and Dark Beast Ganon |
+| `all_divine_beasts_and_trials` (default) | All four Blight defeats, Trial of the Sword completion if both the trial and its DLC are enabled, and Dark Beast Ganon |
+| `all_checks` | Every enabled check, including Dark Beast Ganon |
+
+Beast goals keep the four Blight checks enabled even with `boss_sanity: false`.
+Set `trial_of_the_sword: false` to exclude all trial chests and its completion
+check, including its Victory requirement. Other Master Trials DLC content remains
+enabled. The option defaults to `true` and only takes effect with
+`enable_the_master_trials_dlc: true`; it does not block entering the trial in-game.
+All five Sanity options default to `true`. ChestSanity adds overworld chests;
+mapped shrine chests remain enabled. ShrineSanity adds shrine completion rewards,
+TowerSanity adds tower activations, and MinibossSanity/BossSanity add defeats.
+Currently, keep `chest_sanity: true` with the default starting inventory: disabling
+it removes all initially reachable checks and can prevent seed generation.
+For older YAMLs, rename `chest_shuffle` to `chest_sanity`, and replace the
+`_checks` suffix with `_sanity` on `shrine`, `tower`, `miniboss`, and `boss`.
+The goal controls generation logic and the client's Victory report; it does not
+prevent an early Ganon fight. Use the updated client and generate a new seed and
+Graphic Pack after changing this option.
+
 1. Install Breath of the Wild for Wii U in Cemu and apply the update to **v1.5.0 (v208)**. Keep your own legally obtained game, update, and DLC files.
 2. Generate an Archipelago seed using the BotW world and download that player's `.apbotw` file.
 3. Extract the Wii U game's base and v208 update content from your own copy. Install the patcher dependencies once (Python 3.12 is recommended):

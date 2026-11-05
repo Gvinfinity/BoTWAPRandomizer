@@ -10,6 +10,7 @@ public sealed class SlotContract
 {
     public string Fingerprint { get; }
     public long? GoalLocationId { get; }
+    public HashSet<long> GoalRequiredLocationIds { get; } = [];
     public HashSet<long> Locations { get; } = [];
     public Dictionary<long, int> StartingInventory { get; } = [];
     private readonly Dictionary<long, JsonElement> items = [];
@@ -36,6 +37,16 @@ public sealed class SlotContract
             long goal = goalElement.GetInt64();
             if (!Locations.Contains(goal)) throw new InvalidDataException("Goal location is absent from the seed's location table");
             GoalLocationId = goal;
+        }
+        if (data.TryGetProperty("goal_required_location_ids", out var requiredGoals))
+        {
+            foreach (var value in requiredGoals.EnumerateArray())
+            {
+                long id = value.GetInt64();
+                if (!Locations.Contains(id) || !GoalRequiredLocationIds.Add(id))
+                    throw new InvalidDataException("Invalid or duplicate goal prerequisite location");
+            }
+            if (GoalLocationId is null) throw new InvalidDataException("Goal prerequisites require a goal location");
         }
         if (!Locations.SetEquals(mailbox.Validate()) || !Locations.SetEquals(serverLocations))
             throw new InvalidDataException("Server, slot data, and hook location tables disagree");
@@ -280,7 +291,8 @@ public sealed partial class ClientBridge : IDisposable
             if (state.Checks.Count != 0) server.SendChecks(state.Checks.Order().ToArray());
             // The goal status is replayed on reconnect after checks, so the server
             // always observes the goal location before CLIENT_GOAL.
-            if (contract.GoalLocationId is { } goal && state.Checks.Contains(goal)) server.SendGoal();
+            if (contract.GoalLocationId is { } goal && state.Checks.Contains(goal)
+                && contract.GoalRequiredLocationIds.IsSubsetOf(state.Checks)) server.SendGoal();
             checksDirty = false;
         }
         if (!server.Connected) return;

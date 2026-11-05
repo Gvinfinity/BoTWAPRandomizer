@@ -21,11 +21,12 @@ def validate_plan(plan: dict) -> dict:
         raise ValueError("A patch plan must contain at least one check")
     from .completions import catalog
     from .combat import catalog as combat_catalog
-    completion_bindings = {e['id']: e for e in [*catalog()['locations'], *combat_catalog()['locations']]}
+    from .objectives import SWORD_TRIAL
+    completion_bindings = {e['id']: e for e in [*catalog()['locations'], *combat_catalog()['locations'], SWORD_TRIAL]}
     for entry in plan["locations"]:
         name = check_actor_name(entry["id"])
         kind = entry.get('kind', 'chest')
-        if kind in {'shrine', 'tower', 'miniboss', 'boss'}:
+        if kind in {'shrine', 'tower', 'miniboss', 'boss', 'objective'}:
             binding = completion_bindings.get(entry['id'])
             # Event identity and tower placement checksums are trusted catalog
             # bindings; a plan may add item placements, but cannot redirect them.

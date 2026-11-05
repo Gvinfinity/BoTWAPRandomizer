@@ -73,7 +73,7 @@ def apply_plan(plan: dict, dump, output: str) -> dict:
     files = {}
     for outer, members in sorted(replacements.items()):
         files[outer] = replace_members(dump.read(outer), members)
-    token_ids = [entry['id'] for entry in plan['locations'] if entry.get('kind') not in {'miniboss', 'boss'}]
+    token_ids = [entry['id'] for entry in plan['locations'] if entry.get('kind') not in {'miniboss', 'boss', 'objective'}]
     actor_files, _ = build_check_actors(dump, token_ids)
     files.update(actor_files)
     files.update(build_rune_terminal_actor(dump, files['content/Actor/ActorInfo.product.sbyml']))

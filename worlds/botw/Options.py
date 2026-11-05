@@ -1,40 +1,69 @@
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, PerGameCommonOptions, Toggle
+from Options import Choice, DefaultOnToggle, PerGameCommonOptions, Toggle
 
 
-class ChestShuffle(DefaultOnToggle):
+class Goal(Choice):
+    """Choose the checks required for Victory, always including Dark Beast Ganon.
+
+    All Divine Beasts requires the four Blight defeat checks even with Boss
+    Defeat Checks disabled. All Divine Beasts and Trials also requires Trial of
+    the Sword completion when both it and The Master Trials DLC are enabled. All Checks
+    requires every enabled check. Requirements delay the AP goal report;
+    they do not physically prevent an early Ganon fight.
+    """
+    display_name = "Goal"
+    option_dark_beast_ganon = 0
+    option_all_divine_beasts = 1
+    option_all_divine_beasts_and_trials = 2
+    option_all_checks = 3
+    default = 2
+
+
+class ChestSanity(DefaultOnToggle):
     """Include the mapped overworld chests in addition to mapped shrine chests."""
-    display_name = "Overworld Chest Shuffle"
+    display_name = "ChestSanity"
 
 
-class ShrineChecks(DefaultOnToggle):
+class ShrineSanity(DefaultOnToggle):
     """Replace base-game monk Spirit Orb rewards with Archipelago checks."""
-    display_name = "Shrine Completion Checks"
+    display_name = "ShrineSanity"
 
 
-class TowerChecks(DefaultOnToggle):
+class TowerSanity(DefaultOnToggle):
     """Physical tower terminal checks, reachable without receiving a tower item.
 
     The Plateau tower check is omitted when Skip Great Plateau Tutorial is on.
     Receiving a tower item never completes its physical check.
     """
-    display_name = "Tower Activation Checks"
+    display_name = "TowerSanity"
 
 
-class MinibossChecks(DefaultOnToggle):
+class MinibossSanity(DefaultOnToggle):
     """Include individual Hinox/Stalnox, Talus and Molduga defeats."""
-    display_name = "Miniboss Defeat Checks"
+    display_name = "MinibossSanity"
 
 
-class BossChecks(DefaultOnToggle):
-    """Include optional boss defeats. Dark Beast Ganon remains as the required goal check."""
-    display_name = "Boss Defeat Checks"
+class BossSanity(DefaultOnToggle):
+    """Include optional boss defeats. Bosses required by the selected goal
+    remain enabled even when this option is disabled.
+    """
+    display_name = "BossSanity"
 
 
 class MasterTrials(Toggle):
     """Include mapped Master Trials DLC checks/items. Requires a DLC catalog."""
     display_name = "The Master Trials DLC"
+
+
+class TrialOfTheSword(DefaultOnToggle):
+    """Include Trial of the Sword chests and its completion check.
+
+    Requires The Master Trials DLC. Disable to remove these checks and the
+    trial's Victory requirement while retaining the DLC's other content.
+    This changes the randomizer's checks and logic, not physical access to the trial.
+    """
+    display_name = "Trial of the Sword"
 
 
 class ChampionsBallad(Toggle):
@@ -54,13 +83,15 @@ class SkipGreatPlateau(DefaultOnToggle):
 
 @dataclass
 class BotWOptions(PerGameCommonOptions):
+    goal: Goal
     skip_great_plateau: SkipGreatPlateau
-    chest_shuffle: ChestShuffle
-    shrine_checks: ShrineChecks
-    tower_checks: TowerChecks
-    miniboss_checks: MinibossChecks
-    boss_checks: BossChecks
+    chest_sanity: ChestSanity
+    shrine_sanity: ShrineSanity
+    tower_sanity: TowerSanity
+    miniboss_sanity: MinibossSanity
+    boss_sanity: BossSanity
     enable_the_master_trials_dlc: MasterTrials
+    trial_of_the_sword: TrialOfTheSword
     enable_the_champions_ballad_dlc: ChampionsBallad
 
 

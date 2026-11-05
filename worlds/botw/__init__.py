@@ -8,7 +8,7 @@ from worlds.AutoWorld import World, WebWorld
 
 from .Items import BotWItem, botw_items, classification
 from .Locations import botw_locations, chest_data, completion_data, combat_data
-from .Options import BotWOptions
+from .Options import BotWOptions, Goal
 from .Patch import BotWPatch
 from .Regions import create_regions
 from .Rules import set_rules
@@ -16,6 +16,7 @@ from .reference import categories, item_data, item_groups
 from .static.checks import PROTOCOL_VERSION, check_actor_name
 from .static.protocol import MAILBOX_VERSION, seed_fingerprint
 from .static.starting import starting_state
+from .static.objectives import BEAST_DEFEATS, SWORD_TRIAL
 
 
 class BotWWebWorld(WebWorld):
@@ -51,21 +52,35 @@ class BotWWorld(World):
                                  (self.options.enable_the_champions_ballad_dlc, "The Champions' Ballad DLC")):
             if option and not any(category in entry.get("category", []) for entry in chest_data):
                 raise ValueError(f"{category} requires a chest catalog discovered with --dlc")
+        self.trial_of_the_sword_enabled = bool(self.options.enable_the_master_trials_dlc
+                                               and self.options.trial_of_the_sword)
         self.active_chests = [entry for entry in chest_data if self.category_enabled(entry)
-                              and (self.options.chest_shuffle or "Overworld Chests" not in entry.get("category", []))]
+                              and (self.trial_of_the_sword_enabled
+                                   or not entry['region'].startswith('Trial of the Sword ('))
+                              and (self.options.chest_sanity or "Overworld Chests" not in entry.get("category", []))]
         if not self.active_chests:
             raise ValueError("No mapped checks; create worlds/botw/data/chests.json using the static patcher")
         self.active_completions = [entry for entry in completion_data
-                                   if (entry["kind"] == "shrine" and self.options.shrine_checks)
-                                   or (entry["kind"] == "tower" and self.options.tower_checks
+                                   if (entry["kind"] == "shrine" and self.options.shrine_sanity)
+                                   or (entry["kind"] == "tower" and self.options.tower_sanity
                                        and not (entry["tower"] == 7 and self.options.skip_great_plateau))]
+        required_bosses = {'Dark Beast Ganon - Defeated'}
+        if self.options.goal in (Goal.option_all_divine_beasts, Goal.option_all_divine_beasts_and_trials):
+            required_bosses.update(BEAST_DEFEATS)
         self.active_combat = [entry for entry in combat_data if self.category_enabled(entry)
-                              and ((entry['kind'] == 'miniboss' and self.options.miniboss_checks)
-                                   or (entry['kind'] == 'boss' and self.options.boss_checks)
-                                   # Dark Beast is also the physical completion signal, so it
-                                   # remains enabled even when optional boss checks are off.
-                                   or entry['name'] == 'Dark Beast Ganon - Defeated')]
-        self.active_locations = [*self.active_chests, *self.active_completions, *self.active_combat]
+                              and ((entry['kind'] == 'miniboss' and self.options.miniboss_sanity)
+                                   or (entry['kind'] == 'boss' and self.options.boss_sanity)
+                                   or entry['name'] in required_bosses)]
+        self.active_objectives = [dict(SWORD_TRIAL)] if self.trial_of_the_sword_enabled else []
+        self.active_locations = [*self.active_chests, *self.active_completions, *self.active_combat, *self.active_objectives]
+        if self.options.goal == Goal.option_all_checks:
+            self.goal_requirements = [entry for entry in self.active_locations
+                                      if entry['name'] != 'Dark Beast Ganon - Defeated']
+        else:
+            self.goal_requirements = [entry for entry in self.active_locations
+                                      if entry['name'] in required_bosses - {'Dark Beast Ganon - Defeated'}
+                                      or (self.options.goal == Goal.option_all_divine_beasts_and_trials
+                                          and entry.get('kind') == 'objective')]
         self.starting_state = starting_state(bool(self.options.skip_great_plateau))
         # The static patch initializes these exact defaults before a new save.
         for name, count in self.starting_state["logical_inventory"].items():
@@ -117,9 +132,10 @@ class BotWWorld(World):
                                    for name, count in self.starting_state["logical_inventory"].items()},
             "check_actor_prefix": "AP_Check_",
             "check_actor_id_format": "8 uppercase hexadecimal digits",
-            "goal": "defeat_dark_beast_ganon",
+            "goal": self.options.goal.current_key,
             "goal_location_id": next(entry["id"] for entry in self.active_combat
                                       if entry["name"] == "Dark Beast Ganon - Defeated"),
+            "goal_required_location_ids": [entry['id'] for entry in self.goal_requirements],
             "locations": {str(entry["id"]): check_actor_name(entry["id"]) for entry in self.active_locations},
             "items": {str(entry["id"]): entry["delivery"] for entry in item_data.values()},
         }

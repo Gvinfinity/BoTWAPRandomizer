@@ -16,6 +16,31 @@ outside the verified beta scope.
 
 ## Chest identity and hook contract
 
+### Goal requirements
+
+The YAML `goal` option controls Victory: `dark_beast_ganon`,
+`all_divine_beasts`, `all_divine_beasts_and_trials` (default), or `all_checks`.
+All choices require Dark Beast Ganon's defeat. The Beast goals also require
+the four Blight defeat checks. With the default goal, The Master Trials DLC,
+and `trial_of_the_sword: true` (default), Victory also requires the new
+`Trial of the Sword - Completed` check, watched through the saved
+`100enemy_Clear_Senior` flag set by the final trial completion event.
+Receiving Beast Cleared items or Master Sword upgrades does not complete these
+defeat/trial checks. The four Blight checks remain enabled with boss checks off
+when required by a Beast goal. `all_checks` requires every check selected by
+the check/DLC options. See the [README YAML example](../README.md).
+
+The APWorld applies these prerequisites to goal reachability, and the client
+requires their journaled check IDs before sending CLIENT_GOAL. Defeating Dark
+Beast early is recorded, but Victory is withheld until all prerequisites are
+complete; this does not physically block the Ganon encounter. Use the updated
+client and regenerate the seed and Graphic Pack. Old seeds retain their original
+goal contract. With both DLC options enabled, the catalog now selects 415 checks
+with default options, including the trial completion reward.
+
+Use `trial_of_the_sword: false` to remove the trial chests and completion check
+from generation and goal requirements while retaining other enabled DLC content.
+
 Each tracked chest drops a distinct actor named `AP_Check_XXXXXXXX`, where
 `XXXXXXXX` is its unsigned 32-bit **AP location ID**, as eight uppercase hex
 digits. For example, location `0xB1234567` drops `AP_Check_B1234567`. The visible
@@ -103,7 +128,7 @@ game: Breath of the Wild
 Breath of the Wild:
   progression_balancing: 50
   accessibility: full
-  chest_shuffle: true
+  chest_sanity: true
   skip_great_plateau: true
   enable_the_master_trials_dlc: false
   enable_the_champions_ballad_dlc: false

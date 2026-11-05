@@ -116,25 +116,120 @@ class TestCompletionChecks(BotWTestBase):
 
 
 class TestCompletionChecksOff(BotWTestBase):
-    options = {'shrine_checks': False, 'tower_checks': False, 'miniboss_checks': False, 'boss_checks': False}
+    options = {'shrine_sanity': False, 'tower_sanity': False, 'miniboss_sanity': False, 'boss_sanity': False}
 
     def test_no_completion_checks(self):
         self.assertEqual(self.world.active_completions, [])
-        self.assertEqual(len(self.world.active_locations), len(self.world.active_chests) + 1)
-        self.assertEqual(self.world.active_combat[0]['name'], 'Dark Beast Ganon - Defeated')
-        self.assertEqual(self.world.fill_slot_data()['goal_location_id'], self.world.active_combat[0]['id'])
+        self.assertEqual(len(self.world.active_locations), len(self.world.active_chests) + 5)
+        self.assertEqual(len(self.world.goal_requirements), 4)
+        goal = next(e for e in self.world.active_combat if e['name'] == 'Dark Beast Ganon - Defeated')
+        self.assertEqual(self.world.fill_slot_data()['goal_location_id'], goal['id'])
 
 
-class TestShrineChecksOnly(BotWTestBase):
-    options = {'shrine_checks': True, 'tower_checks': False}
+class TestGoalPrerequisites(BotWTestBase):
+    def test_bow_and_paraglider_cannot_unlock_victory(self):
+        for name in ('Paraglider', 'Bow of Light'):
+            self.multiworld.state.collect(self.world.create_item(name))
+        self.assertFalse(self.world.get_location('Dark Beast Ganon - Defeated').can_reach(self.multiworld.state))
+        self.assertFalse(self.world.get_location('Dark Beast Ganon Defeated').can_reach(self.multiworld.state))
+
+    def test_beast_controls_are_required_for_goal(self):
+        self.collect_all_but('Vah Ruta Controls')
+        self.assertFalse(self.world.get_location('Dark Beast Ganon Defeated').can_reach(self.multiworld.state))
+        self.multiworld.state.collect(self.world.create_item('Vah Ruta Controls'))
+        self.assertTrue(self.world.get_location('Dark Beast Ganon Defeated').can_reach(self.multiworld.state))
+
+
+class TestDlcGoalPrerequisites(TestGoalPrerequisites):
+    options = {'enable_the_master_trials_dlc': True}
+
+    def test_trial_is_a_native_completion_objective(self):
+        objective = self.world.active_objectives[0]
+        self.assertEqual(objective['watch_flag'], '100enemy_Clear_Senior')
+        self.assertIn(objective['id'], self.world.fill_slot_data()['goal_required_location_ids'])
+        self.collect_all_but('Heart Container')
+        self.assertFalse(self.world.get_location('Dark Beast Ganon Defeated').can_reach(self.multiworld.state))
+
+
+class TestDarkBeastOnlyGoal(BotWTestBase):
+    options = {'goal': 'dark_beast_ganon', 'boss_sanity': False,
+               'enable_the_master_trials_dlc': True, 'miniboss_sanity': False}
+
+    def test_goal_has_no_beast_or_trial_prerequisites(self):
+        slot = self.world.fill_slot_data()
+        self.assertEqual(slot['goal'], 'dark_beast_ganon')
+        self.assertEqual(slot['goal_required_location_ids'], [])
+        self.assertEqual([e['name'] for e in self.world.active_combat], ['Dark Beast Ganon - Defeated'])
+        for name in ('Paraglider', 'Bow of Light'):
+            self.multiworld.state.collect(self.world.create_item(name))
+        self.assertTrue(self.world.get_location('Dark Beast Ganon Defeated').can_reach(self.multiworld.state))
+
+
+class TestBeastsOnlyGoal(TestGoalPrerequisites):
+    options = {'goal': 'all_divine_beasts', 'enable_the_master_trials_dlc': True,
+               'boss_sanity': False}
+
+    def test_trial_remains_optional_and_beasts_remain_required(self):
+        self.assertEqual(len(self.world.goal_requirements), 4)
+        self.assertTrue(all(entry['kind'] == 'boss' for entry in self.world.goal_requirements))
+        self.assertEqual(sum(e['kind'] == 'boss' for e in self.world.active_combat), 5)
+
+
+class TestAllChecksGoal(BotWTestBase):
+    options = {'goal': 'all_checks', 'enable_the_master_trials_dlc': True}
+
+    def test_every_enabled_check_is_required_except_the_goal_itself(self):
+        slot = self.world.fill_slot_data()
+        self.assertEqual(set(slot['goal_required_location_ids']),
+                         {e['id'] for e in self.world.active_locations} - {slot['goal_location_id']})
+        self.collect_all_but('Magnesis')
+        self.assertFalse(self.world.get_location('Dark Beast Ganon Defeated').can_reach(self.multiworld.state))
+        self.multiworld.state.collect(self.world.create_item('Magnesis'))
+        self.assertTrue(self.world.get_location('Dark Beast Ganon Defeated').can_reach(self.multiworld.state))
+
+
+class TestTrialOfTheSwordDisabled(BotWTestBase):
+    options = {'enable_the_master_trials_dlc': True, 'trial_of_the_sword': False}
+
+    def test_trial_checks_and_goal_requirement_are_removed(self):
+        self.assertFalse(self.world.trial_of_the_sword_enabled)
+        self.assertEqual(self.world.active_objectives, [])
+        self.assertFalse(any(e['region'].startswith('Trial of the Sword (')
+                             for e in self.world.active_locations))
+        self.assertEqual(len(self.world.goal_requirements), 4)
+        self.collect_all_but('Heart Container')
+        self.assertTrue(self.world.get_location('Dark Beast Ganon Defeated').can_reach(self.multiworld.state))
+
+    def test_other_master_trials_items_remain_enabled(self):
+        pool = {item.name for item in self.multiworld.itempool}
+        self.assertIn('Travel Medallion', pool)
+        self.assertIn('Progressive Master Sword', pool)
+
+
+class TestTrialDisabledWithAllChecksGoal(TestTrialOfTheSwordDisabled):
+    options = {'goal': 'all_checks', 'enable_the_master_trials_dlc': True,
+               'trial_of_the_sword': False}
+
+    def test_trial_checks_and_goal_requirement_are_removed(self):
+        self.assertFalse(self.world.trial_of_the_sword_enabled)
+        self.assertEqual(self.world.active_objectives, [])
+        self.assertFalse(any(e['region'].startswith('Trial of the Sword (')
+                             for e in self.world.active_locations))
+        slot = self.world.fill_slot_data()
+        self.assertEqual(set(slot['goal_required_location_ids']),
+                         {e['id'] for e in self.world.active_locations} - {slot['goal_location_id']})
+
+
+class TestShrineSanityOnly(BotWTestBase):
+    options = {'shrine_sanity': True, 'tower_sanity': False}
 
     def test_only_shrine_completions(self):
         self.assertEqual(len(self.world.active_completions), 120)
         self.assertTrue(all(e['kind'] == 'shrine' for e in self.world.active_completions))
 
 
-class TestTowerChecksOnly(BotWTestBase):
-    options = {'shrine_checks': False, 'tower_checks': True, 'skip_great_plateau': False}
+class TestTowerSanityOnly(BotWTestBase):
+    options = {'shrine_sanity': False, 'tower_sanity': True, 'skip_great_plateau': False}
 
     def test_all_towers_and_plateau_access_without_its_item(self):
         self.assertEqual(len(self.world.active_completions), 15)
@@ -168,10 +263,10 @@ class TestDlcOptionsOn(BotWTestBase):
         self.assertIn('One-Hit Obliterator', pool)
         self.assertIn('Master Cycle Zero', pool)
         self.assertEqual(sum("The Master Trials DLC" in entry.get('category', [])
-                             for entry in self.world.active_locations), 7)
+                             for entry in self.world.active_locations), 8)
         self.assertEqual(sum("The Champions' Ballad DLC" in entry.get('category', [])
                              for entry in self.world.active_locations), 18)
-        self.assertEqual(len(self.world.active_locations), 414)
+        self.assertEqual(len(self.world.active_locations), 415)
 
 
 class TestMasterTrialsOnly(BotWTestBase):

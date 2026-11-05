@@ -1,7 +1,7 @@
 from worlds.generic.Rules import set_rule
 
 from .logic import compile_requirement
-from .reference import item_data, item_groups, manual_locations, manual_regions
+from .reference import item_data, item_groups, manual_regions
 
 
 def set_rules(world):
@@ -31,6 +31,9 @@ def set_rules(world):
             original = requirement
             requirement = lambda state, original=original, traversal=traversal: original(state) and traversal(state)
         set_rule(world.get_location(entry["name"]), requirement)
-    victory = next(entry for entry in manual_locations if entry.get("victory"))
-    set_rule(world.get_location("Dark Beast Ganon Defeated"), rule(victory["requires"]))
+    dark_beast = world.get_location('Dark Beast Ganon - Defeated')
+    combat_rule = dark_beast.access_rule
+    required = tuple(world.get_location(entry['name']) for entry in world.goal_requirements)
+    set_rule(dark_beast, lambda state: combat_rule(state) and all(location.can_reach(state) for location in required))
+    set_rule(world.get_location("Dark Beast Ganon Defeated"), lambda state: dark_beast.can_reach(state))
     world.multiworld.completion_condition[world.player] = lambda state: state.has("Victory", world.player)
