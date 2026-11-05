@@ -1,0 +1,2055 @@
+{
+  "version": 1,
+  "locations": [
+    {
+      "name": "Tah Muhl Shrine",
+      "region": "Eldin",
+      "category": [
+        "Eldin Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274048,
+      "kind": "shrine",
+      "dungeon": "Dungeon000",
+      "watch_flag": "Clear_Dungeon000",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Jee Noh Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "id": 3222274049,
+      "kind": "shrine",
+      "dungeon": "Dungeon001",
+      "watch_flag": "Clear_Dungeon001",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Sah Dahaj Shrine",
+      "region": "Eldin",
+      "category": [
+        "Eldin Shrines"
+      ],
+      "requires": "",
+      "id": 3222274050,
+      "kind": "shrine",
+      "dungeon": "Dungeon002",
+      "watch_flag": "Clear_Dungeon002",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Hawa Koth Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Magnesis| AND |Progressive Stasis|",
+      "id": 3222274051,
+      "kind": "shrine",
+      "dungeon": "Dungeon003",
+      "watch_flag": "Clear_Dungeon003",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Zalta Wa Shrine",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Hyrule Ridge Shrines"
+      ],
+      "requires": "",
+      "id": 3222274052,
+      "kind": "shrine",
+      "dungeon": "Dungeon004",
+      "watch_flag": "Clear_Dungeon004",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ne'ez Yohma Shrine",
+      "region": "Lanayru",
+      "category": [
+        "Lanayru Shrines"
+      ],
+      "requires": "|Cryonis|",
+      "id": 3222274053,
+      "kind": "shrine",
+      "dungeon": "Dungeon005",
+      "watch_flag": "Clear_Dungeon005",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Yah Rin Shrine",
+      "region": "Faron",
+      "category": [
+        "Faron Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274054,
+      "kind": "shrine",
+      "dungeon": "Dungeon006",
+      "watch_flag": "Clear_Dungeon006",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Bosh Kala Shrine",
+      "region": "Dueling Peaks",
+      "category": [
+        "Dueling Peaks Shrines"
+      ],
+      "requires": "",
+      "id": 3222274055,
+      "kind": "shrine",
+      "dungeon": "Dungeon007",
+      "watch_flag": "Clear_Dungeon007",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Bareeda Naag Shrine",
+      "region": "Tabantha",
+      "category": [
+        "Tabantha Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "id": 3222274056,
+      "kind": "shrine",
+      "dungeon": "Dungeon008",
+      "watch_flag": "Clear_Dungeon008",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Owa Daim Shrine",
+      "region": "Great Plateau",
+      "category": [
+        "Great Plateau Shrines"
+      ],
+      "requires": "|Progressive Stasis|",
+      "id": 3222274057,
+      "kind": "shrine",
+      "dungeon": "Dungeon009",
+      "watch_flag": "Clear_Dungeon009",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Kay Noh Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274058,
+      "kind": "shrine",
+      "dungeon": "Dungeon010",
+      "watch_flag": "Clear_Dungeon010",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Monya Toma Shrine",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Great Hyrule Forest Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "id": 3222274059,
+      "kind": "shrine",
+      "dungeon": "Dungeon011",
+      "watch_flag": "Clear_Dungeon011",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Voo Lota Shrine",
+      "region": "Tabantha",
+      "category": [
+        "Tabantha Shrines"
+      ],
+      "requires": "|Vah Medoh Cleared|",
+      "id": 3222274060,
+      "kind": "shrine",
+      "dungeon": "Dungeon012",
+      "watch_flag": "Clear_Dungeon012",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Katosa Aug Shrine",
+      "region": "Akkala",
+      "category": [
+        "Akkala Shrines"
+      ],
+      "requires": "",
+      "id": 3222274061,
+      "kind": "shrine",
+      "dungeon": "Dungeon013",
+      "watch_flag": "Clear_Dungeon013",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Kam Urog Shrine",
+      "region": "Necluda",
+      "category": [
+        "Necluda Shrines"
+      ],
+      "requires": "",
+      "id": 3222274062,
+      "kind": "shrine",
+      "dungeon": "Dungeon014",
+      "watch_flag": "Clear_Dungeon014",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Toto Sah Shrine",
+      "region": "Dueling Peaks",
+      "category": [
+        "Dueling Peaks Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "id": 3222274063,
+      "kind": "shrine",
+      "dungeon": "Dungeon015",
+      "watch_flag": "Clear_Dungeon015",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Rucco Maag Shrine",
+      "region": "Lanayru",
+      "category": [
+        "Lanayru Shrines"
+      ],
+      "requires": "",
+      "id": 3222274064,
+      "kind": "shrine",
+      "dungeon": "Dungeon016",
+      "watch_flag": "Clear_Dungeon016",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Shee Vaneer Shrine",
+      "region": "Dueling Peaks",
+      "category": [
+        "Dueling Peaks Shrines"
+      ],
+      "requires": "|@Cold Resistance|",
+      "id": 3222274065,
+      "kind": "shrine",
+      "dungeon": "Dungeon017",
+      "watch_flag": "Clear_Dungeon017",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Rok Uwog Shrine",
+      "region": "Hebra",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274066,
+      "kind": "shrine",
+      "dungeon": "Dungeon018",
+      "watch_flag": "Clear_Dungeon018",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Dow Na'eh Shrine",
+      "region": "Necluda",
+      "category": [
+        "Necluda Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274067,
+      "kind": "shrine",
+      "dungeon": "Dungeon019",
+      "watch_flag": "Clear_Dungeon019",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Sheem Dagoze Shrine",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Hyrule Ridge Shrines"
+      ],
+      "requires": "",
+      "id": 3222274068,
+      "kind": "shrine",
+      "dungeon": "Dungeon020",
+      "watch_flag": "Clear_Dungeon020",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Toh Yahsa Shrine",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Hyrule Ridge Shrines"
+      ],
+      "requires": "|Progressive Stasis| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "id": 3222274069,
+      "kind": "shrine",
+      "dungeon": "Dungeon021",
+      "watch_flag": "Clear_Dungeon021",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Keo Ruug Shrine",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Great Hyrule Forest Shrines"
+      ],
+      "requires": "",
+      "id": 3222274070,
+      "kind": "shrine",
+      "dungeon": "Dungeon022",
+      "watch_flag": "Clear_Dungeon022",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Sheh Rata Shrine",
+      "region": "Lanayru",
+      "category": [
+        "Lanayru Shrines"
+      ],
+      "requires": "|Cryonis| AND |Progressive Remote Bomb|",
+      "id": 3222274071,
+      "kind": "shrine",
+      "dungeon": "Dungeon023",
+      "watch_flag": "Clear_Dungeon023",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Mezza Lo Shrine",
+      "region": "Necluda",
+      "category": [
+        "Necluda Shrines"
+      ],
+      "requires": "|Magnesis| AND |Progressive Stasis| AND |Progressive Remote Bomb|",
+      "id": 3222274072,
+      "kind": "shrine",
+      "dungeon": "Dungeon024",
+      "watch_flag": "Clear_Dungeon024",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Kayra Mah Shrine",
+      "region": "Eldin",
+      "category": [
+        "Eldin Shrines"
+      ],
+      "requires": "|@Flame Resistance|",
+      "id": 3222274073,
+      "kind": "shrine",
+      "dungeon": "Dungeon025",
+      "watch_flag": "Clear_Dungeon025",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "region": "Eldin",
+      "name": "Shae Mo'sah Shrine",
+      "category": [
+        "Eldin Shrines"
+      ],
+      "requires": "|@Flame Resistance|",
+      "id": 3222274074,
+      "kind": "shrine",
+      "dungeon": "Dungeon026",
+      "watch_flag": "Clear_Dungeon026",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Rota Ooh Shrine",
+      "region": "Central Hyrule",
+      "category": [
+        "Central Hyrule Shrines"
+      ],
+      "requires": "",
+      "id": 3222274075,
+      "kind": "shrine",
+      "dungeon": "Dungeon027",
+      "watch_flag": "Clear_Dungeon027",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Shora Hah Shrine",
+      "region": "Eldin",
+      "category": [
+        "Eldin Shrines"
+      ],
+      "requires": "|@Flame Resistance| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "id": 3222274076,
+      "kind": "shrine",
+      "dungeon": "Dungeon028",
+      "watch_flag": "Clear_Dungeon028",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Hila Rao Shrine",
+      "region": "Dueling Peaks",
+      "category": [
+        "Dueling Peaks Shrines"
+      ],
+      "requires": "|Cryonis| AND |Progressive Remote Bomb|",
+      "id": 3222274077,
+      "kind": "shrine",
+      "dungeon": "Dungeon029",
+      "watch_flag": "Clear_Dungeon029",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Joloo Nah Shrine",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Gerudo Highlands Shrines"
+      ],
+      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |Heart Container:10| AND |Magnesis| AND |Progressive Stasis|",
+      "id": 3222274078,
+      "kind": "shrine",
+      "dungeon": "Dungeon030",
+      "watch_flag": "Clear_Dungeon030",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Mo'a Keet Shrine",
+      "region": "Eldin",
+      "category": [
+        "Eldin Shrines"
+      ],
+      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "id": 3222274079,
+      "kind": "shrine",
+      "dungeon": "Dungeon031",
+      "watch_flag": "Clear_Dungeon031",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Dako Tah Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "id": 3222274080,
+      "kind": "shrine",
+      "dungeon": "Dungeon032",
+      "watch_flag": "Clear_Dungeon032",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Daka Tuss Shrine",
+      "region": "Lanayru",
+      "category": [
+        "Lanayru Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274081,
+      "kind": "shrine",
+      "dungeon": "Dungeon033",
+      "watch_flag": "Clear_Dungeon033",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Kah Yah Shrine",
+      "region": "Faron",
+      "category": [
+        "Faron Shrines"
+      ],
+      "requires": "|Camera|",
+      "id": 3222274082,
+      "kind": "shrine",
+      "dungeon": "Dungeon034",
+      "watch_flag": "Clear_Dungeon034",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Akh Va'quot Shrine",
+      "region": "Tabantha",
+      "category": [
+        "Tabantha Shrines"
+      ],
+      "requires": "",
+      "id": 3222274083,
+      "kind": "shrine",
+      "dungeon": "Dungeon035",
+      "watch_flag": "Clear_Dungeon035",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Sho Dantu Shrine",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Gerudo Highlands Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "id": 3222274084,
+      "kind": "shrine",
+      "dungeon": "Dungeon036",
+      "watch_flag": "Clear_Dungeon036",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Shae Loya Shrine",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Hyrule Ridge Shrines"
+      ],
+      "requires": "|Progressive Stasis|",
+      "id": 3222274085,
+      "kind": "shrine",
+      "dungeon": "Dungeon037",
+      "watch_flag": "Clear_Dungeon037",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Oman Au Shrine",
+      "region": "Great Plateau",
+      "category": [
+        "Great Plateau Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274086,
+      "kind": "shrine",
+      "dungeon": "Dungeon038",
+      "watch_flag": "Clear_Dungeon038",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Myahm Agana Shrine",
+      "region": "Necluda",
+      "category": [
+        "Necluda Shrines"
+      ],
+      "requires": "",
+      "id": 3222274087,
+      "kind": "shrine",
+      "dungeon": "Dungeon039",
+      "watch_flag": "Clear_Dungeon039",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Kaam Ya'tak Shrine",
+      "region": "Central Hyrule",
+      "category": [
+        "Central Hyrule Shrines"
+      ],
+      "requires": "|Magnesis| AND |Progressive Stasis|",
+      "id": 3222274088,
+      "kind": "shrine",
+      "dungeon": "Dungeon040",
+      "watch_flag": "Clear_Dungeon040",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ja Baij Shrine",
+      "region": "Great Plateau",
+      "category": [
+        "Great Plateau Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "id": 3222274089,
+      "kind": "shrine",
+      "dungeon": "Dungeon041",
+      "watch_flag": "Clear_Dungeon041",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Rin Oyaa Shrine",
+      "region": "Hebra",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274090,
+      "kind": "shrine",
+      "dungeon": "Dungeon042",
+      "watch_flag": "Clear_Dungeon042",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "region": "Gerudo Highlands",
+      "name": "Kuh Takkar Shrine",
+      "category": [
+        "Gerudo Highlands Shrines"
+      ],
+      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|)) AND |Magnesis|",
+      "id": 3222274091,
+      "kind": "shrine",
+      "dungeon": "Dungeon043",
+      "watch_flag": "Clear_Dungeon043",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Shee Venath Shrine",
+      "region": "Dueling Peaks",
+      "category": [
+        "Dueling Peaks Shrines"
+      ],
+      "requires": "",
+      "id": 3222274092,
+      "kind": "shrine",
+      "dungeon": "Dungeon044",
+      "watch_flag": "Clear_Dungeon044",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ha Dahamar Shrine",
+      "region": "Dueling Peaks",
+      "category": [
+        "Dueling Peaks Shrines"
+      ],
+      "requires": "|Cryonis|",
+      "id": 3222274093,
+      "kind": "shrine",
+      "dungeon": "Dungeon045",
+      "watch_flag": "Clear_Dungeon045",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Shada Naw Shrine",
+      "region": "Hebra",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Magnesis| AND |Progressive Stasis|",
+      "id": 3222274094,
+      "kind": "shrine",
+      "dungeon": "Dungeon046",
+      "watch_flag": "Clear_Dungeon046",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ree Dahee Shrine",
+      "region": "Dueling Peaks",
+      "category": [
+        "Dueling Peaks Shrines"
+      ],
+      "requires": "",
+      "id": 3222274095,
+      "kind": "shrine",
+      "dungeon": "Dungeon047",
+      "watch_flag": "Clear_Dungeon047",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ze Kasho Shrine",
+      "region": "Akkala",
+      "category": [
+        "Akkala Shrines"
+      ],
+      "requires": "",
+      "id": 3222274096,
+      "kind": "shrine",
+      "dungeon": "Dungeon048",
+      "watch_flag": "Clear_Dungeon048",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Kaya Wan Shrine",
+      "region": "Lanayru",
+      "category": [
+        "Lanayru Shrines"
+      ],
+      "requires": "|Cryonis|",
+      "id": 3222274097,
+      "kind": "shrine",
+      "dungeon": "Dungeon049",
+      "watch_flag": "Clear_Dungeon049",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Shai Utoh Shrine",
+      "region": "Faron",
+      "category": [
+        "Faron Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb| AND |Progressive Stasis| AND |Magnesis|",
+      "id": 3222274098,
+      "kind": "shrine",
+      "dungeon": "Dungeon050",
+      "watch_flag": "Clear_Dungeon050",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "region": "Hebra",
+      "name": "Maka Rah Shrine",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb| AND |Cryonis| AND |Magnesis|",
+      "id": 3222274099,
+      "kind": "shrine",
+      "dungeon": "Dungeon051",
+      "watch_flag": "Clear_Dungeon051",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Gee Ha'rah Shrine",
+      "region": "Hebra",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Progressive Stasis|",
+      "id": 3222274100,
+      "kind": "shrine",
+      "dungeon": "Dungeon052",
+      "watch_flag": "Clear_Dungeon052",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Sha Warvo Shrine",
+      "region": "Tabantha",
+      "category": [
+        "Tabantha Shrines"
+      ],
+      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|))",
+      "id": 3222274101,
+      "kind": "shrine",
+      "dungeon": "Dungeon053",
+      "watch_flag": "Clear_Dungeon053",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ka'o Makagh Shrine",
+      "region": "Lake Hylia",
+      "category": [
+        "Lake Hylia Shrines"
+      ],
+      "requires": "|Magnesis| AND |Progressive Remote Bomb|",
+      "id": 3222274102,
+      "kind": "shrine",
+      "dungeon": "Dungeon054",
+      "watch_flag": "Clear_Dungeon054",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Dunba Taag Shrine",
+      "region": "Hebra",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Progressive Stasis|",
+      "id": 3222274103,
+      "kind": "shrine",
+      "dungeon": "Dungeon055",
+      "watch_flag": "Clear_Dungeon055",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Mirro Shaz Shrine",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Great Hyrule Forest Shrines"
+      ],
+      "requires": "|Progressive Stasis|",
+      "id": 3222274104,
+      "kind": "shrine",
+      "dungeon": "Dungeon056",
+      "watch_flag": "Clear_Dungeon056",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Wahgo Katta Shrine",
+      "region": "Central Hyrule",
+      "category": [
+        "Central Hyrule Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274105,
+      "kind": "shrine",
+      "dungeon": "Dungeon057",
+      "watch_flag": "Clear_Dungeon057",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Mogg Latan Shrine",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Hyrule Ridge Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274106,
+      "kind": "shrine",
+      "dungeon": "Dungeon058",
+      "watch_flag": "Clear_Dungeon058",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Kah Okeo Shrine",
+      "region": "Tabantha",
+      "category": [
+        "Tabantha Shrines"
+      ],
+      "requires": "|Progressive Stasis| AND |Progressive Remote Bomb|",
+      "id": 3222274107,
+      "kind": "shrine",
+      "dungeon": "Dungeon059",
+      "watch_flag": "Clear_Dungeon059",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Daqo Chisay Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "id": 3222274108,
+      "kind": "shrine",
+      "dungeon": "Dungeon060",
+      "watch_flag": "Clear_Dungeon060",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Shoda Sah Shrine",
+      "region": "Faron",
+      "category": [
+        "Faron Shrines"
+      ],
+      "requires": "",
+      "id": 3222274109,
+      "kind": "shrine",
+      "dungeon": "Dungeon061",
+      "watch_flag": "Clear_Dungeon061",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Sha Gehma Shrine",
+      "region": "Hebra",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Magnesis| AND |Progressive Stasis|",
+      "id": 3222274110,
+      "kind": "shrine",
+      "dungeon": "Dungeon062",
+      "watch_flag": "Clear_Dungeon062",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "region": "Gerudo Desert",
+      "name": "Kema Zoos Shrine",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Magnesis|",
+      "id": 3222274111,
+      "kind": "shrine",
+      "dungeon": "Dungeon063",
+      "watch_flag": "Clear_Dungeon063",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Daqa Koh Shrine",
+      "region": "Eldin",
+      "category": [
+        "Eldin Shrines"
+      ],
+      "requires": "|@Flame Resistance| AND |Progressive Stasis|",
+      "id": 3222274112,
+      "kind": "shrine",
+      "dungeon": "Dungeon064",
+      "watch_flag": "Clear_Dungeon064",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Keh Namut Shrine",
+      "region": "Great Plateau",
+      "category": [
+        "Great Plateau Shrines"
+      ],
+      "requires": "|@Cold Resistance| AND |Cryonis|",
+      "id": 3222274113,
+      "kind": "shrine",
+      "dungeon": "Dungeon065",
+      "watch_flag": "Clear_Dungeon065",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Kah Mael Shrine",
+      "region": "Lanayru",
+      "category": [
+        "Lanayru Shrines"
+      ],
+      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "id": 3222274114,
+      "kind": "shrine",
+      "dungeon": "Dungeon066",
+      "watch_flag": "Clear_Dungeon066",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Qua Raym Shrine",
+      "region": "Eldin",
+      "category": [
+        "Eldin Shrines"
+      ],
+      "requires": "|@Flame Resistance| AND |Magnesis| AND |Progressive Remote Bomb|",
+      "id": 3222274115,
+      "kind": "shrine",
+      "dungeon": "Dungeon067",
+      "watch_flag": "Clear_Dungeon067",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ya Naga Shrine",
+      "region": "Lake Hylia",
+      "category": [
+        "Lake Hylia Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "id": 3222274116,
+      "kind": "shrine",
+      "dungeon": "Dungeon068",
+      "watch_flag": "Clear_Dungeon068",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ishto Soh Shrine",
+      "region": "Lake Hylia",
+      "category": [
+        "Lake Hylia Shrines"
+      ],
+      "requires": "",
+      "id": 3222274117,
+      "kind": "shrine",
+      "dungeon": "Dungeon069",
+      "watch_flag": "Clear_Dungeon069",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Soh Kofi Shrine",
+      "region": "Lanayru",
+      "category": [
+        "Lanayru Shrines"
+      ],
+      "requires": "",
+      "id": 3222274118,
+      "kind": "shrine",
+      "dungeon": "Dungeon070",
+      "watch_flag": "Clear_Dungeon070",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Pumaag Nitae Shrine",
+      "region": "Lake Hylia",
+      "category": [
+        "Lake Hylia Shrines"
+      ],
+      "requires": "",
+      "id": 3222274119,
+      "kind": "shrine",
+      "dungeon": "Dungeon071",
+      "watch_flag": "Clear_Dungeon071",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Dah Kaso Shrine",
+      "region": "Central Hyrule",
+      "category": [
+        "Central Hyrule Shrines"
+      ],
+      "requires": "",
+      "id": 3222274120,
+      "kind": "shrine",
+      "dungeon": "Dungeon072",
+      "watch_flag": "Clear_Dungeon072",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Katah Chuki Shrine",
+      "region": "Central Hyrule",
+      "category": [
+        "Central Hyrule Shrines"
+      ],
+      "requires": "",
+      "id": 3222274121,
+      "kind": "shrine",
+      "dungeon": "Dungeon073",
+      "watch_flag": "Clear_Dungeon073",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Noya Neha Shrine",
+      "region": "Central Hyrule",
+      "category": [
+        "Central Hyrule Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "id": 3222274122,
+      "kind": "shrine",
+      "dungeon": "Dungeon074",
+      "watch_flag": "Clear_Dungeon074",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Dah Hesho Shrine",
+      "region": "Akkala",
+      "category": [
+        "Akkala Shrines"
+      ],
+      "requires": "",
+      "id": 3222274123,
+      "kind": "shrine",
+      "dungeon": "Dungeon075",
+      "watch_flag": "Clear_Dungeon075",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Sasa Kai Shrine",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Gerudo Highlands Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "id": 3222274124,
+      "kind": "shrine",
+      "dungeon": "Dungeon076",
+      "watch_flag": "Clear_Dungeon076",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ke'nai Shakah Shrine",
+      "region": "Akkala",
+      "category": [
+        "Akkala Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb| AND |Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "id": 3222274125,
+      "kind": "shrine",
+      "dungeon": "Dungeon077",
+      "watch_flag": "Clear_Dungeon077",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Mijah Rokee Shrine",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Hyrule Ridge Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "id": 3222274126,
+      "kind": "shrine",
+      "dungeon": "Dungeon078",
+      "watch_flag": "Clear_Dungeon078",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Namika Ozz Shrine",
+      "region": "Central Hyrule",
+      "category": [
+        "Central Hyrule Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "id": 3222274127,
+      "kind": "shrine",
+      "dungeon": "Dungeon079",
+      "watch_flag": "Clear_Dungeon079",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Shoqa Tatone Shrine",
+      "region": "Lake Hylia",
+      "category": [
+        "Lake Hylia Shrines"
+      ],
+      "requires": "|Central Tower| AND |Camera| AND |Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "id": 3222274128,
+      "kind": "shrine",
+      "dungeon": "Dungeon080",
+      "watch_flag": "Clear_Dungeon080",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Muwo Jeem Shrine",
+      "region": "Faron",
+      "category": [
+        "Faron Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "id": 3222274129,
+      "kind": "shrine",
+      "dungeon": "Dungeon081",
+      "watch_flag": "Clear_Dungeon081",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Chaas Qeta Shrine",
+      "region": "Necluda",
+      "category": [
+        "Necluda Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "id": 3222274130,
+      "kind": "shrine",
+      "dungeon": "Dungeon082",
+      "watch_flag": "Clear_Dungeon082",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Tena Ko'sah Shrine",
+      "region": "Tabantha",
+      "category": [
+        "Tabantha Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "id": 3222274131,
+      "kind": "shrine",
+      "dungeon": "Dungeon083",
+      "watch_flag": "Clear_Dungeon083",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Tutsuwa Nima Shrine",
+      "region": "Akkala",
+      "category": [
+        "Akkala Shrines"
+      ],
+      "requires": "|Dinraal's Scale| AND |Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Cryonis|",
+      "id": 3222274132,
+      "kind": "shrine",
+      "dungeon": "Dungeon084",
+      "watch_flag": "Clear_Dungeon084",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Kema Kosassa Shrine",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Gerudo Highlands Shrines"
+      ],
+      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|)) AND |Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Cryonis|",
+      "id": 3222274133,
+      "kind": "shrine",
+      "dungeon": "Dungeon085",
+      "watch_flag": "Clear_Dungeon085",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Goma Asaagh Shrine",
+      "region": "Hebra",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Cryonis|",
+      "id": 3222274134,
+      "kind": "shrine",
+      "dungeon": "Dungeon086",
+      "watch_flag": "Clear_Dungeon086",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Mozo Shenno Shrine",
+      "region": "Hebra",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Magnesis|",
+      "id": 3222274135,
+      "kind": "shrine",
+      "dungeon": "Dungeon087",
+      "watch_flag": "Clear_Dungeon087",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Hia Miu Shrine",
+      "region": "Hebra",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Magnesis|",
+      "id": 3222274136,
+      "kind": "shrine",
+      "dungeon": "Dungeon088",
+      "watch_flag": "Clear_Dungeon088",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Saas Ko'sah Shrine",
+      "region": "Central Hyrule",
+      "category": [
+        "Central Hyrule Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Magnesis|",
+      "id": 3222274137,
+      "kind": "shrine",
+      "dungeon": "Dungeon089",
+      "watch_flag": "Clear_Dungeon089",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Suma Sahma Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|))",
+      "id": 3222274138,
+      "kind": "shrine",
+      "dungeon": "Dungeon090",
+      "watch_flag": "Clear_Dungeon090",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Gorae Torr Shrine",
+      "region": "Eldin",
+      "category": [
+        "Eldin Shrines"
+      ],
+      "requires": "",
+      "id": 3222274139,
+      "kind": "shrine",
+      "dungeon": "Dungeon091",
+      "watch_flag": "Clear_Dungeon091",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Maag No'rah Shrine",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Hyrule Ridge Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "id": 3222274140,
+      "kind": "shrine",
+      "dungeon": "Dungeon092",
+      "watch_flag": "Clear_Dungeon092",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Raqa Zunzo Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "|Vah Naboris Cleared| AND ((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance|",
+      "id": 3222274141,
+      "kind": "shrine",
+      "dungeon": "Dungeon093",
+      "watch_flag": "Clear_Dungeon093",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Tho Kayu Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Progressive Remote Bomb|",
+      "id": 3222274142,
+      "kind": "shrine",
+      "dungeon": "Dungeon094",
+      "watch_flag": "Clear_Dungeon094",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Kuhn Sidajj Shrine",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Great Hyrule Forest Shrines"
+      ],
+      "requires": "|Magnesis|",
+      "id": 3222274143,
+      "kind": "shrine",
+      "dungeon": "Dungeon095",
+      "watch_flag": "Clear_Dungeon095",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Qukah Nata Shrine",
+      "region": "Faron",
+      "category": [
+        "Faron Shrines"
+      ],
+      "requires": "",
+      "id": 3222274144,
+      "kind": "shrine",
+      "dungeon": "Dungeon096",
+      "watch_flag": "Clear_Dungeon096",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Korgu Chideh Shrine",
+      "region": "Faron",
+      "category": [
+        "Faron Shrines"
+      ],
+      "requires": "|Magnesis| AND |Progressive Remote Bomb| AND |Progressive Stasis| AND |Cryonis|",
+      "id": 3222274145,
+      "kind": "shrine",
+      "dungeon": "Dungeon097",
+      "watch_flag": "Clear_Dungeon097",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Daag Chokah Shrine",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Great Hyrule Forest Shrines"
+      ],
+      "requires": "",
+      "id": 3222274146,
+      "kind": "shrine",
+      "dungeon": "Dungeon098",
+      "watch_flag": "Clear_Dungeon098",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ta'loh Naeg Shrine",
+      "region": "Dueling Peaks",
+      "category": [
+        "Dueling Peaks Shrines"
+      ],
+      "requires": "",
+      "id": 3222274147,
+      "kind": "shrine",
+      "dungeon": "Dungeon099",
+      "watch_flag": "Clear_Dungeon099",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Keeha Yoog Shrine",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Gerudo Highlands Shrines"
+      ],
+      "requires": "|@Cold Resistance|",
+      "id": 3222274148,
+      "kind": "shrine",
+      "dungeon": "Dungeon100",
+      "watch_flag": "Clear_Dungeon100",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Dagah Keek Shrine",
+      "region": "Lanayru",
+      "category": [
+        "Lanayru Shrines"
+      ],
+      "requires": "|Cryonis| AND |Magnesis|",
+      "id": 3222274149,
+      "kind": "shrine",
+      "dungeon": "Dungeon101",
+      "watch_flag": "Clear_Dungeon101",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Zuna Kai Shrine",
+      "region": "Akkala",
+      "category": [
+        "Akkala Shrines"
+      ],
+      "requires": "(|Revali's Gale| OR |Progressive Revali's Gale|)",
+      "id": 3222274150,
+      "kind": "shrine",
+      "dungeon": "Dungeon102",
+      "watch_flag": "Clear_Dungeon102",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Dila Maag Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "",
+      "id": 3222274151,
+      "kind": "shrine",
+      "dungeon": "Dungeon103",
+      "watch_flag": "Clear_Dungeon103",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "region": "Hebra",
+      "name": "Lanno Kooh Shrine",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "|Heart Container:10|",
+      "id": 3222274152,
+      "kind": "shrine",
+      "dungeon": "Dungeon104",
+      "watch_flag": "Clear_Dungeon104",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Tu Ka'loh Shrine",
+      "region": "Akkala",
+      "category": [
+        "Akkala Shrines"
+      ],
+      "requires": "|Stamina Vessel:3|",
+      "id": 3222274153,
+      "kind": "shrine",
+      "dungeon": "Dungeon105",
+      "watch_flag": "Clear_Dungeon105",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Maag Halan Shrine",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Great Hyrule Forest Shrines"
+      ],
+      "requires": "|Cryonis|",
+      "id": 3222274154,
+      "kind": "shrine",
+      "dungeon": "Dungeon106",
+      "watch_flag": "Clear_Dungeon106",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Misae Suma Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|",
+      "id": 3222274155,
+      "kind": "shrine",
+      "dungeon": "Dungeon107",
+      "watch_flag": "Clear_Dungeon107",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ketoh Wawai Shrine",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Great Hyrule Forest Shrines"
+      ],
+      "requires": "",
+      "id": 3222274156,
+      "kind": "shrine",
+      "dungeon": "Dungeon108",
+      "watch_flag": "Clear_Dungeon108",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Ritaag Zumo Shrine",
+      "region": "Akkala",
+      "category": [
+        "Akkala Shrines"
+      ],
+      "requires": "",
+      "id": 3222274157,
+      "kind": "shrine",
+      "dungeon": "Dungeon109",
+      "watch_flag": "Clear_Dungeon109",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Korsh O'hu Shrine",
+      "region": "Gerudo Desert",
+      "category": [
+        "Gerudo Desert Shrines"
+      ],
+      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "id": 3222274158,
+      "kind": "shrine",
+      "dungeon": "Dungeon110",
+      "watch_flag": "Clear_Dungeon110",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Tawa Jinn Shrine",
+      "region": "Faron",
+      "category": [
+        "Faron Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "id": 3222274159,
+      "kind": "shrine",
+      "dungeon": "Dungeon111",
+      "watch_flag": "Clear_Dungeon111",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Lakna Rokee Shrine",
+      "region": "Dueling Peaks",
+      "category": [
+        "Dueling Peaks Shrines"
+      ],
+      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "id": 3222274160,
+      "kind": "shrine",
+      "dungeon": "Dungeon112",
+      "watch_flag": "Clear_Dungeon112",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Shae Katha Shrine",
+      "region": "Lake Hylia",
+      "category": [
+        "Lake Hylia Shrines"
+      ],
+      "requires": "|Farosh's Scale|",
+      "id": 3222274161,
+      "kind": "shrine",
+      "dungeon": "Dungeon113",
+      "watch_flag": "Clear_Dungeon113",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Shai Yota Shrine",
+      "region": "Lanayru",
+      "category": [
+        "Lanayru Shrines"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "id": 3222274162,
+      "kind": "shrine",
+      "dungeon": "Dungeon114",
+      "watch_flag": "Clear_Dungeon114",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Rona Kachta Shrine",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Great Hyrule Forest Shrines"
+      ],
+      "requires": "",
+      "id": 3222274163,
+      "kind": "shrine",
+      "dungeon": "Dungeon115",
+      "watch_flag": "Clear_Dungeon115",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Qaza Tokki Shrine",
+      "region": "Hebra",
+      "category": [
+        "Hebra Shrines"
+      ],
+      "requires": "",
+      "id": 3222274164,
+      "kind": "shrine",
+      "dungeon": "Dungeon116",
+      "watch_flag": "Clear_Dungeon116",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Jitan Sa'mi Shrine",
+      "region": "Necluda",
+      "category": [
+        "Necluda Shrines"
+      ],
+      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|)) AND |Naydra's Scale|",
+      "id": 3222274165,
+      "kind": "shrine",
+      "dungeon": "Dungeon117",
+      "watch_flag": "Clear_Dungeon117",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "To Quomo Shrine",
+      "region": "Hebra",
+      "requires": "|@Cold Resistance|",
+      "category": [],
+      "id": 3222274166,
+      "kind": "shrine",
+      "dungeon": "Dungeon118",
+      "watch_flag": "Clear_Dungeon118",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Tahno O'ah Shrine",
+      "region": "Necluda",
+      "category": [
+        "Necluda Shrines"
+      ],
+      "requires": "|@Cold Resistance| AND |Progressive Remote Bomb|",
+      "id": 3222274167,
+      "kind": "shrine",
+      "dungeon": "Dungeon119",
+      "watch_flag": "Clear_Dungeon119",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "name": "Hebra Tower",
+      "region": "Hebra",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Hebra Tower|",
+      "id": 3223322625,
+      "kind": "tower",
+      "tower": 1,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/C-2/C-2_Static.smubin",
+          "hash_id": 3650282708,
+          "map_sha256": "caa8d48f86901aead1f0150c706fd2f965388139f1494f20fe703ac631fc0f15"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/C-2/C-2_Static.smubin",
+          "hash_id": 3650282708,
+          "map_sha256": "3c9f02eefc95a44829135a0ecbe902bd516d452c02d0a14911b1abf5d229ae83"
+        }
+      ]
+    },
+    {
+      "name": "Tabantha Tower",
+      "region": "Tabantha",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Tabantha Tower|",
+      "id": 3223322626,
+      "kind": "tower",
+      "tower": 2,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/B-4/B-4_Static.smubin",
+          "hash_id": 3703935795,
+          "map_sha256": "d99f9da2fb7fb3d292774255d56dbf80da913bf24227a71c3b0eca554d8c3914"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/B-4/B-4_Static.smubin",
+          "hash_id": 3703935795,
+          "map_sha256": "bf99016975f8cf26c8e761f98f8a2fece9015f6fc5b6b653d3d6e1bcd17a3393"
+        }
+      ]
+    },
+    {
+      "name": "Gerudo Tower",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Gerudo Tower|",
+      "id": 3223322627,
+      "kind": "tower",
+      "tower": 3,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/B-6/B-6_Static.smubin",
+          "hash_id": 1285797230,
+          "map_sha256": "94daf0078ee2e128f23c159abd39e391add5faa9a0eff977be70c398369b993e"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/B-6/B-6_Static.smubin",
+          "hash_id": 1285797230,
+          "map_sha256": "e299c68fb534ff67fcdfb65a75e3607db97205233ef51d51b7f5c4e025f2d9b3"
+        }
+      ]
+    },
+    {
+      "name": "Wasteland Tower",
+      "region": "Gerudo Desert",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Wasteland Tower|",
+      "id": 3223322628,
+      "kind": "tower",
+      "tower": 4,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/C-7/C-7_Static.smubin",
+          "hash_id": 2275687969,
+          "map_sha256": "3b9a5996eca322dc9da2c1c1b6a4492baf6a415a50443019da9a2192b8261411"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/C-7/C-7_Static.smubin",
+          "hash_id": 2275687969,
+          "map_sha256": "fc972e421e418920955cc8f8fcce5c8ba5378c8a05c00b2ab019350fda50941e"
+        }
+      ]
+    },
+    {
+      "name": "Woodland Tower",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Woodland Tower|",
+      "id": 3223322629,
+      "kind": "tower",
+      "tower": 5,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/F-3/F-3_Static.smubin",
+          "hash_id": 1943274718,
+          "map_sha256": "f628459364f1dc40652225adb387f9e70bce93e7cda803ede87c9dcad7a75613"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/F-3/F-3_Static.smubin",
+          "hash_id": 1943274718,
+          "map_sha256": "a3b3d1e01592a294fa1854d31464c48c73d842b13426344412db6f8537c54b29"
+        }
+      ]
+    },
+    {
+      "name": "Central Tower",
+      "region": "Central Hyrule",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Central Tower|",
+      "id": 3223322630,
+      "kind": "tower",
+      "tower": 6,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/E-5/E-5_Static.smubin",
+          "hash_id": 2879079867,
+          "map_sha256": "cfe4cde301ce94462961ff341318b8993ad4bee8a9bcf0d64c17c8231d4d6361"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/E-5/E-5_Static.smubin",
+          "hash_id": 2879079867,
+          "map_sha256": "747a408e3fa6441a04c08c8b4842db928bfb0c197c4b930801d9972d06d9d1aa"
+        }
+      ]
+    },
+    {
+      "name": "Great Plateau Tower",
+      "region": "Great Plateau",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Great Plateau Tower|",
+      "id": 3223322631,
+      "kind": "tower",
+      "tower": 7,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/E-6/E-6_Static.smubin",
+          "hash_id": 2733553602,
+          "map_sha256": "9552028ddd19d79fce0c9fbd4d80d3252c1d6a02a03b50fbb48d0eabe70ff0ef"
+        },
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/E-6/E-6_Static.smubin",
+          "hash_id": 4042440915,
+          "map_sha256": "9552028ddd19d79fce0c9fbd4d80d3252c1d6a02a03b50fbb48d0eabe70ff0ef"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/E-6/E-6_Static.smubin",
+          "hash_id": 2733553602,
+          "map_sha256": "40187e2960b892630f0c6ee894309c685828be54f106cd3b8e6a9cc04e959f0f"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/E-6/E-6_Static.smubin",
+          "hash_id": 4042440915,
+          "map_sha256": "40187e2960b892630f0c6ee894309c685828be54f106cd3b8e6a9cc04e959f0f"
+        }
+      ]
+    },
+    {
+      "name": "Dueling Peaks Tower",
+      "region": "Dueling Peaks",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Dueling Peaks Tower|",
+      "id": 3223322632,
+      "kind": "tower",
+      "tower": 8,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/G-6/G-6_Static.smubin",
+          "hash_id": 2934598095,
+          "map_sha256": "7c96b5177bf3d930cd300187ec001d7f2bcb445b064f21b4f0ae08c6e1116fc5"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/G-6/G-6_Static.smubin",
+          "hash_id": 2934598095,
+          "map_sha256": "055903152d5f694e95fb0c551330152f265fc7a9ef4a99c7be4cfb1e2dea3f1e"
+        }
+      ]
+    },
+    {
+      "name": "Lake Tower",
+      "region": "Lake Hylia",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Lake Tower|",
+      "id": 3223322633,
+      "kind": "tower",
+      "tower": 9,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/E-7/E-7_Static.smubin",
+          "hash_id": 2751434839,
+          "map_sha256": "1609744f3ef7a1bb7c2e783795c445567bd71c045bd92df6c25752f838a260bf"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/E-7/E-7_Static.smubin",
+          "hash_id": 2751434839,
+          "map_sha256": "3058e5741ae0476a3e2f85b83708d8435552b73ae13d46a817fc4f4e58c96006"
+        }
+      ]
+    },
+    {
+      "name": "Eldin Tower",
+      "region": "Eldin",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Eldin Tower|",
+      "id": 3223322634,
+      "kind": "tower",
+      "tower": 10,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/H-3/H-3_Static.smubin",
+          "hash_id": 219123603,
+          "map_sha256": "14083a4db6bf87300939af4e3ba71a347aa7f62647c26c9177fe963d65a44037"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/H-3/H-3_Static.smubin",
+          "hash_id": 219123603,
+          "map_sha256": "0e392bd9a63e2d1f6af2d0c2d4100345cbea4b43b29da0df833d2f65b3e8e68d"
+        }
+      ]
+    },
+    {
+      "name": "Akkala Tower",
+      "region": "Akkala",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Akkala Tower|",
+      "id": 3223322635,
+      "kind": "tower",
+      "tower": 11,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/I-3/I-3_Static.smubin",
+          "hash_id": 1669567698,
+          "map_sha256": "a2a3f053973ae3a10b5d2e20468b4088eb0c33d47f08af8e8d14b05e9b31c29f"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/I-3/I-3_Static.smubin",
+          "hash_id": 1669567698,
+          "map_sha256": "de950862ed22a85300971e8ee5743a026d3ceb1a4aad216db1f4808f8c423742"
+        }
+      ]
+    },
+    {
+      "name": "Lanayru Tower",
+      "region": "Lanayru",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Lanayru Tower|",
+      "id": 3223322636,
+      "kind": "tower",
+      "tower": 12,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/H-4/H-4_Static.smubin",
+          "hash_id": 1475180658,
+          "map_sha256": "1dd966f7f3bd14e2220694d99340fcd0c9b3ec04de8bd49fd849221f0dcca89d"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/H-4/H-4_Static.smubin",
+          "hash_id": 1475180658,
+          "map_sha256": "d5f8363113178eb73b464e1ce8dcf331c13d6995389b9618e8ed0dda42479f53"
+        }
+      ]
+    },
+    {
+      "name": "Hateno Tower",
+      "region": "Necluda",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Hateno Tower|",
+      "id": 3223322637,
+      "kind": "tower",
+      "tower": 13,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/H-7/H-7_Static.smubin",
+          "hash_id": 4138911080,
+          "map_sha256": "de3c5be62f1d101bfe13eca502b560dce7a2bbdee9a09a7e182079b2982e6556"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/H-7/H-7_Static.smubin",
+          "hash_id": 4138911080,
+          "map_sha256": "974002625e61576ae8ad936765bb6562c4b30631aa02eae8132a3186b0b41c40"
+        }
+      ]
+    },
+    {
+      "name": "Faron Tower",
+      "region": "Faron",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Faron Tower|",
+      "id": 3223322638,
+      "kind": "tower",
+      "tower": 14,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/G-8/G-8_Static.smubin",
+          "hash_id": 4111125397,
+          "map_sha256": "777dd14080e0d4a57e3e1a8fa2bf12b1fff126f81dbe00de83b790043cc92a83"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/G-8/G-8_Static.smubin",
+          "hash_id": 4111125397,
+          "map_sha256": "bcd430f9b1943030587e01b821ea91de765cb8cbd5763a06989dd25ba207c202"
+        }
+      ]
+    },
+    {
+      "name": "Ridgeland Tower",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Sheikah Towers"
+      ],
+      "requires": "|Ridgeland Tower|",
+      "id": 3223322639,
+      "kind": "tower",
+      "tower": 15,
+      "terminals": [
+        {
+          "resource": "content/Pack/TitleBG.pack!Map/MainField/D-4/D-4_Static.smubin",
+          "hash_id": 1620889332,
+          "map_sha256": "bab676290aa3e507772a0b92618c4fbcc2fb0fa5669388d1a065ce72d981c916"
+        },
+        {
+          "resource": "aoc/0010/Map/MainField/D-4/D-4_Static.smubin",
+          "hash_id": 1620889332,
+          "map_sha256": "92f0328e01b55419ec6ebcfa5a701f4bf416b664c569cb495c2d40ebc62514d3"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "resource": "content/Event/Demo004_0.sbeventpack!EventFlow/Demo004_0.bfevfl",
+      "flow": "Demo004_0",
+      "sha256": "f94f9d006b14930276595ad0ae9106677dacccb8140f13cb7750c716aa92b83e"
+    },
+    {
+      "resource": "content/Event/Npc_DungeonPriest001.sbeventpack!EventFlow/Npc_DungeonPriest001.bfevfl",
+      "flow": "Npc_DungeonPriest001",
+      "sha256": "28e5a3d85eb82852131cc55c9c2efc37ff016dc40a6b3d7c2805d149637b44fd"
+    },
+    {
+      "flow": "Demo033_0",
+      "resource": "content/Event/Demo033_0.sbeventpack!EventFlow/Demo033_0.bfevfl",
+      "sha256": "d87df1fd49e754c4e67b798e47b50ef4ebdc762060d0f815d281a9a0305eedf0"
+    }
+  ]
+}

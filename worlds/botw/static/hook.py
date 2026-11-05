@@ -4,6 +4,7 @@ from pathlib import Path
 
 from .protocol import PROTOCOL, seed_fingerprint
 from .checks import check_actor_name
+from .combat import hook_assembly
 
 
 def mailbox_assembly(location_ids=(), fingerprint="0" * 32) -> str:
@@ -38,6 +39,10 @@ def build_seed_hook(plan):
                                    plan.get("starting_state"))
     if plan.get("slot_data", {}).get("seed_fingerprint") != fingerprint:
         raise ValueError("Patch/slot seed fingerprint mismatch; regenerate this seed")
+    extra = hook_assembly(plan['locations'], [entry['id'] for entry in plan['locations']])
+    if extra:
+        template = template.replace('    bl _AP_FlushPendingChecks', '    bl _AP_PollKillChecks\n    bl _AP_FlushPendingChecks', 1)
+        template = template.replace('0x0313B840 =', extra + '\n0x0313B840 =', 1)
     begin, end = template.index("_AP_Mailbox_Base:"), template.index("_AP_Is_Injecting:")
     return (template[:begin] + mailbox_assembly([entry["id"] for entry in plan["locations"]], fingerprint)
             + template[end:]).encode()

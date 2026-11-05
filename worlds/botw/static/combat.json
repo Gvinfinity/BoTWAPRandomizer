@@ -1,0 +1,2241 @@
+{
+  "version": 1,
+  "locations": [
+    {
+      "id": 3240860789,
+      "kind": "miniboss",
+      "name": "Stalnox - Hebra [FC8EAD42]",
+      "region": "Hebra",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Bone",
+      "hash_id": 4237208898,
+      "watch_flag": "MainField_Enemy_Giant_Bone_4237208898",
+      "position": [
+        -4260.1484375,
+        326.9973449707031,
+        -3777.484619140625
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/A-1/A-1_Static.smubin",
+      "map_sha256": "e34f0475132fd7146aa779addbfa7c08f373456b5a77fffc819d68be6850fba9",
+      "logical_map": "Map/MainField/A-1/A-1_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3253288243,
+      "kind": "miniboss",
+      "name": "Black Hinox - Hebra [77CB9A7E]",
+      "region": "Hebra",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Senior",
+      "hash_id": 2009832062,
+      "watch_flag": "MainField_Enemy_Giant_Senior_2009832062",
+      "position": [
+        -4531.0,
+        333.4498596191406,
+        -2679.2734375
+      ],
+      "resource": "content/Map/MainField/A-2/A-2_Dynamic.smubin",
+      "map_sha256": "0671ecb32bb7fbc21159859f722f3c11d7e2b36a732cab6d8f32f49787d97fa7",
+      "logical_map": "Map/MainField/A-2/A-2_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3253240922,
+      "kind": "miniboss",
+      "name": "Stone Talus - Gerudo Highlands [E87B1CA3]",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 3900382371,
+      "watch_flag": "MainField_Enemy_Golem_Middle_3900382371",
+      "position": [
+        -4312.0654296875,
+        418.1097412109375,
+        1446.88623046875
+      ],
+      "resource": "content/Map/MainField/A-6/A-6_Dynamic.smubin",
+      "map_sha256": "a0c2a0316a2bdf3489b9b862da15721c744f95bb1ee2e42bf6c8a2ad418727a9",
+      "logical_map": "Map/MainField/A-6/A-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3250253043,
+      "kind": "miniboss",
+      "name": "Molduga - Gerudo Desert [B8B20BC3]",
+      "region": "Gerudo Desert",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "family": "molduga",
+      "actor": "Enemy_Sandworm",
+      "hash_id": 3098676163,
+      "watch_flag": "MainField_Enemy_Sandworm_3098676163",
+      "position": [
+        -4832.6123046875,
+        133.20516967773438,
+        2800.421142578125
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/A-7/A-7_Static.smubin",
+      "map_sha256": "7acd3e2cf6b53b589dbfbf3bf40b55eb8447272070b5a702578e632d6dd879dd",
+      "logical_map": "Map/MainField/A-7/A-7_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3254673874,
+      "kind": "miniboss",
+      "name": "Molduga - Gerudo Desert [D2E9C9E7]",
+      "region": "Gerudo Desert",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "family": "molduga",
+      "actor": "Enemy_Sandworm",
+      "hash_id": 3538536935,
+      "watch_flag": "MainField_Enemy_Sandworm_3538536935",
+      "position": [
+        -4191.11572265625,
+        126.9088134765625,
+        3797.448486328125
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/A-8/A-8_Static.smubin",
+      "map_sha256": "2e74c757633749c6d30d03de88379629970e4d2a0e4a4b03deacba0d1f71b8ca",
+      "logical_map": "Map/MainField/A-8/A-8_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3243145664,
+      "kind": "miniboss",
+      "name": "Molduga - Gerudo Desert [D4C5E52E]",
+      "region": "Gerudo Desert",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "family": "molduga",
+      "actor": "Enemy_Sandworm",
+      "hash_id": 3569739054,
+      "watch_flag": "MainField_Enemy_Sandworm_3569739054",
+      "position": [
+        -4555.6220703125,
+        137.1412353515625,
+        3256.35400390625
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/A-8/A-8_Static.smubin",
+      "map_sha256": "2e74c757633749c6d30d03de88379629970e4d2a0e4a4b03deacba0d1f71b8ca",
+      "logical_map": "Map/MainField/A-8/A-8_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3250693810,
+      "kind": "miniboss",
+      "name": "Frost Talus - Hebra [0B518664]",
+      "region": "Hebra",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Ice",
+      "hash_id": 189892196,
+      "watch_flag": "MainField_Enemy_Golem_Ice_189892196",
+      "position": [
+        -3709.5,
+        331.27947998046875,
+        -2347.0
+      ],
+      "resource": "content/Map/MainField/B-2/B-2_Dynamic.smubin",
+      "map_sha256": "fc9b683c233cb697b5331fc5d0204d591c31300395d76b0e0712b7c21c9ecd1b",
+      "logical_map": "Map/MainField/B-2/B-2_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3239328000,
+      "kind": "miniboss",
+      "name": "Frost Talus - Hebra [646AA878]",
+      "region": "Hebra",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Ice",
+      "hash_id": 1684711544,
+      "watch_flag": "MainField_Enemy_Golem_Ice_1684711544",
+      "position": [
+        -3073.5,
+        478.4151916503906,
+        -2918.5
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/B-2/B-2_Static.smubin",
+      "map_sha256": "39a928f4d471f8a0d243737b07ec90b740514a4b177f75f4282a80e8749fbc88",
+      "logical_map": "Map/MainField/B-2/B-2_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3240273459,
+      "kind": "miniboss",
+      "name": "Stone Talus - Tabantha [1BACE734]",
+      "region": "Tabantha",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Senior",
+      "hash_id": 464316212,
+      "watch_flag": "MainField_Enemy_Golem_Senior_464316212",
+      "position": [
+        -3929.296875,
+        197.19400024414062,
+        -1083.484375
+      ],
+      "resource": "content/Map/MainField/B-3/B-3_Dynamic.smubin",
+      "map_sha256": "65b705be02d834bf8823783299ddd70cce8294e582bccd487be5759a3d6fdd50",
+      "logical_map": "Map/MainField/B-3/B-3_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3239388737,
+      "kind": "miniboss",
+      "name": "Stone Talus - Tabantha [96DAF8CA]",
+      "region": "Tabantha",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Senior",
+      "hash_id": 2530932938,
+      "watch_flag": "MainField_Enemy_Golem_Senior_2530932938",
+      "position": [
+        -3248.40478515625,
+        291.6773376464844,
+        -1078.1204833984375
+      ],
+      "resource": "content/Map/MainField/B-3/B-3_Dynamic.smubin",
+      "map_sha256": "65b705be02d834bf8823783299ddd70cce8294e582bccd487be5759a3d6fdd50",
+      "logical_map": "Map/MainField/B-3/B-3_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3238707827,
+      "kind": "miniboss",
+      "name": "Black Hinox - Tabantha [AA1A9FB8]",
+      "region": "Tabantha",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Senior",
+      "hash_id": 2853871544,
+      "watch_flag": "MainField_Enemy_Giant_Senior_2853871544",
+      "position": [
+        -3793.6796875,
+        246.02236938476562,
+        -1557.1015625
+      ],
+      "resource": "content/Map/MainField/B-3/B-3_Dynamic.smubin",
+      "map_sha256": "65b705be02d834bf8823783299ddd70cce8294e582bccd487be5759a3d6fdd50",
+      "logical_map": "Map/MainField/B-3/B-3_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3240865923,
+      "kind": "miniboss",
+      "name": "Stone Talus - Hyrule Ridge [A4B34A2A]",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Senior",
+      "hash_id": 2763213354,
+      "watch_flag": "MainField_Enemy_Golem_Senior_2763213354",
+      "position": [
+        -3137.5,
+        317.30767822265625,
+        72.89840698242188
+      ],
+      "resource": "content/Map/MainField/B-5/B-5_Dynamic.smubin",
+      "map_sha256": "a771d0ff1fe34d78db6ce4703de4a7b1df7370c37b15d24f48b5f1eb4ac5cb54",
+      "logical_map": "Map/MainField/B-5/B-5_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3238215554,
+      "kind": "miniboss",
+      "name": "Stone Talus - Gerudo Highlands [925DE039]",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Senior",
+      "hash_id": 2455625785,
+      "watch_flag": "MainField_Enemy_Golem_Senior_2455625785",
+      "position": [
+        -3804.75732421875,
+        602.5669555664062,
+        1204.771728515625
+      ],
+      "resource": "content/Map/MainField/B-6/B-6_Dynamic.smubin",
+      "map_sha256": "b4df145452d2c563206b72ee2eff99005364c8d37a2adff405aae78027a2296a",
+      "logical_map": "Map/MainField/B-6/B-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3240824970,
+      "kind": "miniboss",
+      "name": "Frost Talus - Gerudo Highlands [EEE07F28]",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Ice",
+      "hash_id": 4007690024,
+      "watch_flag": "MainField_Enemy_Golem_Ice_4007690024",
+      "position": [
+        -3558.7158203125,
+        558.3580932617188,
+        1560.0665283203125
+      ],
+      "resource": "content/Map/MainField/B-6/B-6_Dynamic.smubin",
+      "map_sha256": "b4df145452d2c563206b72ee2eff99005364c8d37a2adff405aae78027a2296a",
+      "logical_map": "Map/MainField/B-6/B-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3241360167,
+      "kind": "miniboss",
+      "name": "Molduga - Gerudo Desert [1D72263F]",
+      "region": "Gerudo Desert",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "family": "molduga",
+      "actor": "Enemy_Sandworm",
+      "hash_id": 494020159,
+      "watch_flag": "MainField_Enemy_Sandworm_494020159",
+      "position": [
+        -3799.05810546875,
+        118.76321411132812,
+        3653.433349609375
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/B-8/B-8_Static.smubin",
+      "map_sha256": "c23dec21fddb4bca31675c20275f82f26db448658ca33efb4dcd7c9f9c70a426",
+      "logical_map": "Map/MainField/B-8/B-8_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3246934023,
+      "kind": "miniboss",
+      "name": "Frost Talus - Hebra [F3A5F88A]",
+      "region": "Hebra",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Ice",
+      "hash_id": 4087740554,
+      "watch_flag": "MainField_Enemy_Golem_Ice_4087740554",
+      "position": [
+        -2144.87646484375,
+        491.27215576171875,
+        -3082.591796875
+      ],
+      "resource": "content/Map/MainField/C-1/C-1_Dynamic.smubin",
+      "map_sha256": "fe268b3f392599692c95116c56b3130f6e6ef6d190a94c58d81bb0027ad94355",
+      "logical_map": "Map/MainField/C-1/C-1_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3251331479,
+      "kind": "miniboss",
+      "name": "Stone Talus - Hebra [132FEC6F]",
+      "region": "Hebra",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Senior",
+      "hash_id": 321907823,
+      "watch_flag": "MainField_Enemy_Golem_Senior_321907823",
+      "position": [
+        -2864.500732421875,
+        408.9790954589844,
+        -1825.90625
+      ],
+      "resource": "content/Map/MainField/C-3/C-3_Dynamic.smubin",
+      "map_sha256": "bf3f0048cc63379d41472a153bb92d16bff7c5fb1fb6c8dc2880446007b1d94b",
+      "logical_map": "Map/MainField/C-3/C-3_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3243434643,
+      "kind": "miniboss",
+      "name": "Stone Talus - Hyrule Ridge [D6EB66AD]",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 3605751469,
+      "watch_flag": "MainField_Enemy_Golem_Middle_3605751469",
+      "position": [
+        -2177.46484375,
+        322.3008728027344,
+        -1585.3902587890625
+      ],
+      "resource": "content/Map/MainField/C-3/C-3_Dynamic.smubin",
+      "map_sha256": "bf3f0048cc63379d41472a153bb92d16bff7c5fb1fb6c8dc2880446007b1d94b",
+      "logical_map": "Map/MainField/C-3/C-3_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3249111134,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Hyrule Ridge [D83D636F]",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 3627901807,
+      "watch_flag": "MainField_Enemy_Giant_Middle_3627901807",
+      "position": [
+        -2370.046875,
+        261.7044372558594,
+        -419.5859375
+      ],
+      "resource": "content/Map/MainField/C-4/C-4_Dynamic.smubin",
+      "map_sha256": "e5c2d5a6a6610551b31bd51dbb78b4088817c8a07edea9d6928b3f5da23a488c",
+      "logical_map": "Map/MainField/C-4/C-4_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3244797008,
+      "kind": "miniboss",
+      "name": "Stalnox - Hyrule Ridge [669E62A5]",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Bone",
+      "hash_id": 1721655973,
+      "watch_flag": "MainField_Enemy_Giant_Bone_1721655973",
+      "position": [
+        -2217.0,
+        372.3073425292969,
+        584.0
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/C-5/C-5_Static.smubin",
+      "map_sha256": "11416b1ca9edf03a7b5e711c3c47fa5695fda07a22246dd0300a4e04cd682f12",
+      "logical_map": "Map/MainField/C-5/C-5_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3240789902,
+      "kind": "miniboss",
+      "name": "Frost Talus - Gerudo Highlands [26A1198A]",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Ice",
+      "hash_id": 648092042,
+      "watch_flag": "MainField_Enemy_Golem_Ice_648092042",
+      "position": [
+        -2919.989013671875,
+        656.116943359375,
+        1294.265625
+      ],
+      "resource": "content/Map/MainField/C-6/C-6_Dynamic.smubin",
+      "map_sha256": "e09dd3c6dca7656ef4b1624eba2d89b09b7e367ab6fa8858b5aa27df6232c7c9",
+      "logical_map": "Map/MainField/C-6/C-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3247934821,
+      "kind": "miniboss",
+      "name": "Stone Talus - Gerudo Desert [A88D44BF]",
+      "region": "Gerudo Desert",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 2827830463,
+      "watch_flag": "MainField_Enemy_Golem_Middle_2827830463",
+      "position": [
+        -2277.5,
+        293.7734069824219,
+        1979.0
+      ],
+      "resource": "content/Map/MainField/C-6/C-6_Dynamic.smubin",
+      "map_sha256": "e09dd3c6dca7656ef4b1624eba2d89b09b7e367ab6fa8858b5aa27df6232c7c9",
+      "logical_map": "Map/MainField/C-6/C-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3251645705,
+      "kind": "miniboss",
+      "name": "Stone Talus - Gerudo Highlands [162EE739]",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 372172601,
+      "watch_flag": "MainField_Enemy_Golem_Middle_372172601",
+      "position": [
+        -2898.46875,
+        305.7907409667969,
+        2210.994140625
+      ],
+      "resource": "content/Map/MainField/C-7/C-7_Dynamic.smubin",
+      "map_sha256": "3e721945ef13c3ce02debfd7b7ffec9c6cc7335013afbc5e4aa4b8271c590e88",
+      "logical_map": "Map/MainField/C-7/C-7_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3247922246,
+      "kind": "miniboss",
+      "name": "Stone Talus - Gerudo Desert [3A1F23A4]",
+      "region": "Gerudo Desert",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 975119268,
+      "watch_flag": "MainField_Enemy_Golem_Middle_975119268",
+      "position": [
+        -2096.45751953125,
+        318.46441650390625,
+        3037.90625
+      ],
+      "resource": "content/Map/MainField/C-8/C-8_Dynamic.smubin",
+      "map_sha256": "7bd31c79dc14fe9ecffb0c738a328ccdb86f06fe7242192603caa73837fda6d0",
+      "logical_map": "Map/MainField/C-8/C-8_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3240585444,
+      "kind": "miniboss",
+      "name": "Molduking - Gerudo Desert [689DEA85]",
+      "region": "Gerudo Desert",
+      "category": [
+        "Minibosses",
+        "The Champions' Ballad DLC"
+      ],
+      "requires": "|Progressive Remote Bomb|",
+      "family": "molduga",
+      "actor": "Enemy_SandwormR",
+      "hash_id": 1755179653,
+      "watch_flag": "MainField_Enemy_SandwormR_1755179653",
+      "position": [
+        -2391.182373046875,
+        119.09212493896484,
+        3733.19482421875
+      ],
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/C-8/C-8_Static.smubin",
+      "map_sha256": "f3a7567d4b2b60b5ccccdc1783ba51c1a5c2dc783898404f47d0693e50fe5fed",
+      "logical_map": "Map/MainField/C-8/C-8_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3241353596,
+      "kind": "miniboss",
+      "name": "Stalnox - Great Hyrule Forest [BED73911]",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Bone",
+      "hash_id": 3201775889,
+      "watch_flag": "MainField_Enemy_Giant_Bone_3201775889",
+      "position": [
+        -1273.5,
+        213.07742309570312,
+        -2113.5
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/D-2/D-2_Static.smubin",
+      "map_sha256": "522a72b0a02b1bcf5780895352df0e59e680f29be3a931853c897342893d1b43",
+      "logical_map": "Map/MainField/D-2/D-2_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3242008171,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Hyrule Ridge [935DF7F5]",
+      "region": "Hyrule Ridge",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 2472409077,
+      "watch_flag": "MainField_Enemy_Giant_Middle_2472409077",
+      "position": [
+        -1534.88134765625,
+        214.8236083984375,
+        -171.59173583984375
+      ],
+      "resource": "content/Map/MainField/D-4/D-4_Dynamic.smubin",
+      "map_sha256": "27e1a365723838b1092a9d611a82f08e3e0c798a3f602ccf21c38d2d30eeb8f0",
+      "logical_map": "Map/MainField/D-4/D-4_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3243369425,
+      "kind": "miniboss",
+      "name": "Black Hinox - Central Hyrule [32BBD5B2]",
+      "region": "Central Hyrule",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Senior",
+      "hash_id": 851170738,
+      "watch_flag": "MainField_Enemy_Giant_Senior_851170738",
+      "position": [
+        -1177.05029296875,
+        139.4813232421875,
+        118.50634765625
+      ],
+      "resource": "content/Map/MainField/D-5/D-5_Dynamic.smubin",
+      "map_sha256": "295414da96f6fc0814ef9df4f0937774088dd451f6435acdbf90feeca1123eab",
+      "logical_map": "Map/MainField/D-5/D-5_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3243588693,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Central Hyrule [74360820]",
+      "region": "Central Hyrule",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 1949698080,
+      "watch_flag": "MainField_Enemy_Giant_Middle_1949698080",
+      "position": [
+        -1704.296875,
+        111.59847259521484,
+        1776.78125
+      ],
+      "resource": "content/Map/MainField/D-6/D-6_Dynamic.smubin",
+      "map_sha256": "8f37809558e66dea954dd95d1ba17ebf1700b56d629b04b019e27bf25ee4e67e",
+      "logical_map": "Map/MainField/D-6/D-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3238218039,
+      "kind": "miniboss",
+      "name": "Stone Talus - Great Plateau [D72F6746]",
+      "region": "Great Plateau",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 3610208070,
+      "watch_flag": "MainField_Enemy_Golem_Junior_3610208070",
+      "position": [
+        -1087.75341796875,
+        179.1353759765625,
+        1663.178955078125
+      ],
+      "resource": "content/Map/MainField/D-6/D-6_Dynamic.smubin",
+      "map_sha256": "8f37809558e66dea954dd95d1ba17ebf1700b56d629b04b019e27bf25ee4e67e",
+      "logical_map": "Map/MainField/D-6/D-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3239775602,
+      "kind": "miniboss",
+      "name": "Stone Talus - Gerudo Highlands [C32368A8]",
+      "region": "Gerudo Highlands",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 3273877672,
+      "watch_flag": "MainField_Enemy_Golem_Middle_3273877672",
+      "position": [
+        -1896.0,
+        200.68356323242188,
+        2044.677734375
+      ],
+      "resource": "content/Map/MainField/D-7/D-7_Dynamic.smubin",
+      "map_sha256": "9399d55ffa2595178a2292b0c046a7eddae15668faa312a73e022645df3d3358",
+      "logical_map": "Map/MainField/D-7/D-7_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3241656185,
+      "kind": "miniboss",
+      "name": "Stone Talus - Lake Hylia [1D4D9298]",
+      "region": "Lake Hylia",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 491623064,
+      "watch_flag": "MainField_Enemy_Golem_Middle_491623064",
+      "position": [
+        -971.1309814453125,
+        355.70867919921875,
+        3236.137939453125
+      ],
+      "resource": "content/Map/MainField/D-8/D-8_Dynamic.smubin",
+      "map_sha256": "c6ea2234f09dc8cd8a0a085aa1842a7c1b5290fada98c7d2d72211bbff00bdf9",
+      "logical_map": "Map/MainField/D-8/D-8_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3251976224,
+      "kind": "miniboss",
+      "name": "Stalnox - Lake Hylia [A7D6898C]",
+      "region": "Lake Hylia",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Bone",
+      "hash_id": 2815854988,
+      "watch_flag": "MainField_Enemy_Giant_Bone_2815854988",
+      "position": [
+        -1062.0,
+        275.2412109375,
+        3771.5
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/D-8/D-8_Static.smubin",
+      "map_sha256": "1140aad4714de7da8e63af62438cb523755e8c9c8a633d0c0b63447bfc862db4",
+      "logical_map": "Map/MainField/D-8/D-8_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3238227294,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Great Hyrule Forest [D8CB2BB1]",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 3637193649,
+      "watch_flag": "MainField_Enemy_Giant_Middle_3637193649",
+      "position": [
+        -480.5544128417969,
+        278.987548828125,
+        -2039.6402587890625
+      ],
+      "resource": "content/Map/MainField/E-2/E-2_Dynamic.smubin",
+      "map_sha256": "013881fc732ba700e8bf800f8c030732fe0178814db0e9863236dd9610b617f8",
+      "logical_map": "Map/MainField/E-2/E-2_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3239927803,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Great Hyrule Forest [F338510E]",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 4080554254,
+      "watch_flag": "MainField_Enemy_Giant_Middle_4080554254",
+      "position": [
+        -752.486328125,
+        187.4080352783203,
+        -1268.1246337890625
+      ],
+      "resource": "content/Map/MainField/E-3/E-3_Dynamic.smubin",
+      "map_sha256": "24f02ae4d1c98ca5746bf8efad1cbcf94b5c4d35f8dec6ee8a86d3de354618fe",
+      "logical_map": "Map/MainField/E-3/E-3_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3245150141,
+      "kind": "miniboss",
+      "name": "Stone Talus - Central Hyrule [E6A728ED]",
+      "region": "Central Hyrule",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Senior",
+      "hash_id": 3869714669,
+      "watch_flag": "MainField_Enemy_Golem_Senior_3869714669",
+      "position": [
+        -768.742919921875,
+        152.7621612548828,
+        -804.486572265625
+      ],
+      "resource": "content/Map/MainField/E-4/E-4_Dynamic.smubin",
+      "map_sha256": "f825e865a1a699742b793b4ec2073bc6b11ccc07c0d0168251a322480fa06b98",
+      "logical_map": "Map/MainField/E-4/E-4_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3249395070,
+      "kind": "miniboss",
+      "name": "Stalnox - Central Hyrule [04675B3E]",
+      "region": "Central Hyrule",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Bone_AllDay",
+      "hash_id": 73882430,
+      "watch_flag": "MainField_Enemy_Giant_Bone_AllDay_73882430",
+      "position": [
+        -491.3448181152344,
+        126.08099365234375,
+        -1009.8152465820312
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/E-4/E-4_Static.smubin",
+      "map_sha256": "143b2a2074cfe720c561b2e23f115d97502f029e0e79ad2844bcbc579cc582f0",
+      "logical_map": "Map/MainField/E-4/E-4_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3241148879,
+      "kind": "miniboss",
+      "name": "Stone Talus - Central Hyrule [73DE82A1]",
+      "region": "Central Hyrule",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Senior",
+      "hash_id": 1943962273,
+      "watch_flag": "MainField_Enemy_Golem_Senior_1943962273",
+      "position": [
+        -136.646484375,
+        127.21487426757812,
+        -956.2634887695312
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/E-4/E-4_Static.smubin",
+      "map_sha256": "143b2a2074cfe720c561b2e23f115d97502f029e0e79ad2844bcbc579cc582f0",
+      "logical_map": "Map/MainField/E-4/E-4_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3246768855,
+      "kind": "miniboss",
+      "name": "Stone Talus - Dueling Peaks [8D20D02D]",
+      "region": "Dueling Peaks",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 2367737901,
+      "watch_flag": "MainField_Enemy_Golem_Middle_2367737901",
+      "position": [
+        -176.93313598632812,
+        132.59005737304688,
+        1771.619384765625
+      ],
+      "resource": "content/Map/MainField/E-6/E-6_Dynamic.smubin",
+      "map_sha256": "06c013bc38a7a5ea97a56a237f9cc6cd692ca48b4c895cef08cf1df9b36f7246",
+      "logical_map": "Map/MainField/E-6/E-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3251763124,
+      "kind": "miniboss",
+      "name": "Stone Talus - Central Hyrule [E33CD1FA]",
+      "region": "Central Hyrule",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 3812413946,
+      "watch_flag": "MainField_Enemy_Golem_Middle_3812413946",
+      "position": [
+        -514.7517700195312,
+        127.48651885986328,
+        1181.7398681640625
+      ],
+      "resource": "content/Map/MainField/E-6/E-6_Dynamic.smubin",
+      "map_sha256": "06c013bc38a7a5ea97a56a237f9cc6cd692ca48b4c895cef08cf1df9b36f7246",
+      "logical_map": "Map/MainField/E-6/E-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3251198554,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Great Hyrule Forest [96D18D96]",
+      "region": "Great Hyrule Forest",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 2530315670,
+      "watch_flag": "MainField_Enemy_Giant_Middle_2530315670",
+      "position": [
+        341.82000732421875,
+        278.72998046875,
+        -3116.14013671875
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/F-1/F-1_Static.smubin",
+      "map_sha256": "9be5a78298751d220b89d7c03500cde15e12fd63c00643637f1534ffe96e4b2c",
+      "logical_map": "Map/MainField/F-1/F-1_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3244989727,
+      "kind": "miniboss",
+      "name": "Stone Talus - Central Hyrule [32DB1102]",
+      "region": "Central Hyrule",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 853217538,
+      "watch_flag": "MainField_Enemy_Golem_Middle_853217538",
+      "position": [
+        771.5,
+        152.5275421142578,
+        -1014.0
+      ],
+      "resource": "content/Map/MainField/F-3/F-3_Dynamic.smubin",
+      "map_sha256": "ebc3031aa47a1feaae6d8a0e3ce94652b427c3f16ee2b6b785955ae17069fe1c",
+      "logical_map": "Map/MainField/F-3/F-3_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3248649040,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Central Hyrule [4B79EE4C]",
+      "region": "Central Hyrule",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 1266282060,
+      "watch_flag": "MainField_Enemy_Giant_Middle_1266282060",
+      "position": [
+        626.4873046875,
+        123.08964538574219,
+        -305.544921875
+      ],
+      "resource": "content/Map/MainField/F-4/F-4_Dynamic.smubin",
+      "map_sha256": "0d903685400cc86d3d57302d63951fba0682053aec6651ee9ec1d032cb429227",
+      "logical_map": "Map/MainField/F-4/F-4_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3248349155,
+      "kind": "miniboss",
+      "name": "Stalnox - Central Hyrule [4CBE97B9]",
+      "region": "Central Hyrule",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Bone",
+      "hash_id": 1287559097,
+      "watch_flag": "MainField_Enemy_Giant_Bone_1287559097",
+      "position": [
+        256.5,
+        142.48538208007812,
+        -913.5000610351562
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/F-4/F-4_Static.smubin",
+      "map_sha256": "a1b2f32496245fba53a56cb04d7a442d4e3a735cc138f8feb42f7ed9ba055bd0",
+      "logical_map": "Map/MainField/F-4/F-4_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3254735327,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Central Hyrule [DF2B9A50]",
+      "region": "Central Hyrule",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 3744176720,
+      "watch_flag": "MainField_Enemy_Giant_Middle_3744176720",
+      "position": [
+        421.0,
+        161.27197265625,
+        329.5
+      ],
+      "resource": "content/Map/MainField/F-5/F-5_Dynamic.smubin",
+      "map_sha256": "1c1f0e0c161131b508d1ef10cc0b531c065be5457a4213968bc16729de51c2fd",
+      "logical_map": "Map/MainField/F-5/F-5_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3244930085,
+      "kind": "miniboss",
+      "name": "Stone Talus - Lake Hylia [1CB621C9]",
+      "region": "Lake Hylia",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 481698249,
+      "watch_flag": "MainField_Enemy_Golem_Junior_481698249",
+      "position": [
+        359.3416748046875,
+        114.45487976074219,
+        1904.0146484375
+      ],
+      "resource": "content/Map/MainField/F-6/F-6_Dynamic.smubin",
+      "map_sha256": "717d85daefea94dd1e2ba4d8218ad6ae7eb94a34ee0221c99e1a6e6543ac06d7",
+      "logical_map": "Map/MainField/F-6/F-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3254398257,
+      "kind": "miniboss",
+      "name": "Stone Talus - Dueling Peaks [FC63C8D7]",
+      "region": "Dueling Peaks",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 4234397911,
+      "watch_flag": "MainField_Enemy_Golem_Junior_4234397911",
+      "position": [
+        705.3431396484375,
+        137.62451171875,
+        1471.8834228515625
+      ],
+      "resource": "content/Map/MainField/F-6/F-6_Dynamic.smubin",
+      "map_sha256": "717d85daefea94dd1e2ba4d8218ad6ae7eb94a34ee0221c99e1a6e6543ac06d7",
+      "logical_map": "Map/MainField/F-6/F-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3253951639,
+      "kind": "miniboss",
+      "name": "Stalnox - Lake Hylia [B144DDD3]",
+      "region": "Lake Hylia",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Bone",
+      "hash_id": 2974080467,
+      "watch_flag": "MainField_Enemy_Giant_Bone_2974080467",
+      "position": [
+        100.49996948242188,
+        111.27676391601562,
+        3371.0
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/F-8/F-8_Static.smubin",
+      "map_sha256": "c55194bc2cad7df88ae220aaefbcfcf60071bdc2123718dfdbe81cf31e4c877a",
+      "logical_map": "Map/MainField/F-8/F-8_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3254514269,
+      "kind": "miniboss",
+      "name": "Igneo Talus - Eldin [7C0089B5]",
+      "region": "Eldin",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Fire",
+      "hash_id": 2080410037,
+      "watch_flag": "MainField_Enemy_Golem_Fire_2080410037",
+      "position": [
+        1336.09765625,
+        507.311279296875,
+        -3043.211669921875
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/G-1/G-1_Static.smubin",
+      "map_sha256": "0de2b3ba0058b66875c9aab72ae870ab93847e94861a9b8f04bcd2b9586aa316",
+      "logical_map": "Map/MainField/G-1/G-1_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3253675878,
+      "kind": "miniboss",
+      "name": "Igneo Talus - Eldin [7DEA06F5]",
+      "region": "Eldin",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Fire",
+      "hash_id": 2112489205,
+      "watch_flag": "MainField_Enemy_Golem_Fire_2112489205",
+      "position": [
+        1795.541015625,
+        394.18463134765625,
+        -1746.731201171875
+      ],
+      "resource": "content/Map/MainField/G-3/G-3_Dynamic.smubin",
+      "map_sha256": "3218f3f434529201d734a842feea7b237765d9d7f4d60d6feec36696caac1640",
+      "logical_map": "Map/MainField/G-3/G-3_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3244149283,
+      "kind": "miniboss",
+      "name": "Hinox - Lanayru [5F8470E2]",
+      "region": "Lanayru",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Junior",
+      "hash_id": 1602515170,
+      "watch_flag": "MainField_Enemy_Giant_Junior_1602515170",
+      "position": [
+        1969.03564453125,
+        115.4423828125,
+        97.39785766601562
+      ],
+      "resource": "content/Map/MainField/G-5/G-5_Dynamic.smubin",
+      "map_sha256": "8d4e2943973f8696d0db0141a01fcfae0762c210d558448e6e5f56579c8486e7",
+      "logical_map": "Map/MainField/G-5/G-5_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3238230719,
+      "kind": "miniboss",
+      "name": "Stone Talus - Dueling Peaks [5679D6F9]",
+      "region": "Dueling Peaks",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 1450825465,
+      "watch_flag": "MainField_Enemy_Golem_Junior_1450825465",
+      "position": [
+        1186.6202392578125,
+        254.28482055664062,
+        1642.767578125
+      ],
+      "resource": "content/Map/MainField/G-6/G-6_Dynamic.smubin",
+      "map_sha256": "e597b73ff019e1b3b1f75c4b0922c96a49d1322bd79b30185c494c4e2df5e764",
+      "logical_map": "Map/MainField/G-6/G-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3239889072,
+      "kind": "miniboss",
+      "name": "Stone Talus - Dueling Peaks [77C3F9C4]",
+      "region": "Dueling Peaks",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 2009332164,
+      "watch_flag": "MainField_Enemy_Golem_Junior_2009332164",
+      "position": [
+        1465.907470703125,
+        203.7691192626953,
+        1328.9095458984375
+      ],
+      "resource": "content/Map/MainField/G-6/G-6_Dynamic.smubin",
+      "map_sha256": "e597b73ff019e1b3b1f75c4b0922c96a49d1322bd79b30185c494c4e2df5e764",
+      "logical_map": "Map/MainField/G-6/G-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3253596438,
+      "kind": "miniboss",
+      "name": "Stone Talus - Dueling Peaks [E6DCAAB1]",
+      "region": "Dueling Peaks",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 3873221297,
+      "watch_flag": "MainField_Enemy_Golem_Junior_3873221297",
+      "position": [
+        1257.11572265625,
+        355.7956848144531,
+        2176.521728515625
+      ],
+      "resource": "content/Map/MainField/G-6/G-6_Dynamic.smubin",
+      "map_sha256": "e597b73ff019e1b3b1f75c4b0922c96a49d1322bd79b30185c494c4e2df5e764",
+      "logical_map": "Map/MainField/G-6/G-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3240586406,
+      "kind": "miniboss",
+      "name": "Hinox - Faron [71771F89]",
+      "region": "Faron",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Junior",
+      "hash_id": 1903632265,
+      "watch_flag": "MainField_Enemy_Giant_Junior_1903632265",
+      "position": [
+        1330.546875,
+        180.3846893310547,
+        2623.9375
+      ],
+      "resource": "content/Map/MainField/G-7/G-7_Dynamic.smubin",
+      "map_sha256": "ec7510dbe86d0e9cce9e673119e1fd65a6d18d7243ed7936f62e5c07cbd48d09",
+      "logical_map": "Map/MainField/G-7/G-7_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3241053762,
+      "kind": "miniboss",
+      "name": "Stalnox - Dueling Peaks [65429CAF]",
+      "region": "Dueling Peaks",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Bone",
+      "hash_id": 1698864303,
+      "watch_flag": "MainField_Enemy_Giant_Bone_1698864303",
+      "position": [
+        1940.5,
+        144.4051971435547,
+        2396.5
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/G-7/G-7_Static.smubin",
+      "map_sha256": "619424a123e79d9bcf3abbffb9182360f4ecf15cac0ba5f12d4892c500a32096",
+      "logical_map": "Map/MainField/G-7/G-7_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3239222560,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Lake Hylia [C30ECEC8]",
+      "region": "Lake Hylia",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 3272527560,
+      "watch_flag": "MainField_Enemy_Giant_Middle_3272527560",
+      "position": [
+        1031.4295654296875,
+        127.21514892578125,
+        3496.26171875
+      ],
+      "resource": "content/Map/MainField/G-8/G-8_Dynamic.smubin",
+      "map_sha256": "c08ec3ce9afa97bb8fb0f9c2487ff9b95729927fe831a79e31f54ab9de455949",
+      "logical_map": "Map/MainField/G-8/G-8_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3240299839,
+      "kind": "miniboss",
+      "name": "Stone Talus - Faron [E39027D1]",
+      "region": "Faron",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 3817875409,
+      "watch_flag": "MainField_Enemy_Golem_Junior_3817875409",
+      "position": [
+        1392.0201416015625,
+        107.03223419189453,
+        3727.5908203125
+      ],
+      "resource": "content/Map/MainField/G-8/G-8_Dynamic.smubin",
+      "map_sha256": "c08ec3ce9afa97bb8fb0f9c2487ff9b95729927fe831a79e31f54ab9de455949",
+      "logical_map": "Map/MainField/G-8/G-8_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3243255977,
+      "kind": "miniboss",
+      "name": "Stone Talus - Faron [F43666AA]",
+      "region": "Faron",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 4097205930,
+      "watch_flag": "MainField_Enemy_Golem_Junior_4097205930",
+      "position": [
+        1690.725830078125,
+        165.26773071289062,
+        3335.62060546875
+      ],
+      "resource": "content/Map/MainField/G-8/G-8_Dynamic.smubin",
+      "map_sha256": "c08ec3ce9afa97bb8fb0f9c2487ff9b95729927fe831a79e31f54ab9de455949",
+      "logical_map": "Map/MainField/G-8/G-8_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3249620230,
+      "kind": "miniboss",
+      "name": "Hinox - Faron [F45E39F4]",
+      "region": "Faron",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Junior",
+      "hash_id": 4099815924,
+      "watch_flag": "MainField_Enemy_Giant_Junior_4099815924",
+      "position": [
+        1493.3946533203125,
+        306.7704772949219,
+        3092.13818359375
+      ],
+      "resource": "content/Map/MainField/G-8/G-8_Dynamic.smubin",
+      "map_sha256": "c08ec3ce9afa97bb8fb0f9c2487ff9b95729927fe831a79e31f54ab9de455949",
+      "logical_map": "Map/MainField/G-8/G-8_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3245670335,
+      "kind": "miniboss",
+      "name": "Black Hinox - Eldin [CB464CAD]",
+      "region": "Eldin",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Senior",
+      "hash_id": 3410381997,
+      "watch_flag": "MainField_Enemy_Giant_Senior_3410381997",
+      "position": [
+        2917.418212890625,
+        343.684814453125,
+        -3561.400390625
+      ],
+      "resource": "content/Map/MainField/H-1/H-1_Dynamic.smubin",
+      "map_sha256": "7b127004235222d3974569626674c21329cbc75c3540cd6649dc41caddbd8821",
+      "logical_map": "Map/MainField/H-1/H-1_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3249882627,
+      "kind": "miniboss",
+      "name": "Igneo Talus - Eldin [F6F2E033]",
+      "region": "Eldin",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Fire",
+      "hash_id": 4143112243,
+      "watch_flag": "MainField_Enemy_Golem_Fire_4143112243",
+      "position": [
+        2146.5,
+        535.8251953125,
+        -3011.5
+      ],
+      "resource": "content/Map/MainField/H-1/H-1_Dynamic.smubin",
+      "map_sha256": "7b127004235222d3974569626674c21329cbc75c3540cd6649dc41caddbd8821",
+      "logical_map": "Map/MainField/H-1/H-1_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3245962545,
+      "kind": "miniboss",
+      "name": "Igneo Talus Titan - Eldin [27CD3C67]",
+      "region": "Eldin",
+      "category": [
+        "Minibosses",
+        "The Champions' Ballad DLC"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Fire_R",
+      "hash_id": 667761767,
+      "watch_flag": "MainField_Enemy_Golem_Fire_R_667761767",
+      "position": [
+        2160.106201171875,
+        500.65277099609375,
+        -3190.370361328125
+      ],
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/H-1/H-1_Static.smubin",
+      "map_sha256": "c1e4545a2364c5d618cc0832c58d472ea81f52c0fb688da38370b978766c67ba",
+      "logical_map": "Map/MainField/H-1/H-1_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3241599148,
+      "kind": "miniboss",
+      "name": "Igneo Talus - Eldin [BD926025]",
+      "region": "Eldin",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Fire",
+      "hash_id": 3180486693,
+      "watch_flag": "MainField_Enemy_Golem_Fire_3180486693",
+      "position": [
+        2141.55712890625,
+        559.1337890625,
+        -2178.47119140625
+      ],
+      "resource": "content/Map/MainField/H-2/H-2_Dynamic.smubin",
+      "map_sha256": "09b8d84cf9cc5a298b93d000b2e20c445dacc9344abfd0a6e13a7d51d019bfa6",
+      "logical_map": "Map/MainField/H-2/H-2_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3245898015,
+      "kind": "miniboss",
+      "name": "Igneo Talus - Eldin [51CC8032]",
+      "region": "Eldin",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Fire",
+      "hash_id": 1372356658,
+      "watch_flag": "MainField_Enemy_Golem_Fire_1372356658",
+      "position": [
+        2372.51708984375,
+        507.8928527832031,
+        -1998.615234375
+      ],
+      "resource": "content/Map/MainField/H-3/H-3_Dynamic.smubin",
+      "map_sha256": "44640edd8f9c5b30a5fdc1ea99c42e2203c7869109eb3d7e7e220cb47e8b6538",
+      "logical_map": "Map/MainField/H-3/H-3_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3240097250,
+      "kind": "miniboss",
+      "name": "Black Hinox - Lanayru [DF02B9D2]",
+      "region": "Lanayru",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Senior",
+      "hash_id": 3741497810,
+      "watch_flag": "MainField_Enemy_Giant_Senior_3741497810",
+      "position": [
+        2485.102294921875,
+        152.09019470214844,
+        -133.5557861328125
+      ],
+      "resource": "content/Map/MainField/H-4/H-4_Dynamic.smubin",
+      "map_sha256": "79e0c71d99bb81db4a27cddd1052f26e2dd8960ee50a342a62cbb9d88c5fd439",
+      "logical_map": "Map/MainField/H-4/H-4_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3248096455,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Lanayru [7C2A231D]",
+      "region": "Lanayru",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 2083136285,
+      "watch_flag": "MainField_Enemy_Giant_Middle_2083136285",
+      "position": [
+        2930.51416015625,
+        312.5434875488281,
+        -298.39996337890625
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/H-4/H-4_Static.smubin",
+      "map_sha256": "1dd966f7f3bd14e2220694d99340fcd0c9b3ec04de8bd49fd849221f0dcca89d",
+      "logical_map": "Map/MainField/H-4/H-4_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3242744537,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Necluda [D4EBD996]",
+      "region": "Necluda",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 3572226454,
+      "watch_flag": "MainField_Enemy_Giant_Middle_3572226454",
+      "position": [
+        2990.90087890625,
+        251.3900909423828,
+        787.9237060546875
+      ],
+      "resource": "content/Map/MainField/H-5/H-5_Dynamic.smubin",
+      "map_sha256": "2bd4277cba71efa88b200c0a3f81125b9c877fd2efdd23a0f88cf96280a6e6d1",
+      "logical_map": "Map/MainField/H-5/H-5_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3254364191,
+      "kind": "miniboss",
+      "name": "Hinox - Necluda [6D4936B2]",
+      "region": "Necluda",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Junior",
+      "hash_id": 1833514674,
+      "watch_flag": "MainField_Enemy_Giant_Junior_1833514674",
+      "position": [
+        2414.716796875,
+        304.6875305175781,
+        1177.8350830078125
+      ],
+      "resource": "content/Map/MainField/H-6/H-6_Dynamic.smubin",
+      "map_sha256": "10106a73c821cc38541ec86ef231c8105cd65173a64feb66113b81013ac5d640",
+      "logical_map": "Map/MainField/H-6/H-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3253592359,
+      "kind": "miniboss",
+      "name": "Stone Talus - Necluda [DBDA3E11]",
+      "region": "Necluda",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 3688513041,
+      "watch_flag": "MainField_Enemy_Golem_Junior_3688513041",
+      "position": [
+        2527.5,
+        241.9990997314453,
+        1904.5
+      ],
+      "resource": "content/Map/MainField/H-6/H-6_Dynamic.smubin",
+      "map_sha256": "10106a73c821cc38541ec86ef231c8105cd65173a64feb66113b81013ac5d640",
+      "logical_map": "Map/MainField/H-6/H-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3251438505,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Faron [37CF400F]",
+      "region": "Faron",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 936329231,
+      "watch_flag": "MainField_Enemy_Giant_Middle_936329231",
+      "position": [
+        2693.697998046875,
+        273.8866882324219,
+        2967.56689453125
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/H-7/H-7_Static.smubin",
+      "map_sha256": "de3c5be62f1d101bfe13eca502b560dce7a2bbdee9a09a7e182079b2982e6556",
+      "logical_map": "Map/MainField/H-7/H-7_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3243989328,
+      "kind": "miniboss",
+      "name": "Hinox - Faron [C6F41AEA]",
+      "region": "Faron",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Junior",
+      "hash_id": 3337886442,
+      "watch_flag": "MainField_Enemy_Giant_Junior_3337886442",
+      "position": [
+        2768.060302734375,
+        258.1331481933594,
+        2711.582763671875
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/H-7/H-7_Static.smubin",
+      "map_sha256": "de3c5be62f1d101bfe13eca502b560dce7a2bbdee9a09a7e182079b2982e6556",
+      "logical_map": "Map/MainField/H-7/H-7_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3244553094,
+      "kind": "miniboss",
+      "name": "Black Hinox - Faron [E1A44550]",
+      "region": "Faron",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Senior",
+      "hash_id": 3785639248,
+      "watch_flag": "MainField_Enemy_Giant_Senior_3785639248",
+      "position": [
+        2420.75341796875,
+        327.4729919433594,
+        2782.59521484375
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/H-7/H-7_Static.smubin",
+      "map_sha256": "de3c5be62f1d101bfe13eca502b560dce7a2bbdee9a09a7e182079b2982e6556",
+      "logical_map": "Map/MainField/H-7/H-7_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3248813574,
+      "kind": "miniboss",
+      "name": "Stalnox - Faron [DC8D9024]",
+      "region": "Faron",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Bone",
+      "hash_id": 3700264996,
+      "watch_flag": "MainField_Enemy_Giant_Bone_3700264996",
+      "position": [
+        2078.61669921875,
+        110.21531677246094,
+        3450.66455078125
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/H-8/H-8_Static.smubin",
+      "map_sha256": "ab3cd180db47694e895b26a727a80cb2c3017fba3b3bd658488c3dcbfccb82fd",
+      "logical_map": "Map/MainField/H-8/H-8_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3249394241,
+      "kind": "miniboss",
+      "name": "Black Hinox - Akkala [3D4A11F8]",
+      "region": "Akkala",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Senior",
+      "hash_id": 1028264440,
+      "watch_flag": "MainField_Enemy_Giant_Senior_1028264440",
+      "position": [
+        3489.380859375,
+        179.10003662109375,
+        -3335.78515625
+      ],
+      "resource": "content/Map/MainField/I-1/I-1_Dynamic.smubin",
+      "map_sha256": "6794d1c13353e466bb70a99a409997b3629c234983db619bb00192c436336ec1",
+      "logical_map": "Map/MainField/I-1/I-1_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3238695248,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Akkala [52897F12]",
+      "region": "Akkala",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 1384742674,
+      "watch_flag": "MainField_Enemy_Giant_Middle_1384742674",
+      "position": [
+        3288.75390625,
+        323.0764465332031,
+        -1256.2421875
+      ],
+      "resource": "content/Map/MainField/I-3/I-3_Dynamic.smubin",
+      "map_sha256": "4841571077438c8dcb8a4bffd5ccea55c3d540abb6368db62656ae23054d5a72",
+      "logical_map": "Map/MainField/I-3/I-3_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3246010594,
+      "kind": "miniboss",
+      "name": "Stone Talus - Lanayru [3F6AA056]",
+      "region": "Lanayru",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 1063952470,
+      "watch_flag": "MainField_Enemy_Golem_Middle_1063952470",
+      "position": [
+        3992.2734375,
+        353.0322265625,
+        -158.81549072265625
+      ],
+      "resource": "content/Map/MainField/I-4/I-4_Dynamic.smubin",
+      "map_sha256": "c4ebf1097e6f511fb43e0e6eab09313c9a8f96a6814f267d0e07d1aaef950339",
+      "logical_map": "Map/MainField/I-4/I-4_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3246876479,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Lanayru [E465A74D]",
+      "region": "Lanayru",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 3831867213,
+      "watch_flag": "MainField_Enemy_Giant_Middle_3831867213",
+      "position": [
+        3526.26171875,
+        251.17626953125,
+        364.96875
+      ],
+      "resource": "content/Map/MainField/I-5/I-5_Dynamic.smubin",
+      "map_sha256": "c9103ade50c2870b56be006c9d2e8e1f0582806de252c570f446258e393f2082",
+      "logical_map": "Map/MainField/I-5/I-5_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3240236510,
+      "kind": "miniboss",
+      "name": "Stone Talus - Necluda [085196DD]",
+      "region": "Necluda",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 139564765,
+      "watch_flag": "MainField_Enemy_Golem_Junior_139564765",
+      "position": [
+        3199.40966796875,
+        173.37844848632812,
+        1904.3590087890625
+      ],
+      "resource": "content/Map/MainField/I-6/I-6_Dynamic.smubin",
+      "map_sha256": "485665e869c14730e34a25cf4252cdddf2a94a0f0b92ef73f83dc081de123d7b",
+      "logical_map": "Map/MainField/I-6/I-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3254488761,
+      "kind": "miniboss",
+      "name": "Hinox - Necluda [C7AD24C5]",
+      "region": "Necluda",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Junior",
+      "hash_id": 3350013125,
+      "watch_flag": "MainField_Enemy_Giant_Junior_3350013125",
+      "position": [
+        3250.9375,
+        268.7547912597656,
+        1331.625
+      ],
+      "resource": "content/Map/MainField/I-6/I-6_Dynamic.smubin",
+      "map_sha256": "485665e869c14730e34a25cf4252cdddf2a94a0f0b92ef73f83dc081de123d7b",
+      "logical_map": "Map/MainField/I-6/I-6_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3246485428,
+      "kind": "miniboss",
+      "name": "Hinox - Necluda [1640D6A7]",
+      "region": "Necluda",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Junior",
+      "hash_id": 373348007,
+      "watch_flag": "MainField_Enemy_Giant_Junior_373348007",
+      "position": [
+        3210.172607421875,
+        172.00546264648438,
+        2996.328125
+      ],
+      "resource": "content/Map/MainField/I-7/I-7_Dynamic.smubin",
+      "map_sha256": "23cef3c23536d5a2a03fabd271c00f662ec0cff66c7ec415795212c37e10cdb9",
+      "logical_map": "Map/MainField/I-7/I-7_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3245627243,
+      "kind": "miniboss",
+      "name": "Stone Talus - Faron [DCFED0B2]",
+      "region": "Faron",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Junior",
+      "hash_id": 3707687090,
+      "watch_flag": "MainField_Enemy_Golem_Junior_3707687090",
+      "position": [
+        3272.5166015625,
+        133.05174255371094,
+        3409.85400390625
+      ],
+      "resource": "content/Map/MainField/I-8/I-8_Dynamic.smubin",
+      "map_sha256": "7ccdcbf923079f108f2cd1d3b892cf37de42f8234cbf8d1350c0ef1fbc5ea70e",
+      "logical_map": "Map/MainField/I-8/I-8_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3250668901,
+      "kind": "miniboss",
+      "name": "Stalnox - Akkala [962D3E0D]",
+      "region": "Akkala",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Bone",
+      "hash_id": 2519547405,
+      "watch_flag": "MainField_Enemy_Giant_Bone_2519547405",
+      "position": [
+        4146.6923828125,
+        130.3513946533203,
+        -2225.2431640625
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/J-2/J-2_Static.smubin",
+      "map_sha256": "f1502b54e939af517d237b3ce8fc53840ff1d5a2e7b1b7bb3bf59d479e41df2f",
+      "logical_map": "Map/MainField/J-2/J-2_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3251024172,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Lanayru [DCE95AC8]",
+      "region": "Lanayru",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 3706280648,
+      "watch_flag": "MainField_Enemy_Giant_Middle_3706280648",
+      "position": [
+        4442.0,
+        160.79347229003906,
+        350.9375
+      ],
+      "resource": "content/Map/MainField/J-5/J-5_Dynamic.smubin",
+      "map_sha256": "db51f9e3f9129fe34a9093d159ebd2590ed1ac0861637a2dbaa4e5d5ed55da94",
+      "logical_map": "Map/MainField/J-5/J-5_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3246637150,
+      "kind": "miniboss",
+      "name": "Stone Talus - Necluda [D264C25F]",
+      "region": "Necluda",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "talus",
+      "actor": "Enemy_Golem_Middle",
+      "hash_id": 3529818719,
+      "watch_flag": "MainField_Enemy_Golem_Middle_3529818719",
+      "position": [
+        4558.5,
+        105.4057846069336,
+        2465.0
+      ],
+      "resource": "content/Map/MainField/J-7/J-7_Dynamic.smubin",
+      "map_sha256": "4214462a585ab34ae5a9519e47fc957ffaacef0465918e761d1a01c2de3f9cdd",
+      "logical_map": "Map/MainField/J-7/J-7_Dynamic.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3248154712,
+      "kind": "miniboss",
+      "name": "Blue Hinox - Faron [72C75295]",
+      "region": "Faron",
+      "category": [
+        "Minibosses"
+      ],
+      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "family": "hinox",
+      "actor": "Enemy_Giant_Middle",
+      "hash_id": 1925665429,
+      "watch_flag": "MainField_Enemy_Giant_Middle_1925665429",
+      "position": [
+        4537.11083984375,
+        110.75968170166016,
+        3701.952392578125
+      ],
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/J-8/J-8_Static.smubin",
+      "map_sha256": "a27b168030c738794d6024fc893f596793a4a9e2a570d8fb2ae930184e9b1ee5",
+      "logical_map": "Map/MainField/J-8/J-8_Static.smubin",
+      "watch_type": "bool",
+      "watch_threshold": 1
+    },
+    {
+      "id": 3254779904,
+      "kind": "boss",
+      "name": "Windblight Ganon - Defeated",
+      "region": "Divine Beast Vah Medoh",
+      "category": [
+        "Bosses"
+      ],
+      "requires": "|Magnesis| AND |Progressive Remote Bomb| AND |Progressive Armor Upgrade| AND ((|@Upgradeable Cold Resistant Head| AND |@Upgradeable Cold Resistant Body| AND |@Upgradeable Legs|) OR (|@Upgradeable Cold Resistant Head| AND |@Upgradeable Body| AND |@Upgradeable Cold Resistant Legs|) OR (|@Upgradeable Head| AND |@Upgradeable Cold Resistant Body| AND |@Upgradeable Cold Resistant Legs|))",
+      "actor": "Enemy_SiteBoss_Bow",
+      "watch_flag": "Defeated_Enemy_SiteBoss_Bow_Num",
+      "scene": "RemainsWind",
+      "watch_type": "s32",
+      "watch_threshold": 1,
+      "resource": "content/Pack/RemainsWind.pack!Map/MainFieldDungeon/RemainsWind/RemainsWind_Static.smubin",
+      "logical_map": "Map/MainFieldDungeon/RemainsWind/RemainsWind_Static.smubin",
+      "map_sha256": "d7a3935703013a19e58c0e28bb842cad2c59c07f3488655be2c7b9c98ce00a68",
+      "hash_id": 2684730666,
+      "position": [
+        6.15655082469857e-08,
+        24.25,
+        23.5
+      ]
+    },
+    {
+      "id": 3254779905,
+      "kind": "boss",
+      "name": "Fireblight Ganon - Defeated",
+      "region": "Divine Beast Vah Rudania",
+      "category": [
+        "Bosses"
+      ],
+      "requires": "|Progressive Armor Upgrade| AND ((|@Upgradeable Flame Resistant Head| AND |@Upgradeable Flame Resistant Body| AND |@Upgradeable Legs|) OR (|@Upgradeable Flame Resistant Head| AND |@Upgradeable Body| AND |@Upgradeable Flame Resistant Legs|) OR (|@Upgradeable Head| AND |@Upgradeable Flame Resistant Body| AND |@Upgradeable Flame Resistant Legs|))",
+      "actor": "Enemy_SiteBoss_Lsword",
+      "watch_flag": "Defeated_Enemy_SiteBoss_Lsword_Num",
+      "scene": "RemainsFire",
+      "watch_type": "s32",
+      "watch_threshold": 1,
+      "resource": "content/Pack/RemainsFire.pack!Map/MainFieldDungeon/RemainsFire/RemainsFire_Static.smubin",
+      "logical_map": "Map/MainFieldDungeon/RemainsFire/RemainsFire_Static.smubin",
+      "map_sha256": "19053169d546663d5c7d920f740e5cad4da423a2c7b5625c6fda46e8c488a430",
+      "hash_id": 674596187,
+      "position": [
+        8.74227794156468e-07,
+        23.5,
+        15.0
+      ]
+    },
+    {
+      "id": 3254779906,
+      "kind": "boss",
+      "name": "Waterblight Ganon - Defeated",
+      "region": "Divine Beast Vah Ruta",
+      "category": [
+        "Bosses"
+      ],
+      "requires": "|Magnesis| AND |Progressive Stasis| AND |Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "actor": "Enemy_SiteBoss_Spear",
+      "watch_flag": "Defeated_Enemy_SiteBoss_Spear_Num",
+      "scene": "RemainsWater",
+      "watch_type": "s32",
+      "watch_threshold": 1,
+      "resource": "content/Pack/RemainsWater.pack!Map/MainFieldDungeon/RemainsWater/RemainsWater_Static.smubin",
+      "logical_map": "Map/MainFieldDungeon/RemainsWater/RemainsWater_Static.smubin",
+      "map_sha256": "c45cdd4d110409c8a4c08b7717e68bbf48751ca8848a14a39dfb0238fb61ed81",
+      "hash_id": 781518966,
+      "position": [
+        3.322065595057211e-06,
+        2.0,
+        -21.5
+      ]
+    },
+    {
+      "id": 3254779907,
+      "kind": "boss",
+      "name": "Thunderblight Ganon - Defeated",
+      "region": "Divine Beast Vah Naboris",
+      "category": [
+        "Bosses"
+      ],
+      "requires": "|Progressive Remote Bomb| AND |Magnesis| AND |Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "actor": "Enemy_SiteBoss_Sword",
+      "watch_flag": "Defeated_Enemy_SiteBoss_Sword_Num",
+      "scene": "RemainsElectric",
+      "watch_type": "s32",
+      "watch_threshold": 1,
+      "resource": "content/Pack/RemainsElectric.pack!Map/MainFieldDungeon/RemainsElectric/RemainsElectric_Static.smubin",
+      "logical_map": "Map/MainFieldDungeon/RemainsElectric/RemainsElectric_Static.smubin",
+      "map_sha256": "ec0a5959dfe62ebef195580ae0697760eb100180b7eaff5d3a2b26a67fb2b7d3",
+      "hash_id": 3700074540,
+      "position": [
+        0.0,
+        94.0,
+        -25.0
+      ]
+    },
+    {
+      "id": 3254779908,
+      "kind": "boss",
+      "name": "Calamity Ganon - Defeated",
+      "region": "Hyrule Castle",
+      "category": [
+        "Bosses"
+      ],
+      "requires": "|Master Sword| OR |Progressive Master Sword| OR |Bow of Light|",
+      "actor": "Enemy_Ganon",
+      "watch_flag": "IsPlayed_Demo145_0",
+      "scene": "MainField",
+      "watch_type": "bool",
+      "watch_threshold": 1,
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/E-4/E-4_Static.smubin",
+      "logical_map": "Map/MainField/E-4/E-4_Static.smubin",
+      "map_sha256": "143b2a2074cfe720c561b2e23f115d97502f029e0e79ad2844bcbc579cc582f0",
+      "hash_id": 108794243,
+      "position": [
+        -254.0,
+        191.01229858398438,
+        -1061.366943359375
+      ]
+    },
+    {
+      "id": 3254779909,
+      "kind": "boss",
+      "name": "Maz Koshia - Defeated",
+      "region": "Final Trial",
+      "category": [
+        "Bosses",
+        "The Champions' Ballad DLC"
+      ],
+      "requires": "|Magnesis| AND |Progressive Stasis| AND |Cryonis| AND |Progressive Armor Upgrade:3| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "actor": "Priest_Boss_Normal",
+      "watch_flag": "Defeated_Priest_Boss_Normal_Num",
+      "scene": "FinalTrial",
+      "watch_type": "s32",
+      "watch_threshold": 1,
+      "placement_actor": "Priest_Boss_MetaAI",
+      "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6",
+      "hash_id": 1645060353,
+      "position": [
+        0.0,
+        0.002440554555505514,
+        900.0
+      ]
+    },
+    {
+      "id": 3254779910,
+      "kind": "boss",
+      "name": "Dark Beast Ganon - Defeated",
+      "region": "Hyrule Castle",
+      "category": [
+        "Bosses"
+      ],
+      "requires": "|Bow of Light|",
+      "actor": "Enemy_GanonBeast",
+      "watch_flag": "Defeated_Enemy_GanonBeast_Num",
+      "watch_type": "s32",
+      "watch_threshold": 1,
+      "scene": "MainField",
+      "resource": "content/Pack/TitleBG.pack!Map/MainField/E-5/E-5_Static.smubin",
+      "logical_map": "Map/MainField/E-5/E-5_Static.smubin",
+      "map_sha256": "cfe4cde301ce94462961ff341318b8993ad4bee8a9bcf0d64c17c8231d4d6361",
+      "hash_id": 2604543743,
+      "position": [
+        -254.00003051757812,
+        125.2079086303711,
+        560.5
+      ]
+    }
+  ]
+}

@@ -4,6 +4,14 @@ import re
 from .resources import binary_modules, decompress
 
 
+def allocation_template(path):
+    path = path.replace('Actor/AIProgram/AP_TowerTerminal.baiprog', 'Actor/AIProgram/DownloadTerminal.baiprog')
+    path = path.replace('Actor/AIProgram/AP_RuneTerminal.baiprog', 'Actor/AIProgram/DownloadTerminal.baiprog')
+    path = path.replace('AP_TowerTerminal', 'FldObj_DownloadTerminal_A_01')
+    path = path.replace('AP_RuneTerminal', 'FldObj_DownloadTerminal_A_01')
+    return re.sub(r"AP_Check_[0-9A-F]{8}", "Item_Ore_A", path)
+
+
 def rstb_name(resource: str) -> str:
     # Archive members inherit the mount of their outer archive. Cemu's overlay
     # uses lower-case aoc; the game's resource table uses upper-case Aoc.
@@ -46,7 +54,7 @@ def update_resource_sizes(table, dump, files: dict[str, bytes]) -> None:
             for entry in oead.Sarc(raw).get_files():
                 if entry.name is None:
                     continue
-                source_name = re.sub(r"AP_Check_[0-9A-F]{8}", "Item_Ore_A", entry.name)
+                source_name = allocation_template(entry.name)
                 old = source_archive.get_file(source_name)
                 if old is None:
                     raise ValueError(f"No allocation template for {path}!{entry.name}")
@@ -54,7 +62,7 @@ def update_resource_sizes(table, dump, files: dict[str, bytes]) -> None:
                       f"{template_path}!{source_name}")
 
     for path, data in sorted(files.items()):
-        template = re.sub(r"AP_Check_[0-9A-F]{8}", "Item_Ore_A", path)
+        template = allocation_template(path)
         visit(path, data, dump.read(template), template)
     # Apply after traversal: shared resources must use the original budget,
     # never compound another language/archive's growth.

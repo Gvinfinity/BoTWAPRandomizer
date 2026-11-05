@@ -34,8 +34,11 @@ internal sealed class ProtocolServerFixture : IDisposable
             items = new[] { new { item = nextItem, location, player = 1, flags = 1, @class = "NetworkItem" } } });
         sentItems++;
     }
+    private readonly HashSet<long> observedChecks = [];
+    public bool HasCheck(long id) { lock (observedChecks) return observedChecks.Contains(id); }
     public string Uri { get; }
     public TaskCompletionSource<long[]> Checks { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+    public TaskCompletionSource<int> GoalStatus { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
     public ProtocolServerFixture(JsonElement slotData, uint location, uint item, TimeSpan? timeout = null, bool manualItems = false)
     {
         stop = new CancellationTokenSource(timeout ?? TimeSpan.FromSeconds(15));
@@ -88,7 +91,7 @@ internal sealed class ProtocolServerFixture : IDisposable
                         case "Connect":
                             await SendPackets(new { cmd = "Connected", team = 0, slot = 1,
                                 players = new[] { new { team = 0, slot = 1, alias = "Test", name = "Test", @class = "NetworkPlayer" } },
-                                missing_locations = new[] { location }, checked_locations = Array.Empty<long>(),
+                                missing_locations = slotData.GetProperty("locations").EnumerateObject().Select(e => long.Parse(e.Name)).ToArray(), checked_locations = Array.Empty<long>(),
                                 slot_info = new Dictionary<string, object> { ["1"] = new { name = "Test", game = "Breath of the Wild", type = 1, group_members = Array.Empty<int>() } },
                                 hint_points = 0, slot_data = slotData });
                             // Live suites release one receipt at a time so independent
@@ -103,7 +106,16 @@ internal sealed class ProtocolServerFixture : IDisposable
                                     items = new[] { new { item, location, player = 1, flags = 1, @class = "NetworkItem" } } });
                             break;
                         case "LocationChecks":
-                            Checks.TrySetResult(packet.GetProperty("locations").EnumerateArray().Select(x => x.GetInt64()).ToArray());
+                            var receivedChecks = packet.GetProperty("locations").EnumerateArray().Select(x => x.GetInt64()).ToArray();
+                            lock (observedChecks) observedChecks.UnionWith(receivedChecks);
+                            Checks.TrySetResult(receivedChecks);
+                            break;
+                        case "StatusUpdate":
+                            // Verify the location packet reached the server before its
+                            // corresponding completion status on the same socket.
+                            GoalStatus.TrySetResult(HasCheck(location)
+                                ? packet.GetProperty("status").GetInt32()
+                                : -1);
                             break;
                     }
                 }

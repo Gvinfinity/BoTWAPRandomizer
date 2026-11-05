@@ -101,3 +101,19 @@ def load_chests():
         keys.add(key)
         bound.append(entry)
     return bound
+
+
+def load_completions():
+    from .static.completions import catalog
+    data = catalog()
+    if data.get('version') != PROTOCOL_VERSION:
+        raise ValueError('Unsupported completion catalog version')
+    ids, names = set(), set()
+    for entry in data['locations']:
+        check_actor_name(entry['id'])
+        if entry['kind'] not in {'shrine', 'tower'} or entry['region'] not in manual_regions:
+            raise ValueError(f'Invalid completion binding: {entry["name"]}')
+        if entry['id'] in ids or entry['name'] in names:
+            raise ValueError('Duplicate completion binding')
+        ids.add(entry['id']); names.add(entry['name'])
+    return data['locations']

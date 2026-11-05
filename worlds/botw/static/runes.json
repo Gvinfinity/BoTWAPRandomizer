@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "source_actor": "FldObj_DownloadTerminal_A_01",
+  "replacement_actor": "AP_RuneTerminal",
+  "disabled_action": "DemoGetItem",
+  "locations": [
+    {
+      "dungeon": "Dungeon009",
+      "item": "Progressive Stasis",
+      "resource": "content/Pack/Dungeon009.pack!Map/CDungeon/Dungeon009/Dungeon009_Static.smubin",
+      "hash_id": 3030563290,
+      "map_sha256": "9cc5ecf40502f8561c66b15a3d6e994dea885f60e74c8503776de93caa078ff0",
+      "actor": "DgnObj_DownloadTerminal_A_01",
+      "activation_flag": "CDungeon_DgnObj_DownloadTerminal_A_01_3030563290",
+      "flag": "IsGet_Obj_StopTimer"
+    },
+    {
+      "dungeon": "Dungeon038",
+      "item": "Magnesis",
+      "resource": "content/Pack/Dungeon038.pack!Map/CDungeon/Dungeon038/Dungeon038_Static.smubin",
+      "hash_id": 2308174590,
+      "map_sha256": "6ab7a8b8ab1d6ac8b9f89a292950b8000f4fe4cd3d96411a54f133b6266895a7",
+      "actor": "DgnObj_DownloadTerminal_A_01",
+      "activation_flag": "CDungeon_DgnObj_DownloadTerminal_A_01_2308174590",
+      "flag": "IsGet_Obj_Magnetglove"
+    },
+    {
+      "dungeon": "Dungeon041",
+      "item": "Progressive Remote Bomb",
+      "resource": "content/Pack/Dungeon041.pack!Map/CDungeon/Dungeon041/Dungeon041_Static.smubin",
+      "hash_id": 714582554,
+      "map_sha256": "217180103c2bc29d0d23f78bd3aa7030e5ae157529220ae1ddb0d82222a9dfcf",
+      "actor": "DgnObj_DownloadTerminal_A_01",
+      "activation_flag": "CDungeon_DgnObj_DownloadTerminal_A_01_714582554",
+      "flag": "IsGet_Obj_RemoteBombBall"
+    },
+    {
+      "dungeon": "Dungeon065",
+      "item": "Cryonis",
+      "resource": "content/Pack/Dungeon065.pack!Map/CDungeon/Dungeon065/Dungeon065_Static.smubin",
+      "hash_id": 1421474480,
+      "map_sha256": "a75e658443d5e44eebfd26d45a7e8d6c7205d94e11f97ea6c7676f6b26e9f0d9",
+      "actor": "DgnObj_DownloadTerminal_A_01",
+      "activation_flag": "CDungeon_DgnObj_DownloadTerminal_A_01_1421474480",
+      "flag": "IsGet_Obj_IceMaker"
+    }
+  ],
+  "source_actor_sha256": "b8e9d4c64ebe281af1f34d1c27da7d9478af944d25430f1f507c0d29805a1784"
+}

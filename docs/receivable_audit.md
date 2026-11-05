@@ -35,7 +35,7 @@ The client journals the selected progressive tier before mutating it. Each absol
 - The symbol catalog supplies native addresses, calling conventions, tower refresh functions and event permission semantics.
 - Installed event flows supplied rune and sensor ownership checks, Divine Beast map download flags, champion upgrade actor names, tower activation/marker operations, and Master Sword power operations (`Demo206_0`, `100enemy` flow).
 - Client build and self-tests pass, including all 43 profiles, progression caps, byte-sized big-endian bool outputs, delayed flag commits and reconnect without accidentally granting a second Stasis tier. Champion tests cover all four base-to-upgraded replacements, delayed removal, journal replay before publication, reconnect after execution, and preservation of unrelated pouch items.
-- A direct import of the world reference confirms all 181 entries have implemented delivery kinds. All 18 world generation tests pass, including a regression test for delivery coverage.
+- A direct import of the world reference confirms all 181 entries have implemented delivery kinds. All 58 APWorld tests pass, including restrictive-fill generation, option/DLC matrices, generated patch round-trips, and delivery coverage.
 
 ## Live validation status
 

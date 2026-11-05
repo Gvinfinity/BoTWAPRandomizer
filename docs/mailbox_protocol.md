@@ -7,14 +7,14 @@ C# embeds that exact file. All integers in guest memory are **big endian**.
 
 ## Seed identity and check actors
 
-Each chest drops `AP_Check_XXXXXXXX`, encoding its nonzero unsigned 32-bit AP
+Each check marker uses `AP_Check_XXXXXXXX`, encoding its nonzero unsigned 32-bit AP
 **location ID** in exactly eight uppercase hexadecimal digits. Its localized
 label, `Archipelago Item [XXXXXXXX]`, is display text. A placed item's ID or owner
 never determines the local check ID.
 
 The patcher bundles the core ASM with an immutable seed location table. Slot data
-contains protocol version, player, seed name, fingerprint, location names and item
-delivery metadata. The fingerprint is the first 16 SHA-256 bytes of compact,
+contains protocol version, player, seed name, fingerprint, location names, item
+delivery metadata and the required Dark Beast Ganon goal location ID. The fingerprint is the first 16 SHA-256 bytes of compact,
 key-sorted JSON containing `seed` (string), `player` (integer), and `locations`
 (sorted integer IDs). New seeds also include the canonical `starting_state`
 object in that JSON identity. Legacy seeds without a starting-state object
@@ -117,7 +117,9 @@ idempotent within the Cemu lifetime. Ordinary actors continue through native
 
 The client durably journals a check **before** releasing its outgoing slot. The
 journal retains the complete checked set and resends it on login; AP checks are
-idempotent. A network failure does not lose a freed ring entry. One received item
+idempotent. Once the required Dark Beast Ganon check is journaled, the client
+sends that check first and then reports `CLIENT_GOAL`; it repeats the status on
+reconnect after replaying journaled checks. A network failure does not lose a freed ring entry. One received item
 is in flight at a time. The client saves its intent before publication and advances
 the AP history index only after the grant-specific verification succeeds. RPC
 sequences identify calls, independently of AP history indices.
@@ -144,9 +146,11 @@ The client supports AP login, received-item history, checks, reconnection, actor
 grants, and selected heart, stamina, and pouch-slot progression grants. Unsupported
 `kind: unimplemented` grants block later history entries with a visible reason.
 Legacy seeds without applied-starting metadata can block on reference precollects.
-Pickup banners, shop checks, live Paraglider flag delivery, and victory reporting
-remain unfinished. The Plateau skip sets its containment flag and pouch statically
-on a fresh save.
+Pickup banners and shop checks remain unfinished. Live Paraglider flag delivery,
+physical encounter checks, and victory reporting are implemented, but still need
+the runtime coverage described in `docs/cemu_integration_tests.md`. Plateau skip
+initializes tutorial/map defaults statically on a fresh save; it leaves the
+Paraglider randomized.
 
 Pouch observation reads guest memory from the client and uses repeated reads for
 stability; it does not hold the game lock while measuring. The native call batch

@@ -18,9 +18,26 @@ def validate_plan(plan: dict) -> dict:
         raise ValueError("Invalid seed name")
     ids, keys = set(), set()
     if not plan.get("locations"):
-        raise ValueError("A patch plan must contain at least one chest")
+        raise ValueError("A patch plan must contain at least one check")
+    from .completions import catalog
+    from .combat import catalog as combat_catalog
+    completion_bindings = {e['id']: e for e in [*catalog()['locations'], *combat_catalog()['locations']]}
     for entry in plan["locations"]:
         name = check_actor_name(entry["id"])
+        kind = entry.get('kind', 'chest')
+        if kind in {'shrine', 'tower', 'miniboss', 'boss'}:
+            binding = completion_bindings.get(entry['id'])
+            # Event identity and tower placement checksums are trusted catalog
+            # bindings; a plan may add item placements, but cannot redirect them.
+            if binding is None or any(entry.get(k) != v for k, v in binding.items()):
+                raise ValueError('Completion check disagrees with the supported catalog')
+            if entry['id'] in ids:
+                raise ValueError('Duplicate completion check')
+            ids.add(entry['id'])
+            if entry.get('check_actor', name) != name:
+                raise ValueError('Invalid completion check actor')
+            continue
+        if kind != 'chest': raise ValueError('Unsupported check kind')
         key = chest_key(entry["resource"], entry["hash_id"])
         if entry["id"] in ids or key in keys:
             raise ValueError(f"Duplicate check: {key}")
@@ -49,6 +66,9 @@ def validate_plan(plan: dict) -> dict:
             raise ValueError("Patch and slot starting state disagree")
     elif "starting_state" in slot:
         raise ValueError("Patch is missing the slot's starting state")
+    if start and start.get('skip_great_plateau') and any(
+            e.get('kind') == 'tower' and e['tower'] == 7 for e in plan['locations']):
+        raise ValueError('The skipped Plateau tower cannot also be a physical check')
     expected = {str(value): check_actor_name(value) for value in ids}
     if len(ids) > PROTOCOL["max_locations"]:
         raise ValueError("Too many checks for the native mailbox location table")

@@ -62,7 +62,8 @@ def parse_requirement(expression: str):
     return tree
 
 
-def compile_requirement(expression: str, player: int, items: dict, categories: dict):
+def compile_requirement(expression: str, player: int, items: dict, categories: dict,
+                        ignored_items: frozenset[str] = frozenset()):
     tree = parse_requirement(expression)
 
     def compile_node(node):
@@ -70,6 +71,8 @@ def compile_requirement(expression: str, player: int, items: dict, categories: d
         if operator == "true":
             return lambda state: True
         if operator == "item":
+            if node[1] in ignored_items:
+                return lambda state: True
             if node[1] not in items:
                 raise ValueError(f"Unknown logic item: {node[1]}")
             return lambda state: state.has(node[1], player, node[2])

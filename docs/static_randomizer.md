@@ -1,11 +1,18 @@
-# Static chest randomizer and APWorld
+# Breath of the Wild APWorld beta
 
-This is the first static chest implementation for the Wii U v208 game. It
-generates Archipelago seeds and applies them to an extracted game as a Cemu
-Graphic Pack. The generated pack includes the seed-bound acquisition/delivery hook, and the
-client consumes APWorld slot data. New saves skip the Great Plateau tutorial
-by default and start with the Paraglider. Native received-flag/progressive-item grants and
-in-game victory reporting remain unfinished; this is not yet a playable integration.
+The APWorld generates solo or multiworld seeds for Wii U v208 and writes a
+player-specific `.apbotw` patch. Applying that patch to the player's extracted
+game produces a Cemu Graphic Pack with seed-bound chest, shrine, tower and
+encounter checks, plus the AP engine hook. The .NET client connects to
+Archipelago and delivers the supported actor, rupee, capacity, and native
+progression items through the shared-memory mailbox.
+
+The beta covers the currently bound catalogs and item table; it does not add
+shop checks. The automated suite has verified restrictive fill, generated
+patch round-tripping, item delivery state, physical check dispatch, rune
+randomization and shrine/tower/combat routes. Four-hour stability, full-pouch
+queue behavior, all player-visible banners and natural traversal/combat remain
+outside the verified beta scope.
 
 ## Chest identity and hook contract
 
@@ -104,9 +111,12 @@ Breath of the Wild:
 
 ## Catalog and first logic scope
 
-The bundled base/update catalog contains 1,417 candidate chests, with 164 bound
-checks: 32 Plateau overworld chests from BotwRandomizer's Paraglider chest list,
-and 132 shrine chests bound to the Manual's names and requirements. Every
+The bundled catalog has 187 bound chest checks, 120 shrine completion checks,
+15 tower checks and 93 miniboss/boss checks. The chest count includes seven
+Master Trials and fifteen Champions' Ballad chests; DLC options control whether
+those are included in a seed. The 181 item mappings have concrete delivery
+implementations: 129 actor grants, 43 native grants, five progression
+operations and four rupee grants. Every chest
 identity includes its map resource, map checksum, actor HashId, original loot,
 position, and binding provenance. Location IDs derive from the logical map path
 and HashId and do not depend on the seed or scan order. Discovery rejects hash
@@ -130,34 +140,37 @@ Rules support the Manual's `|Item|`, `|Item:count|`, `|@Category|`, parentheses,
 `AND`, and `OR` without `eval`. Regions retain the reference's tower gates, with
 Paraglider additionally required outside the Plateau. The item pool includes
 all enabled progression copies, subtracts precollected inventory, samples optional
-items into the remaining slots, and fills any spare slots with arrows. Insufficient
-checks fail generation rather than discarding progression. The fresh-save starting inventory is precollected in AP logic and initialized
-in the game resources. With the default Plateau skip, this includes its tower
-and Paraglider; vanilla hearts and pouch capacities are also represented.
+items into the remaining slots, and fills spare slots with arrows. Insufficient
+checks and enabled items without a delivery implementation fail generation.
 
-The reference assumes progression items and flags have been synchronized into
-the game. Slot data exposes delivery metadata; grants without an implemented
-native mapping are explicitly `kind: unimplemented`. Tower unlocks, runes,
-progressive equipment, capacities, and received event flags still need native
-delivery. The initial defaults are applied statically before a new save begins. Dark Beast Ganon is a logical goal event; the hook/client must
-report its actual defeat. Shop patching is not integrated in this first pass.
+The fresh-save starting inventory is precollected in AP logic and initialized
+in game resources. With the default Plateau skip, the Plateau tower, Sheikah
+Slate, hearts and pouch capacities are initialized; the Paraglider remains in
+the randomized pool. Dark Beast Ganon remains the logical goal event and its
+physical defeat check is the required AP completion signal, even when optional
+boss checks are disabled. The client sends `CLIENT_GOAL` after reporting that
+check. Shop patching is not included in this beta.
 
 ## Validation performed
 
 Solo and two-player worlds passed Archipelago restrictive fill and beatability
-using the local AP installation. The applied 164-check zip was parsed back to
+using the local AP installation. Generated `.apbotw` files round-trip through
+the same production plan validator used by the patcher. The applied validation
+zip was parsed back to
 verify encoded drops, ActorLinks, GeneralParamLists, sorted ActorInfo hashes,
 resource-size entries, and UI labels in all seven installed language packs.
-The current 24 patcher/hook/startup tests and 17 APWorld tests pass. The patcher and
+The current patcher/hook/startup and APWorld test suites pass. The patcher and
 APWorld tests cover the static pipeline; protocol tests additionally
 exercise the actual hook instructions against simulated guest memory. C# self-tests
 cover seed verification, native acknowledgements, queue limits, journal recovery,
 and a real AP SDK exchange against a local WebSocket fixture.
 Coverage includes chest identity, unmatched mappings, archive preservation,
 initial access, rune rules, fill, hook backpressure, and partial native grants.
-These checks do not establish Cemu runtime stability, check latency, UI behavior,
-delivery accuracy, or actual startup/Plateau behavior; the project acceptance metrics still
-require emulator validation of the integrated hook.
+The live item suite verified all 194 receipts across 181 item types. The live
+Stasis terminal test confirmed the rune remains absent until AP delivery. These
+checks do not establish four-hour Cemu stability, sub-150 ms check latency,
+player-visible UI behavior, full-pouch queuing, or natural gameplay traversal;
+those acceptance checks remain before a non-beta release.
 
 ## References
 
@@ -190,8 +203,8 @@ dotnet run --project src/client -- --self-test-pack /path/to/BotW_AP_P1.zip
 ```
 
 That check reads the pack's actual ASM allocation and compares its IDs and
-fingerprint with the manifest and AP slot data. The current catalog has 5
-native actor mappings and 176 explicitly unsupported grant mappings.
+fingerprint with the manifest and AP slot data. Seed generation rejects enabled
+items that have no delivery implementation.
 
 ## Starting after the Great Plateau tutorial
 
@@ -204,15 +217,18 @@ Breath of the Wild:
 
 Generate a new seed, apply it to your extracted game, enable the resulting AP
 graphic pack, and choose **New Game**. Start with the Plateau tower/map enabled,
-its main tutorial quests finished, and the Sheikah Slate and Paraglider in the
-pouch. `IsGet_PlayerStole2` is initialized true to remove the Plateau containment
-without playing the Old Man gift sequence. The AP client is not needed to apply
-these fresh-save defaults.
+its main tutorial quests finished, and the Sheikah Slate in the pouch.
+The Paraglider stays randomized, so Plateau containment is removed when that AP
+item is received. The AP client is not needed to apply the other fresh-save
+defaults.
 
 This uses the reference randomizer's Bootup GameData initialization approach.
-The patch adds the two key items to the native `PorchItem` arrays, preserves other
-entries, and updates the RSTB for the rebuilt resources. Shrine completion and
-rune flags remain unchanged; shrine chests are still checks.
+The patch adds the Sheikah Slate to the native `PorchItem` arrays, preserves
+other entries, and updates the RSTB for the rebuilt resources. The four Plateau rune
+terminals use an AP clone with the vanilla `DemoGetItem` action disabled, so
+Magnesis, Remote Bombs, Stasis and Cryonis are granted through AP item receipts.
+The clone is bound only to those four placements; other download terminals keep
+their vanilla behavior. Shrine chests remain checks.
 
 Slot data records the exact applied AP starting-item counts. The client accepts
 only that many precollected receipts (AP location `-2`) as already applied; ordinary
@@ -222,5 +238,5 @@ be interchanged.
 
 Existing saves retain their saved flags/inventory and are not migrated by these
 initial defaults. Set `skip_great_plateau: false` for the original tutorial and
-keep the Paraglider in the randomized item pool. Native runtime validation of
-this startup patch in Cemu is still required.
+keep the Paraglider in the randomized item pool. A fresh save and regenerated
+pack are required when changing this option or applying the rune-terminal fix.

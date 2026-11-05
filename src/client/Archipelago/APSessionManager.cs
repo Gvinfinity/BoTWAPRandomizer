@@ -114,6 +114,19 @@ public sealed class APSessionManager : IServerLink, IDisposable
             throw new IOException("AP check submission failed; journal retained for reconnect", ex);
         }
     }
+    public void SendGoal()
+    {
+        try
+        {
+            session.SetClientState(ArchipelagoClientState.ClientGoal);
+            log?.Invoke("Reported CLIENT_GOAL to Archipelago after the goal location check.");
+        }
+        catch (Exception ex) when (ex is ArchipelagoSocketClosedException or System.Net.WebSockets.WebSocketException or System.Net.Sockets.SocketException or IOException)
+        {
+            Dispose();
+            throw new IOException("AP goal status submission failed; checks remain journaled for reconnect", ex);
+        }
+    }
     public void Dispose() => Disconnect(session, log);
     private static void Disconnect(ArchipelagoSession session, Action<string>? log)
     {

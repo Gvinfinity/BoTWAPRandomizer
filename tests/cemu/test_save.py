@@ -71,6 +71,9 @@ def test_delivery_save_reset_clears_pouch_and_flags_without_changing_hashes():
     reference = world_reference()
     names = {flag['Name'] for profile in reference.native_grants.values()
              for tier in profile['Tiers'] for flag in tier['Writes']}
+    from importlib import import_module
+    names.update(e['watch_flag'] for e in import_module(reference.__package__ + '.static.combat').catalog()['locations'])
+    names.update(e['watch_flag'] for e in reference.load_completions() if 'watch_flag' in e)
     names.discard('GreatFairy_ArmorRank')  # transient, absent from real saves
     names.update(['MaxHartValue', 'WeaponPorchStockNum', 'BowPorchStockNum', 'ShieldPorchStockNum',
                   'CurrentRupee', 'IsGet_PlayerStole2', 'StaminaMax', 'StaminaCurrentMax',

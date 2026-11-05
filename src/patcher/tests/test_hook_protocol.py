@@ -9,7 +9,7 @@ from botw_static.protocol import PROTOCOL as P, seed_fingerprint
 
 
 class PPC:
-    def __init__(self, ids):
+    def __init__(self, ids, source=None):
         self.memory = bytearray(0x200000)
         self.registers = [0] * 32
         self.floats = [0.] * 32
@@ -21,10 +21,18 @@ class PPC:
         self.symbols = {'_AP_Mailbox_Base': 0x10000, '_AP_Is_Injecting': 0x10000 + P['mailbox_size']}
         words = [int(word, 16) for word in re.findall(r'0x[0-9A-F]{8}', mailbox_assembly(ids))]
         self.memory[0x10000:0x10000 + len(words)*4] = struct.pack(f'>{len(words)}I', *words)
-        for raw in (ROOT / 'src/hook/patch_Archipelago.asm').read_text().splitlines():
+        self.symbols.update({'_AP_KillData_Count': 0x90000, '_AP_KillData_Cursor': 0x90004,
+                             '_AP_KillData_Records': 0x90100, '_AP_KillData_Names': 0x95000})
+        data_at = None
+        for raw in (source or (ROOT / 'src/hook/patch_Archipelago.asm').read_text()).splitlines():
             line = raw.split('#')[0].strip()
             if line.endswith(':'):
+                data_at = self.symbols.get(line[:-1]) if line.startswith('_AP_KillData_') else None
                 self.labels[line[:-1]] = len(self.code)
+            elif data_at is not None and line.startswith('.int '):
+                values = [int(v.strip(), 0) for v in line[5:].split(',')]
+                struct.pack_into('>' + 'I' * len(values), self.memory, data_at, *values)
+                data_at += 4 * len(values)
             elif line and not line.startswith(('.', '[', 'moduleMatches', '0x')):
                 op, _, args = line.partition(' ')
                 self.code.append((op, [a.strip() for a in args.split(',') if a.strip()]))

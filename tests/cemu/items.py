@@ -79,6 +79,10 @@ def reset_delivery_state(data):
     reference = world_reference()
     resets = {flag['Name']: 0 for profile in reference.native_grants.values()
               for tier in profile['Tiers'] for flag in tier['Writes']}
+    from importlib import import_module
+    encounters = import_module(reference.__package__ + '.static.combat').catalog()['locations']
+    resets.update({entry['watch_flag']: 0 for entry in encounters})
+    resets.update({entry['watch_flag']: 0 for entry in reference.load_completions() if 'watch_flag' in entry})
     resets.update(MaxHartValue=12, WeaponPorchStockNum=8, BowPorchStockNum=5,
                   ShieldPorchStockNum=4, CurrentRupee=0, IsGet_PlayerStole2=0)
     resets.update(StaminaMax=struct.unpack('>I', struct.pack('>f', 1000.0))[0],
@@ -97,4 +101,26 @@ def reset_delivery_state(data):
             struct.pack_into('>I', output, at + 4, value)
     missing = resets.keys() - found
     if missing: raise ValueError('Save lacks delivery test fields: ' + ', '.join(sorted(missing)))
+    return output
+
+
+def physical_check(kind):
+    reference = world_reference()
+    entries = reference.load_completions()
+    return next(e for e in entries if e.get('tower') == 8) if kind == 'tower' else next(
+        e for e in entries if e.get('dungeon') == 'Dungeon000')
+
+
+def set_save_values(data, values):
+    """Set named existing scalar test-precondition fields without adding records."""
+    import struct, zlib
+    output = bytearray(data)
+    pending = {zlib.crc32(name.encode()): (name, value) for name, value in values.items()}
+    found = set()
+    for at in range(12, len(output) - 4, 8):
+        key = struct.unpack_from('>I', output, at)[0]
+        if key in pending:
+            name, value = pending[key]; found.add(name)
+            struct.pack_into('>I', output, at + 4, value)
+    if values.keys() - found: raise ValueError('Save lacks test preconditions: ' + str(values.keys() - found))
     return output

@@ -182,13 +182,25 @@ public sealed class Mailbox(IMemory memory) : IDisposable
     public uint WriteSafeString(string actorName)
     {
         Protocol.ValidateActorName(actorName, 1);
+        return WriteSafeCString(actorName);
+    }
+
+    public uint WriteSafeGameDataName(string name)
+    {
+        if (string.IsNullOrEmpty(name) || name.Length >= 56 || name.Any(c => c == 0 || c > 127))
+            throw new ArgumentException("Invalid native GameData name", nameof(name));
+        return WriteSafeCString(name);
+    }
+
+    private uint WriteSafeCString(string value)
+    {
         uint baseAddr = GuestAddress;
         if (baseAddr == 0) throw new InvalidDataException("Guest mailbox address is not initialized");
         int scratchOffset = Protocol.Get("scratch_offset");
         var buffer = new byte[64];
         Protocol.Write(buffer.AsSpan(0), unchecked(baseAddr + (uint)scratchOffset + 8));
         Protocol.Write(buffer.AsSpan(4), GameOffsets.SafeStringVtable);
-        Encoding.ASCII.GetBytes(actorName).CopyTo(buffer, 8);
+        Encoding.ASCII.GetBytes(value).CopyTo(buffer, 8);
         memory.Write(scratchOffset, buffer);
         return unchecked(baseAddr + (uint)scratchOffset);
     }

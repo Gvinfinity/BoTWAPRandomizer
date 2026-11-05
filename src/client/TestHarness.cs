@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
+using Archipelago.MultiClient.Net.Enums;
 using BotWClient.Archipelago;
 using BotWClient.Memory;
 
@@ -400,8 +401,10 @@ internal static class TestHarness
         public bool Connected { get; set; } = true;
         public IReadOnlyList<ReceivedItem> ReceivedItems { get; set; } = [];
         public List<long> Sent { get; } = [];
+        public int GoalReports { get; private set; }
         public bool FailSend { get; set; }
         public void SendChecks(long[] ids) { if (FailSend) throw new IOException("Simulated network failure"); Sent.AddRange(ids); }
+        public void SendGoal() { if (FailSend) throw new IOException("Simulated network failure"); GoalReports++; }
     }
 
     private static void Require(bool value, string message) { if (!value) throw new Exception(message); }
@@ -499,7 +502,7 @@ internal static class TestHarness
 
             using var data = JsonDocument.Parse($$$$"""
             {"protocol_version":2,"player":1,"seed":"test","seed_fingerprint":"00000000000000000000000000000000",
-             "check_actor_prefix":"AP_Check_","locations":{"{{{{location}}}}":"AP_Check_B0123456"},
+             "check_actor_prefix":"AP_Check_","goal_location_id":{{{{location}}}},"locations":{"{{{{location}}}}":"AP_Check_B0123456"},
              "items":{"{{{{swordItem}}}}":{"kind":"actor","actor":"Weapon_Sword_070","quantity":1},
                       "{{{{arrowItem}}}}":{"kind":"actor","actor":"NormalArrow","quantity":10},
                       "{{{{foodItem}}}}":{"kind":"actor","actor":"Item_Cook_A","quantity":1},
@@ -774,8 +777,8 @@ internal static class TestHarness
             using (var bridge = new ClientBridge(mailbox, contract, directory, 0, 1))
             {
                 bridge.Pump(server);
-                Require(server.Sent.Contains(location) && bridge.NextItem == 1 && sim.TotalPouchValue("Weapon_Sword_070") == 40,
-                        "Reconnect lost a check or replayed an acknowledged item");
+                Require(server.Sent.Contains(location) && server.GoalReports == 1 && bridge.NextItem == 1 && sim.TotalPouchValue("Weapon_Sword_070") == 40,
+                        "Reconnect lost a check, failed to report CLIENT_GOAL, or replayed an acknowledged item");
             }
 
             ConfigureMailbox(sim, mailbox, location);
@@ -791,6 +794,8 @@ internal static class TestHarness
                 DriveUntilIdle(bridge, session, sim, maxSteps: 5);
                 Require(bridge.NextItem == 1 && sim.TotalPouchValue("Weapon_Sword_070") == 40, "AP network item was not granted via RPC");
                 Require(fixture.Checks.Task.WaitAsync(TimeSpan.FromSeconds(5)).GetAwaiter().GetResult().Contains(location), "Mailbox check did not reach the AP socket");
+                Require(fixture.GoalStatus.Task.WaitAsync(TimeSpan.FromSeconds(5)).GetAwaiter().GetResult() == (int)ArchipelagoClientState.ClientGoal,
+                        "Goal check did not send CLIENT_GOAL over the real AP SDK socket");
                 string diagnostics = output.ToString();
                 Require(diagnostics.Contains("RoomInfo") && diagnostics.Contains("Connected") && diagnostics.Contains("AP slot verified") && diagnostics.Contains("ReceivedItems"), "Verbose connection stages missing");
                 Require(!diagnostics.Contains("test-secret"), "Password leaked during real login");
@@ -826,7 +831,7 @@ internal static class TestHarness
             mailbox.SetWord(Protocol.Get("capabilities_offset"), 7);
             mailbox.SetWord(Protocol.Get("version_offset"), 1); Reject(() => mailbox.Validate());
 
-            Console.WriteLine("PASS: RPC wire format, Wii U v208 offsets, weapon/stackable/food/key-item grants, progression async setters, all native profiles and caps, champion replacement and removal recovery, native reconnect recovery, journal recovery, network failure, starting inventory, queue capacity, counter wrap and real AP SDK WebSocket exchange");
+            Console.WriteLine("PASS: RPC wire format, Wii U v208 offsets, item/native/progression grants, champion replacement and removal recovery, reconnect/journal/network failure, starting inventory, queue capacity, counter wrap, real AP SDK check-before-goal status, and WebSocket exchange");
             if (tlsCertificate is null && OperatingSystem.IsLinux()) TestTlsSubprocess(directory);
             return 0;
         }

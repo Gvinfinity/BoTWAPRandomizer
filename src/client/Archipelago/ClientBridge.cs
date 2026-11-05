@@ -9,6 +9,7 @@ public readonly record struct ItemGrant(GrantKind Kind, string Name, uint Quanti
 public sealed class SlotContract
 {
     public string Fingerprint { get; }
+    public long? GoalLocationId { get; }
     public HashSet<long> Locations { get; } = [];
     public Dictionary<long, int> StartingInventory { get; } = [];
     private readonly Dictionary<long, JsonElement> items = [];
@@ -29,6 +30,12 @@ public sealed class SlotContract
             uint id = uint.Parse(location.Name);
             if (id == 0 || location.Value.GetString() != $"AP_Check_{id:X8}") throw new InvalidDataException("Invalid check actor mapping");
             Locations.Add(id);
+        }
+        if (data.TryGetProperty("goal_location_id", out var goalElement))
+        {
+            long goal = goalElement.GetInt64();
+            if (!Locations.Contains(goal)) throw new InvalidDataException("Goal location is absent from the seed's location table");
+            GoalLocationId = goal;
         }
         if (!Locations.SetEquals(mailbox.Validate()) || !Locations.SetEquals(serverLocations))
             throw new InvalidDataException("Server, slot data, and hook location tables disagree");
@@ -117,6 +124,7 @@ public interface IServerLink
     bool Connected { get; }
     IReadOnlyList<ReceivedItem> ReceivedItems { get; }
     void SendChecks(long[] ids);
+    void SendGoal();
 }
 
 public readonly record struct ReceivedItem(long ItemId, long LocationId)
@@ -262,7 +270,7 @@ public sealed partial class ClientBridge : IDisposable
         while (mailbox.PeekCheck() is { } check)
         {
             if (check.IsShop != 0 || check.ApLocationId > uint.MaxValue || !contract.Locations.Contains((long)check.ApLocationId))
-                throw new InvalidDataException("Hook reported a check absent from this seed's chest table");
+                throw new InvalidDataException("Hook reported a check absent from this seed's location table");
             state.Checks.Add((long)check.ApLocationId); Save(); checksDirty = true;
             mailbox.AcknowledgeCheck(check.SeqId);
             log?.Invoke($"Hook check journaled and acknowledged: location={check.ApLocationId}, sequence={check.SeqId}, server_connected={server.Connected}");
@@ -270,6 +278,9 @@ public sealed partial class ClientBridge : IDisposable
         if (server.Connected && checksDirty)
         {
             if (state.Checks.Count != 0) server.SendChecks(state.Checks.Order().ToArray());
+            // The goal status is replayed on reconnect after checks, so the server
+            // always observes the goal location before CLIENT_GOAL.
+            if (contract.GoalLocationId is { } goal && state.Checks.Contains(goal)) server.SendGoal();
             checksDirty = false;
         }
         if (!server.Connected) return;

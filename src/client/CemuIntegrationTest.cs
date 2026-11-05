@@ -13,8 +13,11 @@ internal static class CemuIntegrationTest
         var timer = Stopwatch.StartNew();
         var results = new List<object>();
         string stage = "startup";
-        bool chestChecked = false;
+        bool chestChecked = false, inputAllowed = true;
         int planned = 0;
+        uint? physicalOrbs = null;
+        double? completionFlag = null;
+        double[]? playerPosition = null;
         JsonElement? currentCase = null;
         string? blockReason = null;
         try
@@ -32,6 +35,8 @@ internal static class CemuIntegrationTest
             if (Directory.Exists(stateDirectory)) throw new IOException("Test requires a new journal directory");
             uint location = config.GetProperty("location").GetUInt32();
             var data = config.GetProperty("slot_data");
+            bool physical = config.TryGetProperty("physical_check", out var physicalCheck);
+            bool runeTerminalTest = config.TryGetProperty("rune_terminal_test", out var runeTerminal);
             var cases = config.TryGetProperty("cases", out var list) ? list.EnumerateArray().Select(x => x.Clone()).ToArray() :
                 new[] { JsonSerializer.SerializeToElement(new { item = config.GetProperty("item").GetUInt32(), name = "Legacy actor", category = "actor" }) };
             if (cases.Length == 0) throw new InvalidDataException("Scenario has no receipts");
@@ -65,12 +70,26 @@ internal static class CemuIntegrationTest
             uint tick = mailbox.Word(28);
             bool Active() => mailbox.Status == 2 && mailbox.GuestAddress != 0 && mailbox.ReadGuestWord(GameOffsets.PauseMenuDataMgrPtr) != 0;
             Wait(() => mailbox.Word(28) != tick && Active(), "gameplay readiness");
+            if (physical)
+            {
+                inputAllowed = false; Progress();
+                Wait(() => {
+                    uint player = mailbox.ReadGuestWord(GameOffsets.PlayerInfoPtr);
+                    return player != 0 && mailbox.ReadGuestWord(player + GameOffsets.PlayerInfoActorOffset) != 0;
+                }, "live player for physical completion fixture");
+            }
             using var server = new ProtocolServerFixture(data, location, cases[0].GetProperty("item").GetUInt32(), limit, manualItems: true);
             using var session = new APSessionManager(server.Uri, "Test", null, mailbox, Console.WriteLine);
             using var bridge = new ClientBridge(mailbox, session.Contract, stateDirectory, session.Team, session.Slot, Console.WriteLine);
-            Wait(() => { bridge.Pump(session); return server.Checks.Task.IsCompleted; }, "chest acquisition and AP LocationChecks");
-            if (!server.Checks.Task.GetAwaiter().GetResult().Contains(location)) throw new InvalidDataException("Wrong location check");
-            chestChecked = true; Progress();
+            if (!physical)
+            {
+                Wait(() => { bridge.Pump(session); return server.Checks.Task.IsCompleted; }, "chest acquisition and AP LocationChecks");
+                if (!server.Checks.Task.GetAwaiter().GetResult().Contains(location)) throw new InvalidDataException("Wrong location check");
+                chestChecked = true; Progress();
+            }
+            else if (mailbox.OutHead != 0 || server.HasCheck(location))
+                throw new InvalidDataException("Physical check fired before the fixture enabled interaction");
+            uint checkHeadBeforeGrant = mailbox.OutHead;
 
             // The fixture gates receipts. Observation and test cleanup RPCs run only while
             // the production bridge has no grant in flight and the ring is empty.
@@ -92,7 +111,7 @@ internal static class CemuIntegrationTest
                 if (manager == 0) throw new IOException("GameData manager unavailable");
                 uint core = mailbox.GameDataCore(manager, 0x700);
                 if (core == 0) throw new IOException("GameData core unavailable");
-                uint text = mailbox.WriteSafeString(name);
+                uint text = mailbox.WriteSafeGameDataName(name);
                 mailbox.SetWord(Protocol.Get("scratch_offset") + 64, 0);
                 var read = Call(type == "bool" ? GameOffsets.GdtGetBoolByName : GameOffsets.GdtGetS32ByName,
                     core, mailbox.ScratchResultAddress, text, mailbox.ReadGuestWord(manager + 0x704) >> 24, 1);
@@ -102,6 +121,179 @@ internal static class CemuIntegrationTest
             }
             (uint Sum, uint Count) Pouch(string actor) => mailbox.MeasureStablePouch(mailbox.ReadGuestWord(GameOffsets.PauseMenuDataMgrPtr), actor);
             void Require(bool condition, string error) { if (!condition) throw new InvalidDataException(error); }
+            bool deliveryAfterCheck = config.TryGetProperty("delivery_after_check", out var afterCheck) && afterCheck.GetBoolean();
+            void CollectPhysical()
+            {
+                deadline = limit;
+                for (int frame = 0; frame < 3; frame++)
+                {
+                    uint previous = mailbox.Word(28);
+                    Wait(() => { bridge.Pump(session); return mailbox.Word(28) != previous; }, "checking grant/check isolation");
+                }
+                Require(mailbox.OutHead == checkHeadBeforeGrant && !server.HasCheck(location),
+                    "Incoming item grant incorrectly emitted the physical location check");
+                uint orbsBefore = Pouch("Obj_DungeonClearSeal").Sum;
+                if (config.TryGetProperty("expected_position", out var expectedPosition))
+                {
+                    var arrivalDeadline = timer.Elapsed + TimeSpan.FromSeconds(20);
+                    Wait(() => {
+                        uint info = mailbox.ReadGuestWord(GameOffsets.PlayerInfoPtr);
+                        uint player = info == 0 ? 0 : mailbox.ReadGuestWord(info + GameOffsets.PlayerInfoActorOffset);
+                        if (player == 0) return false;
+                        playerPosition = Enumerable.Range(0, 3).Select(i => (double)BitConverter.UInt32BitsToSingle(
+                            mailbox.ReadGuestWord(player + 0x2D4u + (uint)i * 4))).ToArray();
+                        double distance = Math.Sqrt(playerPosition.Zip(expectedPosition.EnumerateArray(),
+                            (actual, expected) => Math.Pow(actual - expected.GetDouble(), 2)).Sum());
+                        Require(timer.Elapsed < arrivalDeadline || (double.IsFinite(distance) && distance < 6),
+                            "Player did not reach the fixture location: distance " + distance + "; actual " + string.Join(",", playerPosition));
+                        return double.IsFinite(distance) && distance < 6;
+                    }, "player arrival at the physical fixture");
+                }
+                Action? assistTick = null;
+                double nextAssist = 0;
+                if (config.TryGetProperty("assisted_combat", out var assistance) && assistance.GetBoolean()
+                    && physicalCheck.GetProperty("kind").GetString() is "miniboss" or "boss")
+                {
+                    uint exports = mailbox.GuestAddress + (uint)Protocol.Get("mailbox_size");
+                    Require(mailbox.ReadGuestWord(exports) == 0x41505445, "Test native exports are unavailable");
+                    uint finder = mailbox.ReadGuestWord(exports + 4), zeroLife = mailbox.ReadGuestWord(exports + 8);
+                    uint enemy = 0;
+                    string targetName = physicalCheck.GetProperty("actor").GetString()!;
+                    void SpawnPrerequisite(string flag)
+                    {
+                        Require(flag is "LastBossIncompleteGanonGenerateFlag" or "FinalTrial_InBossBattleArea"
+                            or "Appear_PGanonWind" or "Appear_PGanonFire" or "Appear_PGanonWater" or "Appear_PGanonElectric",
+                            "Not a permitted transient spawn prerequisite");
+                        uint manager = mailbox.ReadGuestWord(GameOffsets.GdtManagerPtr);
+                        uint core = mailbox.GameDataCore(manager, 0x70C);
+                        Require(core != 0, "Writable GameData core unavailable for fixture spawn");
+                        Call(GameOffsets.GdtSetBoolTyped, core, 1, mailbox.WriteSafeString(flag), 0, 1);
+                        if (((mailbox.ReadGuestWord(manager + 0x714) >> 16) & 0xFF) != 0)
+                            Call(GameOffsets.GdtSetBoolTyped, mailbox.GameDataCore(manager, 0x710), 1,
+                                mailbox.WriteSafeString(flag), 0, 1);
+                        Require(ReadFlag(flag, "bool") == 1, "Cannot enable fixture spawn prerequisite " + flag);
+                        Console.WriteLine("TEST ASSIST: enabled transient spawn prerequisite " + flag);
+                    }
+                    if (targetName.StartsWith("Enemy_SiteBoss_", StringComparison.Ordinal))
+                        SpawnPrerequisite("Appear_PGanon" + physicalCheck.GetProperty("scene").GetString()!.Replace("Remains", ""));
+                    if (targetName == "Enemy_Ganon") SpawnPrerequisite("LastBossIncompleteGanonGenerateFlag");
+                    if (targetName == "Priest_Boss_Normal") SpawnPrerequisite("FinalTrial_InBossBattleArea");
+                    int positionOffset = Protocol.Get("scratch_offset") + 80;
+                    for (int axis = 0; axis < 3; axis++)
+                        mailbox.SetWord(positionOffset + axis * 4, BitConverter.SingleToUInt32Bits((float)playerPosition![axis]));
+                    Wait(() => { enemy = Call(finder, mailbox.WriteSafeString(targetName), mailbox.GuestAddress + (uint)positionOffset).R3; return enemy != 0; },
+                        "native encounter actor: " + targetName);
+                    uint id = mailbox.ReadGuestWord(enemy + 0x50);
+                    var enemyPosition = Enumerable.Range(0, 3).Select(i => (double)BitConverter.UInt32BitsToSingle(
+                        mailbox.ReadGuestWord(enemy + 0x2D4u + (uint)i * 4))).ToArray();
+                    double separation = Math.Sqrt(enemyPosition.Zip(playerPosition!, (a,b) => Math.Pow(a-b,2)).Sum());
+                    Require(double.IsFinite(separation) && separation < 50, "Encounter actor is outside the visited location");
+                    Require(Call(zeroLife, enemy, id).R3 == 1, "Encounter actor expired before the native defeat aid");
+                    Console.WriteLine("TEST ASSIST: native zero-life request for " + targetName + "; waiting for its actual death flag");
+                    string[] phaseActors = targetName switch {
+                        "Enemy_Giant_Bone" => [targetName, "Enemy_Giant_Bone_Eye"],
+                        "Priest_Boss_Normal" => [targetName, "Priest_Boss_Giant"],
+                        "Enemy_GanonBeast" => [targetName, "Enemy_GanonBeast_WeakPoint"],
+                        _ => [targetName]
+                    };
+                    assistTick = () => {
+                        foreach (string phaseActor in phaseActors)
+                        {
+                            uint activeEnemy = Call(finder, mailbox.WriteSafeString(phaseActor), mailbox.GuestAddress + (uint)positionOffset).R3;
+                            if (activeEnemy == 0) continue;
+                            uint actorId = mailbox.ReadGuestWord(activeEnemy + 0x50);
+                            uint vtable = mailbox.ReadGuestWord(activeEnemy + 0xE8);
+                            uint getter = vtable == 0 ? 0 : mailbox.ReadGuestWord(vtable + 0x2BC);
+                            if (getter == 0) continue;
+                            uint life = Call(getter, activeEnemy).R3;
+                            if (life == 0 || unchecked((int)mailbox.ReadGuestWord(life)) <= 0) continue;
+                            if (Call(zeroLife, activeEnemy, actorId).R3 == 1)
+                                Console.WriteLine("TEST ASSIST: native zero-life request for active phase " + phaseActor);
+                        }
+                    };
+                }
+                inputAllowed = true;
+                double nextPositionSample = 0;
+                Wait(() => {
+                    bridge.Pump(session);
+                    if (server.HasCheck(location)) return true;
+                    if (assistTick is not null && timer.Elapsed.TotalSeconds >= nextAssist)
+                    {
+                        assistTick(); nextAssist = timer.Elapsed.TotalSeconds + 2;
+                    }
+                    if (timer.Elapsed.TotalSeconds >= nextPositionSample)
+                    {
+                        uint info = mailbox.ReadGuestWord(GameOffsets.PlayerInfoPtr);
+                        uint player = info == 0 ? 0 : mailbox.ReadGuestWord(info + GameOffsets.PlayerInfoActorOffset);
+                        if (player != 0)
+                            playerPosition = Enumerable.Range(0, 3).Select(i => (double)BitConverter.UInt32BitsToSingle(
+                                mailbox.ReadGuestWord(player + 0x2D4u + (uint)i * 4))).ToArray();
+                        physicalOrbs = Pouch("Obj_DungeonClearSeal").Sum;
+                        if (physicalCheck.TryGetProperty("watch_flag", out var watched))
+                            completionFlag = ReadFlag(watched.GetString()!, physicalCheck.GetProperty("watch_type").GetString()!);
+                        nextPositionSample = timer.Elapsed.TotalSeconds + .5; Progress();
+                    }
+                    return server.HasCheck(location);
+                },
+                    "physical completion: " + physicalCheck.GetProperty("name").GetString());
+                inputAllowed = false; chestChecked = true;
+                if (physicalCheck.TryGetProperty("watch_flag", out var completedFlag))
+                    completionFlag = ReadFlag(completedFlag.GetString()!, physicalCheck.GetProperty("watch_type").GetString()!);
+                Progress();
+                Require(physicalCheck.GetProperty("kind").GetString() != "shrine" || Pouch("Obj_DungeonClearSeal").Sum == orbsBefore, "Tracked shrine granted a vanilla Spirit Orb");
+            }
+            if (runeTerminalTest)
+            {
+                string flag = runeTerminal.GetProperty("flag").GetString()!;
+                string activationFlag = runeTerminal.GetProperty("activation_flag").GetString()!;
+                Require(ReadFlag(flag, "bool") == 0, "Rune fixture started with the AP rune already owned");
+                Require(ReadFlag(activationFlag, "bool") == 0, "Rune terminal fixture started activated");
+                if (config.TryGetProperty("expected_position", out var runePosition))
+                {
+                    var arrivalDeadline = timer.Elapsed + TimeSpan.FromSeconds(20);
+                    Wait(() => {
+                        uint info = mailbox.ReadGuestWord(GameOffsets.PlayerInfoPtr);
+                        uint player = info == 0 ? 0 : mailbox.ReadGuestWord(info + GameOffsets.PlayerInfoActorOffset);
+                        if (player == 0) return false;
+                        playerPosition = Enumerable.Range(0, 3).Select(i => (double)BitConverter.UInt32BitsToSingle(
+                            mailbox.ReadGuestWord(player + 0x2D4u + (uint)i * 4))).ToArray();
+                        double distance = Math.Sqrt(playerPosition.Zip(runePosition.EnumerateArray(),
+                            (actual, expected) => Math.Pow(actual - expected.GetDouble(), 2)).Sum());
+                        Require(timer.Elapsed < arrivalDeadline || (double.IsFinite(distance) && distance < 6),
+                            "Player did not reach the rune terminal: " + string.Join(",", playerPosition));
+                        return double.IsFinite(distance) && distance < 6;
+                    }, "player arrival at the rune terminal");
+                }
+                inputAllowed = true; Progress();
+                var terminalDeadline = timer.Elapsed + TimeSpan.FromSeconds(10);
+                while (timer.Elapsed < terminalDeadline)
+                {
+                    bridge.Pump(session);
+                    Require(ReadFlag(flag, "bool") == 0, "Vanilla rune terminal granted " + flag);
+                    Require(!server.HasCheck(location), "Rune terminal emitted an unexpected location check");
+                    if (config.TryGetProperty("expected_position", out var terminalPosition))
+                    {
+                        uint info = mailbox.ReadGuestWord(GameOffsets.PlayerInfoPtr);
+                        uint player = info == 0 ? 0 : mailbox.ReadGuestWord(info + GameOffsets.PlayerInfoActorOffset);
+                        if (player != 0)
+                        {
+                            playerPosition = Enumerable.Range(0, 3).Select(i => (double)BitConverter.UInt32BitsToSingle(
+                                mailbox.ReadGuestWord(player + 0x2D4u + (uint)i * 4))).ToArray();
+                            double distance = Math.Sqrt(playerPosition.Zip(terminalPosition.EnumerateArray(),
+                                (actual, expected) => Math.Pow(actual - expected.GetDouble(), 2)).Sum());
+                            Require(double.IsFinite(distance) && distance < 1.5,
+                                "Link moved away from the rune terminal: " + string.Join(",", playerPosition));
+                        }
+                    }
+                    Thread.Sleep(400);
+                    Progress();
+                }
+                string interactionPath = config.GetProperty("rune_interaction_path").GetString()!;
+                Require(File.Exists(interactionPath), "The live fixture did not send its single terminal interaction");
+                Require(ReadFlag(activationFlag, "bool") == 0, "Rune terminal unexpectedly completed its vanilla acquisition flow");
+                inputAllowed = false; Progress();
+            }
+            if (physical && deliveryAfterCheck && !runeTerminalTest) CollectPhysical();
             foreach (var test in cases)
             {
                 currentCase = test;
@@ -210,8 +402,16 @@ internal static class CemuIntegrationTest
                 WriteResult(new { passed = false, running = true, elapsed_seconds = timer.Elapsed.TotalSeconds, stage, planned, completed = results.Count, items = results });
                 Console.WriteLine($"LIVE PASS {results.Count}/{planned}: {name} ({receiptTimer.Elapsed.TotalSeconds:F2}s)");
             }
+            if (physical && !deliveryAfterCheck) CollectPhysical();
+            if (config.TryGetProperty("watch_combat", out var watchCombat) && watchCombat.GetBoolean())
+            {
+                Require(mailbox.OutHead == 1, "An incoming grant incorrectly generated an encounter death check");
+                foreach (string id in data.GetProperty("locations").EnumerateObject().Select(e => e.Name))
+                    if (uint.Parse(id) != location) Require(!server.HasCheck(long.Parse(id)), "Unexpected encounter check " + id);
+            }
             WriteResult(new { passed = true, elapsed_seconds = timer.Elapsed.TotalSeconds, location, fingerprint = mailbox.Fingerprint,
-                planned, completed = results.Count, items = results });
+                physical_check_passed = physical && !runeTerminalTest, rune_terminal_passed = runeTerminalTest,
+                completion_flag = completionFlag, assisted_fast_events = config.TryGetProperty("fast_fixtures", out var fast) && fast.GetBoolean(), assisted_native_defeat = config.TryGetProperty("assisted_combat", out var aid) && aid.GetBoolean(), player_position = playerPosition, delivery_after_check = deliveryAfterCheck, planned, completed = results.Count, items = results });
             return 0;
         }
         catch (Exception error)
@@ -223,7 +423,7 @@ internal static class CemuIntegrationTest
         }
         void Progress()
         {
-            if (progressPath is not null) AtomicWrite(progressPath, new { stage, chest_checked = chestChecked, planned, completed = results.Count });
+            if (progressPath is not null) AtomicWrite(progressPath, new { stage, chest_checked = chestChecked, input_allowed = inputAllowed, spirit_orbs = physicalOrbs, completion_flag = completionFlag, player_position = playerPosition, planned, completed = results.Count });
         }
         void WriteResult(object result) { if (resultPath is not null) AtomicWrite(resultPath, result); }
     }

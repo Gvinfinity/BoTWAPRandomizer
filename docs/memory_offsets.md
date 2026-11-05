@@ -53,19 +53,22 @@ state, fingerprint and location table. See [mailbox_protocol.md](mailbox_protoco
 for every field and ownership rule. `status` at +8 stays 2 after the first tick;
 `tick_count` at +`0x1C` is the gameplay heartbeat.
 
-## Unimplemented native features
+## Implemented and unverified native features
 
-Pickup banners, general GameData flag delivery, live Plateau flag delivery, and
-victory detection remain unfinished. The client uses native GameData and player
-functions for selected heart, stamina, and pouch-slot progression grants.
-Check candidate native flags and functions against the v208 symbol sheet and
-validate them at runtime before using them in RPC calls.
+The AP world includes physical checks for shrines, towers, minibosses, and bosses.
+Dark Beast Ganon's defeat check is mandatory because the client reports
+`CLIENT_GOAL` after that location has been sent to the server. Optional boss
+checks can be disabled independently. The client also uses native GameData and
+player functions for selected heart, stamina, and pouch-slot progression grants.
+
+Runtime-verified behavior is documented in `docs/cemu_integration_tests.md`.
+Pickup banners and general GameData flag delivery remain outside the implemented
+scope. Plateau completion flags are configured as new-save Bootup defaults; live
+Paraglider receipt removes Plateau containment through the delivered AP item path.
 
 ## Fresh-save Plateau skip
 
-The static patcher sets `IsGet_PlayerStole2` in Bootup GameData defaults and
-adds `PlayerStole2` to the initial pouch. The v208 symbol sheet records a live
-observation that this flag independently controls Plateau fog/return containment,
-even with the four shrine completion flags false. The pouch is separate: it must
-also contain the key item to use the Paraglider. This startup path needs no
-injected GameData setter and applies before the new save's actors/caches load.
+The static patcher configures the tutorial/map defaults and adds the Sheikah Slate
+to the initial pouch. It does not place the Paraglider in the pouch. Paraglider
+remains randomized, and its AP receipt updates the live containment flag. This
+startup path applies before the new save's actors/caches load.

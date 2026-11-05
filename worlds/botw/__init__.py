@@ -7,7 +7,7 @@ from BaseClasses import ItemClassification
 from worlds.AutoWorld import World, WebWorld
 
 from .Items import BotWItem, botw_items, classification
-from .Locations import botw_locations, chest_data
+from .Locations import botw_locations, chest_data, completion_data, combat_data
 from .Options import BotWOptions
 from .Patch import BotWPatch
 from .Regions import create_regions
@@ -23,7 +23,7 @@ class BotWWebWorld(WebWorld):
 
 
 class BotWWorld(World):
-    """Experimental chest integration using native loot markers and reference logic."""
+    """Native chest, shrine, tower and encounter defeat checks."""
     game = "Breath of the Wild"
     options_dataclass = BotWOptions
     options: BotWOptions
@@ -43,6 +43,10 @@ class BotWWorld(World):
         return True
 
     def generate_early(self):
+        unsupported = [entry['name'] for entry in item_data.values()
+                       if entry['delivery']['kind'] == 'unimplemented' and self.category_enabled(entry)]
+        if unsupported:
+            raise ValueError('Enabled items have no delivery implementation: ' + ', '.join(unsupported))
         for option, category in ((self.options.enable_the_master_trials_dlc, "The Master Trials DLC"),
                                  (self.options.enable_the_champions_ballad_dlc, "The Champions' Ballad DLC")):
             if option and not any(category in entry.get("category", []) for entry in chest_data):
@@ -51,6 +55,17 @@ class BotWWorld(World):
                               and (self.options.chest_shuffle or "Overworld Chests" not in entry.get("category", []))]
         if not self.active_chests:
             raise ValueError("No mapped checks; create worlds/botw/data/chests.json using the static patcher")
+        self.active_completions = [entry for entry in completion_data
+                                   if (entry["kind"] == "shrine" and self.options.shrine_checks)
+                                   or (entry["kind"] == "tower" and self.options.tower_checks
+                                       and not (entry["tower"] == 7 and self.options.skip_great_plateau))]
+        self.active_combat = [entry for entry in combat_data if self.category_enabled(entry)
+                              and ((entry['kind'] == 'miniboss' and self.options.miniboss_checks)
+                                   or (entry['kind'] == 'boss' and self.options.boss_checks)
+                                   # Dark Beast is also the physical completion signal, so it
+                                   # remains enabled even when optional boss checks are off.
+                                   or entry['name'] == 'Dark Beast Ganon - Defeated')]
+        self.active_locations = [*self.active_chests, *self.active_completions, *self.active_combat]
         self.starting_state = starting_state(bool(self.options.skip_great_plateau))
         # The static patch initializes these exact defaults before a new save.
         for name, count in self.starting_state["logical_inventory"].items():
@@ -96,20 +111,22 @@ class BotWWorld(World):
             "seed": str(self.multiworld.seed_name),
             "player": self.player,
             "seed_fingerprint": seed_fingerprint(self.multiworld.seed_name, self.player,
-                                                 [entry["id"] for entry in self.active_chests], self.starting_state),
+                                                 [entry["id"] for entry in self.active_locations], self.starting_state),
             "starting_state": self.starting_state,
             "starting_inventory": {str(item_data[name]["id"]): count
                                    for name, count in self.starting_state["logical_inventory"].items()},
             "check_actor_prefix": "AP_Check_",
             "check_actor_id_format": "8 uppercase hexadecimal digits",
             "goal": "defeat_dark_beast_ganon",
-            "locations": {str(entry["id"]): check_actor_name(entry["id"]) for entry in self.active_chests},
+            "goal_location_id": next(entry["id"] for entry in self.active_combat
+                                      if entry["name"] == "Dark Beast Ganon - Defeated"),
+            "locations": {str(entry["id"]): check_actor_name(entry["id"]) for entry in self.active_locations},
             "items": {str(entry["id"]): entry["delivery"] for entry in item_data.values()},
         }
 
     def generate_output(self, output_directory):
         entries = []
-        for entry in self.active_chests:
+        for entry in self.active_locations:
             location = self.get_location(entry["name"])
             item = location.item
             entries.append(dict(entry, check_actor=check_actor_name(entry["id"]),
