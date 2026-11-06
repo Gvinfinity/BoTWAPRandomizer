@@ -102,7 +102,11 @@ def prepare(args, run):
     slot = dict(protocol_version=2, player=1, seed='test', seed_fingerprint=fingerprint,
                 check_actor_prefix='AP_Check_', locations={str(e['id']):f'AP_Check_{e["id"]:08X}' for e in locations},
                 items={str(case['item']): case['delivery'] for case in cases})
-    plan = dict(version=1, game='Breath of the Wild', player=1, seed='test', locations=locations, slot_data=slot)
+    planned_locations = [dict(entry, placed_item=dict(
+        name=cases[0]['name'], id=cases[0]['item'], player=1, player_name='Test'))
+        if entry['id'] == location else dict(entry) for entry in locations]
+    plan = dict(version=1, game='Breath of the Wild', player=1, player_name='Test', seed='test',
+                locations=planned_locations, slot_data=slot)
     (run/'plan.json').write_text(json.dumps(plan, indent=2))
     config, data = run/'config/Cemu', run/'data/Cemu'
     config.mkdir(parents=True); data.mkdir(parents=True)
@@ -269,7 +273,7 @@ def prepare(args, run):
         entry = ET.SubElement(gp,'Entry',filename='graphicPacks/TestGraphics/rules.txt')
         preset = ET.SubElement(entry,'Preset')
         ET.SubElement(preset,'category').text='Resolution'
-        ET.SubElement(preset,'preset').text='320x180'
+        ET.SubElement(preset,'preset').text=args.resolution
     tree.write(config/'settings.xml', encoding='utf-8', xml_declaration=True)
     controller = ET.Element('emulated_controller')
     ET.SubElement(controller,'type').text = 'Wii U Pro Controller'
@@ -323,6 +327,8 @@ def main():
     parser.add_argument('--items', choices=('simplified', 'partial', 'full'), default='simplified',
                         help='One item, one item type per delivery category (all its tiers), or every item and tier')
     parser.add_argument('--item-timeout', type=int, default=15, help='Maximum seconds per receipt; advances immediately on success')
+    parser.add_argument('--resolution', default='320x180', help='Community Graphics pack resolution preset')
+    parser.add_argument('--capture-pickup-frames', action='store_true', help='Capture chest interaction frames for visual review')
     parser.add_argument('--timeout',type=int,default=600)
     parser.add_argument('--display', default=os.environ.get('DISPLAY'),
                         help='X display to use (defaults to DISPLAY; Vulkan acceleration is enabled)')
@@ -379,8 +385,8 @@ def main():
         def command(*parts): return subprocess.run(parts,env=env,check=True,capture_output=True,timeout=10).stdout
         probe=launch(['dotnet',str(ROOT/'src/client/bin/Debug/net10.0/BotWClient.dll'),
                       '--cemu-test',str(run/'scenario.json')],'client',env)
-        def capture():
-            try: subprocess.run(['import','-window',window,str(run/'screen.png')], env=env,
+        def capture(filename='screen.png'):
+            try: subprocess.run(['import','-window',window,str(run/filename)], env=env,
                                 capture_output=True, timeout=2, check=False)
             except (subprocess.TimeoutExpired, OSError): pass
         def check_pack():
@@ -399,7 +405,8 @@ def main():
         if window is None: raise TimeoutError('Cemu window')
         command('xdotool','windowfocus',window)
         # Press A through title/Continue/save confirmation. The probe establishes gameplay readiness.
-        last_capture=0; last_press=0; last_pack_check=0; rune_interaction_sent=False
+        last_capture=0; last_press=0; last_pack_check=0; rune_interaction_sent=False; chest_captured=False
+        last_pickup_capture=0; pickup_frame=0
         while time.monotonic()-started<args.timeout:
             if time.monotonic()-last_pack_check > 1:
                 check_pack(); last_pack_check=time.monotonic()
@@ -409,6 +416,12 @@ def main():
             progress_path = run/'progress.json'
             try: progress = json.loads(progress_path.read_text()) if progress_path.exists() else {}
             except (ValueError, OSError): progress = {}
+            if (args.capture_pickup_frames and progress.get('stage') == 'chest acquisition and AP LocationChecks'
+                    and time.monotonic()-last_pickup_capture >= .5):
+                capture(f'pickup-{pickup_frame:03}.png')
+                pickup_frame += 1; last_pickup_capture=time.monotonic()
+            if progress.get('chest_checked') and not chest_captured:
+                capture('chest_reward.png'); chest_captured=True
             allow_input = progress.get('input_allowed', True) if (args.completion or args.location_id is not None or args.rune_terminal) else (not progress.get('chest_checked') or progress.get('completed', 0) == 0)
             stage = progress.get('stage', '')
             if args.rune_terminal and progress.get('input_allowed') and stage == 'native observation RPC':

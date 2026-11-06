@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Tracker/index.html;Tracker/app.js;Tracker/logic.js;Tracker/style.css" LogicalName="BotWClient.tracker.%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../worlds/botw/data/manual/items.json" LogicalName="BotWClient.tracker.items.json" />
+    <EmbeddedResource Include="../../worlds/botw/data/chests.json;../../worlds/botw/static/completions.json;../../worlds/botw/static/combat.json" LogicalName="BotWClient.tracker.%(Filename)%(Extension)" />
     <PackageReference Include="Archipelago.MultiClient.Net" Version="6.3.0" />
     <EmbeddedResource Include="../../worlds/botw/data/native_grants.json" LogicalName="BotWClient.native_grants.json" />
     <EmbeddedResource Include="../../worlds/botw/static/protocol.json" LogicalName="BotWClient.protocol.json" />

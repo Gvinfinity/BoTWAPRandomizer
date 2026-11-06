@@ -4,6 +4,7 @@ from __future__ import annotations
 import binascii
 
 from .checks import check_actor_name
+from .icons import ICON_ACTOR
 from .resources import binary_modules, decode_byml, decompress, encode_byml, rewrap
 
 TEMPLATE_ACTOR = "Item_Ore_A"
@@ -36,7 +37,7 @@ def build_check_actors(dump, location_ids: list[int]) -> tuple[dict[str, bytes],
             raise ValueError(f"Check actor CRC collides with an existing actor: {name}")
         actor = oead.byml.from_text(oead.byml.to_text(template))
         actor["name"] = name
-        actor["itemUseIconActorName"] = TEMPLATE_ACTOR
+        actor["itemUseIconActorName"] = ICON_ACTOR
         # Never alias systemSameGroupActorName to the template: the hook must
         # receive the distinct AP name before native pouch conversion.
         actor["systemSameGroupActorName"] = ""
@@ -55,7 +56,7 @@ def build_check_actors(dump, location_ids: list[int]) -> tuple[dict[str, bytes],
         item_params = gparam_data.objects["Item"].params
         item_params["BuyingPrice"] = oead.aamp.Parameter(0)
         item_params["SellingPrice"] = oead.aamp.Parameter(0)
-        item_params["UseIconActorName"] = oead.aamp.Parameter(oead.FixedSafeString64(TEMPLATE_ACTOR))
+        item_params["UseIconActorName"] = oead.aamp.Parameter(oead.FixedSafeString64(ICON_ACTOR))
         writer.files[new_gparam] = bytes(gparam_data.to_binary())
         del writer.files[gparam_path]
         raw = bytes(writer.write()[1])

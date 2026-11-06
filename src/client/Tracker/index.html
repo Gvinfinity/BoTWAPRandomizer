@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BotW Tracker</title><link rel="stylesheet" href="/style.css"><script src="/logic.js" defer></script><script src="/app.js" defer></script></head>
+<body>
+<aside>
+  <header><span class="eyebrow">ARCHIPELAGO</span><h1>BotW Tracker</h1><p id="connection" role="status">Connecting…</p></header>
+  <section class="progress-section"><div class="progress-title"><strong id="progress">Loading checks…</strong><span id="items"></span></div><progress id="bar" max="1" value="0"></progress></section>
+  <section class="filters">
+    <label>Search<input id="search" type="search" placeholder="Check name or region" autocomplete="off"></label>
+    <div class="columns"><label>Region<select id="region"><option value="">All regions</option></select></label><label>Type<select id="kind"><option value="">All types</option></select></label></div>
+    <label>Item requirements<select id="logic"><option value="">All checks</option><option value="met">Item conditions met</option><option value="missing">Missing required items</option></select></label>
+    <label class="inline"><input id="hide" type="checkbox" checked> Hide completed checks</label>
+  </section>
+  <details id="inventory-panel"><summary>Item progression <span id="inventory-count"></span></summary><p>Received and starting items; delivery may still be queued.</p><div id="inventory"></div><p id="delivery-status"></p></details>
+  <div id="result-count" aria-live="polite"></div><nav id="results" aria-label="Location checks"></nav>
+</aside>
+<main>
+  <canvas id="map" tabindex="0" aria-label="Breath of the Wild map with Archipelago checks. Drag to pan, scroll to zoom, or select checks from the list. Arrow keys pan; plus and minus zoom."></canvas>
+  <div class="map-heading"><strong>Hyrule</strong><span id="mode" role="status">Loading game map…</span></div>
+  <div id="map-error" hidden role="alert"><h2>Game map unavailable</h2><p>Build the map from your installed game files, then restart the tracker:</p><code>.venv-patcher/bin/python -m src.patcher.build_tracker_map</code><p>Setup instructions: docs/tracker.md</p></div>
+  <div class="map-controls"><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button><button id="reset">Fit map</button></div>
+  <div class="map-legend"><span class="chest">●</span> Chest <span class="shrine">◆</span> Shrine / tower <span class="enemy">▲</span> Enemy <span class="complete">●</span> Completed<br><small>Numbers group checks at the same entrance · North ↑</small></div>
+  <div id="hover" hidden></div><article id="detail" hidden></article>
+</main>
+</body></html>

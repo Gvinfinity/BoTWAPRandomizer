@@ -62,19 +62,19 @@
   },
   "Divine Beast Vah Medoh": {
     "connects_to": [],
-    "requires": "|Tabantha Tower| AND |Vah Medoh Controls| AND ((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|))"
+    "requires": "|Vah Medoh Controls| AND |Magnesis| AND |Progressive Remote Bomb|"
   },
   "Divine Beast Vah Rudania": {
     "connects_to": [],
-    "requires": "|Eldin Tower| AND |Vah Rudania Controls| AND ((|@Flame Resistant Head| AND |@Flame Resistant Body|) OR (|@Flame Resistant Head| AND |@Flame Resistant Legs|) OR (|@Flame Resistant Body| AND |@Flame Resistant Legs|)) AND |Magnesis| AND |Progressive Remote Bomb|"
+    "requires": "|Vah Rudania Controls| AND |Magnesis| AND |Progressive Remote Bomb|"
   },
   "Divine Beast Vah Ruta": {
     "connects_to": [],
-    "requires": "|Lanayru Tower| AND |Vah Ruta Controls| AND |Zora Armor| AND |Cryonis|"
+    "requires": "|Vah Ruta Controls| AND |Cryonis|"
   },
   "Divine Beast Vah Naboris": {
     "connects_to": [],
-    "requires": "|Wasteland Tower| AND |Vah Naboris Controls| AND (|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance|"
+    "requires": "|Vah Naboris Controls| AND |Magnesis|"
   },
   "Trial of the Sword (Beginning Trials)": {
 	"connects_to": [],
@@ -90,11 +90,11 @@
   },
   "Great Plateau (One-Hit Obliterator)": {
     "connects_to": [],
-    "requires": "|Great Plateau Tower| AND |One-Hit Obliterator| AND |Progressive Revali's Gale| AND |Progressive Daruk's Protection| AND |Progressive Mipha's Grace| AND |Progressive Urbosa's Fury|"
+    "requires": "|One-Hit Obliterator|"
   },
   "Final Trial": {
     "connects_to": [],
-    "requires": "|Great Plateau Tower| AND |Final Trial Controls| AND |Progressive Revali's Gale:2| AND |Progressive Daruk's Protection:2| AND |Progressive Mipha's Grace:2| AND |Progressive Urbosa's Fury:2|"
+    "requires": "|Final Trial Controls| AND |Magnesis| AND |Progressive Remote Bomb| AND |Cryonis| AND |Progressive Stasis|"
   },
   "Hyrule Castle": {
     "connects_to": [],

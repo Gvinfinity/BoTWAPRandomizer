@@ -17,6 +17,18 @@ public sealed class APSessionManager : IServerLink, IDisposable
     public int Team { get; }
     public int Slot { get; }
     public bool Connected => session.Socket.Connected;
+    public IEnumerable<long> CheckedLocations => session.Locations.AllLocationsChecked;
+    public Dictionary<string, int> TrackerInventory()
+    {
+        var receipts = session.Items.AllItemsReceived.ToArray();
+        var counts = receipts.Where(item => item.LocationId != -2).GroupBy(item => item.ItemId)
+            .ToDictionary(group => group.Key, group => group.Count());
+        var precollected = receipts.Where(item => item.LocationId == -2).GroupBy(item => item.ItemId)
+            .ToDictionary(group => group.Key, group => group.Count());
+        foreach (long id in precollected.Keys.Union(Contract.StartingInventory.Keys))
+            counts[id] = counts.GetValueOrDefault(id) + Math.Max(precollected.GetValueOrDefault(id), Contract.StartingInventory.GetValueOrDefault(id));
+        return counts.ToDictionary(pair => session.Items.GetItemName(pair.Key, "Breath of the Wild"), pair => pair.Value);
+    }
     public IReadOnlyList<ReceivedItem> ReceivedItems => session.Items.AllItemsReceived
         .Select(item => new ReceivedItem(item.ItemId, item.LocationId)).ToArray();
     public APSessionManager(string uri, string slotName, string? password, Mailbox mailbox, Action<string>? log = null)

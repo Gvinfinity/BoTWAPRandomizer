@@ -9,6 +9,7 @@ import tempfile
 import zipfile
 
 from .actors import build_check_actors
+from .icons import build_check_icon
 from .chests import patch_chest_byml
 from .plan import validate_plan
 from .resources import binary_modules, decode_byml, decompress, encode_byml, replace_members
@@ -76,10 +77,13 @@ def apply_plan(plan: dict, dump, output: str) -> dict:
     token_ids = [entry['id'] for entry in plan['locations'] if entry.get('kind') not in {'miniboss', 'boss', 'objective'}]
     actor_files, _ = build_check_actors(dump, token_ids)
     files.update(actor_files)
+    files.update(build_check_icon(dump))
     files.update(build_rune_terminal_actor(dump, files['content/Actor/ActorInfo.product.sbyml']))
     if tower_maps:
         files.update(build_tower_actor(dump, files['content/Actor/ActorInfo.product.sbyml']))
-    message_files, _ = build_check_messages(dump, token_ids)
+    placements = {entry['id']: entry.get('placed_item') for entry in plan['locations']}
+    message_files, _ = build_check_messages(dump, token_ids, placements,
+                                            plan['player'], plan.get('player_name'))
     files.update(message_files)
     if plan.get("starting_state") is not None:
         starting_files, _ = build_starting_resources(dump, plan["starting_state"])

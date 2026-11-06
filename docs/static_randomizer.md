@@ -44,14 +44,18 @@ from generation and goal requirements while retaining other enabled DLC content.
 Each tracked chest drops a distinct actor named `AP_Check_XXXXXXXX`, where
 `XXXXXXXX` is its unsigned 32-bit **AP location ID**, as eight uppercase hex
 digits. For example, location `0xB1234567` drops `AP_Check_B1234567`. The visible
-item name is `Archipelago Item [B1234567]`. The placed reward's item ID and owner
+item name comes from the seed's placed reward, with the recipient appended for
+another player's item (for example, `Sharp Knife (Chef)`). The placed reward's item ID and owner
 are separate: a foreign player's reward still uses the local chest's location ID.
 
 The static engine creates an actor pack, ActorLink, GeneralParamList, ActorInfo
 entry, UI name/description, and RSTB allocations for each marker. The current
-visual prototype shares the diamond model and icon; its buying/selling prices
-are zero. Model, physics, and AI resources remain shared to keep each additional
-pack small. All installed language packs receive the AP labels (currently English).
+visual uses the supplied Archipelago `data/icon.png` for the pickup icon; its
+buying/selling prices are zero. The 3D model, physics, and AI resources remain
+shared with the diamond template to keep each additional pack small. All installed
+language packs receive the seed's item names and recipient labels. Item names
+are Archipelago names rather than localized translations. New seeds include
+recipient names; older patches fall back to `Player N` for foreign recipients.
 
 The bundled acquisition hook now:
 
@@ -105,7 +109,7 @@ python3.12 -m venv .venv-patcher
   --bind-reference --output out/chests.json
 
 # Package the currently bundled catalog and world for Archipelago.
-.venv-patcher/bin/python -m src.patcher bundle-world --output out/botw.apworld
+.venv-patcher/bin/python -m src.patcher bundle-world
 
 # After Archipelago generation, apply this player's seed.
 .venv-patcher/bin/python -m src.patcher apply AP_seed_P1_Player.apbotw \

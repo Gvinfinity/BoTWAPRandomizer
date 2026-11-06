@@ -11,6 +11,7 @@ from botw_static.bindings import bind_reference
 from botw_static.discovery import discover_chests
 from botw_static.plan import read_plan
 from botw_static.resources import GameDump
+from botw_static.version import WORLD_VERSION
 
 
 def main() -> None:
@@ -25,8 +26,9 @@ def main() -> None:
         command.add_argument("--output", required=True)
     discover.add_argument("--bind-reference", action="store_true")
     apply.add_argument("patch", help="Generated .apbotw or JSON patch plan")
-    bundle = commands.add_parser("bundle-world", help="Package the world into botw.apworld")
-    bundle.add_argument("--output", required=True)
+    bundle = commands.add_parser("bundle-world", help="Package the versioned BotW APWorld")
+    bundle.add_argument("--output", default=f"out/botw-{WORLD_VERSION}.apworld",
+                        help=f"Output archive (default: out/botw-{WORLD_VERSION}.apworld)")
     args = parser.parse_args()
     if args.command == "bundle-world":
         output = Path(args.output)
@@ -36,7 +38,7 @@ def main() -> None:
         with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
             archive.writestr("archipelago.json", json.dumps({
                 "game": "Breath of the Wild", "version": 7, "compatible_version": 7,
-                "world_version": "0.5.0", "minimum_ap_version": "0.6.0"
+                "world_version": WORLD_VERSION, "minimum_ap_version": "0.6.0"
             }))
             archive.write(ROOT / "src/hook/patch_Archipelago.asm", "botw/static/hook_template.asm")
             for path in sorted((ROOT / "worlds/botw").rglob("*")):

@@ -1,5 +1,6 @@
 using BotWClient.Memory;
 using BotWClient.Archipelago;
+using BotWClient.Tracker;
 
 namespace BotWClient;
 
@@ -7,14 +8,29 @@ internal static class Program
 {
     private static int Main(string[] args)
     {
+        if (args.Contains("--self-test-tracker")) return TrackerTests.Run();
         if (args.Length == 2 && args[0] == "--cemu-test") return CemuIntegrationTest.Run(args[1]);
         if (args.Length == 2 && args[0] == "--self-test-pack") return TestHarness.ValidatePack(args[1]);
         if (args.Length == 2 && args[0] == "--self-test-tls") return TestHarness.Run(args[1]);
         if (args.Contains("--self-test") || args.Contains("--mock")) return TestHarness.Run();
         string? Option(string name) { int index = Array.IndexOf(args, name); return index >= 0 && index + 1 < args.Length ? args[index + 1] : null; }
+        if (args.Contains("--tracker-only"))
+        {
+            try
+            {
+                using var preview = new TrackerServer(int.Parse(Option("--tracker-port") ?? "38282"), mapDirectory: Option("--tracker-map-dir"));
+                preview.Publish("catalog-preview", "Catalog preview · no live game", false, [], 0, null);
+                Console.WriteLine($"Tracker: {preview.Url} (catalog preview; Ctrl+C to exit)");
+                using var stop = new ManualResetEventSlim();
+                Console.CancelKeyPress += (_, e) => { e.Cancel = true; stop.Set(); };
+                stop.Wait(); return 0;
+            }
+            catch (Exception ex) { Console.Error.WriteLine(ex.Message); return 1; }
+        }
         string? server = Option("--server"), slot = Option("--slot");
         if (server is null || slot is null)
         {
+            Console.WriteLine("Tracker: add --tracker [--tracker-port 38282] for a local browser map. Use --tracker-only to preview without Cemu or AP.\n       Tests: --self-test-tracker\n");
             Console.WriteLine("Usage: BotWClient --server host[:port]|ws://host[:port]|wss://host[:port] [--port number] --slot name [--password value] [--state-dir path] [--verbose]\n       Bare hosts negotiate WSS then WS, default port 38281. Explicit URLs use ports 80/443 unless specified.\n       BotWClient --self-test");
             return 1;
         }
@@ -42,12 +58,23 @@ internal static class Program
             using var initial = new APSessionManager(endpoint.AbsoluteUri, slot, Option("--password"), mailbox, log.Write);
             using var bridge = new ClientBridge(mailbox, initial.Contract, directory, initial.Team, initial.Slot, log.Write);
             APSessionManager current = initial;
+            using var tracker = args.Contains("--tracker")
+                ? new TrackerServer(int.Parse(Option("--tracker-port") ?? "38282"), initial.Contract.Locations, Option("--tracker-map-dir")) : null;
+            if (tracker is not null) Console.WriteLine($"Tracker: {tracker.Url}");
+            long trackerUpdate = 0;
             string? lastReason = null;
             Console.WriteLine($"Connected to AP, team {initial.Team}, slot {initial.Slot}. Seed pack verified. Ctrl+C to exit.");
             try
             {
                 while (!cancellation.IsCancellationRequested)
                 {
+                    if (tracker is not null && Environment.TickCount64 >= trackerUpdate)
+                    {
+                        tracker.Publish($"{initial.Contract.Fingerprint}-T{initial.Team}-P{initial.Slot}", slot,
+                            current.Connected, bridge.TrackerChecks.Concat(current.CheckedLocations),
+                            current.ReceivedItems.Count, bridge.BlockReason, current.TrackerInventory(), bridge.NextItem);
+                        trackerUpdate = Environment.TickCount64 + 1000;
+                    }
                     if (!current.Connected)
                     {
                         bridge.Pump(current); // Persist checks even while the connection is down.

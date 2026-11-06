@@ -66,6 +66,8 @@ class TestBotWGeneration(BotWTestBase):
         self.assertEqual(len(planned_ids), len(plan['locations']))
         self.assertEqual(len(plan['slot_data']['items']), len(item_data))
         self.assertTrue(all(entry['placed_item']['id'] is not None for entry in plan['locations']))
+        self.assertTrue(all(entry['placed_item']['player_name'] == self.multiworld.get_player_name(
+            entry['placed_item']['player']) for entry in plan['locations']))
 
     def test_plateau_skip_starts_with_map_but_keeps_paraglider_in_pool(self):
         data = self.world.fill_slot_data()
@@ -127,6 +129,23 @@ class TestCompletionChecksOff(BotWTestBase):
 
 
 class TestGoalPrerequisites(BotWTestBase):
+    def test_naboris_and_goal_require_thunder_helm(self):
+        from BaseClasses import ItemClassification
+        self.assertEqual(self.world.create_item('Thunder Helm').classification, ItemClassification.progression)
+        self.collect_all_but('Thunder Helm')
+        region = self.world.get_region('Divine Beast Vah Naboris')
+        boss = self.world.get_location('Thunderblight Ganon - Defeated')
+        victory = self.world.get_location('Dark Beast Ganon Defeated')
+        self.assertFalse(region.can_reach(self.multiworld.state))
+        self.assertFalse(boss.can_reach(self.multiworld.state))
+        self.assertFalse(victory.can_reach(self.multiworld.state))
+        # The surrounding desert is still open without the Helm.
+        self.assertTrue(self.world.get_region('Gerudo Desert').can_reach(self.multiworld.state))
+        self.multiworld.state.collect(self.world.create_item('Thunder Helm'))
+        self.assertTrue(region.can_reach(self.multiworld.state))
+        self.assertTrue(boss.can_reach(self.multiworld.state))
+        self.assertTrue(victory.can_reach(self.multiworld.state))
+
     def test_bow_and_paraglider_cannot_unlock_victory(self):
         for name in ('Paraglider', 'Bow of Light'):
             self.multiworld.state.collect(self.world.create_item(name))

@@ -15,14 +15,30 @@ python -m pip install -e '.[test]'   # run from src/patcher
 Build the world bundle from the repository root:
 
 ```sh
-python -m src.patcher bundle-world --output dist/botw.apworld
+python -m src.patcher bundle-world
 ```
+
+This creates `out/botw-0.5.3.apworld`. Release bundles use `botw-VERSION.apworld`,
+with the version defined in `worlds/botw/static/version.py` and recorded in the
+archive manifest. Install only one BotW APWorld version in Archipelago.
+
+Version 0.5.3 separates Beast boarding from internal controls, adds Gerudo Town
+disguise and Lakna Rokee Camera requirements, and models local DLC quest stages.
+See [boarding and quest logic](docs/boarding_logic.md) for requirements and native
+supply assumptions. Generate a new seed and Graphic Pack to use these rules.
 
 Build the client from the repository root:
 
 ```sh
 dotnet build src/client/BotWClient.csproj
 ```
+
+Add `--tracker` to the client command for an offline map tracker at
+`http://127.0.0.1:38282/`. Checks overlay the actual BotW map extracted from your
+installed game, with shrine entrance groups, automatic completion, item progression,
+and search/filter controls. Preview without Cemu using
+`dotnet run --project src/client -- --tracker-only`. See [the tracker guide](docs/tracker.md)
+for one-time map preparation and logic limits.
 
 The patcher uses extracted game content as input; it does not include game files. See [the patcher CLI](src/patcher/__main__.py) for `discover` and `apply` commands and their required paths. The repository also includes detailed [Cemu integration test notes](docs/cemu_integration_tests.md).
 
@@ -86,6 +102,9 @@ Graphic Pack after changing this option.
    ```
 
    This creates a seed-specific Graphic Pack ZIP by applying the patch plan to your game content. The base/update/DLC combination should match the content you use in Cemu.
+   Tracked pickups display the Archipelago icon and the placed reward's item
+   name, including its recipient when sent to another player. Regenerate the
+   seed to include recipient names; older patches can show `Player N` instead.
 4. In Cemu, open **Options → General settings → General** and note the configured Graphic Packs directory. Extract the generated ZIP into that directory, preserving its `rules.txt` and directory structure.
 5. Open **Options → Graphic Packs**, refresh the list if needed, and enable the generated BotW Archipelago pack under the Breath of the Wild category. Do not enable the standalone AP hook pack alongside it.
 6. Start the game, then launch the built `BotWClient` and connect it to the same Archipelago room using the generated player credentials.

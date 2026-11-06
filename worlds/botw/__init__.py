@@ -146,7 +146,8 @@ class BotWWorld(World):
             location = self.get_location(entry["name"])
             item = location.item
             entries.append(dict(entry, check_actor=check_actor_name(entry["id"]),
-                                placed_item={"name": item.name, "id": item.code, "player": item.player}))
+                                placed_item={"name": item.name, "id": item.code, "player": item.player,
+                                             "player_name": self.multiworld.get_player_name(item.player)}))
         digest = hashlib.sha256(json.dumps(entries, sort_keys=True).encode()).hexdigest()
         plan = {"version": PROTOCOL_VERSION, "game": self.game, "player": self.player,
                 "player_name": self.player_name, "seed": str(self.multiworld.seed_name),

@@ -33,6 +33,12 @@ Requirements: Cemu, .NET 10 with client NuGet dependencies already restored, the
 patcher Python dependencies, an X11 display, xdotool and ImageMagick `import`.
 The runner uses `DISPLAY` by default and starts Cemu with Vulkan. It focuses the
 Cemu window to send controller input, so the screen appears while the test runs.
+
+For pickup icon/name review, add `--capture-pickup-frames --resolution
+"1280x720 (HD, Default)"`. This saves `pickup-*.png` during chest interaction,
+in addition to the regular screenshots. The selected chest uses its configured
+reward name in the production message builder. These captures are visual
+evidence to review, not an automated image comparison.
 No manual input is needed. Use `--display :0` to select another X display. Pass
 `--headless` only when no usable display is available; that mode uses Xvfb and
 software OpenGL.

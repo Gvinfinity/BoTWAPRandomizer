@@ -187,6 +187,7 @@ public sealed partial class ClientBridge : IDisposable
     private bool checksDirty = true;
     public string? BlockReason { get; private set; }
     public int NextItem => state.NextItem;
+    public IEnumerable<long> TrackerChecks => state.Checks;
 
     public ClientBridge(Mailbox mailbox, SlotContract contract, string directory, int team, int slot, Action<string>? log = null)
     {

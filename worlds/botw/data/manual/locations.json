@@ -465,7 +465,7 @@
         "Dueling Peaks Shrines",
         "Shrine Chests"
       ],
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|"
+      "requires": "|Camera| AND (|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|)"
     },
     {
       "name": "Lakna Rokee Shrine",
@@ -473,7 +473,7 @@
       "category": [
         "Dueling Peaks Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|"
+      "requires": "|Camera| AND (|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|)"
     },
     {
       "name": "Ree Dahee Shrine - Chest",

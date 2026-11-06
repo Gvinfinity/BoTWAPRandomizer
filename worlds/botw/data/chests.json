@@ -6388,7 +6388,7 @@
         -4.0
       ],
       "region": "Dueling Peaks",
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "|Camera| AND (|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|)",
       "resource": "content/Pack/Dungeon112.pack!Map/CDungeon/Dungeon112/Dungeon112_Static.smubin"
     },
     {

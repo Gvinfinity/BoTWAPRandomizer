@@ -5,6 +5,8 @@ from .resources import binary_modules, decompress
 
 
 def allocation_template(path):
+    path = path.replace('UI/StockItem/AP_Item_00.sbitemico', 'UI/StockItem/Item_Ore_A.sbitemico')
+    path = path.replace('UI/StockItem/AP_Item_00.bitemico', 'UI/StockItem/Item_Ore_A.bitemico')
     path = path.replace('Actor/AIProgram/AP_TowerTerminal.baiprog', 'Actor/AIProgram/DownloadTerminal.baiprog')
     path = path.replace('Actor/AIProgram/AP_RuneTerminal.baiprog', 'Actor/AIProgram/DownloadTerminal.baiprog')
     path = path.replace('AP_TowerTerminal', 'FldObj_DownloadTerminal_A_01')
