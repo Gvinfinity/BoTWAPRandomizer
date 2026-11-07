@@ -179,9 +179,16 @@ class TestDarkBeastOnlyGoal(BotWTestBase):
         self.assertEqual(slot['goal'], 'dark_beast_ganon')
         self.assertEqual(slot['goal_required_location_ids'], [])
         self.assertEqual([e['name'] for e in self.world.active_combat], ['Dark Beast Ganon - Defeated'])
-        for name in ('Paraglider', 'Bow of Light'):
-            self.multiworld.state.collect(self.world.create_item(name))
-        self.assertTrue(self.world.get_location('Dark Beast Ganon Defeated').can_reach(self.multiworld.state))
+        state = self.multiworld.state
+        state.collect(self.world.create_item('Paraglider'))
+        self.assertFalse(self.world.get_location('Dark Beast Ganon Defeated').can_reach(state))
+        # Native equipment and Zelda's Bow of Light cover combat, but the
+        # undefeated Fire/Thunderblight gauntlet still needs Bombs/Magnesis.
+        state.collect(self.world.create_item('Progressive Remote Bomb'))
+        self.assertFalse(self.world.get_location('Dark Beast Ganon Defeated').can_reach(state))
+        state.collect(self.world.create_item('Magnesis'))
+        self.assertTrue(self.world.get_location('Dark Beast Ganon Defeated').can_reach(state))
+        self.assertFalse(state.has('Bow of Light', self.player))
 
 
 class TestBeastsOnlyGoal(TestGoalPrerequisites):

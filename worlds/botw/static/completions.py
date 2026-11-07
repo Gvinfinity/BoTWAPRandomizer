@@ -7,6 +7,7 @@ import io
 import json
 from importlib.resources import files
 
+from .check_logic import apply_check_logic
 from .checks import check_actor_name
 from .resources import binary_modules, decode_byml, decompress, encode_byml, rewrap
 
@@ -16,7 +17,9 @@ TOWER_TEMPLATE = 'FldObj_DownloadTerminal_A_01'
 
 def catalog():
     # This module is also loaded as botw_static by the standalone patcher.
-    return json.loads(files(__package__).joinpath('completions.json').read_text())
+    data = json.loads(files(__package__).joinpath('completions.json').read_text())
+    data['locations'] = [apply_check_logic(entry) for entry in data['locations']]
+    return data
 
 
 def _evfl():

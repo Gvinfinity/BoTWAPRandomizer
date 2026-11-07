@@ -1,0 +1,33 @@
+# Bugs
+
+## Chests
+
+Map/MainField/D-6/D-6_Static.smubin - Chest F5EA1473 -> Needs bomb
+
+Map/MainField/E-6/E-6_Dynamic.smubin - Chest A2A08719 -> Needs bomb
+
+Map/MainField/E-6/E-6_Static.smubin - Chest E1F9BB4B -> Needs bomb, paraglider or revali's gate
+Map/MainField/E-6/E-6_Static.smubin - Chest 78F0EAF1 -> Needs bomb, paraglider or revali's gate
+
+Map/MainField/E-6/E-6_Dynamic.smubin - Chest 6260C604 -> Needs magnesis
+Map/MainField/E-6/E-6_Dynamic.smubin - Chest DF4FC4CF -> Needs magnesis
+Map/MainField/E-6/E-6_Dynamic.smubin - Chest 123AEF57 -> Needs magnesis
+
+Map/MainField/E-7/E-7_Dynamic.smubin - Chest 68BE4D6A -> Needs bomb
+Map/MainField/E-7/E-7_Static.smubin - Chest E382DE4C -> Needs stasis
+
+## Logic
+
+Eldin Tower -> Cannot enter region without some logic
+
+## General
+
+Many items are being added twice to the inventory
+
+Revali's gate was received because of duplicate Herbosa's Fury
+
+## Regressions
+
+Runes acquirable directly via the slate
+
+Leavin Great Plateau not working 

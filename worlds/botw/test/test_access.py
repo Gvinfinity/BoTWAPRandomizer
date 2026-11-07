@@ -123,3 +123,53 @@ class TestDlcStoryMilestones(BotWTestBase):
         state = self.multiworld.state
         self.assertTrue(state.has("Completed Revali's Song", self.player))
         self.assertFalse(self.world.get_region('Final Trial').can_reach(state))
+
+
+class TestPhysicalCheckRules(BotWTestBase):
+    def test_reported_chests_require_their_physical_capabilities(self):
+        from ..static.check_logic import CHEST_RULES
+        from ..Locations import chest_data
+        for entry in chest_data:
+            if (entry['logical_map'], entry['hash_id']) not in CHEST_RULES:
+                continue
+            location = self.world.get_location(entry['name'])
+            self.assertFalse(location.can_reach(self.multiworld.state), entry['name'])
+        self.multiworld.state.collect(self.world.create_item('Magnesis'))
+        for hash_id in (0x6260C604, 0xDF4FC4CF, 0x123AEF57):
+            entry = next(e for e in chest_data if e['hash_id'] == hash_id)
+            self.assertTrue(self.world.get_location(entry['name']).can_reach(self.multiworld.state))
+        bomb_chest = next(e for e in chest_data if e['hash_id'] == 0xF5EA1473)
+        self.assertFalse(self.world.get_location(bomb_chest['name']).can_reach(self.multiworld.state))
+        self.multiworld.state.collect(self.world.create_item('Progressive Remote Bomb'))
+        self.assertTrue(self.world.get_location(bomb_chest['name']).can_reach(self.multiworld.state))
+
+    def test_native_weapons_can_defeat_a_hinox_without_ap_weapons_or_bombs(self):
+        self.multiworld.state.collect(self.world.create_item('Paraglider'))
+        entry = next(e for e in self.world.active_combat if e.get('family') == 'hinox')
+        self.assertTrue(self.world.get_location(entry['name']).can_reach(self.multiworld.state))
+        self.assertFalse(self.multiworld.state.has('Master Sword', self.player))
+        self.assertFalse(self.multiworld.state.has('Progressive Remote Bomb', self.player))
+
+    def test_scout_does_not_require_randomized_armor_upgrades(self):
+        self.multiworld.state.collect(self.world.create_item('Paraglider'))
+        self.assertTrue(self.world.get_location('Chaas Qeta Shrine').can_reach(self.multiworld.state))
+        self.assertFalse(self.multiworld.state.has('Progressive Armor Upgrade', self.player))
+        self.assertFalse(self.world.get_location('Shoqa Tatone Shrine').can_reach(self.multiworld.state))
+        self.multiworld.state.collect(self.world.create_item('Camera'))
+        self.assertTrue(self.world.get_location('Shoqa Tatone Shrine').can_reach(self.multiworld.state))
+
+    def test_plateau_cold_food_does_not_require_ap_clothing(self):
+        self.assertFalse(self.world.get_location('Keh Namut Shrine').can_reach(self.multiworld.state))
+        self.multiworld.state.collect(self.world.create_item('Cryonis'))
+        self.assertTrue(self.world.get_location('Keh Namut Shrine').can_reach(self.multiworld.state))
+
+    def test_cleared_reward_cannot_skip_voo_lota_quest(self):
+        from BaseClasses import CollectionState
+        state = CollectionState(self.multiworld)
+        for name in ('Paraglider', 'Vah Medoh Cleared'):
+            state.collect(self.world.create_item(name))
+        self.assertFalse(self.world.get_location('Voo Lota Shrine').can_reach(state))
+        self.collect_all_but('Vah Medoh Controls', state)
+        self.assertFalse(self.world.get_location('Voo Lota Shrine').can_reach(state))
+        state.collect(self.world.create_item('Vah Medoh Controls'))
+        self.assertTrue(self.world.get_location('Voo Lota Shrine').can_reach(state))

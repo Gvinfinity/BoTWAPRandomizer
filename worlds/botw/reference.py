@@ -4,6 +4,7 @@ from __future__ import annotations
 from importlib.resources import files
 import json
 
+from .static.check_logic import apply_check_logic
 from .static.checks import PROTOCOL_VERSION, chest_key, check_actor_name
 
 
@@ -99,7 +100,7 @@ def load_chests():
         names.add(entry["name"])
         codes.add(entry["id"])
         keys.add(key)
-        bound.append(entry)
+        bound.append(apply_check_logic(entry))
     return bound
 
 

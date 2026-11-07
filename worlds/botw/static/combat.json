@@ -9,7 +9,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Bone",
       "hash_id": 4237208898,
@@ -33,7 +33,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Senior",
       "hash_id": 2009832062,
@@ -57,7 +57,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 3900382371,
@@ -81,7 +81,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb|",
+      "requires": "|Progressive Remote Bomb| OR |Medoh Flight Range Supplies|",
       "family": "molduga",
       "actor": "Enemy_Sandworm",
       "hash_id": 3098676163,
@@ -105,7 +105,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb|",
+      "requires": "|Progressive Remote Bomb| OR |Medoh Flight Range Supplies|",
       "family": "molduga",
       "actor": "Enemy_Sandworm",
       "hash_id": 3538536935,
@@ -129,7 +129,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb|",
+      "requires": "|Progressive Remote Bomb| OR |Medoh Flight Range Supplies|",
       "family": "molduga",
       "actor": "Enemy_Sandworm",
       "hash_id": 3569739054,
@@ -153,7 +153,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Ice",
       "hash_id": 189892196,
@@ -177,7 +177,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Ice",
       "hash_id": 1684711544,
@@ -201,7 +201,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Senior",
       "hash_id": 464316212,
@@ -225,7 +225,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Senior",
       "hash_id": 2530932938,
@@ -249,7 +249,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Senior",
       "hash_id": 2853871544,
@@ -273,7 +273,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Senior",
       "hash_id": 2763213354,
@@ -297,7 +297,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Senior",
       "hash_id": 2455625785,
@@ -321,7 +321,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Ice",
       "hash_id": 4007690024,
@@ -345,7 +345,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb|",
+      "requires": "|Progressive Remote Bomb| OR |Medoh Flight Range Supplies|",
       "family": "molduga",
       "actor": "Enemy_Sandworm",
       "hash_id": 494020159,
@@ -369,7 +369,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Ice",
       "hash_id": 4087740554,
@@ -393,7 +393,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Senior",
       "hash_id": 321907823,
@@ -417,7 +417,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 3605751469,
@@ -441,7 +441,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 3627901807,
@@ -465,7 +465,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Bone",
       "hash_id": 1721655973,
@@ -489,7 +489,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Ice",
       "hash_id": 648092042,
@@ -513,7 +513,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 2827830463,
@@ -537,7 +537,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 372172601,
@@ -561,7 +561,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 975119268,
@@ -586,7 +586,7 @@
         "Minibosses",
         "The Champions' Ballad DLC"
       ],
-      "requires": "|Progressive Remote Bomb|",
+      "requires": "|Progressive Remote Bomb| OR |Medoh Flight Range Supplies|",
       "family": "molduga",
       "actor": "Enemy_SandwormR",
       "hash_id": 1755179653,
@@ -610,7 +610,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Bone",
       "hash_id": 3201775889,
@@ -634,7 +634,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 2472409077,
@@ -658,7 +658,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Senior",
       "hash_id": 851170738,
@@ -682,7 +682,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 1949698080,
@@ -706,7 +706,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 3610208070,
@@ -730,7 +730,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 3273877672,
@@ -754,7 +754,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 491623064,
@@ -778,7 +778,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Bone",
       "hash_id": 2815854988,
@@ -802,7 +802,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 3637193649,
@@ -826,7 +826,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 4080554254,
@@ -850,7 +850,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Senior",
       "hash_id": 3869714669,
@@ -874,7 +874,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Bone_AllDay",
       "hash_id": 73882430,
@@ -898,7 +898,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Senior",
       "hash_id": 1943962273,
@@ -922,7 +922,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 2367737901,
@@ -946,7 +946,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 3812413946,
@@ -970,7 +970,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 2530315670,
@@ -994,7 +994,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 853217538,
@@ -1018,7 +1018,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 1266282060,
@@ -1042,7 +1042,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Bone",
       "hash_id": 1287559097,
@@ -1066,7 +1066,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 3744176720,
@@ -1090,7 +1090,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 481698249,
@@ -1114,7 +1114,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 4234397911,
@@ -1138,7 +1138,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Bone",
       "hash_id": 2974080467,
@@ -1162,7 +1162,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Fire",
       "hash_id": 2080410037,
@@ -1186,7 +1186,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Fire",
       "hash_id": 2112489205,
@@ -1210,7 +1210,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Junior",
       "hash_id": 1602515170,
@@ -1234,7 +1234,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 1450825465,
@@ -1258,7 +1258,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 2009332164,
@@ -1282,7 +1282,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 3873221297,
@@ -1306,7 +1306,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Junior",
       "hash_id": 1903632265,
@@ -1330,7 +1330,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Bone",
       "hash_id": 1698864303,
@@ -1354,7 +1354,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 3272527560,
@@ -1378,7 +1378,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 3817875409,
@@ -1402,7 +1402,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 4097205930,
@@ -1426,7 +1426,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Junior",
       "hash_id": 4099815924,
@@ -1450,7 +1450,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Senior",
       "hash_id": 3410381997,
@@ -1474,7 +1474,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Fire",
       "hash_id": 4143112243,
@@ -1499,7 +1499,7 @@
         "Minibosses",
         "The Champions' Ballad DLC"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Fire_R",
       "hash_id": 667761767,
@@ -1523,7 +1523,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Fire",
       "hash_id": 3180486693,
@@ -1547,7 +1547,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Fire",
       "hash_id": 1372356658,
@@ -1571,7 +1571,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Senior",
       "hash_id": 3741497810,
@@ -1595,7 +1595,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 2083136285,
@@ -1619,7 +1619,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 3572226454,
@@ -1643,7 +1643,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Junior",
       "hash_id": 1833514674,
@@ -1667,7 +1667,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 3688513041,
@@ -1691,7 +1691,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 936329231,
@@ -1715,7 +1715,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Junior",
       "hash_id": 3337886442,
@@ -1739,7 +1739,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Senior",
       "hash_id": 3785639248,
@@ -1763,7 +1763,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Bone",
       "hash_id": 3700264996,
@@ -1787,7 +1787,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Senior",
       "hash_id": 1028264440,
@@ -1811,7 +1811,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 1384742674,
@@ -1835,7 +1835,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 1063952470,
@@ -1859,7 +1859,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 3831867213,
@@ -1883,7 +1883,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 139564765,
@@ -1907,7 +1907,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Junior",
       "hash_id": 3350013125,
@@ -1931,7 +1931,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Junior",
       "hash_id": 373348007,
@@ -1955,7 +1955,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Junior",
       "hash_id": 3707687090,
@@ -1979,7 +1979,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Bone",
       "hash_id": 2519547405,
@@ -2003,7 +2003,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 3706280648,
@@ -2027,7 +2027,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "talus",
       "actor": "Enemy_Golem_Middle",
       "hash_id": 3529818719,
@@ -2051,7 +2051,7 @@
       "category": [
         "Minibosses"
       ],
-      "requires": "|Progressive Remote Bomb| OR |Master Sword| OR |Progressive Master Sword|",
+      "requires": "",
       "family": "hinox",
       "actor": "Enemy_Giant_Middle",
       "hash_id": 1925665429,
@@ -2075,7 +2075,7 @@
       "category": [
         "Bosses"
       ],
-      "requires": "|Magnesis| AND |Progressive Remote Bomb| AND |Progressive Armor Upgrade| AND ((|@Upgradeable Cold Resistant Head| AND |@Upgradeable Cold Resistant Body| AND |@Upgradeable Legs|) OR (|@Upgradeable Cold Resistant Head| AND |@Upgradeable Body| AND |@Upgradeable Cold Resistant Legs|) OR (|@Upgradeable Head| AND |@Upgradeable Cold Resistant Body| AND |@Upgradeable Cold Resistant Legs|))",
+      "requires": "",
       "actor": "Enemy_SiteBoss_Bow",
       "watch_flag": "Defeated_Enemy_SiteBoss_Bow_Num",
       "scene": "RemainsWind",
@@ -2099,7 +2099,7 @@
       "category": [
         "Bosses"
       ],
-      "requires": "|Progressive Armor Upgrade| AND ((|@Upgradeable Flame Resistant Head| AND |@Upgradeable Flame Resistant Body| AND |@Upgradeable Legs|) OR (|@Upgradeable Flame Resistant Head| AND |@Upgradeable Body| AND |@Upgradeable Flame Resistant Legs|) OR (|@Upgradeable Head| AND |@Upgradeable Flame Resistant Body| AND |@Upgradeable Flame Resistant Legs|))",
+      "requires": "|Progressive Remote Bomb|",
       "actor": "Enemy_SiteBoss_Lsword",
       "watch_flag": "Defeated_Enemy_SiteBoss_Lsword_Num",
       "scene": "RemainsFire",
@@ -2123,7 +2123,7 @@
       "category": [
         "Bosses"
       ],
-      "requires": "|Magnesis| AND |Progressive Stasis| AND |Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "actor": "Enemy_SiteBoss_Spear",
       "watch_flag": "Defeated_Enemy_SiteBoss_Spear_Num",
       "scene": "RemainsWater",
@@ -2147,7 +2147,7 @@
       "category": [
         "Bosses"
       ],
-      "requires": "|Progressive Remote Bomb| AND |Magnesis| AND |Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "|Magnesis|",
       "actor": "Enemy_SiteBoss_Sword",
       "watch_flag": "Defeated_Enemy_SiteBoss_Sword_Num",
       "scene": "RemainsElectric",
@@ -2171,7 +2171,7 @@
       "category": [
         "Bosses"
       ],
-      "requires": "|Master Sword| OR |Progressive Master Sword| OR |Bow of Light|",
+      "requires": "(|Freed Vah Rudania| OR |Progressive Remote Bomb|) AND (|Freed Vah Naboris| OR |Magnesis|)",
       "actor": "Enemy_Ganon",
       "watch_flag": "IsPlayed_Demo145_0",
       "scene": "MainField",
@@ -2196,7 +2196,7 @@
         "Bosses",
         "The Champions' Ballad DLC"
       ],
-      "requires": "|Magnesis| AND |Progressive Stasis| AND |Cryonis| AND |Progressive Armor Upgrade:3| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "actor": "Priest_Boss_Normal",
       "watch_flag": "Defeated_Priest_Boss_Normal_Num",
       "scene": "FinalTrial",
@@ -2221,7 +2221,7 @@
       "category": [
         "Bosses"
       ],
-      "requires": "|Bow of Light|",
+      "requires": "|Calamity Ganon Cleared Locally|",
       "actor": "Enemy_GanonBeast",
       "watch_flag": "Defeated_Enemy_GanonBeast_Num",
       "watch_type": "s32",

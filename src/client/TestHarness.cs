@@ -439,6 +439,41 @@ internal static class TestHarness
         bridge.Pump(server);
     }
 
+    private static void TestProducerLease()
+    {
+        string path = Path.Combine(Path.GetTempPath(), "botw-ap-lease-test-" + Guid.NewGuid().ToString("N") + ".lock");
+        try
+        {
+            using (var lease = CemuMemoryReader.AcquireProducerLease(path))
+            {
+                Require(File.Exists(path), "Producer lock missing while held");
+                try
+                {
+                    using var competing = CemuMemoryReader.AcquireProducerLease(path);
+                    throw new Exception("Concurrent producer acquired the Cemu lock");
+                }
+                catch (IOException) { }
+                Require(File.Exists(path), "Rejected producer removed the active lock");
+            }
+            Require(!File.Exists(path), "Normal shutdown left the Cemu lock behind");
+            try
+            {
+                using var lease = CemuMemoryReader.AcquireProducerLease(path);
+                // Reproduce a /proc/PID/mem permission failure after lock acquisition.
+                throw new UnauthorizedAccessException("Memory access denied");
+            }
+            catch (UnauthorizedAccessException) { }
+            Require(!File.Exists(path), "Failed attachment left the Cemu lock behind");
+            File.WriteAllText(path, "stale lock");
+            using (var lease = CemuMemoryReader.AcquireProducerLease(path)) { }
+            Require(!File.Exists(path), "Stale lock was not reclaimed and removed");
+            using (var lease = CemuMemoryReader.AcquireProducerLease(path)) { }
+            Require(!File.Exists(path), "Retry left the Cemu lock behind");
+            Console.WriteLine("PASS: producer lock exclusion, failure cleanup, stale lock recovery and retry");
+        }
+        finally { if (File.Exists(path)) File.Delete(path); }
+    }
+
     private static void TestEndpoints()
     {
         var automatic = ServerEndpoint.Parse("archipelago.reprgb.gay", "63456");
@@ -547,6 +582,7 @@ internal static class TestHarness
         try
         {
             TestEndpoints();
+            TestProducerLease();
             TestGoalPrerequisites();
             const uint location = 0xB0123456, swordItem = 0xB0100001, unsupported = 0xB0100002,
                        arrowItem = 0xB0100003, foodItem = 0xB0100004, keyItem = 0xB0100005, badActorItem = 0xB0100006;

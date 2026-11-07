@@ -3155,7 +3155,7 @@
         -34.0
       ],
       "region": "Gerudo Desert",
-      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon001.pack!Map/CDungeon/Dungeon001/Dungeon001_Static.smubin"
     },
     {
@@ -3329,7 +3329,7 @@
         -19.0
       ],
       "region": "Dueling Peaks",
-      "requires": "",
+      "requires": "|Paraglider|",
       "resource": "content/Pack/Dungeon007.pack!Map/CDungeon/Dungeon007/Dungeon007_Static.smubin"
     },
     {
@@ -3350,7 +3350,7 @@
         -148.0
       ],
       "region": "Dueling Peaks",
-      "requires": "",
+      "requires": "|Paraglider|",
       "resource": "content/Pack/Dungeon007.pack!Map/CDungeon/Dungeon007/Dungeon007_Static.smubin"
     },
     {
@@ -3471,7 +3471,7 @@
         42.0
       ],
       "region": "Tabantha",
-      "requires": "|Vah Medoh Cleared|",
+      "requires": "(|Freed Vah Medoh| AND |Paraglider|)",
       "resource": "content/Pack/Dungeon012.pack!Map/CDungeon/Dungeon012/Dungeon012_Static.smubin"
     },
     {
@@ -3613,7 +3613,7 @@
         28.5
       ],
       "region": "Dueling Peaks",
-      "requires": "|@Cold Resistance|",
+      "requires": "(|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|)",
       "resource": "content/Pack/Dungeon017.pack!Map/CDungeon/Dungeon017/Dungeon017_Static.smubin"
     },
     {
@@ -3734,7 +3734,7 @@
         21.100000381469727
       ],
       "region": "Hyrule Ridge",
-      "requires": "|Progressive Stasis| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "(|Progressive Stasis| AND |Progressive Remote Bomb| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon021.pack!Map/CDungeon/Dungeon021/Dungeon021_Static.smubin"
     },
     {
@@ -3755,7 +3755,7 @@
         8.0
       ],
       "region": "Hyrule Ridge",
-      "requires": "|Progressive Stasis| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "(|Progressive Stasis| AND |Progressive Remote Bomb| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon021.pack!Map/CDungeon/Dungeon021/Dungeon021_Static.smubin"
     },
     {
@@ -3829,7 +3829,7 @@
         -4.0
       ],
       "region": "Necluda",
-      "requires": "|Magnesis| AND |Progressive Stasis| AND |Progressive Remote Bomb|",
+      "requires": "(|Magnesis| AND |Progressive Stasis| AND |Progressive Remote Bomb|)",
       "resource": "content/Pack/Dungeon024.pack!Map/CDungeon/Dungeon024/Dungeon024_Static.smubin"
     },
     {
@@ -3850,7 +3850,7 @@
         -111.99999237060547
       ],
       "region": "Eldin",
-      "requires": "|@Flame Resistance|",
+      "requires": "(|@Flame Resistance| OR |Native Fireproof Supplies|)",
       "resource": "content/Pack/Dungeon025.pack!Map/CDungeon/Dungeon025/Dungeon025_Static.smubin"
     },
     {
@@ -3871,7 +3871,7 @@
         -175.0
       ],
       "region": "Eldin",
-      "requires": "|@Flame Resistance|",
+      "requires": "(|@Flame Resistance| OR |Native Fireproof Supplies|)",
       "resource": "content/Pack/Dungeon025.pack!Map/CDungeon/Dungeon025/Dungeon025_Static.smubin"
     },
     {
@@ -3956,7 +3956,7 @@
         60.499996185302734
       ],
       "region": "Eldin",
-      "requires": "|@Flame Resistance| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin"
     },
     {
@@ -3977,7 +3977,7 @@
         -27.5
       ],
       "region": "Eldin",
-      "requires": "|@Flame Resistance| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin"
     },
     {
@@ -3998,7 +3998,7 @@
         -9.5
       ],
       "region": "Eldin",
-      "requires": "|@Flame Resistance| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin"
     },
     {
@@ -4019,7 +4019,7 @@
         -16.0
       ],
       "region": "Eldin",
-      "requires": "|@Flame Resistance| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin"
     },
     {
@@ -4040,7 +4040,7 @@
         32.0
       ],
       "region": "Eldin",
-      "requires": "|@Flame Resistance| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin"
     },
     {
@@ -4061,7 +4061,7 @@
         -9.0
       ],
       "region": "Eldin",
-      "requires": "|@Flame Resistance| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin"
     },
     {
@@ -4114,7 +4114,7 @@
         -61.0
       ],
       "region": "Gerudo Highlands",
-      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |Heart Container:10| AND |Magnesis| AND |Progressive Stasis|",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND |Magnesis| AND |Progressive Stasis|)",
       "resource": "content/Pack/Dungeon030.pack!Map/CDungeon/Dungeon030/Dungeon030_Static.smubin"
     },
     {
@@ -4135,7 +4135,7 @@
         38.0
       ],
       "region": "Gerudo Highlands",
-      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |Heart Container:10| AND |Magnesis| AND |Progressive Stasis|",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND |Magnesis| AND |Progressive Stasis|)",
       "resource": "content/Pack/Dungeon030.pack!Map/CDungeon/Dungeon030/Dungeon030_Static.smubin"
     },
     {
@@ -4156,7 +4156,7 @@
         38.0
       ],
       "region": "Eldin",
-      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon031.pack!Map/CDungeon/Dungeon031/Dungeon031_Static.smubin"
     },
     {
@@ -4177,7 +4177,7 @@
         -63.5
       ],
       "region": "Eldin",
-      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon031.pack!Map/CDungeon/Dungeon031/Dungeon031_Static.smubin"
     },
     {
@@ -4198,7 +4198,7 @@
         -21.500001907348633
       ],
       "region": "Gerudo Desert",
-      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "resource": "content/Pack/Dungeon032.pack!Map/CDungeon/Dungeon032/Dungeon032_Static.smubin"
     },
     {
@@ -4219,7 +4219,7 @@
         32.0
       ],
       "region": "Gerudo Desert",
-      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "resource": "content/Pack/Dungeon032.pack!Map/CDungeon/Dungeon032/Dungeon032_Static.smubin"
     },
     {
@@ -4240,7 +4240,7 @@
         35.5
       ],
       "region": "Gerudo Desert",
-      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "resource": "content/Pack/Dungeon032.pack!Map/CDungeon/Dungeon032/Dungeon032_Static.smubin"
     },
     {
@@ -4261,7 +4261,7 @@
         35.000003814697266
       ],
       "region": "Gerudo Desert",
-      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "resource": "content/Pack/Dungeon032.pack!Map/CDungeon/Dungeon032/Dungeon032_Static.smubin"
     },
     {
@@ -4615,7 +4615,7 @@
         5.5
       ],
       "region": "Gerudo Highlands",
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|)) AND |Magnesis|",
+      "requires": "((((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|))) AND |Magnesis|)",
       "resource": "content/Pack/Dungeon043.pack!Map/CDungeon/Dungeon043/Dungeon043_Static.smubin"
     },
     {
@@ -4884,7 +4884,7 @@
         -6.0
       ],
       "region": "Tabantha",
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|))",
+      "requires": "(|Paraglider| AND |Native Cold Protection Supplies|)",
       "resource": "content/Pack/Dungeon053.pack!Map/CDungeon/Dungeon053/Dungeon053_Static.smubin"
     },
     {
@@ -4905,7 +4905,7 @@
         -18.0
       ],
       "region": "Tabantha",
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|))",
+      "requires": "(|Paraglider| AND |Native Cold Protection Supplies|)",
       "resource": "content/Pack/Dungeon053.pack!Map/CDungeon/Dungeon053/Dungeon053_Static.smubin"
     },
     {
@@ -5248,7 +5248,7 @@
         -23.0
       ],
       "region": "Gerudo Desert",
-      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "resource": "content/Pack/Dungeon060.pack!Map/CDungeon/Dungeon060/Dungeon060_Static.smubin"
     },
     {
@@ -5301,7 +5301,7 @@
         -11.5
       ],
       "region": "Gerudo Desert",
-      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "resource": "content/Pack/Dungeon063.pack!Map/CDungeon/Dungeon063/Dungeon063_Static.smubin"
     },
     {
@@ -5322,7 +5322,7 @@
         29.0
       ],
       "region": "Eldin",
-      "requires": "|@Flame Resistance|",
+      "requires": "(|@Flame Resistance| OR |Native Fireproof Supplies|)",
       "resource": "content/Pack/Dungeon064.pack!Map/CDungeon/Dungeon064/Dungeon064_Static.smubin"
     },
     {
@@ -5343,7 +5343,7 @@
         0.5
       ],
       "region": "Great Plateau",
-      "requires": "|@Cold Resistance| AND |Cryonis|",
+      "requires": "((|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Cryonis|)",
       "resource": "content/Pack/Dungeon065.pack!Map/CDungeon/Dungeon065/Dungeon065_Static.smubin"
     },
     {
@@ -5364,7 +5364,7 @@
         -23.0
       ],
       "region": "Lanayru",
-      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon066.pack!Map/CDungeon/Dungeon066/Dungeon066_Static.smubin"
     },
     {
@@ -5590,7 +5590,7 @@
         -60.0
       ],
       "region": "Gerudo Highlands",
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "resource": "content/Pack/Dungeon076.pack!Map/CDungeon/Dungeon076/Dungeon076_Static.smubin"
     },
     {
@@ -5611,7 +5611,7 @@
         -60.0
       ],
       "region": "Akkala",
-      "requires": "|Progressive Remote Bomb| AND |Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "|Progressive Remote Bomb|",
       "resource": "content/Pack/Dungeon077.pack!Map/CDungeon/Dungeon077/Dungeon077_Static.smubin"
     },
     {
@@ -5632,7 +5632,7 @@
         -60.0
       ],
       "region": "Hyrule Ridge",
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "resource": "content/Pack/Dungeon078.pack!Map/CDungeon/Dungeon078/Dungeon078_Static.smubin"
     },
     {
@@ -5653,7 +5653,7 @@
         -60.000003814697266
       ],
       "region": "Central Hyrule",
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "resource": "content/Pack/Dungeon079.pack!Map/CDungeon/Dungeon079/Dungeon079_Static.smubin"
     },
     {
@@ -5674,7 +5674,7 @@
         -60.000003814697266
       ],
       "region": "Lake Hylia",
-      "requires": "|Central Tower| AND |Camera| AND |Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "|Camera|",
       "resource": "content/Pack/Dungeon080.pack!Map/CDungeon/Dungeon080/Dungeon080_Static.smubin"
     },
     {
@@ -5695,7 +5695,7 @@
         -60.0
       ],
       "region": "Faron",
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "resource": "content/Pack/Dungeon081.pack!Map/CDungeon/Dungeon081/Dungeon081_Static.smubin"
     },
     {
@@ -5716,7 +5716,7 @@
         -60.0
       ],
       "region": "Necluda",
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "resource": "content/Pack/Dungeon082.pack!Map/CDungeon/Dungeon082/Dungeon082_Static.smubin"
     },
     {
@@ -5737,7 +5737,7 @@
         -60.0
       ],
       "region": "Tabantha",
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "resource": "content/Pack/Dungeon083.pack!Map/CDungeon/Dungeon083/Dungeon083_Static.smubin"
     },
     {
@@ -5758,7 +5758,7 @@
         -60.0
       ],
       "region": "Akkala",
-      "requires": "|Dinraal's Scale| AND |Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Cryonis|",
+      "requires": "|Dinraal's Scale|",
       "resource": "content/Pack/Dungeon084.pack!Map/CDungeon/Dungeon084/Dungeon084_Static.smubin"
     },
     {
@@ -5779,7 +5779,7 @@
         -60.0
       ],
       "region": "Gerudo Highlands",
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|)) AND |Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Cryonis|",
+      "requires": "|Native Cold Protection Supplies|",
       "resource": "content/Pack/Dungeon085.pack!Map/CDungeon/Dungeon085/Dungeon085_Static.smubin"
     },
     {
@@ -5800,7 +5800,7 @@
         -60.0
       ],
       "region": "Hebra",
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Cryonis|",
+      "requires": "|Native Cold Protection Supplies|",
       "resource": "content/Pack/Dungeon086.pack!Map/CDungeon/Dungeon086/Dungeon086_Static.smubin"
     },
     {
@@ -5821,7 +5821,7 @@
         -60.0
       ],
       "region": "Hebra",
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Magnesis|",
+      "requires": "|Native Cold Protection Supplies|",
       "resource": "content/Pack/Dungeon087.pack!Map/CDungeon/Dungeon087/Dungeon087_Static.smubin"
     },
     {
@@ -5842,7 +5842,7 @@
         -60.0
       ],
       "region": "Hebra",
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Magnesis|",
+      "requires": "|Native Cold Protection Supplies|",
       "resource": "content/Pack/Dungeon088.pack!Map/CDungeon/Dungeon088/Dungeon088_Static.smubin"
     },
     {
@@ -5863,7 +5863,7 @@
         -60.0
       ],
       "region": "Central Hyrule",
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Magnesis|",
+      "requires": "",
       "resource": "content/Pack/Dungeon089.pack!Map/CDungeon/Dungeon089/Dungeon089_Static.smubin"
     },
     {
@@ -5884,7 +5884,7 @@
         -4.0
       ],
       "region": "Gerudo Desert",
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|))",
+      "requires": "(((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)))",
       "resource": "content/Pack/Dungeon090.pack!Map/CDungeon/Dungeon090/Dungeon090_Static.smubin"
     },
     {
@@ -5947,7 +5947,7 @@
         -4.0
       ],
       "region": "Gerudo Desert",
-      "requires": "|Vah Naboris Cleared| AND ((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance|",
+      "requires": "(|Freed Vah Naboris| AND (((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|))",
       "resource": "content/Pack/Dungeon093.pack!Map/CDungeon/Dungeon093/Dungeon093_Static.smubin"
     },
     {
@@ -5968,7 +5968,7 @@
         -4.0
       ],
       "region": "Gerudo Desert",
-      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Progressive Remote Bomb|",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Progressive Remote Bomb|)",
       "resource": "content/Pack/Dungeon094.pack!Map/CDungeon/Dungeon094/Dungeon094_Static.smubin"
     },
     {
@@ -6031,7 +6031,7 @@
         -4.0
       ],
       "region": "Faron",
-      "requires": "|Magnesis| AND |Progressive Remote Bomb| AND |Progressive Stasis| AND |Cryonis|",
+      "requires": "(|Magnesis| AND |Progressive Remote Bomb| AND |Progressive Stasis| AND |Cryonis|)",
       "resource": "content/Pack/Dungeon097.pack!Map/CDungeon/Dungeon097/Dungeon097_Static.smubin"
     },
     {
@@ -6136,7 +6136,7 @@
         -4.0
       ],
       "region": "Gerudo Highlands",
-      "requires": "|@Cold Resistance|",
+      "requires": "(|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|)",
       "resource": "content/Pack/Dungeon100.pack!Map/CDungeon/Dungeon100/Dungeon100_Static.smubin"
     },
     {
@@ -6157,7 +6157,7 @@
         -4.0
       ],
       "region": "Lanayru",
-      "requires": "|Cryonis| AND |Magnesis|",
+      "requires": "(|Cryonis| AND |Magnesis|)",
       "resource": "content/Pack/Dungeon101.pack!Map/CDungeon/Dungeon101/Dungeon101_Static.smubin"
     },
     {
@@ -6178,7 +6178,7 @@
         -4.0
       ],
       "region": "Akkala",
-      "requires": "(|Revali's Gale| OR |Progressive Revali's Gale|)",
+      "requires": "",
       "resource": "content/Pack/Dungeon102.pack!Map/CDungeon/Dungeon102/Dungeon102_Static.smubin"
     },
     {
@@ -6220,7 +6220,7 @@
         -4.0
       ],
       "region": "Hebra",
-      "requires": "|Heart Container:10|",
+      "requires": "",
       "resource": "content/Pack/Dungeon104.pack!Map/CDungeon/Dungeon104/Dungeon104_Static.smubin"
     },
     {
@@ -6241,7 +6241,7 @@
         -4.5
       ],
       "region": "Akkala",
-      "requires": "|Stamina Vessel:3|",
+      "requires": "",
       "resource": "content/Pack/Dungeon105.pack!Map/CDungeon/Dungeon105/Dungeon105_Static.smubin"
     },
     {
@@ -6283,7 +6283,7 @@
         -4.0
       ],
       "region": "Gerudo Desert",
-      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)",
       "resource": "content/Pack/Dungeon107.pack!Map/CDungeon/Dungeon107/Dungeon107_Static.smubin"
     },
     {
@@ -6346,7 +6346,7 @@
         -4.0
       ],
       "region": "Gerudo Desert",
-      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "resource": "content/Pack/Dungeon110.pack!Map/CDungeon/Dungeon110/Dungeon110_Static.smubin"
     },
     {
@@ -6367,7 +6367,7 @@
         -4.0
       ],
       "region": "Faron",
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "resource": "content/Pack/Dungeon111.pack!Map/CDungeon/Dungeon111/Dungeon111_Static.smubin"
     },
     {
@@ -6388,7 +6388,7 @@
         -4.0
       ],
       "region": "Dueling Peaks",
-      "requires": "|Camera| AND (|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|)",
+      "requires": "|Camera|",
       "resource": "content/Pack/Dungeon112.pack!Map/CDungeon/Dungeon112/Dungeon112_Static.smubin"
     },
     {
@@ -6493,7 +6493,7 @@
         -4.0
       ],
       "region": "Necluda",
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|)) AND |Naydra's Scale|",
+      "requires": "((((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|))) AND |Naydra's Scale|)",
       "resource": "content/Pack/Dungeon117.pack!Map/CDungeon/Dungeon117/Dungeon117_Static.smubin"
     },
     {
@@ -6530,7 +6530,7 @@
         -4.0
       ],
       "region": "Necluda",
-      "requires": "|@Cold Resistance| AND |Progressive Remote Bomb|",
+      "requires": "((|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Progressive Remote Bomb|)",
       "resource": "content/Pack/Dungeon119.pack!Map/CDungeon/Dungeon119/Dungeon119_Static.smubin"
     },
     {
@@ -6596,7 +6596,7 @@
         10.0
       ],
       "region": "Gerudo Desert",
-      "requires": "|Progressive Urbosa's Fury| AND (|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "(|Progressive Urbosa's Fury| AND (|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "resource": "aoc/0010/Pack/Dungeon121.pack!Map/CDungeon/Dungeon121/Dungeon121_Static.smubin"
     },
     {
@@ -6662,7 +6662,7 @@
         -27.0
       ],
       "region": "Lanayru",
-      "requires": "|Progressive Mipha's Grace| AND |Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Cryonis|",
+      "requires": "(|Progressive Mipha's Grace| AND |Cryonis|)",
       "resource": "aoc/0010/Pack/Dungeon124.pack!Map/CDungeon/Dungeon124/Dungeon124_Static.smubin"
     },
     {
@@ -6684,7 +6684,7 @@
         3.5
       ],
       "region": "Lanayru",
-      "requires": "|Progressive Mipha's Grace| AND |Cryonis|",
+      "requires": "(|Progressive Mipha's Grace| AND |Cryonis|)",
       "resource": "aoc/0010/Pack/Dungeon125.pack!Map/CDungeon/Dungeon125/Dungeon125_Static.smubin"
     },
     {
@@ -6706,7 +6706,7 @@
         -48.5
       ],
       "region": "Lanayru",
-      "requires": "|Progressive Mipha's Grace| AND |Zora Armor| AND |Cryonis| AND |Magnesis|",
+      "requires": "(|Progressive Mipha's Grace| AND |Zora Armor| AND |Cryonis| AND |Magnesis|)",
       "resource": "aoc/0010/Pack/Dungeon126.pack!Map/CDungeon/Dungeon126/Dungeon126_Static.smubin"
     },
     {
@@ -6728,7 +6728,7 @@
         -33.5
       ],
       "region": "Tabantha",
-      "requires": "|Progressive Revali's Gale| AND ((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|))",
+      "requires": "(|Progressive Revali's Gale| AND (((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|))))",
       "resource": "aoc/0010/Pack/Dungeon127.pack!Map/CDungeon/Dungeon127/Dungeon127_Static.smubin"
     },
     {
@@ -6750,7 +6750,7 @@
         -18.0
       ],
       "region": "Hebra",
-      "requires": "|Progressive Revali's Gale| AND |Cryonis|",
+      "requires": "(|Progressive Revali's Gale| AND |Cryonis|)",
       "resource": "aoc/0010/Pack/Dungeon128.pack!Map/CDungeon/Dungeon128/Dungeon128_Static.smubin"
     },
     {
@@ -6772,7 +6772,7 @@
         -23.0
       ],
       "region": "Hyrule Ridge",
-      "requires": "|Progressive Revali's Gale| AND |Progressive Remote Bomb| AND |Progressive Stasis|",
+      "requires": "(|Progressive Revali's Gale| AND |Progressive Remote Bomb| AND |Progressive Stasis|)",
       "resource": "aoc/0010/Pack/Dungeon129.pack!Map/CDungeon/Dungeon129/Dungeon129_Static.smubin"
     },
     {
@@ -6793,7 +6793,7 @@
         -28.0
       ],
       "region": "Eldin",
-      "requires": "((|@Upgradeable Flame Resistant Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|) OR (|@Upgradeable Head| AND |@Upgradeable Flame Resistant Body| AND |@Upgradeable Legs|) OR (|@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Flame Resistant Legs|)) AND |Progressive Armor Upgrade| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "((|@Flame Resistant Head| OR |Native Fireproof Supplies| OR |@Flame Resistant Body| OR |@Flame Resistant Legs|) AND |Progressive Remote Bomb| AND |Magnesis|)",
       "resource": "aoc/0010/Pack/Dungeon130.pack!Map/CDungeon/Dungeon130/Dungeon130_Static.smubin"
     },
     {
@@ -6815,7 +6815,7 @@
         6.0
       ],
       "region": "Eldin",
-      "requires": "|Progressive Daruk's Protection| AND |@Flame Resistance| AND |Magnesis| AND |Progressive Remote Bomb|",
+      "requires": "(|Progressive Daruk's Protection| AND (|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Magnesis| AND |Progressive Remote Bomb|)",
       "resource": "aoc/0010/Pack/Dungeon131.pack!Map/CDungeon/Dungeon131/Dungeon131_Static.smubin"
     },
     {
@@ -6837,7 +6837,7 @@
         8.0
       ],
       "region": "Eldin",
-      "requires": "|Vah Rudania Cleared| AND ((|@Flame Resistant Head| AND |@Flame Resistant Body|) OR (|@Flame Resistant Head| AND |@Flame Resistant Legs|) OR (|@Flame Resistant Body| AND |@Flame Resistant Legs|)) AND |Cryonis|",
+      "requires": "(|Freed Vah Rudania| AND (((|@Flame Resistant Head| OR |Native Fireproof Supplies|) AND (|@Flame Resistant Body| OR |Native Fireproof Supplies|)) OR ((|@Flame Resistant Head| OR |Native Fireproof Supplies|) AND (|@Flame Resistant Legs| OR |Native Fireproof Supplies|)) OR ((|@Flame Resistant Body| OR |Native Fireproof Supplies|) AND (|@Flame Resistant Legs| OR |Native Fireproof Supplies|))) AND |Cryonis|)",
       "resource": "aoc/0010/Pack/Dungeon132.pack!Map/CDungeon/Dungeon132/Dungeon132_Static.smubin"
     },
     {
@@ -6859,7 +6859,7 @@
         56.5
       ],
       "region": "Gerudo Desert",
-      "requires": "|Vah Naboris Cleared| AND |Progressive Urbosa's Fury| AND ((|@Upgradeable Heat Resistant Head| AND |@Upgradeable Heat Resistant Body| AND |@Upgradeable Legs|) OR (|@Upgradeable Heat Resistant Head| AND |@Upgradeable Body| AND |@Upgradeable Heat Resistant Legs|) OR (|@Upgradeable Head| AND |@Upgradeable Heat Resistant Body| AND |@Upgradeable Heat Resistant Legs|)) AND ((|@Upgradeable Cold Resistant Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|) OR (|@Upgradeable Head| AND |@Upgradeable Cold Resistant Body| AND |@Upgradeable Legs|) OR (|@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Cold Resistant Legs|)) AND |Progressive Armor Upgrade| AND |Progressive Remote Bomb| AND |Magnesis| AND |Cryonis|",
+      "requires": "(|Freed Vah Naboris| AND |Progressive Urbosa's Fury| AND (((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistant Head| OR |Native Cold Protection Supplies| OR |@Cold Resistant Body| OR |@Cold Resistant Legs|) AND |Progressive Remote Bomb| AND |Magnesis| AND |Cryonis|)",
       "resource": "aoc/0010/Pack/Dungeon133.pack!Map/CDungeon/Dungeon133/Dungeon133_Static.smubin"
     },
     {
@@ -6881,7 +6881,7 @@
         -4.5
       ],
       "region": "Gerudo Desert",
-      "requires": "|Progressive Urbosa's Fury| AND ((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "(|Progressive Urbosa's Fury| AND (((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "resource": "aoc/0010/Pack/Dungeon134.pack!Map/CDungeon/Dungeon134/Dungeon134_Static.smubin"
     },
     {
@@ -13037,7 +13037,7 @@
         1785.1103515625
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Progressive Remote Bomb|",
       "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/D-6/D-6_Static.smubin"
     },
     {
@@ -15385,7 +15385,7 @@
         1939.499755859375
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Magnesis|",
       "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin"
     },
     {
@@ -15509,7 +15509,7 @@
         1524.1182861328125
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Magnesis|",
       "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin"
     },
     {
@@ -15577,7 +15577,7 @@
         1934.5
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Progressive Remote Bomb|",
       "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin"
     },
     {
@@ -15665,7 +15665,7 @@
         1536.4287109375
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Magnesis|",
       "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin"
     },
     {
@@ -15785,7 +15785,7 @@
         1561.833251953125
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Progressive Remote Bomb| OR |Paraglider| OR |Progressive Revali's Gale| OR |Revali's Gale|",
       "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/E-6/E-6_Static.smubin"
     },
     {
@@ -15853,7 +15853,7 @@
         1558.653564453125
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Progressive Remote Bomb| OR |Paraglider| OR |Progressive Revali's Gale| OR |Revali's Gale|",
       "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/E-6/E-6_Static.smubin"
     },
     {
@@ -16021,7 +16021,7 @@
         2343.1767578125
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Progressive Remote Bomb|",
       "resource": "aoc/0010/Map/MainField/E-7/E-7_Dynamic.smubin"
     },
     {
@@ -16433,7 +16433,7 @@
         2327.699951171875
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Progressive Stasis|",
       "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/E-7/E-7_Static.smubin"
     },
     {

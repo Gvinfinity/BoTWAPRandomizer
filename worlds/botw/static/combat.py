@@ -3,9 +3,13 @@ from importlib.resources import files
 import json
 import struct
 
+from .check_logic import apply_check_logic
+
 
 def catalog():
-    return json.loads(files(__package__).joinpath('combat.json').read_text())
+    data = json.loads(files(__package__).joinpath('combat.json').read_text())
+    data['locations'] = [apply_check_logic(entry) for entry in data['locations']]
+    return data
 
 
 

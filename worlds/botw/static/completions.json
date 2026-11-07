@@ -21,7 +21,7 @@
       "category": [
         "Gerudo Desert Shrines"
       ],
-      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
       "id": 3222274049,
       "kind": "shrine",
       "dungeon": "Dungeon001",
@@ -49,7 +49,7 @@
       "category": [
         "Gerudo Desert Shrines"
       ],
-      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Magnesis| AND |Progressive Stasis|",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis| AND |Progressive Stasis|)",
       "id": 3222274051,
       "kind": "shrine",
       "dungeon": "Dungeon003",
@@ -105,7 +105,7 @@
       "category": [
         "Dueling Peaks Shrines"
       ],
-      "requires": "",
+      "requires": "|Paraglider|",
       "id": 3222274055,
       "kind": "shrine",
       "dungeon": "Dungeon007",
@@ -175,7 +175,7 @@
       "category": [
         "Tabantha Shrines"
       ],
-      "requires": "|Vah Medoh Cleared|",
+      "requires": "(|Freed Vah Medoh| AND |Paraglider|)",
       "id": 3222274060,
       "kind": "shrine",
       "dungeon": "Dungeon012",
@@ -245,7 +245,7 @@
       "category": [
         "Dueling Peaks Shrines"
       ],
-      "requires": "|@Cold Resistance|",
+      "requires": "(|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|)",
       "id": 3222274065,
       "kind": "shrine",
       "dungeon": "Dungeon017",
@@ -301,7 +301,7 @@
       "category": [
         "Hyrule Ridge Shrines"
       ],
-      "requires": "|Progressive Stasis| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "(|Progressive Stasis| AND |Progressive Remote Bomb| AND |Magnesis|)",
       "id": 3222274069,
       "kind": "shrine",
       "dungeon": "Dungeon021",
@@ -329,7 +329,7 @@
       "category": [
         "Lanayru Shrines"
       ],
-      "requires": "|Cryonis| AND |Progressive Remote Bomb|",
+      "requires": "(|Cryonis| AND |Progressive Remote Bomb|)",
       "id": 3222274071,
       "kind": "shrine",
       "dungeon": "Dungeon023",
@@ -343,7 +343,7 @@
       "category": [
         "Necluda Shrines"
       ],
-      "requires": "|Magnesis| AND |Progressive Stasis| AND |Progressive Remote Bomb|",
+      "requires": "(|Magnesis| AND |Progressive Stasis| AND |Progressive Remote Bomb|)",
       "id": 3222274072,
       "kind": "shrine",
       "dungeon": "Dungeon024",
@@ -357,7 +357,7 @@
       "category": [
         "Eldin Shrines"
       ],
-      "requires": "|@Flame Resistance|",
+      "requires": "(|@Flame Resistance| OR |Native Fireproof Supplies|)",
       "id": 3222274073,
       "kind": "shrine",
       "dungeon": "Dungeon025",
@@ -371,7 +371,7 @@
       "category": [
         "Eldin Shrines"
       ],
-      "requires": "|@Flame Resistance|",
+      "requires": "(|@Flame Resistance| OR |Native Fireproof Supplies|)",
       "id": 3222274074,
       "kind": "shrine",
       "dungeon": "Dungeon026",
@@ -399,7 +399,7 @@
       "category": [
         "Eldin Shrines"
       ],
-      "requires": "|@Flame Resistance| AND |Progressive Remote Bomb| AND |Magnesis|",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
       "id": 3222274076,
       "kind": "shrine",
       "dungeon": "Dungeon028",
@@ -413,7 +413,7 @@
       "category": [
         "Dueling Peaks Shrines"
       ],
-      "requires": "|Cryonis| AND |Progressive Remote Bomb|",
+      "requires": "(|Cryonis| AND |Progressive Remote Bomb|)",
       "id": 3222274077,
       "kind": "shrine",
       "dungeon": "Dungeon029",
@@ -427,7 +427,7 @@
       "category": [
         "Gerudo Highlands Shrines"
       ],
-      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |Heart Container:10| AND |Magnesis| AND |Progressive Stasis|",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND |Magnesis| AND |Progressive Stasis|)",
       "id": 3222274078,
       "kind": "shrine",
       "dungeon": "Dungeon030",
@@ -441,7 +441,7 @@
       "category": [
         "Eldin Shrines"
       ],
-      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
       "id": 3222274079,
       "kind": "shrine",
       "dungeon": "Dungeon031",
@@ -455,7 +455,7 @@
       "category": [
         "Gerudo Desert Shrines"
       ],
-      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "id": 3222274080,
       "kind": "shrine",
       "dungeon": "Dungeon032",
@@ -567,7 +567,7 @@
       "category": [
         "Central Hyrule Shrines"
       ],
-      "requires": "|Magnesis| AND |Progressive Stasis|",
+      "requires": "(|Magnesis| AND |Progressive Stasis|)",
       "id": 3222274088,
       "kind": "shrine",
       "dungeon": "Dungeon040",
@@ -609,7 +609,7 @@
       "category": [
         "Gerudo Highlands Shrines"
       ],
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|)) AND |Magnesis|",
+      "requires": "((((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|))) AND |Magnesis|)",
       "id": 3222274091,
       "kind": "shrine",
       "dungeon": "Dungeon043",
@@ -651,7 +651,7 @@
       "category": [
         "Hebra Shrines"
       ],
-      "requires": "|Magnesis| AND |Progressive Stasis|",
+      "requires": "(|Magnesis| AND |Progressive Stasis|)",
       "id": 3222274094,
       "kind": "shrine",
       "dungeon": "Dungeon046",
@@ -707,7 +707,7 @@
       "category": [
         "Faron Shrines"
       ],
-      "requires": "|Progressive Remote Bomb| AND |Progressive Stasis| AND |Magnesis|",
+      "requires": "(|Progressive Remote Bomb| AND |Progressive Stasis| AND |Magnesis|)",
       "id": 3222274098,
       "kind": "shrine",
       "dungeon": "Dungeon050",
@@ -721,7 +721,7 @@
       "category": [
         "Hebra Shrines"
       ],
-      "requires": "|Progressive Remote Bomb| AND |Cryonis| AND |Magnesis|",
+      "requires": "(|Progressive Remote Bomb| AND |Cryonis| AND |Magnesis|)",
       "id": 3222274099,
       "kind": "shrine",
       "dungeon": "Dungeon051",
@@ -749,7 +749,7 @@
       "category": [
         "Tabantha Shrines"
       ],
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|))",
+      "requires": "(|Paraglider| AND |Native Cold Protection Supplies|)",
       "id": 3222274101,
       "kind": "shrine",
       "dungeon": "Dungeon053",
@@ -763,7 +763,7 @@
       "category": [
         "Lake Hylia Shrines"
       ],
-      "requires": "|Magnesis| AND |Progressive Remote Bomb|",
+      "requires": "(|Magnesis| AND |Progressive Remote Bomb|)",
       "id": 3222274102,
       "kind": "shrine",
       "dungeon": "Dungeon054",
@@ -833,7 +833,7 @@
       "category": [
         "Tabantha Shrines"
       ],
-      "requires": "|Progressive Stasis| AND |Progressive Remote Bomb|",
+      "requires": "(|Progressive Stasis| AND |Progressive Remote Bomb|)",
       "id": 3222274107,
       "kind": "shrine",
       "dungeon": "Dungeon059",
@@ -847,7 +847,7 @@
       "category": [
         "Gerudo Desert Shrines"
       ],
-      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "id": 3222274108,
       "kind": "shrine",
       "dungeon": "Dungeon060",
@@ -875,7 +875,7 @@
       "category": [
         "Hebra Shrines"
       ],
-      "requires": "|Magnesis| AND |Progressive Stasis|",
+      "requires": "(|Magnesis| AND |Progressive Stasis|)",
       "id": 3222274110,
       "kind": "shrine",
       "dungeon": "Dungeon062",
@@ -889,7 +889,7 @@
       "category": [
         "Gerudo Desert Shrines"
       ],
-      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "id": 3222274111,
       "kind": "shrine",
       "dungeon": "Dungeon063",
@@ -903,7 +903,7 @@
       "category": [
         "Eldin Shrines"
       ],
-      "requires": "|@Flame Resistance| AND |Progressive Stasis|",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Stasis|)",
       "id": 3222274112,
       "kind": "shrine",
       "dungeon": "Dungeon064",
@@ -917,7 +917,7 @@
       "category": [
         "Great Plateau Shrines"
       ],
-      "requires": "|@Cold Resistance| AND |Cryonis|",
+      "requires": "((|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Cryonis|)",
       "id": 3222274113,
       "kind": "shrine",
       "dungeon": "Dungeon065",
@@ -931,7 +931,7 @@
       "category": [
         "Lanayru Shrines"
       ],
-      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
       "id": 3222274114,
       "kind": "shrine",
       "dungeon": "Dungeon066",
@@ -945,7 +945,7 @@
       "category": [
         "Eldin Shrines"
       ],
-      "requires": "|@Flame Resistance| AND |Magnesis| AND |Progressive Remote Bomb|",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Magnesis| AND |Progressive Remote Bomb|)",
       "id": 3222274115,
       "kind": "shrine",
       "dungeon": "Dungeon067",
@@ -1071,7 +1071,7 @@
       "category": [
         "Gerudo Highlands Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "id": 3222274124,
       "kind": "shrine",
       "dungeon": "Dungeon076",
@@ -1085,7 +1085,7 @@
       "category": [
         "Akkala Shrines"
       ],
-      "requires": "|Progressive Remote Bomb| AND |Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "|Progressive Remote Bomb|",
       "id": 3222274125,
       "kind": "shrine",
       "dungeon": "Dungeon077",
@@ -1099,7 +1099,7 @@
       "category": [
         "Hyrule Ridge Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "id": 3222274126,
       "kind": "shrine",
       "dungeon": "Dungeon078",
@@ -1113,7 +1113,7 @@
       "category": [
         "Central Hyrule Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "id": 3222274127,
       "kind": "shrine",
       "dungeon": "Dungeon079",
@@ -1127,7 +1127,7 @@
       "category": [
         "Lake Hylia Shrines"
       ],
-      "requires": "|Central Tower| AND |Camera| AND |Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "|Camera|",
       "id": 3222274128,
       "kind": "shrine",
       "dungeon": "Dungeon080",
@@ -1141,7 +1141,7 @@
       "category": [
         "Faron Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "id": 3222274129,
       "kind": "shrine",
       "dungeon": "Dungeon081",
@@ -1155,7 +1155,7 @@
       "category": [
         "Necluda Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "id": 3222274130,
       "kind": "shrine",
       "dungeon": "Dungeon082",
@@ -1169,7 +1169,7 @@
       "category": [
         "Tabantha Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "id": 3222274131,
       "kind": "shrine",
       "dungeon": "Dungeon083",
@@ -1183,7 +1183,7 @@
       "category": [
         "Akkala Shrines"
       ],
-      "requires": "|Dinraal's Scale| AND |Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Cryonis|",
+      "requires": "|Dinraal's Scale|",
       "id": 3222274132,
       "kind": "shrine",
       "dungeon": "Dungeon084",
@@ -1197,7 +1197,7 @@
       "category": [
         "Gerudo Highlands Shrines"
       ],
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|)) AND |Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Cryonis|",
+      "requires": "|Native Cold Protection Supplies|",
       "id": 3222274133,
       "kind": "shrine",
       "dungeon": "Dungeon085",
@@ -1211,7 +1211,7 @@
       "category": [
         "Hebra Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Cryonis|",
+      "requires": "|Native Cold Protection Supplies|",
       "id": 3222274134,
       "kind": "shrine",
       "dungeon": "Dungeon086",
@@ -1225,7 +1225,7 @@
       "category": [
         "Hebra Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Magnesis|",
+      "requires": "|Native Cold Protection Supplies|",
       "id": 3222274135,
       "kind": "shrine",
       "dungeon": "Dungeon087",
@@ -1239,7 +1239,7 @@
       "category": [
         "Hebra Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Magnesis|",
+      "requires": "|Native Cold Protection Supplies|",
       "id": 3222274136,
       "kind": "shrine",
       "dungeon": "Dungeon088",
@@ -1253,7 +1253,7 @@
       "category": [
         "Central Hyrule Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade:2| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs| AND |Magnesis|",
+      "requires": "",
       "id": 3222274137,
       "kind": "shrine",
       "dungeon": "Dungeon089",
@@ -1267,7 +1267,7 @@
       "category": [
         "Gerudo Desert Shrines"
       ],
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|))",
+      "requires": "(((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)))",
       "id": 3222274138,
       "kind": "shrine",
       "dungeon": "Dungeon090",
@@ -1309,7 +1309,7 @@
       "category": [
         "Gerudo Desert Shrines"
       ],
-      "requires": "|Vah Naboris Cleared| AND ((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance|",
+      "requires": "(|Freed Vah Naboris| AND (((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|))",
       "id": 3222274141,
       "kind": "shrine",
       "dungeon": "Dungeon093",
@@ -1323,7 +1323,7 @@
       "category": [
         "Gerudo Desert Shrines"
       ],
-      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Progressive Remote Bomb|",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Progressive Remote Bomb|)",
       "id": 3222274142,
       "kind": "shrine",
       "dungeon": "Dungeon094",
@@ -1365,7 +1365,7 @@
       "category": [
         "Faron Shrines"
       ],
-      "requires": "|Magnesis| AND |Progressive Remote Bomb| AND |Progressive Stasis| AND |Cryonis|",
+      "requires": "(|Magnesis| AND |Progressive Remote Bomb| AND |Progressive Stasis| AND |Cryonis|)",
       "id": 3222274145,
       "kind": "shrine",
       "dungeon": "Dungeon097",
@@ -1407,7 +1407,7 @@
       "category": [
         "Gerudo Highlands Shrines"
       ],
-      "requires": "|@Cold Resistance|",
+      "requires": "(|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|)",
       "id": 3222274148,
       "kind": "shrine",
       "dungeon": "Dungeon100",
@@ -1421,7 +1421,7 @@
       "category": [
         "Lanayru Shrines"
       ],
-      "requires": "|Cryonis| AND |Magnesis|",
+      "requires": "(|Cryonis| AND |Magnesis|)",
       "id": 3222274149,
       "kind": "shrine",
       "dungeon": "Dungeon101",
@@ -1435,7 +1435,7 @@
       "category": [
         "Akkala Shrines"
       ],
-      "requires": "(|Revali's Gale| OR |Progressive Revali's Gale|)",
+      "requires": "",
       "id": 3222274150,
       "kind": "shrine",
       "dungeon": "Dungeon102",
@@ -1463,7 +1463,7 @@
       "category": [
         "Hebra Shrines"
       ],
-      "requires": "|Heart Container:10|",
+      "requires": "",
       "id": 3222274152,
       "kind": "shrine",
       "dungeon": "Dungeon104",
@@ -1477,7 +1477,7 @@
       "category": [
         "Akkala Shrines"
       ],
-      "requires": "|Stamina Vessel:3|",
+      "requires": "",
       "id": 3222274153,
       "kind": "shrine",
       "dungeon": "Dungeon105",
@@ -1505,7 +1505,7 @@
       "category": [
         "Gerudo Desert Shrines"
       ],
-      "requires": "((|@Heat Resistant Head| AND |@Heat Resistant Body|) OR (|@Heat Resistant Head| AND |@Heat Resistant Legs|) OR (|@Heat Resistant Body| AND |@Heat Resistant Legs|)) AND |@Cold Resistance| AND |Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)",
       "id": 3222274155,
       "kind": "shrine",
       "dungeon": "Dungeon107",
@@ -1547,7 +1547,7 @@
       "category": [
         "Gerudo Desert Shrines"
       ],
-      "requires": "(|@Heat Resistance| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND |@Cold Resistance| AND |Magnesis|",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
       "id": 3222274158,
       "kind": "shrine",
       "dungeon": "Dungeon110",
@@ -1561,7 +1561,7 @@
       "category": [
         "Faron Shrines"
       ],
-      "requires": "|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|",
+      "requires": "",
       "id": 3222274159,
       "kind": "shrine",
       "dungeon": "Dungeon111",
@@ -1575,7 +1575,7 @@
       "category": [
         "Dueling Peaks Shrines"
       ],
-      "requires": "|Camera| AND (|Progressive Armor Upgrade| AND |@Upgradeable Head| AND |@Upgradeable Body| AND |@Upgradeable Legs|)",
+      "requires": "|Camera|",
       "id": 3222274160,
       "kind": "shrine",
       "dungeon": "Dungeon112",
@@ -1645,7 +1645,7 @@
       "category": [
         "Necluda Shrines"
       ],
-      "requires": "((|@Cold Resistant Head| AND |@Cold Resistant Body|) OR (|@Cold Resistant Head| AND |@Cold Resistant Legs|) OR (|@Cold Resistant Body| AND |@Cold Resistant Legs|)) AND |Naydra's Scale|",
+      "requires": "((((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|))) AND |Naydra's Scale|)",
       "id": 3222274165,
       "kind": "shrine",
       "dungeon": "Dungeon117",
@@ -1656,7 +1656,7 @@
     {
       "name": "To Quomo Shrine",
       "region": "Hebra",
-      "requires": "|@Cold Resistance|",
+      "requires": "(|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|)",
       "category": [],
       "id": 3222274166,
       "kind": "shrine",
@@ -1671,7 +1671,7 @@
       "category": [
         "Necluda Shrines"
       ],
-      "requires": "|@Cold Resistance| AND |Progressive Remote Bomb|",
+      "requires": "((|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Progressive Remote Bomb|)",
       "id": 3222274167,
       "kind": "shrine",
       "dungeon": "Dungeon119",

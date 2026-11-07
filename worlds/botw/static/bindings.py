@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import re
 
+from .check_logic import apply_check_logic
 from .messages import read_msbt
 from .resources import binary_modules, decompress
 
@@ -85,5 +86,7 @@ def bind_reference(discovery: dict, dump, reference_dir: Path, randomizer_dir: P
             }]
             discovery["locations"].remove(alternate)
 
+    discovery["locations"] = [apply_check_logic(entry) if entry.get("region") else entry
+                              for entry in discovery["locations"]]
     discovery["binding_warnings"] = warnings
     return discovery

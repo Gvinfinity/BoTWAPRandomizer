@@ -5,6 +5,7 @@ Local events model the ability to complete a quest; they never write game flags.
 The native game still requires performing the corresponding quests/actions.
 """
 from .reference import manual_locations
+from .static.check_logic import CALAMITY_ROUTE, check_requirement
 from .static.combat import catalog as combat_catalog
 
 GERUDO_DISGUISE = ('|Gerudo Top| AND (|Gerudo Veil| OR |Thunder Helm|) AND '
@@ -37,9 +38,11 @@ OBLITERATOR_SHRINES = ('Yowaka Ita Shrine', 'Rohta Chigah Shrine', 'Ruvo Korbah 
 
 def story_events(world):
     events = [
+        dict(name='Calamity Ganon Cleared Locally', region='Hyrule Castle', requires=CALAMITY_ROUTE),
         # Foothill Stable sells Fireproof Elixirs; Rito/Bazaar supplies and
         # renewable ingredients provide cold/heat protection without AP armor.
         dict(name='Native Fireproof Supplies', region='Eldin', requires=''),
+        dict(name='Native Plateau Cold Protection Supplies', region='Great Plateau', requires=''),
         dict(name='Native Cold Protection Supplies', region='Tabantha', requires=''),
         dict(name='Native Desert Protection Supplies', region='Gerudo Desert', requires=''),
         # Flight Range has a bow and Teba supplies Bomb Arrows after training.
@@ -62,7 +65,7 @@ def story_events(world):
         names = {*OBLITERATOR_SHRINES, *(name for _, shrines in SONGS.values() for name in shrines)}
         for name in sorted(names):
             entry = next(e for e in manual_locations if e['name'] == name)
-            events.append(dict(name=f'Completed {name}', region=entry['region'], requires=entry.get('requires', ''),
+            events.append(dict(name=f'Completed {name}', region=entry['region'], requires=check_requirement(entry),
                                ballad=True, after_obliterator=name not in OBLITERATOR_SHRINES))
         events.append(dict(name='Obliterator Trials Completed', region='Great Plateau (One-Hit Obliterator)',
                            event_requires=tuple(f'Completed {name}' for name in OBLITERATOR_SHRINES)))

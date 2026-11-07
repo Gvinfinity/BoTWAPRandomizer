@@ -11,6 +11,8 @@ public sealed class CemuMemoryReader : IMemory
     private FileStream? producerLease;
     public int ProcessId { get; }
     private CemuMemoryReader(SafeFileHandle handle, long address, int pid) { this.handle = handle; this.address = address; ProcessId = pid; }
+    internal static FileStream AcquireProducerLease(string path) => new(path,
+        FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None, 4096, FileOptions.DeleteOnClose);
     public static CemuMemoryReader Attach(bool verbose = false, Action<string>? log = null, int? processId = null)
     {
         if (verbose && log is null) log = new ClientLog(true).Write;
@@ -21,14 +23,12 @@ public sealed class CemuMemoryReader : IMemory
             var timer = Stopwatch.StartNew();
             long scanned = 0;
             log?.Invoke($"Scanning Cemu PID {process.Id}; opening /proc/{process.Id}/mem.");
-            var producerLease = new FileStream(Path.Combine(Path.GetTempPath(), $"BotWAP-Cemu-{process.Id}.lock"),
-                FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
-            SafeFileHandle handle;
-            try { handle = File.OpenHandle($"/proc/{process.Id}/mem", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite); }
-            catch { producerLease.Dispose(); throw; }
+            var producerLease = AcquireProducerLease(Path.Combine(Path.GetTempPath(), $"BotWAP-Cemu-{process.Id}.lock"));
+            SafeFileHandle? handle = null;
             bool selected = false;
             try
             {
+                handle = File.OpenHandle($"/proc/{process.Id}/mem", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
                 foreach (string line in File.ReadLines($"/proc/{process.Id}/maps"))
                 {
                     var fields = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -51,9 +51,10 @@ public sealed class CemuMemoryReader : IMemory
                             {
                                 using var identity = new MemoryStream(candidate.Read(Protocol.Get("extension_offset"), 16));
                                 if (!identity.ToArray().AsSpan(0, 4).SequenceEqual("APV2"u8) || candidate.ReadWord(Protocol.Get("configured_offset")) != 1) continue;
-                                new Mailbox(candidate).Validate(); selected = true;
-                                candidate.producerLease = producerLease;
+                                new Mailbox(candidate).Validate();
                                 log?.Invoke($"Cemu PID {process.Id}, mailbox 0x{position + i:X}; scanned {scanned / 1048576.0:F1} MiB in {timer.Elapsed.TotalSeconds:F2}s.");
+                                candidate.producerLease = producerLease;
+                                selected = true;
                                 return candidate;
                             }
                             catch (Exception ex) when (ex is IOException or InvalidDataException)
@@ -64,7 +65,7 @@ public sealed class CemuMemoryReader : IMemory
                     }
                 }
             }
-            finally { if (!selected) { handle.Dispose(); producerLease.Dispose(); } }
+            finally { if (!selected) { try { handle?.Dispose(); } finally { producerLease.Dispose(); } } }
         }
         throw new IOException("No configured AP v2 mailbox found. Load the seed's graphic pack in Cemu first.");
     }
@@ -88,5 +89,5 @@ public sealed class CemuMemoryReader : IMemory
         return ReadAt(address + ((long)guestAddress - (long)mailboxGuestAddress), length);
     }
     public void Write(int offset, byte[] bytes) => RandomAccess.Write(handle, bytes, address + offset);
-    public void Dispose() { handle.Dispose(); producerLease?.Dispose(); }
+    public void Dispose() { try { handle.Dispose(); } finally { producerLease?.Dispose(); } }
 }
