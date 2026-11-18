@@ -5021,7 +5021,7 @@
         85.9000015258789
       ],
       "region": "Great Hyrule Forest",
-      "requires": "|Progressive Stasis|",
+      "requires": "",
       "resource": "content/Pack/Dungeon056.pack!Map/CDungeon/Dungeon056/Dungeon056_Static.smubin"
     },
     {
@@ -5084,7 +5084,7 @@
         28.0
       ],
       "region": "Central Hyrule",
-      "requires": "|Magnesis|",
+      "requires": "",
       "resource": "content/Pack/Dungeon057.pack!Map/CDungeon/Dungeon057/Dungeon057_Static.smubin"
     },
     {
@@ -12865,7 +12865,7 @@
         1953.013916015625
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Cryonis| AND |Native Plateau Cold Protection Supplies|",
       "resource": "aoc/0010/Map/MainField/D-6/D-6_Dynamic.smubin"
     },
     {
@@ -13177,7 +13177,7 @@
         2221.97900390625
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Native Plateau Cold Protection Supplies|",
       "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin"
     },
     {
@@ -13213,7 +13213,7 @@
         2155.598876953125
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Native Plateau Cold Protection Supplies|",
       "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin"
     },
     {
@@ -13269,7 +13269,7 @@
         2088.03515625
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Magnesis|",
       "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin"
     },
     {
@@ -13305,7 +13305,7 @@
         2032.6064453125
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Magnesis|",
       "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin"
     },
     {
@@ -13325,7 +13325,7 @@
         2142.6396484375
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Native Plateau Cold Protection Supplies|",
       "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin"
     },
     {
@@ -13351,7 +13351,8 @@
     {
       "binding": "randomizer-plateau-hash",
       "category": [
-        "Overworld Chests"
+        "Overworld Chests",
+        "The Master Trials DLC"
       ],
       "hash_id": 759164510,
       "id": 3190268708,
@@ -13365,7 +13366,7 @@
         2028.066650390625
       ],
       "region": "Great Plateau",
-      "requires": "",
+      "requires": "|Native Plateau Cold Protection Supplies|",
       "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/D-7/D-7_Static.smubin"
     },
     {
@@ -15703,7 +15704,8 @@
     {
       "binding": "randomizer-plateau-hash",
       "category": [
-        "Overworld Chests"
+        "Overworld Chests",
+        "The Master Trials DLC"
       ],
       "hash_id": 473644037,
       "id": 3086588757,
@@ -15859,7 +15861,8 @@
     {
       "binding": "randomizer-plateau-hash",
       "category": [
-        "Overworld Chests"
+        "Overworld Chests",
+        "The Master Trials DLC"
       ],
       "hash_id": 4093217196,
       "id": 3001519073,
@@ -26149,23 +26152,23 @@
       "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/J-8/J-8_Static.smubin"
     },
     {
-      "binding": "master-trials-finaltrial-hash",
+      "binding": "champions-ballad-finaltrial-hash",
       "category": [
-        "The Master Trials DLC"
+        "The Champions' Ballad DLC"
       ],
       "hash_id": 1443111722,
       "id": 3051491453,
       "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6",
-      "name": "Trial of the Sword (Final Trials) - Chest 5604232A",
+      "name": "Final Trial - Chest 5604232A",
       "original_actor": "Weapon_Shield_026",
       "position": [
         0.0,
         17.86420440673828,
         62.5
       ],
-      "region": "Trial of the Sword (Final Trials)",
-      "requires": "",
+      "region": "Final Trial",
+      "requires": "|Progressive Stasis|",
       "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "resource_variants": [
         {
@@ -26175,23 +26178,23 @@
       ]
     },
     {
-      "binding": "master-trials-finaltrial-hash",
+      "binding": "champions-ballad-finaltrial-hash",
       "category": [
-        "The Master Trials DLC"
+        "The Champions' Ballad DLC"
       ],
       "hash_id": 1773704879,
       "id": 3133007048,
       "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6",
-      "name": "Trial of the Sword (Final Trials) - Chest 69B896AF",
+      "name": "Final Trial - Chest 69B896AF",
       "original_actor": "Item_Ore_A",
       "position": [
         31.0,
         37.75400161743164,
         -43.349998474121094
       ],
-      "region": "Trial of the Sword (Final Trials)",
-      "requires": "",
+      "region": "Final Trial",
+      "requires": "|Progressive Stasis| AND |Magnesis|",
       "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "resource_variants": [
         {
@@ -26201,23 +26204,23 @@
       ]
     },
     {
-      "binding": "master-trials-finaltrial-hash",
+      "binding": "champions-ballad-finaltrial-hash",
       "category": [
-        "The Master Trials DLC"
+        "The Champions' Ballad DLC"
       ],
       "hash_id": 2364301542,
       "id": 3012811470,
       "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6",
-      "name": "Trial of the Sword (Final Trials) - Chest 8CEC60E6",
+      "name": "Final Trial - Chest 8CEC60E6",
       "original_actor": "Weapon_Bow_016",
       "position": [
         104.0,
         10.740041732788086,
         -25.5
       ],
-      "region": "Trial of the Sword (Final Trials)",
-      "requires": "",
+      "region": "Final Trial",
+      "requires": "|Magnesis| AND |Progressive Stasis| AND |Paraglider|",
       "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "resource_variants": [
         {
@@ -26227,23 +26230,23 @@
       ]
     },
     {
-      "binding": "master-trials-finaltrial-hash",
+      "binding": "champions-ballad-finaltrial-hash",
       "category": [
-        "The Master Trials DLC"
+        "The Champions' Ballad DLC"
       ],
       "hash_id": 2495386238,
       "id": 3093884152,
       "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6",
-      "name": "Trial of the Sword (Final Trials) - Chest 94BC927E",
+      "name": "Final Trial - Chest 94BC927E",
       "original_actor": "Weapon_Spear_027",
       "position": [
         -139.0,
         8.220096588134766,
         -25.5
       ],
-      "region": "Trial of the Sword (Final Trials)",
-      "requires": "",
+      "region": "Final Trial",
+      "requires": "|Cryonis| AND |Progressive Stasis|",
       "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "resource_variants": [
         {
@@ -26253,23 +26256,23 @@
       ]
     },
     {
-      "binding": "master-trials-finaltrial-hash",
+      "binding": "champions-ballad-finaltrial-hash",
       "category": [
-        "The Master Trials DLC"
+        "The Champions' Ballad DLC"
       ],
       "hash_id": 3675721223,
       "id": 3110989121,
       "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6",
-      "name": "Trial of the Sword (Final Trials) - Chest DB170E07",
+      "name": "Final Trial - Chest DB170E07",
       "original_actor": "Obj_BombArrow_A_02",
       "position": [
         23.823375701904297,
         21.331317901611328,
         -46.67648696899414
       ],
-      "region": "Trial of the Sword (Final Trials)",
-      "requires": "",
+      "region": "Final Trial",
+      "requires": "|Magnesis|",
       "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "resource_variants": [
         {
@@ -26279,23 +26282,23 @@
       ]
     },
     {
-      "binding": "master-trials-finaltrial-hash",
+      "binding": "champions-ballad-finaltrial-hash",
       "category": [
-        "The Master Trials DLC"
+        "The Champions' Ballad DLC"
       ],
       "hash_id": 3768423375,
       "id": 3035969838,
       "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6",
-      "name": "Trial of the Sword (Final Trials) - Chest E09D93CF",
+      "name": "Final Trial - Chest E09D93CF",
       "original_actor": "Weapon_Sword_029",
       "position": [
         -32.79999923706055,
         15.616395950317383,
         31.601797103881836
       ],
-      "region": "Trial of the Sword (Final Trials)",
-      "requires": "",
+      "region": "Final Trial",
+      "requires": "|Magnesis|",
       "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "resource_variants": [
         {
@@ -26305,23 +26308,23 @@
       ]
     },
     {
-      "binding": "master-trials-finaltrial-hash",
+      "binding": "champions-ballad-finaltrial-hash",
       "category": [
-        "The Master Trials DLC"
+        "The Champions' Ballad DLC"
       ],
       "hash_id": 3964443978,
       "id": 3150006085,
       "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6",
-      "name": "Trial of the Sword (Final Trials) - Chest EC4C9D4A",
+      "name": "Final Trial - Chest EC4C9D4A",
       "original_actor": "Weapon_Lsword_036",
       "position": [
         45.5,
         16.899999618530273,
         43.400001525878906
       ],
-      "region": "Trial of the Sword (Final Trials)",
-      "requires": "",
+      "region": "Final Trial",
+      "requires": "|Paraglider|",
       "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
       "resource_variants": [
         {

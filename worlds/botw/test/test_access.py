@@ -127,10 +127,9 @@ class TestDlcStoryMilestones(BotWTestBase):
 
 class TestPhysicalCheckRules(BotWTestBase):
     def test_reported_chests_require_their_physical_capabilities(self):
-        from ..static.check_logic import CHEST_RULES
         from ..Locations import chest_data
         for entry in chest_data:
-            if (entry['logical_map'], entry['hash_id']) not in CHEST_RULES:
+            if entry['hash_id'] not in {0xF5EA1473, 0xA2A08719, 0xE1F9BB4B, 0x78F0EAF1, 0x6260C604, 0xDF4FC4CF, 0x123AEF57, 0x68BE4D6A, 0xE382DE4C}:
                 continue
             location = self.world.get_location(entry['name'])
             self.assertFalse(location.can_reach(self.multiworld.state), entry['name'])
@@ -173,3 +172,15 @@ class TestPhysicalCheckRules(BotWTestBase):
         self.assertFalse(self.world.get_location('Voo Lota Shrine').can_reach(state))
         state.collect(self.world.create_item('Vah Medoh Controls'))
         self.assertTrue(self.world.get_location('Voo Lota Shrine').can_reach(state))
+
+
+class TestEntranceSideChestRoutes(BotWTestBase):
+    def test_initial_mirro_shaz_and_wahgo_katta_chests_need_no_local_rune(self):
+        self.multiworld.state.collect(self.world.create_item('Paraglider'))
+        state = self.multiworld.state
+        self.assertTrue(self.world.get_location('Mirro Shaz Shrine - Chest 1').can_reach(state))
+        self.assertFalse(self.world.get_location('Mirro Shaz Shrine - Chest 3').can_reach(state))
+        self.assertTrue(self.world.get_location('Wahgo Katta Shrine - Chest').can_reach(state))
+        self.assertFalse(self.world.get_location('Oman Au Shrine - Chest').can_reach(state))
+        state.collect(self.world.create_item('Progressive Stasis'))
+        self.assertTrue(self.world.get_location('Mirro Shaz Shrine - Chest 3').can_reach(state))

@@ -53,12 +53,9 @@ def bind_reference(discovery: dict, dump, reference_dir: Path, randomizer_dir: P
             chest.update(name=ref["name"], region=ref["region"], requires=ref.get("requires", ""),
                          category=ref.get("category", []), binding="manual-shrine-equal-rule")
 
-    # The Trial of the Sword's final arena is represented by two mutually
-    # exclusive map variants in FinalTrial.pack. They contain the same seven
-    # physical chest HashIds. Give each physical chest one AP location and
-    # patch that same check into both map variants. These are deliberately
-    # named by HashId: the Manual lists floor checks, but does not identify
-    # which actor HashId belongs to each floor.
+    # FinalTrial.pack is the Champions' Ballad's fifth Divine Beast, not Trial
+    # of the Sword. Both variants contain the same seven physical chest IDs.
+    # Preserve one check and patch it into both variants.
     trial_maps = {
         "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
         "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static_NoGrudgeMerge.smubin",
@@ -73,11 +70,11 @@ def bind_reference(discovery: dict, dump, reference_dir: Path, randomizer_dir: P
         if canonical is None:
             continue
         canonical.update(
-            name=f"Trial of the Sword (Final Trials) - Chest {hash_id:08X}",
-            region="Trial of the Sword (Final Trials)",
+            name=f"Final Trial - Chest {hash_id:08X}",
+            region="Final Trial",
             requires="",
-            category=["The Master Trials DLC"],
-            binding="master-trials-finaltrial-hash",
+            category=["The Champions' Ballad DLC"],
+            binding="champions-ballad-finaltrial-hash",
         )
         if alternate is not None:
             canonical["resource_variants"] = [{

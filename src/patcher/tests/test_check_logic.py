@@ -19,12 +19,12 @@ def evaluate(expression, owned):
 
 
 def test_all_reported_chests_have_physical_requirements_and_alternatives():
-    assert len(CHEST_RULES) == 9
+    reported = {0xF5EA1473, 0xA2A08719, 0xE1F9BB4B, 0x78F0EAF1, 0x6260C604, 0xDF4FC4CF, 0x123AEF57, 0x68BE4D6A, 0xE382DE4C}
     entries = json.loads((ROOT / 'worlds/botw/data/chests.json').read_text())['locations']
     found = {}
     for entry in entries:
         key = (entry['logical_map'], entry['hash_id'])
-        if key in CHEST_RULES:
+        if entry['hash_id'] in reported:
             rule = apply_check_logic(entry)['requires']
             assert not evaluate(rule, {})
             if entry['hash_id'] in {0xE1F9BB4B, 0x78F0EAF1}:
@@ -36,7 +36,7 @@ def test_all_reported_chests_have_physical_requirements_and_alternatives():
                 assert evaluate(rule, {required: 1})
                 assert not evaluate(rule, {'Cryonis': 1, 'Camera': 1})
             found[key] = rule
-    assert found.keys() == CHEST_RULES.keys()
+    assert {key[1] for key in found} == reported
 
 
 def test_ordinary_minibosses_allow_native_equipment_and_molduga_alternative():
@@ -97,3 +97,45 @@ def test_materialized_catalogs_match_the_authoritative_rules():
         for entry in json.loads((ROOT / 'worlds/botw' / path).read_text())['locations']:
             if entry.get('region'):
                 assert entry == apply_check_logic(entry), entry['name']
+
+
+def test_route_annotations_bind_all_187_checks_to_exact_actors():
+    from botw_static.check_logic import ROUTES
+    catalog = json.loads((ROOT / 'worlds/botw/data/chests.json').read_text())['locations']
+    by_key = {(e['logical_map'], e['hash_id']): e for e in catalog}
+    assert len(ROUTES) == 187
+    assert len(CHEST_RULES) == 187
+    for route in ROUTES:
+        entry = by_key[(route['logical_map'], int(route['hash_id'], 16))]
+        assert route['check_id'] == entry['id']
+        assert route['original_actor'] == entry['original_actor']
+        assert route['position'] == entry['position']
+        assert route['requires'] == entry['requires']
+        assert route['sources'] and route['route']
+        assert not route['gameplay_verified']
+
+
+def test_underwater_river_chests_and_cold_wooden_pond_chest():
+    catalog = json.loads((ROOT / 'worlds/botw/data/chests.json').read_text())['locations']
+    by_hash = {e['hash_id']: e for e in catalog if e.get('region') == 'Great Plateau'}
+    for hash_id in (0xC986043B, 0xDE46BD48):
+        rule = by_hash[hash_id]['requires']
+        assert not evaluate(rule, {})
+        assert evaluate(rule, {'Magnesis': 1})
+    rule = by_hash[0xB326B249]['requires']
+    assert not evaluate(rule, {'Magnesis': 1, 'Native Plateau Cold Protection Supplies': 1})
+    assert evaluate(rule, {'Cryonis': 1, 'Native Plateau Cold Protection Supplies': 1})
+    # These three metal chests are on dry ground inside the waterfall cave.
+    for hash_id in (0x24A00436, 0x53A734A0, 0xC3182931):
+        assert evaluate(by_hash[hash_id]['requires'], {})
+
+
+def test_final_trial_is_champions_ballad_dungeon_and_bonus_chests_are_dlc():
+    catalog = json.loads((ROOT / 'worlds/botw/data/chests.json').read_text())['locations']
+    final = [e for e in catalog if e.get('binding') == 'champions-ballad-finaltrial-hash']
+    assert len(final) == 7
+    assert all(e['region'] == 'Final Trial' and e['category'] == ["The Champions' Ballad DLC"] for e in final)
+    assert all(e['resource_variants'] for e in final)
+    bonus = [e for e in catalog if e['hash_id'] in {0x2D3FEE5E, 0x1C3B3C05, 0xF3F989AC}]
+    assert len(bonus) == 3
+    assert all('The Master Trials DLC' in e['category'] for e in bonus)

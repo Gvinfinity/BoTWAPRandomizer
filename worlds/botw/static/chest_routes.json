@@ -1,0 +1,4012 @@
+{
+  "version": 1,
+  "scope": "All 187 currently AP-bound chest identities. Normal-route annotations include inherited shrine-approach requirements. Does not include unbound or excluded catalog actors.",
+  "route_semantics": "These are supported normal-route requirements, not a proof that no alternative exists. Region/story/goal rules remain additional dependencies. Vanilla combat equipment, cooking and climbing recovery are available.",
+  "routes": [
+    {
+      "logical_map": "Map/MainField/D-6/D-6_Dynamic.smubin",
+      "hash_id": "0CF83A31",
+      "check_id": 3093478772,
+      "original_actor": "Obj_ArrowBundle_A_01",
+      "position": [
+        -1434.510986328125,
+        292.29180908203125,
+        1733.993896484375
+      ],
+      "region": "Great Plateau",
+      "route": "Climb the stone tower north of the river waterfall.",
+      "requires": "",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/D-6/D-6_Dynamic.smubin",
+      "source_map_sha256": "e387f41d6e6d58d10b9b7b91351aa8a17d0139f7c9700919653c9cecc5d8cc3e"
+    },
+    {
+      "logical_map": "Map/MainField/D-6/D-6_Dynamic.smubin",
+      "hash_id": "233FEE7D",
+      "check_id": 3148474812,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        -1366.1904296875,
+        222.92138671875,
+        1498.36328125
+      ],
+      "region": "Great Plateau",
+      "route": "Enter the broken northwestern perimeter buttress from its opening.",
+      "requires": "",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/D-6/D-6_Dynamic.smubin",
+      "source_map_sha256": "e387f41d6e6d58d10b9b7b91351aa8a17d0139f7c9700919653c9cecc5d8cc3e"
+    },
+    {
+      "logical_map": "Map/MainField/D-6/D-6_Dynamic.smubin",
+      "hash_id": "77C2E0B5",
+      "check_id": 3074647772,
+      "original_actor": "Obj_ArrowBundle_A_02",
+      "position": [
+        -1265.507080078125,
+        219.86380004882812,
+        1563.779052734375
+      ],
+      "region": "Great Plateau",
+      "route": "Climb the tower on the western side of the Forest of Spirits.",
+      "requires": "",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Forest_of_Spirits"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/D-6/D-6_Dynamic.smubin",
+      "source_map_sha256": "e387f41d6e6d58d10b9b7b91351aa8a17d0139f7c9700919653c9cecc5d8cc3e"
+    },
+    {
+      "logical_map": "Map/MainField/D-6/D-6_Dynamic.smubin",
+      "hash_id": "B326B249",
+      "check_id": 3003476379,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        -1432.0806884765625,
+        323.17333984375,
+        1953.013916015625
+      ],
+      "region": "Great Plateau",
+      "route": "Approach the cold pond north of Keh Namut; raise the wooden chest with Cryonis.",
+      "requires": "|Cryonis| AND |Native Plateau Cold Protection Supplies|",
+      "sources": [
+        "https://www.itechpost.com/articles/90770/20170309/zelda-breath-of-the-wild-guide-to-finding-hidden-treasure-in-the-great-plateau.htm"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "caveat": "A secondary guide calls the pond reward Opal; the installed map identifies Amber. Route uses the unique wooden pond placement, not that loot label.",
+      "resource": "aoc/0010/Map/MainField/D-6/D-6_Dynamic.smubin",
+      "source_map_sha256": "e387f41d6e6d58d10b9b7b91351aa8a17d0139f7c9700919653c9cecc5d8cc3e"
+    },
+    {
+      "logical_map": "Map/MainField/D-6/D-6_Static.smubin",
+      "hash_id": "14DF3023",
+      "check_id": 2984159195,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        -1463.2303466796875,
+        258.21075439453125,
+        1797.8499755859375
+      ],
+      "region": "Great Plateau",
+      "route": "Lower the suspended camp ramp using native arrows; climb to the lower chest.",
+      "requires": "",
+      "sources": [
+        "https://www.zeldaspalace.com/breathofthewild/soluce.php?p=3"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/D-6/D-6_Static.smubin",
+      "source_map_sha256": "97a0e388ddad0049eea0f8ea010c963ddc32caf3a1192f8143dcff78e8fa3f67"
+    },
+    {
+      "logical_map": "Map/MainField/D-6/D-6_Static.smubin",
+      "hash_id": "BB0EA220",
+      "check_id": 3032460534,
+      "original_actor": "Obj_ArrowBundle_A_01",
+      "position": [
+        -1449.328857421875,
+        260.49737548828125,
+        1795.8809814453125
+      ],
+      "region": "Great Plateau",
+      "route": "Use the lowered camp ramps to climb to the upper chest.",
+      "requires": "",
+      "sources": [
+        "https://www.zeldaspalace.com/breathofthewild/soluce.php?p=3"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/D-6/D-6_Static.smubin",
+      "source_map_sha256": "97a0e388ddad0049eea0f8ea010c963ddc32caf3a1192f8143dcff78e8fa3f67"
+    },
+    {
+      "logical_map": "Map/MainField/D-6/D-6_Static.smubin",
+      "hash_id": "F5EA1473",
+      "check_id": 2989084003,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        -1064.0355224609375,
+        205.01126098632812,
+        1785.1103515625
+      ],
+      "region": "Great Plateau",
+      "route": "Break the cracked rock cover on the south forest cliff; enter the recess.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Forest_of_Spirits"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/D-6/D-6_Static.smubin",
+      "source_map_sha256": "97a0e388ddad0049eea0f8ea010c963ddc32caf3a1192f8143dcff78e8fa3f67"
+    },
+    {
+      "logical_map": "Map/MainField/D-7/D-7_Dynamic.smubin",
+      "hash_id": "24A00436",
+      "check_id": 3033102673,
+      "original_actor": "Obj_FireArrow_A_03",
+      "position": [
+        -1089.0430908203125,
+        250.78326416015625,
+        2157.960205078125
+      ],
+      "region": "Great Plateau",
+      "route": "Follow the southern river bank into the waterfall cave; open the chest on foot.",
+      "requires": "",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/River_of_the_Dead",
+        "https://www.itechpost.com/articles/90770/20170309/zelda-breath-of-the-wild-guide-to-finding-hidden-treasure-in-the-great-plateau.htm"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "caveat": "Metal material alone does not imply Magnesis: these are dry cave chests. Reach the cave from the southern bank rather than the northern broken bridge.",
+      "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin",
+      "source_map_sha256": "9e391120046ffe1d59d29fe16705032ce850da3ba574e5ba1512c8e8d3ddd663"
+    },
+    {
+      "logical_map": "Map/MainField/D-7/D-7_Dynamic.smubin",
+      "hash_id": "53A734A0",
+      "check_id": 3218524325,
+      "original_actor": "Obj_ArrowBundle_A_01",
+      "position": [
+        -1089.050537109375,
+        250.86068725585938,
+        2159.5517578125
+      ],
+      "region": "Great Plateau",
+      "route": "Enter the waterfall cave from the river bank; open the eastern-wall chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/River_of_the_Dead"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "caveat": "Metal material alone does not imply Magnesis: these are dry cave chests. Reach the cave from the southern bank rather than the northern broken bridge.",
+      "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin",
+      "source_map_sha256": "9e391120046ffe1d59d29fe16705032ce850da3ba574e5ba1512c8e8d3ddd663"
+    },
+    {
+      "logical_map": "Map/MainField/D-7/D-7_Dynamic.smubin",
+      "hash_id": "7BFD6EDD",
+      "check_id": 3162335574,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        -1067.9912109375,
+        327.5381774902344,
+        2221.97900390625
+      ],
+      "region": "Great Plateau",
+      "route": "Climb the eastern Mount Hylia ledges to the wooden chest; prepare cold food.",
+      "requires": "|Native Plateau Cold Protection Supplies|",
+      "sources": [
+        "https://www.itechpost.com/articles/90770/20170309/zelda-breath-of-the-wild-guide-to-finding-hidden-treasure-in-the-great-plateau.htm"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin",
+      "source_map_sha256": "9e391120046ffe1d59d29fe16705032ce850da3ba574e5ba1512c8e8d3ddd663"
+    },
+    {
+      "logical_map": "Map/MainField/D-7/D-7_Dynamic.smubin",
+      "hash_id": "B239AED4",
+      "check_id": 3042958897,
+      "original_actor": "Obj_ArrowBundle_A_01",
+      "position": [
+        -1011.1865234375,
+        287.0235290527344,
+        2155.598876953125
+      ],
+      "region": "Great Plateau",
+      "route": "Climb the guard platform on the eastern Mount Hylia slope.",
+      "requires": "|Native Plateau Cold Protection Supplies|",
+      "sources": [
+        "https://www.itechpost.com/articles/90770/20170309/zelda-breath-of-the-wild-guide-to-finding-hidden-treasure-in-the-great-plateau.htm"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin",
+      "source_map_sha256": "9e391120046ffe1d59d29fe16705032ce850da3ba574e5ba1512c8e8d3ddd663"
+    },
+    {
+      "logical_map": "Map/MainField/D-7/D-7_Dynamic.smubin",
+      "hash_id": "C3182931",
+      "check_id": 3171737463,
+      "original_actor": "Weapon_Bow_003",
+      "position": [
+        -1092.862060546875,
+        250.83355712890625,
+        2160.107177734375
+      ],
+      "region": "Great Plateau",
+      "route": "Walk into the river waterfall cave; open the south-wall bow chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/River_of_the_Dead"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "caveat": "Metal material alone does not imply Magnesis: these are dry cave chests. Reach the cave from the southern bank rather than the northern broken bridge.",
+      "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin",
+      "source_map_sha256": "9e391120046ffe1d59d29fe16705032ce850da3ba574e5ba1512c8e8d3ddd663"
+    },
+    {
+      "logical_map": "Map/MainField/D-7/D-7_Dynamic.smubin",
+      "hash_id": "C986043B",
+      "check_id": 3117400481,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        -1032.0550537109375,
+        247.39306640625,
+        2088.03515625
+      ],
+      "region": "Great Plateau",
+      "route": "From the bank beside the dock, lift the submerged chest onto land.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/River_of_the_Dead"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin",
+      "source_map_sha256": "9e391120046ffe1d59d29fe16705032ce850da3ba574e5ba1512c8e8d3ddd663"
+    },
+    {
+      "logical_map": "Map/MainField/D-7/D-7_Dynamic.smubin",
+      "hash_id": "DE46BD48",
+      "check_id": 3149510449,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        -1038.695068359375,
+        247.2986297607422,
+        2032.6064453125
+      ],
+      "region": "Great Plateau",
+      "route": "Follow the eastern river bank; lift the submerged chest onto land.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/River_of_the_Dead"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin",
+      "source_map_sha256": "9e391120046ffe1d59d29fe16705032ce850da3ba574e5ba1512c8e8d3ddd663"
+    },
+    {
+      "logical_map": "Map/MainField/D-7/D-7_Dynamic.smubin",
+      "hash_id": "F12E4BB3",
+      "check_id": 3078754342,
+      "original_actor": "Obj_FireArrow_A_03",
+      "position": [
+        -1084.90576171875,
+        295.5460205078125,
+        2142.6396484375
+      ],
+      "region": "Great Plateau",
+      "route": "From the waterfall bank, climb the southern ledge above the cave.",
+      "requires": "|Native Plateau Cold Protection Supplies|",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/River_of_the_Dead",
+        "https://www.itechpost.com/articles/90770/20170309/zelda-breath-of-the-wild-guide-to-finding-hidden-treasure-in-the-great-plateau.htm"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/D-7/D-7_Dynamic.smubin",
+      "source_map_sha256": "9e391120046ffe1d59d29fe16705032ce850da3ba574e5ba1512c8e8d3ddd663"
+    },
+    {
+      "logical_map": "Map/MainField/D-7/D-7_Static.smubin",
+      "hash_id": "184922D8",
+      "check_id": 3138940872,
+      "original_actor": "Obj_ArrowBundle_A_01",
+      "position": [
+        -1032.35888671875,
+        293.57952880859375,
+        2264.43310546875
+      ],
+      "region": "Great Plateau",
+      "route": "Clear or bypass the camp west of the cabin and climb its lookout tower.",
+      "requires": "",
+      "sources": [
+        "https://www.zeldaspalace.com/breathofthewild/soluce.php?p=2"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/D-7/D-7_Static.smubin",
+      "source_map_sha256": "808a13f76607d119819afb0004f608dcf74f14e3c84e557daed14faf53f8d89e"
+    },
+    {
+      "logical_map": "Map/MainField/D-7/D-7_Static.smubin",
+      "hash_id": "2D3FEE5E",
+      "check_id": 3190268708,
+      "original_actor": "Obj_BombArrow_A_02",
+      "position": [
+        -1451.488037109375,
+        317.60595703125,
+        2028.066650390625
+      ],
+      "region": "Great Plateau",
+      "route": "Use the southern mountain approach and descend to the bonus chest on the perimeter ledge.",
+      "requires": "|Native Plateau Cold Protection Supplies|",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau",
+        "https://www.zeldaspalace.com/breathofthewild/soluce.php?p=3"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/D-7/D-7_Static.smubin",
+      "source_map_sha256": "808a13f76607d119819afb0004f608dcf74f14e3c84e557daed14faf53f8d89e"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Dynamic.smubin",
+      "hash_id": "123AEF57",
+      "check_id": 3115036712,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        -544.4974975585938,
+        172.8965301513672,
+        1939.499755859375
+      ],
+      "region": "Great Plateau",
+      "route": "Lift the submerged metal chest out of the Eastern Abbey pond.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://www.zeldaspalace.com/breathofthewild/soluce.php?p=2",
+        "https://www.itechpost.com/articles/90770/20170309/zelda-breath-of-the-wild-guide-to-finding-hidden-treasure-in-the-great-plateau.htm"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin",
+      "source_map_sha256": "9f30fe1570aac702142edd1e3db2de60a730df0522017d3abb3cce56187cf2da"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Dynamic.smubin",
+      "hash_id": "386F5E5B",
+      "check_id": 2987233406,
+      "original_actor": "Weapon_Bow_001",
+      "position": [
+        -832.4332885742188,
+        222.00038146972656,
+        1963.1082763671875
+      ],
+      "region": "Great Plateau",
+      "route": "Enter the Temple of Time and inspect the right-hand side room.",
+      "requires": "",
+      "sources": [
+        "https://www.zeldawiki.wiki/wiki/Temple_of_Time"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin",
+      "source_map_sha256": "9f30fe1570aac702142edd1e3db2de60a730df0522017d3abb3cce56187cf2da"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Dynamic.smubin",
+      "hash_id": "4E44ED23",
+      "check_id": 3075166568,
+      "original_actor": "Armor_001_Lower",
+      "position": [
+        -736.32177734375,
+        201.95217895507812,
+        1865.6473388671875
+      ],
+      "region": "Great Plateau",
+      "route": "Walk up the temple approach and enter its second ruined building.",
+      "requires": "",
+      "sources": [
+        "https://www.zeldawiki.wiki/wiki/Temple_of_Time"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin",
+      "source_map_sha256": "9f30fe1570aac702142edd1e3db2de60a730df0522017d3abb3cce56187cf2da"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Dynamic.smubin",
+      "hash_id": "6260C604",
+      "check_id": 3017086259,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        -695.4507446289062,
+        168.32553100585938,
+        1524.1182861328125
+      ],
+      "region": "Great Plateau",
+      "route": "Stand by the Oman Au pond and lift the western underwater chest.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin",
+      "source_map_sha256": "9f30fe1570aac702142edd1e3db2de60a730df0522017d3abb3cce56187cf2da"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Dynamic.smubin",
+      "hash_id": "A2A08719",
+      "check_id": 3135587233,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        -870.0,
+        204.39999389648438,
+        1934.5
+      ],
+      "region": "Great Plateau",
+      "route": "Break the cracked wall beside the pond northwest of the temple.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin",
+      "source_map_sha256": "9f30fe1570aac702142edd1e3db2de60a730df0522017d3abb3cce56187cf2da"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Dynamic.smubin",
+      "hash_id": "B6978C9B",
+      "check_id": 2980362390,
+      "original_actor": "Weapon_Bow_002",
+      "position": [
+        -814.7328491210938,
+        263.5777282714844,
+        1964.883544921875
+      ],
+      "region": "Great Plateau",
+      "route": "Use the exterior ladder and climb the Temple of Time roof tower.",
+      "requires": "",
+      "sources": [
+        "https://www.zeldaspalace.com/breathofthewild/soluce.php?p=3",
+        "https://www.zeldawiki.wiki/wiki/Temple_of_Time"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin",
+      "source_map_sha256": "9f30fe1570aac702142edd1e3db2de60a730df0522017d3abb3cce56187cf2da"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Dynamic.smubin",
+      "hash_id": "DF4FC4CF",
+      "check_id": 3175050564,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        -684.4102172851562,
+        168.8496856689453,
+        1536.4287109375
+      ],
+      "region": "Great Plateau",
+      "route": "Lift the eastern underwater chest from the Oman Au pond.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/E-6/E-6_Dynamic.smubin",
+      "source_map_sha256": "9f30fe1570aac702142edd1e3db2de60a730df0522017d3abb3cce56187cf2da"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Static.smubin",
+      "hash_id": "1C3B3C05",
+      "check_id": 3086588757,
+      "original_actor": "Item_Ore_B",
+      "position": [
+        -671.65283203125,
+        171.7899169921875,
+        1522.6092529296875
+      ],
+      "region": "Great Plateau",
+      "route": "Walk to the bonus chest beside the Oman Au entrance.",
+      "requires": "",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/E-6/E-6_Static.smubin",
+      "source_map_sha256": "40187e2960b892630f0c6ee894309c685828be54f106cd3b8e6a9cc04e959f0f"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Static.smubin",
+      "hash_id": "78F0EAF1",
+      "check_id": 3141477105,
+      "original_actor": "Obj_IceArrow_A_03",
+      "position": [
+        -775.9425048828125,
+        174.80209350585938,
+        1561.833251953125
+      ],
+      "region": "Great Plateau",
+      "route": "Reach the bog platform using Bombs, Paraglider or Revali as confirmed by the player.",
+      "requires": "|Progressive Remote Bomb| OR |Paraglider| OR |Progressive Revali's Gale| OR |Revali's Gale|",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau"
+      ],
+      "evidence": "map_identity_and_player_confirmed_alternatives",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/E-6/E-6_Static.smubin",
+      "source_map_sha256": "40187e2960b892630f0c6ee894309c685828be54f106cd3b8e6a9cc04e959f0f"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Static.smubin",
+      "hash_id": "E1F9BB4B",
+      "check_id": 3193588709,
+      "original_actor": "Obj_FireArrow_A_03",
+      "position": [
+        -774.8546752929688,
+        174.80209350585938,
+        1558.653564453125
+      ],
+      "region": "Great Plateau",
+      "route": "Use the same confirmed bog-platform approaches; open the adjoining fire-arrow chest.",
+      "requires": "|Progressive Remote Bomb| OR |Paraglider| OR |Progressive Revali's Gale| OR |Revali's Gale|",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau"
+      ],
+      "evidence": "map_identity_and_player_confirmed_alternatives",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/E-6/E-6_Static.smubin",
+      "source_map_sha256": "40187e2960b892630f0c6ee894309c685828be54f106cd3b8e6a9cc04e959f0f"
+    },
+    {
+      "logical_map": "Map/MainField/E-6/E-6_Static.smubin",
+      "hash_id": "F3F989AC",
+      "check_id": 3001519073,
+      "original_actor": "Armor_170_Upper",
+      "position": [
+        -468.571533203125,
+        183.2425079345703,
+        2007.50048828125
+      ],
+      "region": "Great Plateau",
+      "route": "Climb the ruined wall beside Ja Baij to the bonus chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/E-6/E-6_Static.smubin",
+      "source_map_sha256": "40187e2960b892630f0c6ee894309c685828be54f106cd3b8e6a9cc04e959f0f"
+    },
+    {
+      "logical_map": "Map/MainField/E-7/E-7_Dynamic.smubin",
+      "hash_id": "68BE4D6A",
+      "check_id": 3001698022,
+      "original_actor": "Obj_FireArrow_A_03",
+      "position": [
+        -971.0025634765625,
+        190.1919403076172,
+        2343.1767578125
+      ],
+      "region": "Great Plateau",
+      "route": "From the southern approach, bomb the cracked cave entrance beneath Owa Daim.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://www.zeldaspalace.com/breathofthewild/soluce.php?p=2"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/E-7/E-7_Dynamic.smubin",
+      "source_map_sha256": "4b9c39cff03f09cea801b040eb786e0f6aa548c18147c151fde3eaae659b6437"
+    },
+    {
+      "logical_map": "Map/MainField/E-7/E-7_Dynamic.smubin",
+      "hash_id": "A6C8694C",
+      "check_id": 3045179743,
+      "original_actor": "Obj_BombArrow_A_02",
+      "position": [
+        -713.0,
+        190.88223266601562,
+        2311.0
+      ],
+      "region": "Great Plateau",
+      "route": "Enter the broken perimeter buttress southeast of the cabin.",
+      "requires": "",
+      "sources": [
+        "https://zeldawiki.wiki/wiki/Great_Plateau"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Map/MainField/E-7/E-7_Dynamic.smubin",
+      "source_map_sha256": "4b9c39cff03f09cea801b040eb786e0f6aa548c18147c151fde3eaae659b6437"
+    },
+    {
+      "logical_map": "Map/MainField/E-7/E-7_Static.smubin",
+      "hash_id": "38ACFCEF",
+      "check_id": 2968623128,
+      "original_actor": "Obj_BombArrow_A_02",
+      "position": [
+        -931.280029296875,
+        179.27999877929688,
+        2206.719970703125
+      ],
+      "region": "Great Plateau",
+      "route": "Break or burn the wooden barricade behind the cabin-side camp using native tools.",
+      "requires": "",
+      "sources": [
+        "https://www.zeldaspalace.com/breathofthewild/soluce.php?p=2"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/E-7/E-7_Static.smubin",
+      "source_map_sha256": "3058e5741ae0476a3e2f85b83708d8435552b73ae13d46a817fc4f4e58c96006"
+    },
+    {
+      "logical_map": "Map/MainField/E-7/E-7_Static.smubin",
+      "hash_id": "E382DE4C",
+      "check_id": 3047383936,
+      "original_actor": "Weapon_Bow_001",
+      "position": [
+        -942.0999755859375,
+        272.99932861328125,
+        2327.699951171875
+      ],
+      "region": "Great Plateau",
+      "route": "At Owa Daim, freeze and strike the covering boulder, then open the exposed chest.",
+      "requires": "|Progressive Stasis|",
+      "sources": [
+        "https://www.zeldaspalace.com/breathofthewild/soluce.php?p=3"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/AocMainField.pack!Map/MainField/E-7/E-7_Static.smubin",
+      "source_map_sha256": "3058e5741ae0476a3e2f85b83708d8435552b73ae13d46a817fc4f4e58c96006"
+    },
+    {
+      "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "hash_id": "5604232A",
+      "check_id": 3051491453,
+      "original_actor": "Weapon_Shield_026",
+      "position": [
+        0.0,
+        17.86420440673828,
+        62.5
+      ],
+      "region": "Final Trial",
+      "route": "Climb the central drive shaft; freeze the rotating plate and pass through its gap.",
+      "requires": "|Progressive Stasis|",
+      "sources": [
+        "https://zeldauniverse.net/guides/breath-of-the-wild/the-champions-ballad/ex-the-divine-trial/",
+        "https://www.shacknews.com/article/102523/zelda-breath-of-the-wild-champions-ballad-final-trial-walkthrough"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "source_map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6"
+    },
+    {
+      "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "hash_id": "69B896AF",
+      "check_id": 3133007048,
+      "original_actor": "Item_Ore_A",
+      "position": [
+        31.0,
+        37.75400161743164,
+        -43.349998474121094
+      ],
+      "region": "Final Trial",
+      "route": "Ride the raised rotating doorway to its upper shelf.",
+      "requires": "|Progressive Stasis| AND |Magnesis|",
+      "sources": [
+        "https://gamefaqs.gamespot.com/switch/189707-the-legend-of-zelda-breath-of-the-wild/faqs/75420/walkthrough"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "source_map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6"
+    },
+    {
+      "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "hash_id": "8CEC60E6",
+      "check_id": 3012811470,
+      "original_actor": "Weapon_Bow_016",
+      "position": [
+        104.0,
+        10.740041732788086,
+        -25.5
+      ],
+      "region": "Final Trial",
+      "route": "Engage the fan-room mechanism, freeze the fan, glide through and defeat the Scout.",
+      "requires": "|Magnesis| AND |Progressive Stasis| AND |Paraglider|",
+      "sources": [
+        "https://zeldauniverse.net/guides/breath-of-the-wild/the-champions-ballad/ex-the-divine-trial/",
+        "https://www.shacknews.com/article/102523/zelda-breath-of-the-wild-champions-ballad-final-trial-walkthrough"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "source_map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6"
+    },
+    {
+      "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "hash_id": "94BC927E",
+      "check_id": 3093884152,
+      "original_actor": "Weapon_Spear_027",
+      "position": [
+        -139.0,
+        8.220096588134766,
+        -25.5
+      ],
+      "region": "Final Trial",
+      "route": "Engage the water-room gears, raise the piston with Cryonis, then turn the valve using Stasis.",
+      "requires": "|Cryonis| AND |Progressive Stasis|",
+      "sources": [
+        "https://zeldauniverse.net/guides/breath-of-the-wild/the-champions-ballad/ex-the-divine-trial/",
+        "https://www.shacknews.com/article/102523/zelda-breath-of-the-wild-champions-ballad-final-trial-walkthrough"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "source_map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6"
+    },
+    {
+      "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "hash_id": "DB170E07",
+      "check_id": 3110989121,
+      "original_actor": "Obj_BombArrow_A_02",
+      "position": [
+        23.823375701904297,
+        21.331317901611328,
+        -46.67648696899414
+      ],
+      "region": "Final Trial",
+      "route": "Climb the central gear catwalk and lower the elevated metal chest.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldauniverse.net/guides/breath-of-the-wild/the-champions-ballad/ex-the-divine-trial/",
+        "https://www.shacknews.com/article/102523/zelda-breath-of-the-wild-champions-ballad-final-trial-walkthrough"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "source_map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6"
+    },
+    {
+      "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "hash_id": "E09D93CF",
+      "check_id": 3035969838,
+      "original_actor": "Weapon_Sword_029",
+      "position": [
+        -32.79999923706055,
+        15.616395950317383,
+        31.601797103881836
+      ],
+      "region": "Final Trial",
+      "route": "Engage the first rotating room and ride its doorway to the scimitar ledge.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldauniverse.net/guides/breath-of-the-wild/the-champions-ballad/ex-the-divine-trial/"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "source_map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6"
+    },
+    {
+      "logical_map": "Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "hash_id": "EC4C9D4A",
+      "check_id": 3150006085,
+      "original_actor": "Weapon_Lsword_036",
+      "position": [
+        45.5,
+        16.899999618530273,
+        43.400001525878906
+      ],
+      "region": "Final Trial",
+      "route": "Ride the rotating spiked-room doorway; jump and glide onto its roof shelf.",
+      "requires": "|Paraglider|",
+      "sources": [
+        "https://www.shacknews.com/article/102523/zelda-breath-of-the-wild-champions-ballad-final-trial-walkthrough"
+      ],
+      "evidence": "map_identity_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/FinalTrial.pack!Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin",
+      "source_map_sha256": "f80e090f8356838f0be183d780a1638e80d30aebea336bb39eec195a9bafddf6"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon001/Dungeon001_Static.smubin",
+      "hash_id": "E5A4004E",
+      "check_id": 3069819867,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        22.0,
+        6.5,
+        -34.0
+      ],
+      "region": "Gerudo Desert",
+      "route": "Lift the chest from the conveyor in the beam room using Magnesis.",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/jee-noh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon001.pack!Map/CDungeon/Dungeon001/Dungeon001_Static.smubin",
+      "source_map_sha256": "d3ed6cbbaf31e2b7edf4a543cd71efd47028f04438fa6e4dfe77bdc4dd6eb676"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon002/Dungeon002_Static.smubin",
+      "hash_id": "9462D984",
+      "check_id": 3026583943,
+      "original_actor": "Weapon_Bow_035",
+      "position": [
+        -17.0,
+        8.068742752075195,
+        2.000000238418579
+      ],
+      "region": "Eldin",
+      "route": "Burn the support beneath the hanging chest in the lamp chamber.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/sah-dahaj-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon002.pack!Map/CDungeon/Dungeon002/Dungeon002_Static.smubin",
+      "source_map_sha256": "817e904f9fd60f4d075ff7b03641b9e8731eee0c5ff1f55ba7dd29ba0242b5ec"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon004/Dungeon004_Static.smubin",
+      "hash_id": "E9959475",
+      "check_id": 3148073795,
+      "original_actor": "Weapon_Bow_035",
+      "position": [
+        -29.0,
+        8.0,
+        -5.5
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Get onto the orb receptacle building and glide to its roof chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/zalta-wa-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon004.pack!Map/CDungeon/Dungeon004/Dungeon004_Static.smubin",
+      "source_map_sha256": "9e02042528eabb4766284f4aca6f4fd271fdce987bf270766071ded7f5dabd5a"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon005/Dungeon005_Static.smubin",
+      "hash_id": "FD3FD0A9",
+      "check_id": 3199947201,
+      "original_actor": "Weapon_Spear_027",
+      "position": [
+        -14.999998092651367,
+        -22.950000762939453,
+        -32.00351333618164
+      ],
+      "region": "Lanayru",
+      "route": "Make Cryonis cover at the beam and climb onto the rear platform.",
+      "requires": "|Cryonis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/neez-yohma-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon005.pack!Map/CDungeon/Dungeon005/Dungeon005_Static.smubin",
+      "source_map_sha256": "00e433cc61d7d13dd2b17994472dbc4032899426e30f5771a339bf1566d97727"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon006/Dungeon006_Static.smubin",
+      "hash_id": "676B7B52",
+      "check_id": 2959211505,
+      "original_actor": "Weapon_Sword_003",
+      "position": [
+        0.0,
+        0.0,
+        -7.5
+      ],
+      "region": "Faron",
+      "route": "Use the metal counterweight or lift the fenced chest with Magnesis.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/yah-rin-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon006.pack!Map/CDungeon/Dungeon006/Dungeon006_Static.smubin",
+      "source_map_sha256": "5316ffe192c6d82ae68f433c552f1b8ccdccafe9856537b69cd97d7b3f6ff2dc"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon006/Dungeon006_Static.smubin",
+      "hash_id": "F15DF8BE",
+      "check_id": 3039091873,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        -36.5,
+        6.0,
+        -60.0
+      ],
+      "region": "Faron",
+      "route": "Arrange the scales with the metal weights and climb to the Opal ledge.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/yah-rin-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon006.pack!Map/CDungeon/Dungeon006/Dungeon006_Static.smubin",
+      "source_map_sha256": "5316ffe192c6d82ae68f433c552f1b8ccdccafe9856537b69cd97d7b3f6ff2dc"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon007/Dungeon007_Static.smubin",
+      "hash_id": "9F9CA288",
+      "check_id": 3016555202,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        -14.999999046325684,
+        1.149999976158142,
+        -19.0
+      ],
+      "region": "Dueling Peaks",
+      "route": "Ride the first air stream to the Amber shelf using the Paraglider.",
+      "requires": "|Paraglider|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/bosh-kala-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon007.pack!Map/CDungeon/Dungeon007/Dungeon007_Static.smubin",
+      "source_map_sha256": "bff5fd828b538a20290da75574c0ce53090b6f63d842c2963790929e9145a942"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon007/Dungeon007_Static.smubin",
+      "hash_id": "F2CC6CDF",
+      "check_id": 2997352430,
+      "original_actor": "Weapon_Lsword_002",
+      "position": [
+        -0.5,
+        -6.5,
+        -148.0
+      ],
+      "region": "Dueling Peaks",
+      "route": "Steer right from the last gust to the isolated claymore shelf.",
+      "requires": "|Paraglider|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/bosh-kala-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon007.pack!Map/CDungeon/Dungeon007/Dungeon007_Static.smubin",
+      "source_map_sha256": "bff5fd828b538a20290da75574c0ce53090b6f63d842c2963790929e9145a942"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon008/Dungeon008_Static.smubin",
+      "hash_id": "097C69CF",
+      "check_id": 3036913716,
+      "original_actor": "Weapon_Bow_016",
+      "position": [
+        -78.0,
+        21.459999084472656,
+        64.0
+      ],
+      "region": "Tabantha",
+      "route": "Bomb the cracked cover beside the entrance for the first bow chest.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/bareeda-naag-shrine/",
+        "https://www.zeldadungeon.net/breath-of-the-wild-walkthrough/shrine-locations/bareeda-naag-shrine-guide/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon008.pack!Map/CDungeon/Dungeon008/Dungeon008_Static.smubin",
+      "source_map_sha256": "79021c3bab284317f4b503aac88bf728980e5a23b7105099e8fb16fd3e6a52dd",
+      "identity_note": "The guide labels the only entrance bow chest Falcon Bow; the installed base drop is Swallow Bow. Do not bind by that reward label alone.",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon008/Dungeon008_Static.smubin",
+      "hash_id": "D16C6D64",
+      "check_id": 3078640570,
+      "original_actor": "Item_Ore_A",
+      "position": [
+        52.0,
+        21.5,
+        48.0
+      ],
+      "region": "Tabantha",
+      "route": "Complete the optional moving-target cannon shot to reveal the Diamond.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/bareeda-naag-shrine/",
+        "https://www.zeldadungeon.net/breath-of-the-wild-walkthrough/shrine-locations/bareeda-naag-shrine-guide/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon008.pack!Map/CDungeon/Dungeon008/Dungeon008_Static.smubin",
+      "source_map_sha256": "79021c3bab284317f4b503aac88bf728980e5a23b7105099e8fb16fd3e6a52dd",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon009/Dungeon009_Static.smubin",
+      "hash_id": "467B2BDA",
+      "check_id": 3085511790,
+      "original_actor": "Weapon_Shield_035",
+      "position": [
+        6.0,
+        15.0,
+        -40.5
+      ],
+      "region": "Great Plateau",
+      "route": "Stop the initial gear, cross it and run up the boulder ramp.",
+      "requires": "|Progressive Stasis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/owa-daim-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon009.pack!Map/CDungeon/Dungeon009/Dungeon009_Static.smubin",
+      "source_map_sha256": "9cc5ecf40502f8561c66b15a3d6e994dea885f60e74c8503776de93caa078ff0"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon011/Dungeon011_Static.smubin",
+      "hash_id": "7FD7D528",
+      "check_id": 3154093313,
+      "original_actor": "Weapon_Sword_035",
+      "position": [
+        -23.0,
+        8.0,
+        -16.0
+      ],
+      "region": "Great Hyrule Forest",
+      "route": "Turn the launcher toward the central platform and launch yourself across.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/monya-toma-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon011.pack!Map/CDungeon/Dungeon011/Dungeon011_Static.smubin",
+      "source_map_sha256": "a6efd250cc7f4e6de920c181b5cdb73ec5a5be8ee81875ff7fc224b08b833785"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon012/Dungeon012_Static.smubin",
+      "hash_id": "86BA94DA",
+      "check_id": 3033159277,
+      "original_actor": "Weapon_Sword_033",
+      "position": [
+        49.29999923706055,
+        23.0,
+        42.0
+      ],
+      "region": "Tabantha",
+      "route": "Traverse the wind course and approach the Flameblade platform from the updraft.",
+      "requires": "(|Freed Vah Medoh| AND |Paraglider|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/voo-lota-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/voo-lota"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon012.pack!Map/CDungeon/Dungeon012/Dungeon012_Static.smubin",
+      "source_map_sha256": "805a833f7b21d8753eb59c3448a23b3dea34f3d67c3101e06f3cefd7234a91ea",
+      "source_review": "cross_checked",
+      "identity_note": "The initial source incorrectly makes Stasis mandatory. Independent wind-course guides describe the ramp-and-glide chest detour without Stasis."
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon013/Dungeon013_Static.smubin",
+      "hash_id": "07BFAB70",
+      "check_id": 2954475796,
+      "original_actor": "Weapon_Lsword_034",
+      "position": [
+        19.0,
+        17.112499237060547,
+        -21.0
+      ],
+      "region": "Akkala",
+      "route": "Return through the opened door to the second apparatus and solve its bonus shot.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/katosa-aug-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon013.pack!Map/CDungeon/Dungeon013/Dungeon013_Static.smubin",
+      "source_map_sha256": "74bdf1d4f04274fa891faf95002a177af9f2947916e37db1ba4bb71914c158d8"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon014/Dungeon014_Static.smubin",
+      "hash_id": "8D8F934D",
+      "check_id": 3118744789,
+      "original_actor": "Weapon_Spear_002",
+      "position": [
+        -8.305347442626953,
+        -9.805347442626953,
+        -12.5
+      ],
+      "region": "Necluda",
+      "route": "Ride the rotating machinery onto the small spear-bearing platform.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kam-urog-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon014.pack!Map/CDungeon/Dungeon014/Dungeon014_Static.smubin",
+      "source_map_sha256": "1c4b4ce0b8aa0e5fece739b772c745db73a7bfd27b7159de6cb9e0bf676b7652"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon014/Dungeon014_Static.smubin",
+      "hash_id": "D172DED5",
+      "check_id": 3115026371,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        -2.5,
+        -6.5,
+        8.5
+      ],
+      "region": "Necluda",
+      "route": "Jump from the large rotating platform into the outer Opal alcove.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kam-urog-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon014.pack!Map/CDungeon/Dungeon014/Dungeon014_Static.smubin",
+      "source_map_sha256": "1c4b4ce0b8aa0e5fece739b772c745db73a7bfd27b7159de6cb9e0bf676b7652"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon016/Dungeon016_Static.smubin",
+      "hash_id": "65D50B08",
+      "check_id": 3065674375,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        -12.0,
+        17.760820388793945,
+        -27.500001907348633
+      ],
+      "region": "Lanayru",
+      "route": "Use native fire arrows or lit arrows to burn the chest's wooden support.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/rucco-maag-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon016.pack!Map/CDungeon/Dungeon016/Dungeon016_Static.smubin",
+      "source_map_sha256": "148a5be23c9be852d97bb45649f16d442471a365bd1c7f52c2b08913ee93ad40"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon016/Dungeon016_Static.smubin",
+      "hash_id": "A2D10FDB",
+      "check_id": 3178199651,
+      "original_actor": "Weapon_Bow_014",
+      "position": [
+        7.500000476837158,
+        17.760820388793945,
+        -27.500001907348633
+      ],
+      "region": "Lanayru",
+      "route": "Burn the other wooden support with native fire ammunition and collect the bow.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/rucco-maag-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon016.pack!Map/CDungeon/Dungeon016/Dungeon016_Static.smubin",
+      "source_map_sha256": "148a5be23c9be852d97bb45649f16d442471a365bd1c7f52c2b08913ee93ad40"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon017/Dungeon017_Static.smubin",
+      "hash_id": "F6D1C28B",
+      "check_id": 2978714051,
+      "original_actor": "Weapon_Lsword_041",
+      "position": [
+        -16.0,
+        18.0,
+        28.5
+      ],
+      "region": "Dueling Peaks",
+      "route": "Use the elevator and glide around the upper rim to the sword shelf.",
+      "requires": "(|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shee-vaneer-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon017.pack!Map/CDungeon/Dungeon017/Dungeon017_Static.smubin",
+      "source_map_sha256": "24e0c1c1f7cb4ace42efb33a970031860a2cb6bc077fa62a51f27d450a0e58bc"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon019/Dungeon019_Static.smubin",
+      "hash_id": "35747318",
+      "check_id": 3035238843,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        9.0,
+        -4.0,
+        -6.0
+      ],
+      "region": "Necluda",
+      "route": "Use Magnesis to recover the chest from the water beside the switch.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dow-naeh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon019.pack!Map/CDungeon/Dungeon019/Dungeon019_Static.smubin",
+      "source_map_sha256": "1fa12e2d236181cd49c751d0ae6e6150d145074f14179ee28d4a02e7feafc166"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon019/Dungeon019_Static.smubin",
+      "hash_id": "4273438E",
+      "check_id": 2973587954,
+      "original_actor": "Weapon_Sword_027",
+      "position": [
+        -20.0,
+        9.6328125,
+        -2.0
+      ],
+      "region": "Necluda",
+      "route": "Sever the suspension ropes, then retrieve the fallen chest with Magnesis.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dow-naeh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon019.pack!Map/CDungeon/Dungeon019/Dungeon019_Static.smubin",
+      "source_map_sha256": "1fa12e2d236181cd49c751d0ae6e6150d145074f14179ee28d4a02e7feafc166"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon019/Dungeon019_Static.smubin",
+      "hash_id": "74EE6DED",
+      "check_id": 3092050709,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        20.0,
+        0.0,
+        -18.0
+      ],
+      "region": "Necluda",
+      "route": "Use the mechanisms and reach the chest on the vertically moving platform.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dow-naeh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon019.pack!Map/CDungeon/Dungeon019/Dungeon019_Static.smubin",
+      "source_map_sha256": "1fa12e2d236181cd49c751d0ae6e6150d145074f14179ee28d4a02e7feafc166"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon020/Dungeon020_Static.smubin",
+      "hash_id": "B0D3835C",
+      "check_id": 2972339571,
+      "original_actor": "Weapon_Lsword_035",
+      "position": [
+        -4.0,
+        -20.0,
+        -30.0
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Complete the orb switches and glide back onto the bonus mechanism.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/sheem-dagoze-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon020.pack!Map/CDungeon/Dungeon020/Dungeon020_Static.smubin",
+      "source_map_sha256": "2342590036e980888051c087ca60df5bc58ad9cd20c85b2cd046fdb5751a01b3"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon021/Dungeon021_Static.smubin",
+      "hash_id": "26D81C06",
+      "check_id": 3186856833,
+      "original_actor": "Armor_046_Upper",
+      "position": [
+        0.0,
+        0.0,
+        21.100000381469727
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Demolish the breakable masonry beneath the entry platform with Bombs.",
+      "requires": "(|Progressive Stasis| AND |Progressive Remote Bomb| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/toh-yahsa-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon021.pack!Map/CDungeon/Dungeon021/Dungeon021_Static.smubin",
+      "source_map_sha256": "b9a25f0c673ae50e2b7d5cf6db087f23c8f460223488f0ba6d6caf1bf4325908"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon021/Dungeon021_Static.smubin",
+      "hash_id": "5FE1D55D",
+      "check_id": 3042581050,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        23.0,
+        12.0,
+        8.0
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Expose the metal block and use Magnesis to push down the high chest.",
+      "requires": "(|Progressive Stasis| AND |Progressive Remote Bomb| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/toh-yahsa-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon021.pack!Map/CDungeon/Dungeon021/Dungeon021_Static.smubin",
+      "source_map_sha256": "b9a25f0c673ae50e2b7d5cf6db087f23c8f460223488f0ba6d6caf1bf4325908"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon022/Dungeon022_Static.smubin",
+      "hash_id": "384F24F4",
+      "check_id": 3191036034,
+      "original_actor": "Weapon_Lsword_003",
+      "position": [
+        30.0,
+        0.0,
+        17.5
+      ],
+      "region": "Great Hyrule Forest",
+      "route": "Enter the alternate constellation counts to unlock the second gate.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/keo-ruug-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon022.pack!Map/CDungeon/Dungeon022/Dungeon022_Static.smubin",
+      "source_map_sha256": "aed1c8a5068a1c77118ff4da645daf2ae0b1417dac3e4b93182f67b5799a86ad"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon024/Dungeon024_Static.smubin",
+      "hash_id": "06D6C55A",
+      "check_id": 3040081489,
+      "original_actor": "Weapon_Sword_035",
+      "position": [
+        -24.0,
+        6.0,
+        -4.0
+      ],
+      "region": "Necluda",
+      "route": "Turn the central apparatus to connect the path to the sword platform.",
+      "requires": "(|Magnesis| AND |Progressive Stasis| AND |Progressive Remote Bomb|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/mezza-lo-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon024.pack!Map/CDungeon/Dungeon024/Dungeon024_Static.smubin",
+      "source_map_sha256": "7dc3978a256d5ad625d99aabd32eacc07a3d905125fa01a24823c76a89154b09"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon025/Dungeon025_Static.smubin",
+      "hash_id": "AE906EB5",
+      "check_id": 3118735030,
+      "original_actor": "Item_Ore_B",
+      "position": [
+        18.0,
+        53.5,
+        -111.99999237060547
+      ],
+      "region": "Eldin",
+      "route": "Ascend the boulder slope and enter the right-hand Ruby recess.",
+      "requires": "(|@Flame Resistance| OR |Native Fireproof Supplies|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kayra-mah-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/kayra-mah"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon025.pack!Map/CDungeon/Dungeon025/Dungeon025_Static.smubin",
+      "source_map_sha256": "3bce52410791f9910758688763086783456d7ebbec75041d93374402eb82a174",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon025/Dungeon025_Static.smubin",
+      "hash_id": "CB40F1B7",
+      "check_id": 3031983609,
+      "original_actor": "Obj_BombArrow_A_02",
+      "position": [
+        -15.0,
+        106.5,
+        -175.0
+      ],
+      "region": "Eldin",
+      "route": "From the upper slope, glide to the side platform holding Bomb Arrows.",
+      "requires": "(|@Flame Resistance| OR |Native Fireproof Supplies|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kayra-mah-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/kayra-mah"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon025.pack!Map/CDungeon/Dungeon025/Dungeon025_Static.smubin",
+      "source_map_sha256": "3bce52410791f9910758688763086783456d7ebbec75041d93374402eb82a174",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "hash_id": "0D51C58F",
+      "check_id": 3137034423,
+      "original_actor": "PutRupee_Silver",
+      "position": [
+        -24.0,
+        35.5,
+        60.499996185302734
+      ],
+      "region": "Eldin",
+      "route": "Carry the blue-flame sequence through the moving platforms to the rupee pillar.",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shora-hah-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/shora-hah"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "source_map_sha256": "36d8bd1ce44d1100e6f2b1b9b134bab57ad8848dd1ebe7a60638fe502ff3db52",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "hash_id": "122C8FE3",
+      "check_id": 3216718161,
+      "original_actor": "Weapon_Lsword_033",
+      "position": [
+        48.0,
+        32.0,
+        -27.5
+      ],
+      "region": "Eldin",
+      "route": "Pass the rolling obstacle and defeat the Scouts to reach the greatsword chest.",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shora-hah-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/shora-hah"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "source_map_sha256": "36d8bd1ce44d1100e6f2b1b9b134bab57ad8848dd1ebe7a60638fe502ff3db52",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "hash_id": "4A7743C0",
+      "check_id": 2999290640,
+      "original_actor": "Obj_IceArrow_A_02",
+      "position": [
+        -54.0,
+        32.0,
+        -9.5
+      ],
+      "region": "Eldin",
+      "route": "Burn the foliage around the Scout ramp, then collect the ice-arrow chest.",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shora-hah-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/shora-hah"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "source_map_sha256": "36d8bd1ce44d1100e6f2b1b9b134bab57ad8848dd1ebe7a60638fe502ff3db52",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "hash_id": "C395B656",
+      "check_id": 3027534942,
+      "original_actor": "Item_Enemy_31",
+      "position": [
+        64.0,
+        32.0,
+        -16.0
+      ],
+      "region": "Eldin",
+      "route": "Clear the same upper Scout group and open the adjacent core chest.",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shora-hah-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/shora-hah"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "source_map_sha256": "36d8bd1ce44d1100e6f2b1b9b134bab57ad8848dd1ebe7a60638fe502ff3db52",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "hash_id": "E41587D7",
+      "check_id": 2967244630,
+      "original_actor": "Weapon_Sword_025",
+      "position": [
+        -27.0,
+        36.0,
+        32.0
+      ],
+      "region": "Eldin",
+      "route": "Light the moving torches and cross by the updrafts to the sword pillar.",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shora-hah-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/shora-hah"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "source_map_sha256": "36d8bd1ce44d1100e6f2b1b9b134bab57ad8848dd1ebe7a60638fe502ff3db52",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "hash_id": "FA290B92",
+      "check_id": 3031960034,
+      "original_actor": "Weapon_Bow_036",
+      "position": [
+        -34.0,
+        20.0,
+        -9.0
+      ],
+      "region": "Eldin",
+      "route": "Use Magnesis to hold up the spike barrier and arrange the sliding platforms.",
+      "requires": "((|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Progressive Remote Bomb| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shora-hah-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/shora-hah"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon028.pack!Map/CDungeon/Dungeon028/Dungeon028_Static.smubin",
+      "source_map_sha256": "36d8bd1ce44d1100e6f2b1b9b134bab57ad8848dd1ebe7a60638fe502ff3db52",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon030/Dungeon030_Static.smubin",
+      "hash_id": "11A4C39B",
+      "check_id": 2952870603,
+      "original_actor": "Weapon_Spear_029",
+      "position": [
+        0.0,
+        20.0,
+        -61.0
+      ],
+      "region": "Gerudo Highlands",
+      "route": "Swing the hanging brazier with Magnesis to ignite the support and drop the chest.",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND |Magnesis| AND |Progressive Stasis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/joloo-nah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon030.pack!Map/CDungeon/Dungeon030/Dungeon030_Static.smubin",
+      "source_map_sha256": "03501edf1bbfb6ba92909cfce1fba219afbf8fe38b66a2cca5b8ba89626d6ba9"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon030/Dungeon030_Static.smubin",
+      "hash_id": "A46C8938",
+      "check_id": 2956712893,
+      "original_actor": "Weapon_Lsword_029",
+      "position": [
+        -26.0,
+        8.0,
+        38.0
+      ],
+      "region": "Gerudo Highlands",
+      "route": "Aim the motion-controlled fan and glide across the second room to the corner.",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND |Magnesis| AND |Progressive Stasis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/joloo-nah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon030.pack!Map/CDungeon/Dungeon030/Dungeon030_Static.smubin",
+      "source_map_sha256": "03501edf1bbfb6ba92909cfce1fba219afbf8fe38b66a2cca5b8ba89626d6ba9"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon031/Dungeon031_Static.smubin",
+      "hash_id": "18ED7FD1",
+      "check_id": 3023075710,
+      "original_actor": "Item_Ore_B",
+      "position": [
+        28.0,
+        25.0,
+        38.0
+      ],
+      "region": "Eldin",
+      "route": "Break the overhead blocks using a native Bomb Arrow or the Magnesis-controlled boulder.",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/moa-keet-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon031.pack!Map/CDungeon/Dungeon031/Dungeon031_Static.smubin",
+      "source_map_sha256": "593550334b9327afa81f7ce1e51e50d92f733c2b299b49ed7e785dc9a0098fac"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon031/Dungeon031_Static.smubin",
+      "hash_id": "F2C557CE",
+      "check_id": 3133969835,
+      "original_actor": "Weapon_Sword_003",
+      "position": [
+        17.0,
+        27.649999618530273,
+        -63.5
+      ],
+      "region": "Eldin",
+      "route": "Bring the metal boulder up the right ramp using Magnesis.",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/moa-keet-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon031.pack!Map/CDungeon/Dungeon031/Dungeon031_Static.smubin",
+      "source_map_sha256": "593550334b9327afa81f7ce1e51e50d92f733c2b299b49ed7e785dc9a0098fac"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon032/Dungeon032_Static.smubin",
+      "hash_id": "51744CA4",
+      "check_id": 3125875999,
+      "original_actor": "PutRupee_Silver",
+      "position": [
+        -47.999996185302734,
+        122.61249542236328,
+        -21.500001907348633
+      ],
+      "region": "Gerudo Desert",
+      "route": "Reposition the conducting cube to power the lower platform leading to the rupee.",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dako-tah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon032.pack!Map/CDungeon/Dungeon032/Dungeon032_Static.smubin",
+      "source_map_sha256": "ab1908b10dcf004b515c8a19ffff3f17e6ae7db7cd68cde737c490f9e406b0d5"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon032/Dungeon032_Static.smubin",
+      "hash_id": "89036A0C",
+      "check_id": 3014462934,
+      "original_actor": "Item_Enemy_30",
+      "position": [
+        -45.0,
+        144.5,
+        32.0
+      ],
+      "region": "Gerudo Desert",
+      "route": "Carry the electric cage through the Scout room to the chest by the ladder.",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dako-tah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon032.pack!Map/CDungeon/Dungeon032/Dungeon032_Static.smubin",
+      "source_map_sha256": "ab1908b10dcf004b515c8a19ffff3f17e6ae7db7cd68cde737c490f9e406b0d5"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon032/Dungeon032_Static.smubin",
+      "hash_id": "ADE54930",
+      "check_id": 3138868053,
+      "original_actor": "Weapon_Shield_036",
+      "position": [
+        -35.5,
+        164.1999969482422,
+        35.5
+      ],
+      "region": "Gerudo Desert",
+      "route": "Return the sliding block after reaching the upper section to expose the shield.",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dako-tah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon032.pack!Map/CDungeon/Dungeon032/Dungeon032_Static.smubin",
+      "source_map_sha256": "ab1908b10dcf004b515c8a19ffff3f17e6ae7db7cd68cde737c490f9e406b0d5"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon032/Dungeon032_Static.smubin",
+      "hash_id": "FBBD21CE",
+      "check_id": 3037685519,
+      "original_actor": "Weapon_Sword_030",
+      "position": [
+        -48.0,
+        143.5,
+        35.000003814697266
+      ],
+      "region": "Gerudo Desert",
+      "route": "Use the electric cage to power the lift and stop at the scimitar landing.",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dako-tah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon032.pack!Map/CDungeon/Dungeon032/Dungeon032_Static.smubin",
+      "source_map_sha256": "ab1908b10dcf004b515c8a19ffff3f17e6ae7db7cd68cde737c490f9e406b0d5"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon033/Dungeon033_Static.smubin",
+      "hash_id": "6E70EC91",
+      "check_id": 3045313681,
+      "original_actor": "Weapon_Lsword_027",
+      "position": [
+        -16.0,
+        0.10000000149011612,
+        -24.0
+      ],
+      "region": "Lanayru",
+      "route": "Complete both orb receptacles; return to the emptied first pool and its side door.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/daka-tuss-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon033.pack!Map/CDungeon/Dungeon033/Dungeon033_Static.smubin",
+      "source_map_sha256": "bbf7750357264f3322cbe706cfba691f46ff7be4b0601539bf5eaf0371f24c6e"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon036/Dungeon036_Static.smubin",
+      "hash_id": "395787EC",
+      "check_id": 3138174110,
+      "original_actor": "PutRupee_Silver",
+      "position": [
+        -22.0,
+        0.0,
+        -1.0
+      ],
+      "region": "Gerudo Highlands",
+      "route": "Destroy or burn the wooden obstruction, then walk behind the next room's column.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/sho-dantu-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon036.pack!Map/CDungeon/Dungeon036/Dungeon036_Static.smubin",
+      "source_map_sha256": "38255f32c8c0a008f03b6054b90f813b53ba24852073bd4f769dcdc6573f8b24"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon037/Dungeon037_Static.smubin",
+      "hash_id": "D751F5A8",
+      "check_id": 3010758555,
+      "original_actor": "Item_Ore_D",
+      "position": [
+        29.0,
+        14.0,
+        1.0
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Activate the launch pad, launch yourself and glide onto the former orb platform.",
+      "requires": "|Progressive Stasis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shae-loya-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon037.pack!Map/CDungeon/Dungeon037/Dungeon037_Static.smubin",
+      "source_map_sha256": "b941528c1e9c77859ee4b00df10e40aefb39cc19709a244a53907a98fc7ab734"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon037/Dungeon037_Static.smubin",
+      "hash_id": "DA0CF65B",
+      "check_id": 3049062245,
+      "original_actor": "Weapon_Bow_017",
+      "position": [
+        -8.0,
+        26.0,
+        17.5
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Shoot both support ropes with native arrows and collect the fallen bow chest.",
+      "requires": "|Progressive Stasis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shae-loya-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon037.pack!Map/CDungeon/Dungeon037/Dungeon037_Static.smubin",
+      "source_map_sha256": "b941528c1e9c77859ee4b00df10e40aefb39cc19709a244a53907a98fc7ab734"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon038/Dungeon038_Static.smubin",
+      "hash_id": "C9300E5A",
+      "check_id": 3084005693,
+      "original_actor": "Weapon_Bow_001",
+      "position": [
+        41.0,
+        45.5,
+        -31.0
+      ],
+      "region": "Great Plateau",
+      "route": "Move the metal bridge, cross the block obstacle and lower the high chest with Magnesis.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/oman-au-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon038.pack!Map/CDungeon/Dungeon038/Dungeon038_Static.smubin",
+      "source_map_sha256": "6ab7a8b8ab1d6ac8b9f89a292950b8000f4fe4cd3d96411a54f133b6266895a7"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon039/Dungeon039_Static.smubin",
+      "hash_id": "81AA7D8E",
+      "check_id": 3010428522,
+      "original_actor": "Weapon_Bow_029",
+      "position": [
+        -9.5,
+        -3.0,
+        -6.0
+      ],
+      "region": "Necluda",
+      "route": "Tilt the apparatus toward the near corner and glide into its maze chest recess.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/myahm-agana-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon039.pack!Map/CDungeon/Dungeon039/Dungeon039_Static.smubin",
+      "source_map_sha256": "afa5c183cb829b8568f6d11d14283491b6734ddf8ab08d7bb6d8b7c638233de3"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon041/Dungeon041_Static.smubin",
+      "hash_id": "0E0316E1",
+      "check_id": 3090423820,
+      "original_actor": "Weapon_Lsword_001",
+      "position": [
+        -6.0,
+        0.0,
+        -4.0
+      ],
+      "region": "Great Plateau",
+      "route": "Bomb the entry-side cracked blocks to reveal the claymore alcove.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/ja-baij-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon041.pack!Map/CDungeon/Dungeon041/Dungeon041_Static.smubin",
+      "source_map_sha256": "217180103c2bc29d0d23f78bd3aa7030e5ae157529220ae1ddb0d82222a9dfcf"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon041/Dungeon041_Static.smubin",
+      "hash_id": "F9E7A191",
+      "check_id": 2974652352,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        -23.0,
+        4.0,
+        -77.0
+      ],
+      "region": "Great Plateau",
+      "route": "Use the launcher on the left side to land at the Amber chest.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/ja-baij-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon041.pack!Map/CDungeon/Dungeon041/Dungeon041_Static.smubin",
+      "source_map_sha256": "217180103c2bc29d0d23f78bd3aa7030e5ae157529220ae1ddb0d82222a9dfcf"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon042/Dungeon042_Static.smubin",
+      "hash_id": "7C10E5C6",
+      "check_id": 2953541263,
+      "original_actor": "Item_Enemy_30",
+      "position": [
+        28.0,
+        16.0,
+        20.0
+      ],
+      "region": "Hebra",
+      "route": "Position the metal box near the upper ledge and climb across to the core.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/rin-oyaa-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon042.pack!Map/CDungeon/Dungeon042/Dungeon042_Static.smubin",
+      "source_map_sha256": "f92fd737c45c2977f73e104c97070ccb95e96e44bccba32ce96e2a1f7617cb49"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon043/Dungeon043_Static.smubin",
+      "hash_id": "118E1D60",
+      "check_id": 3167207632,
+      "original_actor": "Weapon_Sword_034",
+      "position": [
+        -16.0,
+        3.5,
+        5.5
+      ],
+      "region": "Gerudo Highlands",
+      "route": "Carry the ice block into the entrance-side recess and climb onto it.",
+      "requires": "((((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|))) AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kuh-takkar-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon043.pack!Map/CDungeon/Dungeon043/Dungeon043_Static.smubin",
+      "source_map_sha256": "0fa9595e0ab2416993799a7c9f8531798e2cfe2eb6cec04dfef8c715bf91d387"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon044/Dungeon044_Static.smubin",
+      "hash_id": "48D5DF6E",
+      "check_id": 3174753346,
+      "original_actor": "Weapon_Spear_037",
+      "position": [
+        16.0,
+        18.0,
+        28.5
+      ],
+      "region": "Dueling Peaks",
+      "route": "Ride the elevator and glide around the upper wall to the spear chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shee-venath-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon044.pack!Map/CDungeon/Dungeon044/Dungeon044_Static.smubin",
+      "source_map_sha256": "2d65541cce9dda8cd02b60798ca81170eb4fa71113b1094280e2dec7dba5b2d7"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon045/Dungeon045_Static.smubin",
+      "hash_id": "2EF29128",
+      "check_id": 2991006692,
+      "original_actor": "PutRupee_Purple",
+      "position": [
+        62.5,
+        13.5,
+        11.5
+      ],
+      "region": "Dueling Peaks",
+      "route": "Build Cryonis steps on the waterfall to reach the elevated rupee platform.",
+      "requires": "|Cryonis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/ha-dahamar-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon045.pack!Map/CDungeon/Dungeon045/Dungeon045_Static.smubin",
+      "source_map_sha256": "f8a3fba4b17170b53a5d110e632dd7bd1e4df4d546ad8b08da7c15c2fcff1414"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon046/Dungeon046_Static.smubin",
+      "hash_id": "A2F07EFC",
+      "check_id": 3087514818,
+      "original_actor": "Weapon_Lsword_034",
+      "position": [
+        -33.0,
+        8.5,
+        -14.0
+      ],
+      "region": "Hebra",
+      "route": "Use Magnesis to remove the chest from its wall recess.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shada-naw-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon046.pack!Map/CDungeon/Dungeon046/Dungeon046_Static.smubin",
+      "source_map_sha256": "c4666a4a660a1dbcaa38e826d40c39a89e8bf2b504d813bb5738f0597d752eb7"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon047/Dungeon047_Static.smubin",
+      "hash_id": "47B5FCB6",
+      "check_id": 3179635968,
+      "original_actor": "Armor_014_Head",
+      "position": [
+        -15.0,
+        14.0,
+        -81.0
+      ],
+      "region": "Dueling Peaks",
+      "route": "Weight the final tilting platform with native barrels and climb the steep side.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/ree-dahee-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon047.pack!Map/CDungeon/Dungeon047/Dungeon047_Static.smubin",
+      "source_map_sha256": "4dd9045eefc1b6ec6f6a6f3e6c77134ee642fa4397e8739b17d596ba8aae8bc7"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon048/Dungeon048_Static.smubin",
+      "hash_id": "7BBB19EC",
+      "check_id": 3107238461,
+      "original_actor": "Weapon_Spear_028",
+      "position": [
+        -12.0,
+        7.0,
+        38.5
+      ],
+      "region": "Akkala",
+      "route": "Time the rotating laser platforms and use the raised block to reach the upper ledge.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/ze-kasho-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon048.pack!Map/CDungeon/Dungeon048/Dungeon048_Static.smubin",
+      "source_map_sha256": "d3e4d67070fa4b09b18bcdd57c3c05d5ed108b725410e2fcd598dc92ec0b32ca"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon049/Dungeon049_Static.smubin",
+      "hash_id": "EF26C831",
+      "check_id": 3149115435,
+      "original_actor": "Weapon_Sword_003",
+      "position": [
+        -19.0,
+        10.149999618530273,
+        -95.5
+      ],
+      "region": "Lanayru",
+      "route": "Raise the water gate with Cryonis and enter its broadsword alcove.",
+      "requires": "|Cryonis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kaya-wan-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon049.pack!Map/CDungeon/Dungeon049/Dungeon049_Static.smubin",
+      "source_map_sha256": "dd36a2f6fbd88ec8d7a66b32c223559790e28bf8736f403279a28e0fc4ce3a20"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon049/Dungeon049_Static.smubin",
+      "hash_id": "FB3981CC",
+      "check_id": 3040824254,
+      "original_actor": "Item_Enemy_30",
+      "position": [
+        13.5,
+        7.0,
+        -41.0
+      ],
+      "region": "Lanayru",
+      "route": "Use Cryonis to lift the floating wooden chest beside the first Scout platform.",
+      "requires": "|Cryonis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kaya-wan-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon049.pack!Map/CDungeon/Dungeon049/Dungeon049_Static.smubin",
+      "source_map_sha256": "dd36a2f6fbd88ec8d7a66b32c223559790e28bf8736f403279a28e0fc4ce3a20"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon052/Dungeon052_Static.smubin",
+      "hash_id": "B15A1272",
+      "check_id": 2973846608,
+      "original_actor": "Item_Ore_A",
+      "position": [
+        42.5,
+        0.0,
+        -12.5
+      ],
+      "region": "Hebra",
+      "route": "Cut the correct pendulum rope with native arrows so the ball strikes the switch.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/gee-harah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon052.pack!Map/CDungeon/Dungeon052/Dungeon052_Static.smubin",
+      "source_map_sha256": "b7026d8fb3afe4c431866a3f1cad5d4e49d0075562d44c18b30f1f34c4bb8c08"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon053/Dungeon053_Static.smubin",
+      "hash_id": "1120A240",
+      "check_id": 3171358942,
+      "original_actor": "Weapon_Bow_035",
+      "position": [
+        21.0,
+        28.0,
+        -6.0
+      ],
+      "region": "Tabantha",
+      "route": "Ride the hidden rear updraft and steer onto the remote bow platform.",
+      "requires": "(|Paraglider| AND |Native Cold Protection Supplies|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/sha-warvo-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon053.pack!Map/CDungeon/Dungeon053/Dungeon053_Static.smubin",
+      "source_map_sha256": "736b770b977d696f5f3a656e78a887ad310eca9155dda5cdd305325ebf8abe8c"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon053/Dungeon053_Static.smubin",
+      "hash_id": "29B8A7C7",
+      "check_id": 3157882683,
+      "original_actor": "PutRupee_Purple",
+      "position": [
+        -14.0,
+        -34.0,
+        -18.0
+      ],
+      "region": "Tabantha",
+      "route": "Ride the early updraft to the smaller platform guarded by the Scout.",
+      "requires": "(|Paraglider| AND |Native Cold Protection Supplies|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/sha-warvo-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon053.pack!Map/CDungeon/Dungeon053/Dungeon053_Static.smubin",
+      "source_map_sha256": "736b770b977d696f5f3a656e78a887ad310eca9155dda5cdd305325ebf8abe8c"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon054/Dungeon054_Static.smubin",
+      "hash_id": "176F12A2",
+      "check_id": 3203936708,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        -12.0,
+        16.0,
+        10.0
+      ],
+      "region": "Lake Hylia",
+      "route": "Break the door's supporting blocks and use the metal door to access the high chest.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kao-makagh-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/kao-makagh"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon054.pack!Map/CDungeon/Dungeon054/Dungeon054_Static.smubin",
+      "source_map_sha256": "044410fc9de62740ddbed5c7db0acc46dbe75449ffcb65e0eb8f72374473049b",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon054/Dungeon054_Static.smubin",
+      "hash_id": "79B86AB0",
+      "check_id": 3177501896,
+      "original_actor": "Weapon_Bow_001",
+      "position": [
+        -48.5,
+        0.0,
+        26.5
+      ],
+      "region": "Lake Hylia",
+      "route": "Defeat the Scouts and open the left-hand metal doors with Magnesis.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kao-makagh-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/kao-makagh"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon054.pack!Map/CDungeon/Dungeon054/Dungeon054_Static.smubin",
+      "source_map_sha256": "044410fc9de62740ddbed5c7db0acc46dbe75449ffcb65e0eb8f72374473049b",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon054/Dungeon054_Static.smubin",
+      "hash_id": "DCDCA51D",
+      "check_id": 2986695694,
+      "original_actor": "PutRupee_Gold",
+      "position": [
+        -14.0,
+        2.0,
+        15.0
+      ],
+      "region": "Lake Hylia",
+      "route": "Extract the removable wall block using Magnesis to uncover the rupee recess.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kao-makagh-shrine/",
+        "https://www.thonky.com/zelda-breath-of-the-wild/shrine/kao-makagh"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon054.pack!Map/CDungeon/Dungeon054/Dungeon054_Static.smubin",
+      "source_map_sha256": "044410fc9de62740ddbed5c7db0acc46dbe75449ffcb65e0eb8f72374473049b",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon056/Dungeon056_Static.smubin",
+      "hash_id": "1275810C",
+      "check_id": 3206107654,
+      "original_actor": "Weapon_Lsword_031",
+      "position": [
+        -16.0,
+        -15.40000057220459,
+        85.9000015258789
+      ],
+      "region": "Great Hyrule Forest",
+      "route": "Descend from the entrance elevator to the first hammer chest; no Stasis puzzle precedes it.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/mirro-shaz-shrine/",
+        "https://gamefaqs.gamespot.com/switch/189707-the-legend-of-zelda-breath-of-the-wild/faqs/74657/mirro-shaz-shrine"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon056.pack!Map/CDungeon/Dungeon056/Dungeon056_Static.smubin",
+      "source_map_sha256": "36998131eeed4834d45c69d9b0b3db0d008ee71c592926316270622bb20a9d95",
+      "identity_note": "Identical hammer rewards resolved spatially: 1275810C is beside the entrance elevator; 8B7CD0B6 is in the distant optional trial.",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon056/Dungeon056_Static.smubin",
+      "hash_id": "45A5E2D7",
+      "check_id": 2998309235,
+      "original_actor": "Item_Enemy_31",
+      "position": [
+        -144.0,
+        -15.350000381469727,
+        86.0
+      ],
+      "region": "Great Hyrule Forest",
+      "route": "Use Stasis and brought-in native striking weapons to solve the optional second orb shot.",
+      "requires": "|Progressive Stasis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/mirro-shaz-shrine/",
+        "https://gamefaqs.gamespot.com/switch/189707-the-legend-of-zelda-breath-of-the-wild/faqs/74657/mirro-shaz-shrine"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon056.pack!Map/CDungeon/Dungeon056/Dungeon056_Static.smubin",
+      "source_map_sha256": "36998131eeed4834d45c69d9b0b3db0d008ee71c592926316270622bb20a9d95",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon056/Dungeon056_Static.smubin",
+      "hash_id": "8B7CD0B6",
+      "check_id": 3216341262,
+      "original_actor": "Weapon_Lsword_031",
+      "position": [
+        -127.0,
+        -15.350000381469727,
+        96.0
+      ],
+      "region": "Great Hyrule Forest",
+      "route": "Complete the main Stasis mechanisms, then descend into the side trial's hammer room.",
+      "requires": "|Progressive Stasis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/mirro-shaz-shrine/",
+        "https://gamefaqs.gamespot.com/switch/189707-the-legend-of-zelda-breath-of-the-wild/faqs/74657/mirro-shaz-shrine"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon056.pack!Map/CDungeon/Dungeon056/Dungeon056_Static.smubin",
+      "source_map_sha256": "36998131eeed4834d45c69d9b0b3db0d008ee71c592926316270622bb20a9d95",
+      "identity_note": "Identical hammer rewards resolved spatially: 1275810C is beside the entrance elevator; 8B7CD0B6 is in the distant optional trial.",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon057/Dungeon057_Static.smubin",
+      "hash_id": "1336D5B9",
+      "check_id": 3079889459,
+      "original_actor": "Item_Ore_F",
+      "position": [
+        23.5,
+        12.0,
+        28.0
+      ],
+      "region": "Central Hyrule",
+      "route": "Climb the stacked metal crates beside the entrance to the Amber ledge.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/wahgo-katta-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon057.pack!Map/CDungeon/Dungeon057/Dungeon057_Static.smubin",
+      "source_map_sha256": "cfe90ed726b6caf9bb30868701f992a7ad7a78d4aa9d61cb6edc478eb9527bae"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon058/Dungeon058_Static.smubin",
+      "hash_id": "157092BF",
+      "check_id": 2958268527,
+      "original_actor": "PutRupee_Gold",
+      "position": [
+        0.0,
+        -17.0,
+        -76.5
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Arrange the sliding platforms with Magnesis to reach beneath the monk's landing.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/mogg-latan-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon058.pack!Map/CDungeon/Dungeon058/Dungeon058_Static.smubin",
+      "source_map_sha256": "297a89eb8625c0b2d4870d9eafb52cd9799c38dbfa402216c6c0993483dea50a"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon058/Dungeon058_Static.smubin",
+      "hash_id": "2AD66586",
+      "check_id": 3009894487,
+      "original_actor": "Weapon_Spear_025",
+      "position": [
+        7.942135810852051,
+        -16.0,
+        -12.951849937438965
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Lower the drawbridge and take the right-hand platform to the spear chest.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/mogg-latan-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon058.pack!Map/CDungeon/Dungeon058/Dungeon058_Static.smubin",
+      "source_map_sha256": "297a89eb8625c0b2d4870d9eafb52cd9799c38dbfa402216c6c0993483dea50a"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon058/Dungeon058_Static.smubin",
+      "hash_id": "E3A65416",
+      "check_id": 3156798525,
+      "original_actor": "Weapon_Bow_013",
+      "position": [
+        -12.0,
+        -16.0,
+        -43.0
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Clear the swinging hazards and move the metal obstacle to the optional bow platform.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/mogg-latan-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon058.pack!Map/CDungeon/Dungeon058/Dungeon058_Static.smubin",
+      "source_map_sha256": "297a89eb8625c0b2d4870d9eafb52cd9799c38dbfa402216c6c0993483dea50a"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon060/Dungeon060_Static.smubin",
+      "hash_id": "01EE32CB",
+      "check_id": 3200403132,
+      "original_actor": "Weapon_Sword_035",
+      "position": [
+        -13.0,
+        0.0,
+        -23.0
+      ],
+      "region": "Gerudo Desert",
+      "route": "Rearrange the conductors using Magnesis to energize the side chamber's gate.",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/daqo-chisay-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon060.pack!Map/CDungeon/Dungeon060/Dungeon060_Static.smubin",
+      "source_map_sha256": "5b7ff82b8a6c7a4757210065edcdc9aa71bad5e84bf1cb88a6bd23c7aa8b30d3"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon063/Dungeon063_Static.smubin",
+      "hash_id": "3AE31C1E",
+      "check_id": 3208997043,
+      "original_actor": "Weapon_Sword_030",
+      "position": [
+        -26.0,
+        0.0,
+        -11.5
+      ],
+      "region": "Gerudo Desert",
+      "route": "Use Magnesis to bring the moving electric sphere to the caged switch.",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kema-zoos-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon063.pack!Map/CDungeon/Dungeon063/Dungeon063_Static.smubin",
+      "source_map_sha256": "83da9c4b62c5f7bd47cc80a84913c9e7739a8a7348e78bbe141a45fd8cd64e67"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon064/Dungeon064_Static.smubin",
+      "hash_id": "E787E69F",
+      "check_id": 3203822945,
+      "original_actor": "PutRupee_Silver",
+      "position": [
+        18.5,
+        19.0,
+        29.0
+      ],
+      "region": "Eldin",
+      "route": "Launch upward on the rising block and glide toward the entrance-side ledge.",
+      "requires": "(|@Flame Resistance| OR |Native Fireproof Supplies|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/daqa-koh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon064.pack!Map/CDungeon/Dungeon064/Dungeon064_Static.smubin",
+      "source_map_sha256": "4cc34ea207af9b91eb26775b8b4730a194bfd12bb904740b3a1142ef95e215ee"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon065/Dungeon065_Static.smubin",
+      "hash_id": "58DA080E",
+      "check_id": 2984710416,
+      "original_actor": "Weapon_Spear_001",
+      "position": [
+        -4.0,
+        6.0,
+        0.5
+      ],
+      "region": "Great Plateau",
+      "route": "Make Cryonis blocks under the raised recess to reach the spear chest.",
+      "requires": "((|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Cryonis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/keh-namut-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon065.pack!Map/CDungeon/Dungeon065/Dungeon065_Static.smubin",
+      "source_map_sha256": "a75e658443d5e44eebfd26d45a7e8d6c7205d94e11f97ea6c7676f6b26e9f0d9"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon066/Dungeon066_Static.smubin",
+      "hash_id": "0CD1BC19",
+      "check_id": 3144532619,
+      "original_actor": "Item_Ore_A",
+      "position": [
+        16.0,
+        12.0,
+        -23.0
+      ],
+      "region": "Lanayru",
+      "route": "Use the metal weights and the scale's launch to reach the Diamond platform.",
+      "requires": "(|Progressive Stasis| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kah-mael-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon066.pack!Map/CDungeon/Dungeon066/Dungeon066_Static.smubin",
+      "source_map_sha256": "25d17a8e387f83ac72655f7b92c09945a42c3859c1358f1785afd1ade5dd6dac"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon068/Dungeon068_Static.smubin",
+      "hash_id": "130D03C0",
+      "check_id": 3010964048,
+      "original_actor": "Weapon_Sword_041",
+      "position": [
+        17.0,
+        55.0,
+        1.0
+      ],
+      "region": "Lake Hylia",
+      "route": "Use the paired bomb launch and deploy the Paraglider toward the right-hand pillar.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/ya-naga-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon068.pack!Map/CDungeon/Dungeon068/Dungeon068_Static.smubin",
+      "source_map_sha256": "00bf5267095fbadc3daa0397602abb681a4a7b8fed5d01122ee6ef35a317a7e7"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon069/Dungeon069_Static.smubin",
+      "hash_id": "22B30BD3",
+      "check_id": 3033632763,
+      "original_actor": "Item_Ore_D",
+      "position": [
+        25.5,
+        0.0,
+        0.0
+      ],
+      "region": "Lake Hylia",
+      "route": "Reach the upper laser-emitter position and open the nearby chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/ishto-soh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon069.pack!Map/CDungeon/Dungeon069/Dungeon069_Static.smubin",
+      "source_map_sha256": "822545dad03c60a5e15e8902ef85f96b2a6f3330e272cf3a1355a6924177a79b"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon069/Dungeon069_Static.smubin",
+      "hash_id": "59C21244",
+      "check_id": 3200916113,
+      "original_actor": "Item_Enemy_30",
+      "position": [
+        -29.0,
+        12.0,
+        0.0
+      ],
+      "region": "Lake Hylia",
+      "route": "Time the rising columns and glide back toward the wall-mounted core chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/ishto-soh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon069.pack!Map/CDungeon/Dungeon069/Dungeon069_Static.smubin",
+      "source_map_sha256": "822545dad03c60a5e15e8902ef85f96b2a6f3330e272cf3a1355a6924177a79b"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon070/Dungeon070_Static.smubin",
+      "hash_id": "B4BA5197",
+      "check_id": 3082848681,
+      "original_actor": "Weapon_Bow_035",
+      "position": [
+        0.0,
+        12.5,
+        -60.0
+      ],
+      "region": "Lanayru",
+      "route": "Defeat the Guardian Scout with native equipment and enter the opened reward room.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/soh-kofi-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon070.pack!Map/CDungeon/Dungeon070/Dungeon070_Static.smubin",
+      "source_map_sha256": "65835595ff194e861331c12730736f816a600653090d6618d5dcbcf2db229262"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon071/Dungeon071_Static.smubin",
+      "hash_id": "CDAFFB3B",
+      "check_id": 3146631780,
+      "original_actor": "Weapon_Sword_051",
+      "position": [
+        5.960464477539063e-08,
+        12.550000190734863,
+        -60.000003814697266
+      ],
+      "region": "Lake Hylia",
+      "route": "Finish the Scout encounter and collect the chest beyond the arena.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/pumaag-nitae-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon071.pack!Map/CDungeon/Dungeon071/Dungeon071_Static.smubin",
+      "source_map_sha256": "a879e5be03356378d54c518532ca5a4c4c2b4c1d877f725f8ca44009f7be03e2"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon072/Dungeon072_Static.smubin",
+      "hash_id": "3B2FF9D4",
+      "check_id": 3184926506,
+      "original_actor": "Item_Enemy_30",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Central Hyrule",
+      "route": "Defeat the Scout and use the opened door into the monk's room.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dah-kaso-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon072.pack!Map/CDungeon/Dungeon072/Dungeon072_Static.smubin",
+      "source_map_sha256": "2ce21627ddd54216976db69d033d0c526a79348b9f3e3be705772d4fdda78891"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon073/Dungeon073_Static.smubin",
+      "hash_id": "257AC604",
+      "check_id": 3126429099,
+      "original_actor": "Weapon_Spear_024",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Central Hyrule",
+      "route": "Complete the Scout encounter and open the rear reward chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/katah-chuki-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon073.pack!Map/CDungeon/Dungeon073/Dungeon073_Static.smubin",
+      "source_map_sha256": "beb06fb8f030f379a31b942a6652fde92a80e590544457c8ae8f6d0b436fad1a"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon074/Dungeon074_Static.smubin",
+      "hash_id": "30F61E2E",
+      "check_id": 2965089304,
+      "original_actor": "Weapon_Shield_003",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Central Hyrule",
+      "route": "Open the cave approach, defeat the Scout and enter the reward room.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/noya-neha-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon074.pack!Map/CDungeon/Dungeon074/Dungeon074_Static.smubin",
+      "source_map_sha256": "19ad017193aee238545a783815a51e054903cff4639f4dd764c6bddab0898fed"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon075/Dungeon075_Static.smubin",
+      "hash_id": "71C7BCE4",
+      "check_id": 3201664143,
+      "original_actor": "Item_Enemy_31",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Akkala",
+      "route": "Defeat the Scout and approach the chest beside the monk's path.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dah-hesho-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon075.pack!Map/CDungeon/Dungeon075/Dungeon075_Static.smubin",
+      "source_map_sha256": "1ac2ad500a302b409c667672f84888632d55f150637aa9f366bd9dfb37266cc5"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon076/Dungeon076_Static.smubin",
+      "hash_id": "6D6960A4",
+      "check_id": 3198770732,
+      "original_actor": "Weapon_Sword_034",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Gerudo Highlands",
+      "route": "Perform the sun-pedestal quest, defeat the Scout and take the rear chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/sasa-kai-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon076.pack!Map/CDungeon/Dungeon076/Dungeon076_Static.smubin",
+      "source_map_sha256": "44ef8a1e018d24bb69e194d11512303d73d0762ef7f470a81391691398dd0703"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon077/Dungeon077_Static.smubin",
+      "hash_id": "B72D5243",
+      "check_id": 3174394075,
+      "original_actor": "Item_Ore_C",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Akkala",
+      "route": "Open the cave entrance, defeat the Scout and collect the Sapphire.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kenai-shakah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon077.pack!Map/CDungeon/Dungeon077/Dungeon077_Static.smubin",
+      "source_map_sha256": "4f770938519edd644c4e36ddc1de020a4eeb7cbbf79ae6ae7e6a48aedabbea88"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon078/Dungeon078_Static.smubin",
+      "hash_id": "0EAEB3F8",
+      "check_id": 3049079359,
+      "original_actor": "Weapon_Sword_034",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Perform the Blood Moon pedestal quest, then defeat the Scout for the rear chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/mijah-rokee-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon078.pack!Map/CDungeon/Dungeon078/Dungeon078_Static.smubin",
+      "source_map_sha256": "6a2ec2dba11706adcf531b0f74b34a82b37154e3aa058497a8c2c2eb389ddb7d"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon079/Dungeon079_Static.smubin",
+      "hash_id": "AA364AC8",
+      "check_id": 3133590465,
+      "original_actor": "Weapon_Spear_034",
+      "position": [
+        5.960464477539063e-08,
+        12.550000190734863,
+        -60.000003814697266
+      ],
+      "region": "Central Hyrule",
+      "route": "Defeat the Scout and enter the chamber behind its arena.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/namika-ozz-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon079.pack!Map/CDungeon/Dungeon079/Dungeon079_Static.smubin",
+      "source_map_sha256": "ebb623bcac9170cf032caad0aead4d0d91247ca2640c87ef3bea378507bf66b0"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon080/Dungeon080_Static.smubin",
+      "hash_id": "17A6A5F8",
+      "check_id": 2962751401,
+      "original_actor": "Weapon_Sword_024",
+      "position": [
+        5.960464477539063e-08,
+        12.550000190734863,
+        -60.000003814697266
+      ],
+      "region": "Lake Hylia",
+      "route": "Complete the Camera shrine quest, defeat the Scout and collect the rear reward.",
+      "requires": "|Camera|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shoqa-tatone-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon080.pack!Map/CDungeon/Dungeon080/Dungeon080_Static.smubin",
+      "source_map_sha256": "8cac2b2f55a3fc34f4ac6fe66aa82ce3779cb099e0e71f692943f36373bba999"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon081/Dungeon081_Static.smubin",
+      "hash_id": "D1A61DC5",
+      "check_id": 3078099723,
+      "original_actor": "Weapon_Bow_035",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Faron",
+      "route": "Defeat the Scout and open the single bow chest beyond the arena.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/muwo-jeem-shrine/",
+        "https://www.zeldadungeon.net/breath-of-the-wild-walkthrough/shrine-locations/muwo-jeem-shrine-guide/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon081.pack!Map/CDungeon/Dungeon081/Dungeon081_Static.smubin",
+      "source_map_sha256": "5fab3b753c559508de40b5b3e26d2d32b6ef9a6861fdc44768c1e7201307b6ef",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon082/Dungeon082_Static.smubin",
+      "hash_id": "85053370",
+      "check_id": 2980404356,
+      "original_actor": "Armor_014_Upper",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Necluda",
+      "route": "Cross to the island, defeat the Scout and open the reward-room chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/chaas-qeta-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon082.pack!Map/CDungeon/Dungeon082/Dungeon082_Static.smubin",
+      "source_map_sha256": "7e5c2acfb10d68e4c6fe39f64a76c95c67e332c79445ae5a51bc083357cd96a0"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon083/Dungeon083_Static.smubin",
+      "hash_id": "E11E862B",
+      "check_id": 3005897492,
+      "original_actor": "Weapon_Spear_003",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Tabantha",
+      "route": "Reach the shrine, defeat the Scout and enter the rear reward room.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/tena-kosah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon083.pack!Map/CDungeon/Dungeon083/Dungeon083_Static.smubin",
+      "source_map_sha256": "0cf3adb2472d8ce03cb9cbb4a235d76df3745c1da7e8eb911588f9b1e43ac9da"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon084/Dungeon084_Static.smubin",
+      "hash_id": "41A2D176",
+      "check_id": 3203255293,
+      "original_actor": "Weapon_Spear_033",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Akkala",
+      "route": "Offer Dinraal's scale at the spring, defeat the Scout and open the rear chest.",
+      "requires": "|Dinraal's Scale|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/tutsuwa-nima-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon084.pack!Map/CDungeon/Dungeon084/Dungeon084_Static.smubin",
+      "source_map_sha256": "d164606835ea31b5f66c47a33ff89558b07dd4f3dcab3ea676c5eef962a89f86"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon085/Dungeon085_Static.smubin",
+      "hash_id": "F798BB47",
+      "check_id": 3198797395,
+      "original_actor": "PutRupee_Silver",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Gerudo Highlands",
+      "route": "Prepare for the cold approach, defeat the Scout and collect the reward-room rupee.",
+      "requires": "|Native Cold Protection Supplies|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kema-kosassa-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon085.pack!Map/CDungeon/Dungeon085/Dungeon085_Static.smubin",
+      "source_map_sha256": "b6b7be7c95bf010eb43fe8f987f2c1a49cfccbc5feb7dc7a48a424698cd67799"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon086/Dungeon086_Static.smubin",
+      "hash_id": "113FA196",
+      "check_id": 3205573669,
+      "original_actor": "Weapon_Lsword_024",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Hebra",
+      "route": "Melt the entrance ice with native fire, defeat the Scout and open the rear chest.",
+      "requires": "|Native Cold Protection Supplies|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/goma-asaagh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon086.pack!Map/CDungeon/Dungeon086/Dungeon086_Static.smubin",
+      "source_map_sha256": "ea37b1a4b1c98b909bf94ee1e6047134e007157256b415aceffdb0ea75f5bdce"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon087/Dungeon087_Static.smubin",
+      "hash_id": "03643052",
+      "check_id": 3120552855,
+      "original_actor": "Item_Ore_A",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Hebra",
+      "route": "Complete the bird-in-the-snow quest and defeat the Scout to reach the Diamond.",
+      "requires": "|Native Cold Protection Supplies|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/mozo-shenno-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon087.pack!Map/CDungeon/Dungeon087/Dungeon087_Static.smubin",
+      "source_map_sha256": "210d8e081832899db762b624fefa628f4c201909e62884b30c3171a724f58f0d"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon088/Dungeon088_Static.smubin",
+      "hash_id": "0F9DEC61",
+      "check_id": 3133636294,
+      "original_actor": "Item_Ore_C",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Hebra",
+      "route": "Use the ordinary snowy approach, defeat the Scout and open its Sapphire chest.",
+      "requires": "|Native Cold Protection Supplies|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/hia-miu-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon088.pack!Map/CDungeon/Dungeon088/Dungeon088_Static.smubin",
+      "source_map_sha256": "aa9dd031c8db8961c578fe28844b5208df352700316aa56758f037f8462ec903"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon089/Dungeon089_Static.smubin",
+      "hash_id": "4A7E1FD2",
+      "check_id": 3010688551,
+      "original_actor": "Weapon_Sword_033",
+      "position": [
+        0.0,
+        12.550000190734863,
+        -60.0
+      ],
+      "region": "Central Hyrule",
+      "route": "Light the castle dock braziers with native fire, then defeat the Scout for the chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/saas-kosah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon089.pack!Map/CDungeon/Dungeon089/Dungeon089_Static.smubin",
+      "source_map_sha256": "db82965026332a81c150adad77a840a12c2a5ebe70c6362a4466a768303e8a92"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon090/Dungeon090_Static.smubin",
+      "hash_id": "C49CCCCC",
+      "check_id": 3049599666,
+      "original_actor": "Weapon_Sword_030",
+      "position": [
+        0.0,
+        6.5,
+        -4.0
+      ],
+      "region": "Gerudo Desert",
+      "route": "Complete the snowball-shadow quest and walk up the blessing's central staircase.",
+      "requires": "(((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)))",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/suma-sahma-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon090.pack!Map/CDungeon/Dungeon090/Dungeon090_Static.smubin",
+      "source_map_sha256": "e76d1218e1134a61a16f940f3e5c7d103f321a89eac203f9898f84c8b66d186f"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon091/Dungeon091_Static.smubin",
+      "hash_id": "5F3980A3",
+      "check_id": 3098495601,
+      "original_actor": "Weapon_Lsword_034",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Eldin",
+      "route": "Complete the endurance-climbing quest and enter the blessing reward chamber.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/gorae-torr-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon091.pack!Map/CDungeon/Dungeon091/Dungeon091_Static.smubin",
+      "source_map_sha256": "653b2c5941d5b1bc905bf5a4ea63aa65f0fd49d60e9b9322f9cd6e471aedc9eb"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon092/Dungeon092_Static.smubin",
+      "hash_id": "28A75253",
+      "check_id": 3013846396,
+      "original_actor": "PutRupee_Silver",
+      "position": [
+        0.0,
+        6.5,
+        -4.0
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Break the cave obstruction and enter the blessing's open chest chamber.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/maag-norah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon092.pack!Map/CDungeon/Dungeon092/Dungeon092_Static.smubin",
+      "source_map_sha256": "d391c96937da39478f33b91ef0baf6ec045dbeda3ed12552970e86c596db21b3"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon093/Dungeon093_Static.smubin",
+      "hash_id": "B3021E3C",
+      "check_id": 3189412373,
+      "original_actor": "Weapon_Shield_036",
+      "position": [
+        0.0,
+        6.5,
+        -4.0
+      ],
+      "region": "Gerudo Desert",
+      "route": "Complete the post-Naboris sand-seal race and enter the blessing's chest room.",
+      "requires": "(|Freed Vah Naboris| AND (((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|))",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/raqa-zunzo-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon093.pack!Map/CDungeon/Dungeon093/Dungeon093_Static.smubin",
+      "source_map_sha256": "42551081b6dbb8524f4e9f6e8e9040210e45837bcfa598656587783464c00bbe"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon094/Dungeon094_Static.smubin",
+      "hash_id": "C79AF7B3",
+      "check_id": 2982929776,
+      "original_actor": "Weapon_Bow_015",
+      "position": [
+        0.0,
+        6.5,
+        -4.0
+      ],
+      "region": "Gerudo Desert",
+      "route": "Light the desert torches using native fire, then enter the blessing chamber.",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Progressive Remote Bomb|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/tho-kayu-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon094.pack!Map/CDungeon/Dungeon094/Dungeon094_Static.smubin",
+      "source_map_sha256": "4b631b23f2f749be7d7d8ecc0c5aeac01d1aa524b9a8ccbae232edaf86b06dd2"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon095/Dungeon095_Static.smubin",
+      "hash_id": "5C3FBBDC",
+      "check_id": 3208029730,
+      "original_actor": "Item_Enemy_31",
+      "position": [
+        0.0,
+        6.5,
+        -4.0
+      ],
+      "region": "Great Hyrule Forest",
+      "route": "Complete the Korok iron-bowl trial and enter the blessing's reward chamber.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kuhn-sidajj-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon095.pack!Map/CDungeon/Dungeon095/Dungeon095_Static.smubin",
+      "source_map_sha256": "3eee35a80b516686b50343476ed8c588a2cf02a95e5731b12369429ae1399033"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon096/Dungeon096_Static.smubin",
+      "hash_id": "2BA1692C",
+      "check_id": 3180038460,
+      "original_actor": "Armor_046_Lower",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Faron",
+      "route": "Expose the lightning-struck mound and collect the blessing chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/qukah-nata-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon096.pack!Map/CDungeon/Dungeon096/Dungeon096_Static.smubin",
+      "source_map_sha256": "e317601766031a093144080b992735325cb02a6ce6127e149b02fc2a98288621"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon097/Dungeon097_Static.smubin",
+      "hash_id": "B0042543",
+      "check_id": 3137104247,
+      "original_actor": "PutRupee_Gold",
+      "position": [
+        0.0,
+        6.5,
+        -4.0
+      ],
+      "region": "Faron",
+      "route": "Complete Eventide's three-orb trial and enter the blessing reward chamber.",
+      "requires": "(|Magnesis| AND |Progressive Remote Bomb| AND |Progressive Stasis| AND |Cryonis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/korgu-chideh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon097.pack!Map/CDungeon/Dungeon097/Dungeon097_Static.smubin",
+      "source_map_sha256": "c6711eb480200b4e978807f36442004d38b1f995f206206b6631690ea567c475"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon098/Dungeon098_Static.smubin",
+      "hash_id": "C290BA32",
+      "check_id": 3059785682,
+      "original_actor": "Item_Enemy_30",
+      "position": [
+        0.0,
+        6.5,
+        -4.0
+      ],
+      "region": "Great Hyrule Forest",
+      "route": "Follow Oaki without being discovered, then enter the blessing's reward room.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/daag-chokah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon098.pack!Map/CDungeon/Dungeon098/Dungeon098_Static.smubin",
+      "source_map_sha256": "001b9d56f1fecdbd1aae7f4e111554781046bc6ba07ddce84bbda9bde3f6bfb5"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon099/Dungeon099_Static.smubin",
+      "hash_id": "62403A3E",
+      "check_id": 3158797880,
+      "original_actor": "Weapon_Sword_041",
+      "position": [
+        -16.0,
+        10.149999618530273,
+        24.0
+      ],
+      "region": "Dueling Peaks",
+      "route": "Open the entrance-side weapon chest before triggering the combat tutorial.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/taloh-naeg-shrine/",
+        "https://zeldauniverse.net/guides/breath-of-the-wild/shrines/taloh-neag-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon099.pack!Map/CDungeon/Dungeon099/Dungeon099_Static.smubin",
+      "source_map_sha256": "64b5ed896859fe6f70c8d2f120a1eb35c0d3a1e570f44af35ba62d56a585e306",
+      "identity_note": "These actors are inside their CDungeon resource at the entrance, despite the secondary guide calling the equipment chests outside.",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon099/Dungeon099_Static.smubin",
+      "hash_id": "999C1177",
+      "check_id": 3025007258,
+      "original_actor": "Weapon_Shield_041",
+      "position": [
+        16.0,
+        10.149999618530273,
+        24.0
+      ],
+      "region": "Dueling Peaks",
+      "route": "Open the other entrance-side equipment chest before the tutorial.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/taloh-naeg-shrine/",
+        "https://zeldauniverse.net/guides/breath-of-the-wild/shrines/taloh-neag-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon099.pack!Map/CDungeon/Dungeon099/Dungeon099_Static.smubin",
+      "source_map_sha256": "64b5ed896859fe6f70c8d2f120a1eb35c0d3a1e570f44af35ba62d56a585e306",
+      "identity_note": "These actors are inside their CDungeon resource at the entrance, despite the secondary guide calling the equipment chests outside.",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon099/Dungeon099_Static.smubin",
+      "hash_id": "BC8AFC00",
+      "check_id": 3015608437,
+      "original_actor": "Item_Ore_E",
+      "position": [
+        0.0,
+        12.5,
+        -52.0
+      ],
+      "region": "Dueling Peaks",
+      "route": "Complete the native-weapon combat tutorial and enter the Opal reward room.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/taloh-naeg-shrine/",
+        "https://zeldauniverse.net/guides/breath-of-the-wild/shrines/taloh-neag-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon099.pack!Map/CDungeon/Dungeon099/Dungeon099_Static.smubin",
+      "source_map_sha256": "64b5ed896859fe6f70c8d2f120a1eb35c0d3a1e570f44af35ba62d56a585e306",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon100/Dungeon100_Static.smubin",
+      "hash_id": "A90117C4",
+      "check_id": 3113166755,
+      "original_actor": "Item_Ore_A",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Gerudo Highlands",
+      "route": "Complete the cliffside arrow-target quest and enter the blessing chamber.",
+      "requires": "(|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/keeha-yoog-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon100.pack!Map/CDungeon/Dungeon100/Dungeon100_Static.smubin",
+      "source_map_sha256": "d35d697e7c2fca462bff3daedf69da901079950386e0081ad0b42f891a59e9ec"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon101/Dungeon101_Static.smubin",
+      "hash_id": "32A45BAB",
+      "check_id": 3203418836,
+      "original_actor": "PutRupee_Silver",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Lanayru",
+      "route": "Complete the ceremonial trident waterfall-strike quest and enter the blessing chamber.",
+      "requires": "(|Cryonis| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dagah-keek-shrine/",
+        "https://www.zeldaspalace.com/breathofthewild/shrines_1.php"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon101.pack!Map/CDungeon/Dungeon101/Dungeon101_Static.smubin",
+      "source_map_sha256": "8ed9ede779488c8f4ca590a67f58bff7e9509526893250ec7f2a19b50a523aec",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon102/Dungeon102_Static.smubin",
+      "hash_id": "453A895B",
+      "check_id": 2972196023,
+      "original_actor": "Weapon_Sword_033",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Akkala",
+      "route": "Climb Skull Lake's rock column and enter the blessing's reward room.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/zuna-kai-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon102.pack!Map/CDungeon/Dungeon102/Dungeon102_Static.smubin",
+      "source_map_sha256": "38684d278d119dbb73cf219130d001e5c682ca819c68f483b51fc6c63627c000"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon103/Dungeon103_Static.smubin",
+      "hash_id": "DE9FC534",
+      "check_id": 2990491585,
+      "original_actor": "Armor_048_Upper",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Gerudo Desert",
+      "route": "Traverse the desert labyrinth and enter the blessing chamber.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/dila-maag-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon103.pack!Map/CDungeon/Dungeon103/Dungeon103_Static.smubin",
+      "source_map_sha256": "9bb651d54d281bab258e00ce7bf377172173c4ae18421a380df9d0787c5fd47b"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon104/Dungeon104_Static.smubin",
+      "hash_id": "AA072CBB",
+      "check_id": 3119807948,
+      "original_actor": "PutRupee_Gold",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Hebra",
+      "route": "Reach the cave shrine and open the chest along the monk's walkway.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/lanno-kooh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon104.pack!Map/CDungeon/Dungeon104/Dungeon104_Static.smubin",
+      "source_map_sha256": "d9a1422dee803a46bd6d4ccb661e1d2019d02402116360586565c939669ff495"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon105/Dungeon105_Static.smubin",
+      "hash_id": "31A260D4",
+      "check_id": 3068268202,
+      "original_actor": "Armor_048_Head",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.5
+      ],
+      "region": "Akkala",
+      "route": "Complete the island labyrinth route and enter the blessing chamber.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/tu-kaloh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon105.pack!Map/CDungeon/Dungeon105/Dungeon105_Static.smubin",
+      "source_map_sha256": "15363c8aeab8766696d6c784f942ea0108520f9e9fa03883e34e11e664934bb0"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon106/Dungeon106_Static.smubin",
+      "hash_id": "463CB224",
+      "check_id": 2955228827,
+      "original_actor": "Item_Enemy_31",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.5
+      ],
+      "region": "Great Hyrule Forest",
+      "route": "Complete the native wooden-equipment escort trial, then enter the blessing chamber.",
+      "requires": "|Cryonis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/maag-halan-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon106.pack!Map/CDungeon/Dungeon106/Dungeon106_Static.smubin",
+      "source_map_sha256": "f2435362b17397ab7ce7ceb16781426d75e33b16f66b952f7e301a8eed0ba3a0"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon107/Dungeon107_Static.smubin",
+      "hash_id": "DD99FE4B",
+      "check_id": 3219711174,
+      "original_actor": "Item_Ore_A",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Gerudo Desert",
+      "route": "Complete the ice delivery and drink quest to clear the terminal and enter the blessing.",
+      "requires": "((((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/misae-suma-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon107.pack!Map/CDungeon/Dungeon107/Dungeon107_Static.smubin",
+      "source_map_sha256": "a64786697250ddfc223a3a120f30bb9c2b3c0fda29e374918f695fc5497b67c7"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon108/Dungeon108_Static.smubin",
+      "hash_id": "AF0D613A",
+      "check_id": 2966077349,
+      "original_actor": "Item_Enemy_30",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Great Hyrule Forest",
+      "route": "Cross the dark forest trial and enter its blessing chamber.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/ketoh-wawai-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon108.pack!Map/CDungeon/Dungeon108/Dungeon108_Static.smubin",
+      "source_map_sha256": "4089671a04648f2b72b0706e30e24349515b2b7cbad727ea980fb99668ea4982"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon109/Dungeon109_Static.smubin",
+      "hash_id": "34A82D55",
+      "check_id": 3084025142,
+      "original_actor": "Item_Enemy_31",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Akkala",
+      "route": "Deliver the orb along the spiral causeway and enter the blessing chamber.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/ritaag-zumo-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon109.pack!Map/CDungeon/Dungeon109/Dungeon109_Static.smubin",
+      "source_map_sha256": "a7abaf155fd51785667a16b0b011e32a7141cb9daab2e302f85df9f042b75a0b"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon110/Dungeon110_Static.smubin",
+      "hash_id": "7497CE41",
+      "check_id": 2959328205,
+      "original_actor": "Weapon_Spear_033",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Gerudo Desert",
+      "route": "Arrange the seven heroine orbs with Magnesis, then enter the blessing chamber.",
+      "requires": "((|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/korsh-ohu-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon110.pack!Map/CDungeon/Dungeon110/Dungeon110_Static.smubin",
+      "source_map_sha256": "f532f131e93626ef2245ef78cb9a3adc551942ef92fe5b030eaf9baebbf0bcb7"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon111/Dungeon111_Static.smubin",
+      "hash_id": "EF32822E",
+      "check_id": 3133704775,
+      "original_actor": "Weapon_Lsword_035",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Faron",
+      "route": "Complete the three-Hinox orb trial and enter the blessing chamber.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/tawa-jinn-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon111.pack!Map/CDungeon/Dungeon111/Dungeon111_Static.smubin",
+      "source_map_sha256": "9e744e6b8f03f648b401bfee5b468816f1591298ac25c128d0b6e1bc0a1a6e49"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon112/Dungeon112_Static.smubin",
+      "hash_id": "98AC50DE",
+      "check_id": 3076273065,
+      "original_actor": "Weapon_Lsword_055",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Dueling Peaks",
+      "route": "Complete the Kakariko Camera/quest chain and shrine orb event, then enter the blessing.",
+      "requires": "|Camera|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/lakna-rokee-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon112.pack!Map/CDungeon/Dungeon112/Dungeon112_Static.smubin",
+      "source_map_sha256": "b9bc95edc6fc516ee48579f6451a9a8abbd6d7a92326c53c1ec0ee93ca91d3ba"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon113/Dungeon113_Static.smubin",
+      "hash_id": "03091CB1",
+      "check_id": 3209181045,
+      "original_actor": "Weapon_Spear_035",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Lake Hylia",
+      "route": "Offer Farosh's scale at the spring and open the blessing chest.",
+      "requires": "|Farosh's Scale|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shae-katha-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon113.pack!Map/CDungeon/Dungeon113/Dungeon113_Static.smubin",
+      "source_map_sha256": "dfbc9c14e64d5ae0d420d4a48feb60ba51ee7a5bc3ae11b878aedafef77cd744"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon114/Dungeon114_Static.smubin",
+      "hash_id": "7791F53E",
+      "check_id": 3101470904,
+      "original_actor": "Weapon_Lsword_033",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Lanayru",
+      "route": "Clear the bay shrine quest and glide through its wind route to the blessing.",
+      "requires": "|Progressive Remote Bomb|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shai-yota-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon114.pack!Map/CDungeon/Dungeon114/Dungeon114_Static.smubin",
+      "source_map_sha256": "3a13228d0e60e1621bd153b79e3a084b85e57a08777043b5a449e86a19cbcc16"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon115/Dungeon115_Static.smubin",
+      "hash_id": "EC34B951",
+      "check_id": 3010645590,
+      "original_actor": "Weapon_Lsword_033",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Great Hyrule Forest",
+      "route": "Enter the Forgotten Temple, avoid the stationary Guardians and approach the blessing chest.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/rona-kachta-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon115.pack!Map/CDungeon/Dungeon115/Dungeon115_Static.smubin",
+      "source_map_sha256": "21f6ff5e694e72022b8ff2911af034bb895bbaa10a4b12ef8dd0c292b9f5d294"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon116/Dungeon116_Static.smubin",
+      "hash_id": "9BAA6BA1",
+      "check_id": 3114196424,
+      "original_actor": "Armor_048_Lower",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Hebra",
+      "route": "Complete the snow labyrinth route and enter its blessing chamber.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/qaza-tokki-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon116.pack!Map/CDungeon/Dungeon116/Dungeon116_Static.smubin",
+      "source_map_sha256": "add2ea98232ea73300b4535a9b044ea32de2256c1f831c7101e936f528123156"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon117/Dungeon117_Static.smubin",
+      "hash_id": "000F27CE",
+      "check_id": 3132989381,
+      "original_actor": "Weapon_Spear_034",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Necluda",
+      "route": "Complete the Naydra shrine quest and enter the blessing chamber.",
+      "requires": "((((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|))) AND |Naydra's Scale|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/jitan-sami-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon117.pack!Map/CDungeon/Dungeon117/Dungeon117_Static.smubin",
+      "source_map_sha256": "a1fe48ed4395288f57320898c2e775b3a1edb8e03a06c569444244e305c5dfb9"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon119/Dungeon119_Static.smubin",
+      "hash_id": "E93EF4D0",
+      "check_id": 3168431274,
+      "original_actor": "Armor_014_Lower",
+      "position": [
+        1.7881393432617188e-07,
+        6.5,
+        -4.0
+      ],
+      "region": "Necluda",
+      "route": "Break the snowy cave wall and enter its blessing reward chamber.",
+      "requires": "((|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Progressive Remote Bomb|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/tahno-oah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "content/Pack/Dungeon119.pack!Map/CDungeon/Dungeon119/Dungeon119_Static.smubin",
+      "source_map_sha256": "ff676aee70be6d75a7da82423ae608183adbe0ef3a19814b159d19dda7995e2a"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon120/Dungeon120_Static.smubin",
+      "hash_id": "2E548CD4",
+      "check_id": 3155898676,
+      "original_actor": "Weapon_Bow_029",
+      "position": [
+        -74.0,
+        0.0,
+        40.0
+      ],
+      "region": "Great Plateau (One-Hit Obliterator)",
+      "route": "Use the metal bowl to capture the large orb and unlock the bow alcove.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/yowaka-ita-shrine/",
+        "https://www.neoseeker.com/the-legend-of-zelda-breath-of-the-wild/walkthrough/DLC2-NewShrines"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon120.pack!Map/CDungeon/Dungeon120/Dungeon120_Static.smubin",
+      "source_map_sha256": "56c0721eb952edb3766124d0a76127b076df129ad01cf23c317e9a69d975f043",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon120/Dungeon120_Static.smubin",
+      "hash_id": "5D271BB5",
+      "check_id": 3181719341,
+      "original_actor": "Obj_BombArrow_A_02",
+      "position": [
+        -29.0,
+        0.1484375,
+        -8.6171875
+      ],
+      "region": "Great Plateau (One-Hit Obliterator)",
+      "route": "Use the bowl to catch the chest among the descending objects, then place it on land.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/yowaka-ita-shrine/",
+        "https://www.neoseeker.com/the-legend-of-zelda-breath-of-the-wild/walkthrough/DLC2-NewShrines"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon120.pack!Map/CDungeon/Dungeon120/Dungeon120_Static.smubin",
+      "source_map_sha256": "56c0721eb952edb3766124d0a76127b076df129ad01cf23c317e9a69d975f043",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon121/Dungeon121_Static.smubin",
+      "hash_id": "499D9003",
+      "check_id": 2983438152,
+      "original_actor": "Weapon_Spear_035",
+      "position": [
+        44.0,
+        4.150000095367432,
+        10.0
+      ],
+      "region": "Gerudo Desert",
+      "route": "Open the metal box bottom, count the hidden spheres and complete the bonus receptacle.",
+      "requires": "(|Progressive Urbosa's Fury| AND (|@Heat Resistance| OR |Native Desert Protection Supplies| OR (|Gerudo Veil| AND |Gerudo Top| AND |Gerudo Sirwal|)) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kihiro-moh-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon121.pack!Map/CDungeon/Dungeon121/Dungeon121_Static.smubin",
+      "source_map_sha256": "7867f69111471a63c5d772baf90d86334192300845efa39f933b668586a91a0c"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon122/Dungeon122_Static.smubin",
+      "hash_id": "F2EA97F5",
+      "check_id": 3199805676,
+      "original_actor": "PutRupee_Gold",
+      "position": [
+        -42.0,
+        13.0,
+        -21.5
+      ],
+      "region": "Great Plateau (One-Hit Obliterator)",
+      "route": "Use native fire from the torches to burn the chest platform's foliage.",
+      "requires": "",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/etsu-korima-shrine/",
+        "https://www.zeldadungeon.net/wiki/Etsu_Korima_Shrine"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon122.pack!Map/CDungeon/Dungeon122/Dungeon122_Static.smubin",
+      "source_map_sha256": "8a4fb8374a722f9a57c1e4a5a1ed9d37da50aa747338171b77d2a292800ef4e2",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon123/Dungeon123_Static.smubin",
+      "hash_id": "A606EF48",
+      "check_id": 3031563968,
+      "original_actor": "Weapon_Shield_023",
+      "position": [
+        -61.5,
+        38.0,
+        59.0
+      ],
+      "region": "Great Plateau (One-Hit Obliterator)",
+      "route": "Rearrange the metal platforms above the first spike hall to reach the right-hand ledge.",
+      "requires": "|Magnesis|",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/rohta-chigah-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon123.pack!Map/CDungeon/Dungeon123/Dungeon123_Static.smubin",
+      "source_map_sha256": "0dbcb7d86ab778bc53bdb7470c46a4d7e820c6dfe58156a0323af8a30264ce1f"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon124/Dungeon124_Static.smubin",
+      "hash_id": "6D726D35",
+      "check_id": 3186278652,
+      "original_actor": "Item_Enemy_31",
+      "position": [
+        20.5,
+        19.0,
+        -27.0
+      ],
+      "region": "Lanayru",
+      "route": "Build Cryonis steps to the side platform near the orb receptacle.",
+      "requires": "(|Progressive Mipha's Grace| AND |Cryonis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/sato-koda-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon124.pack!Map/CDungeon/Dungeon124/Dungeon124_Static.smubin",
+      "source_map_sha256": "da55ca622e51a1c2592d2c83f2bfa40591e7f0df6cb0036c32c2fd53d5c513b9"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon125/Dungeon125_Static.smubin",
+      "hash_id": "C28563CA",
+      "check_id": 3158890976,
+      "original_actor": "Weapon_Sword_034",
+      "position": [
+        0.0,
+        -33.0,
+        3.5
+      ],
+      "region": "Lanayru",
+      "route": "Use the supplied torch to melt the ice sealing the lower alcove.",
+      "requires": "(|Progressive Mipha's Grace| AND |Cryonis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kee-dafunia-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon125.pack!Map/CDungeon/Dungeon125/Dungeon125_Static.smubin",
+      "source_map_sha256": "00e0caeb4ca5589aa24a0d882b4b497be53e87c015feeb98f2f86931eb69dd75"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon126/Dungeon126_Static.smubin",
+      "hash_id": "502A11C8",
+      "check_id": 3177697263,
+      "original_actor": "Weapon_Shield_022",
+      "position": [
+        73.5,
+        35.10000228881836,
+        -48.5
+      ],
+      "region": "Lanayru",
+      "route": "Build the box-and-Cryonis staircase and pull the high chest down with Magnesis.",
+      "requires": "(|Progressive Mipha's Grace| AND |Zora Armor| AND |Cryonis| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/mah-eliya-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon126.pack!Map/CDungeon/Dungeon126/Dungeon126_Static.smubin",
+      "source_map_sha256": "e92c26dc88a01f06d20f9a951d0ce9332ffd1578b55a95c8de071e5739304a68"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon127/Dungeon127_Static.smubin",
+      "hash_id": "4146F7C4",
+      "check_id": 3169897760,
+      "original_actor": "Weapon_Shield_041",
+      "position": [
+        -5.5,
+        44.0,
+        -33.5
+      ],
+      "region": "Tabantha",
+      "route": "Ride the tower's wind sequence and circle behind the hidden lift to the shield platform.",
+      "requires": "(|Progressive Revali's Gale| AND (((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Body| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Head| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|)) OR ((|@Cold Resistant Body| OR |Native Cold Protection Supplies|) AND (|@Cold Resistant Legs| OR |Native Cold Protection Supplies|))))",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/noe-rajee-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon127.pack!Map/CDungeon/Dungeon127/Dungeon127_Static.smubin",
+      "source_map_sha256": "392e7d857a7d16a26e889fec8677849e58a48e37807342b5f30e6508731660ca"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon128/Dungeon128_Static.smubin",
+      "hash_id": "408C2270",
+      "check_id": 3052914973,
+      "original_actor": "Weapon_Bow_017",
+      "position": [
+        78.0,
+        44.0,
+        -18.0
+      ],
+      "region": "Hebra",
+      "route": "Use the start-area updraft and Cryonis-supported blocks to climb to the bow ladder.",
+      "requires": "(|Progressive Revali's Gale| AND |Cryonis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kiah-toza-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon128.pack!Map/CDungeon/Dungeon128/Dungeon128_Static.smubin",
+      "source_map_sha256": "f48787f6ad47ca2ce27aea969d8a698a6ff67abe2df8c5c3ee22eeb257ed853f"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon129/Dungeon129_Static.smubin",
+      "hash_id": "BE028577",
+      "check_id": 3110058259,
+      "original_actor": "Obj_BombArrow_A_03",
+      "position": [
+        -56.0,
+        78.0,
+        -23.0
+      ],
+      "region": "Hyrule Ridge",
+      "route": "Ride the bomb-course updrafts and glide onto the middle level's small left platform.",
+      "requires": "(|Progressive Revali's Gale| AND |Progressive Remote Bomb| AND |Progressive Stasis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/shira-gomar-shrine/",
+        "https://www.shacknews.com/article/102520/zelda-breath-of-the-wild-revalis-song-walkthrough"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon129.pack!Map/CDungeon/Dungeon129/Dungeon129_Static.smubin",
+      "source_map_sha256": "1bc1325ef70bab438b14075a4bb8af5544acce4c4d1cf59d1ac2e957c56e2402",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon130/Dungeon130_Static.smubin",
+      "hash_id": "AF15C538",
+      "check_id": 3193999918,
+      "original_actor": "Item_Ore_A",
+      "position": [
+        -78.5,
+        46.0,
+        -28.0
+      ],
+      "region": "Eldin",
+      "route": "Bomb the cannon target supporting the chest, then retrieve it with Magnesis.",
+      "requires": "((|@Flame Resistant Head| OR |Native Fireproof Supplies| OR |@Flame Resistant Body| OR |@Flame Resistant Legs|) AND |Progressive Remote Bomb| AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/kamia-omuna-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon130.pack!Map/CDungeon/Dungeon130/Dungeon130_Static.smubin",
+      "source_map_sha256": "5854d19e1e195435e11221669db888e54e118d13c8d67ab2b74ef1319bb3e736"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon131/Dungeon131_Static.smubin",
+      "hash_id": "F1D5602E",
+      "check_id": 3098246609,
+      "original_actor": "Weapon_Lsword_037",
+      "position": [
+        55.0,
+        -83.0,
+        6.0
+      ],
+      "region": "Eldin",
+      "route": "Use Magnesis-controlled metal blocks to shield the flames and reach the right-hand platform.",
+      "requires": "(|Progressive Daruk's Protection| AND (|@Flame Resistance| OR |Native Fireproof Supplies|) AND |Magnesis| AND |Progressive Remote Bomb|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/rinu-honika-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon131.pack!Map/CDungeon/Dungeon131/Dungeon131_Static.smubin",
+      "source_map_sha256": "760f3174c4dbe183050e901573bf0897d4d58f53a1599984f3f50d26dcb1ad15"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon132/Dungeon132_Static.smubin",
+      "hash_id": "612CEFA3",
+      "check_id": 2983208431,
+      "original_actor": "Weapon_Lsword_033",
+      "position": [
+        0.0,
+        16.0,
+        8.0
+      ],
+      "region": "Eldin",
+      "route": "Follow the moving-block course to the first waterfall and catch the falling chest with Cryonis.",
+      "requires": "(|Freed Vah Rudania| AND (((|@Flame Resistant Head| OR |Native Fireproof Supplies|) AND (|@Flame Resistant Body| OR |Native Fireproof Supplies|)) OR ((|@Flame Resistant Head| OR |Native Fireproof Supplies|) AND (|@Flame Resistant Legs| OR |Native Fireproof Supplies|)) OR ((|@Flame Resistant Body| OR |Native Fireproof Supplies|) AND (|@Flame Resistant Legs| OR |Native Fireproof Supplies|))) AND |Cryonis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/sharo-lun-shrine/",
+        "https://zeldawiki.wiki/wiki/Sharo_Lun_Shrine"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon132.pack!Map/CDungeon/Dungeon132/Dungeon132_Static.smubin",
+      "source_map_sha256": "87ee14daba96421ecbe7d024286e365dbc864501c7a0a64be1ccef2d4240a47f",
+      "source_review": "cross_checked"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon133/Dungeon133_Static.smubin",
+      "hash_id": "464252AF",
+      "check_id": 2953017199,
+      "original_actor": "Weapon_Shield_036",
+      "position": [
+        150.0,
+        6.0,
+        56.5
+      ],
+      "region": "Gerudo Desert",
+      "route": "Arrange the apparatus's electric bridge to reach the shield alcove.",
+      "requires": "(|Freed Vah Naboris| AND |Progressive Urbosa's Fury| AND (((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistant Head| OR |Native Cold Protection Supplies| OR |@Cold Resistant Body| OR |@Cold Resistant Legs|) AND |Progressive Remote Bomb| AND |Magnesis| AND |Cryonis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/keive-tala-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon133.pack!Map/CDungeon/Dungeon133/Dungeon133_Static.smubin",
+      "source_map_sha256": "73bff9b07bd8aea6a0f29a7b03dc05622ec3ec0e8c1d700c6f1d6e3bd99eb256"
+    },
+    {
+      "logical_map": "Map/CDungeon/Dungeon134/Dungeon134_Static.smubin",
+      "hash_id": "7A92C271",
+      "check_id": 3105979101,
+      "original_actor": "Weapon_Bow_036",
+      "position": [
+        204.5,
+        -38.5,
+        -4.5
+      ],
+      "region": "Gerudo Desert",
+      "route": "Use Magnesis to build the conductive block connection behind the staircase.",
+      "requires": "(|Progressive Urbosa's Fury| AND (((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Body| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Head| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|)) OR ((|@Heat Resistant Body| OR |Native Desert Protection Supplies|) AND (|@Heat Resistant Legs| OR |Native Desert Protection Supplies|))) AND (|@Cold Resistance| OR |Native Plateau Cold Protection Supplies|) AND |Magnesis|)",
+      "sources": [
+        "https://zeldacentral.com/games/breath-of-the-wild/shrines/takama-shiri-shrine/"
+      ],
+      "evidence": "map_identity_reward_and_walkthrough_route",
+      "gameplay_verified": false,
+      "resource": "aoc/0010/Pack/Dungeon134.pack!Map/CDungeon/Dungeon134/Dungeon134_Static.smubin",
+      "source_map_sha256": "35c438da590e3c828f9f1e306abb293e9c65c49f8fd615a04529f601e0b6996b"
+    }
+  ],
+  "limits": [
+    "Normal-route annotations establish supported methods, not minimal requirements over all possible strategies.",
+    "Individual entries retain source inconsistencies and identity notes; none is a Cemu playtest result.",
+    "Bring necessary native weapons from outside: randomized chest rewards cannot be assumed to supply puzzle equipment."
+  ]
+}

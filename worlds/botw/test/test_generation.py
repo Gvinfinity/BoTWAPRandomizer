@@ -276,7 +276,7 @@ class TestDlcOptionsOff(BotWTestBase):
         self.assertFalse(any("The Master Trials DLC" in entry.get('category', [])
                              or "The Champions' Ballad DLC" in entry.get('category', [])
                              for entry in self.world.active_locations))
-        self.assertEqual(len(self.world.active_locations), 389)
+        self.assertEqual(len(self.world.active_locations), 386)
 
 
 class TestDlcOptionsOn(BotWTestBase):
@@ -289,9 +289,9 @@ class TestDlcOptionsOn(BotWTestBase):
         self.assertIn('One-Hit Obliterator', pool)
         self.assertIn('Master Cycle Zero', pool)
         self.assertEqual(sum("The Master Trials DLC" in entry.get('category', [])
-                             for entry in self.world.active_locations), 8)
+                             for entry in self.world.active_locations), 4)
         self.assertEqual(sum("The Champions' Ballad DLC" in entry.get('category', [])
-                             for entry in self.world.active_locations), 18)
+                             for entry in self.world.active_locations), 25)
         self.assertEqual(len(self.world.active_locations), 415)
 
 
@@ -331,3 +331,28 @@ class TestCombatChecks(BotWTestBase):
         self.assertFalse(location.can_reach(self.multiworld.state))
         self.multiworld.state.collect(self.world.create_item('Paraglider'))
         self.assertTrue(location.can_reach(self.multiworld.state))
+
+
+class TestFinalTrialChestRoutes(BotWTestBase):
+    options = {'enable_the_master_trials_dlc': False, 'enable_the_champions_ballad_dlc': True}
+
+    def test_final_trial_chests_follow_champion_songs_not_sword_trials(self):
+        chests = [e for e in self.world.active_chests if e['region'] == 'Final Trial']
+        self.assertEqual(len(chests), 7)
+        self.assertFalse(any(e['region'].startswith('Trial of the Sword (') for e in chests))
+        self.collect_all_but('One-Hit Obliterator')
+        for entry in chests:
+            self.assertFalse(self.world.get_location(entry['name']).can_reach(self.multiworld.state))
+        self.multiworld.state.collect(self.world.create_item('One-Hit Obliterator'))
+        for entry in chests:
+            self.assertTrue(self.world.get_location(entry['name']).can_reach(self.multiworld.state))
+        self.assertFalse(self.multiworld.state.has('Progressive Master Sword', self.player))
+
+
+class TestSwordTrialChestIsolation(BotWTestBase):
+    options = {'enable_the_master_trials_dlc': True, 'enable_the_champions_ballad_dlc': False}
+
+    def test_sword_option_does_not_enable_champions_dungeon_chests(self):
+        self.assertFalse(any(e['region'] == 'Final Trial' for e in self.world.active_chests))
+        bonus = [e for e in self.world.active_chests if e['hash_id'] in {0x2D3FEE5E, 0x1C3B3C05, 0xF3F989AC}]
+        self.assertEqual(len(bonus), 3)

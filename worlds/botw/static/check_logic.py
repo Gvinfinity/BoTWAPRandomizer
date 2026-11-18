@@ -4,20 +4,17 @@ Vanilla weapons, ammunition and cooking remain available. Recommended armor
 upgrades, hearts and stamina are not mandatory AP progression gates. Keep
 physical rune/quest requirements separate from those recommendations.
 """
+import json
+from importlib.resources import files
+
 from .requirements import parse_requirement
 
-# Stable physical identities: never assign numbered chest rules by sort order.
-CHEST_RULES = {
-    ('Map/MainField/D-6/D-6_Static.smubin', 0xF5EA1473): '|Progressive Remote Bomb|',
-    ('Map/MainField/E-6/E-6_Dynamic.smubin', 0xA2A08719): '|Progressive Remote Bomb|',
-    ('Map/MainField/E-6/E-6_Static.smubin', 0xE1F9BB4B): "|Progressive Remote Bomb| OR |Paraglider| OR |Progressive Revali's Gale| OR |Revali's Gale|",
-    ('Map/MainField/E-6/E-6_Static.smubin', 0x78F0EAF1): "|Progressive Remote Bomb| OR |Paraglider| OR |Progressive Revali's Gale| OR |Revali's Gale|",
-    ('Map/MainField/E-6/E-6_Dynamic.smubin', 0x6260C604): '|Magnesis|',
-    ('Map/MainField/E-6/E-6_Dynamic.smubin', 0xDF4FC4CF): '|Magnesis|',
-    ('Map/MainField/E-6/E-6_Dynamic.smubin', 0x123AEF57): '|Magnesis|',
-    ('Map/MainField/E-7/E-7_Dynamic.smubin', 0x68BE4D6A): '|Progressive Remote Bomb|',
-    ('Map/MainField/E-7/E-7_Static.smubin', 0xE382DE4C): '|Progressive Stasis|',
-}
+# Stable physical identities are accompanied by route steps and source evidence.
+
+ROUTES = json.loads(files(__package__).joinpath('chest_routes.json').read_text())['routes']
+CHEST_RULES = {(row['logical_map'], int(row['hash_id'], 16)): row['requires'] for row in ROUTES}
+BONUS_CHESTS = {0x2D3FEE5E, 0x1C3B3C05, 0xF3F989AC}
+FINAL_TRIAL_MAP = 'Map/MainFieldDungeon/FinalTrial/FinalTrial_Static.smubin'
 
 # Exterior/quest access for Guardian Scout shrines. Ordinary combat equipment
 # is native. Cryonis/Magnesis pillars and upgraded armor are combat aids, not
@@ -147,4 +144,11 @@ def check_requirement(entry):
 
 
 def apply_check_logic(entry):
-    return dict(entry, requires=check_requirement(entry))
+    result = dict(entry, requires=check_requirement(entry))
+    identity = (entry.get('logical_map'), entry.get('hash_id'))
+    if identity in CHEST_RULES and entry.get('logical_map') == FINAL_TRIAL_MAP:
+        result.update(name=f"Final Trial - Chest {entry['hash_id']:08X}", region='Final Trial',
+                      category=["The Champions' Ballad DLC"], binding='champions-ballad-finaltrial-hash')
+    elif identity in CHEST_RULES and entry.get('hash_id') in BONUS_CHESTS:
+        result['category'] = ['Overworld Chests', 'The Master Trials DLC']
+    return result

@@ -1,27 +1,27 @@
 {
+  "scope": "all_generatable_ap_locations",
   "generated_by": "tools/export_logic_graph.py",
-  "source_digest": "e57d9a1ba867d018aa5a1e0560483a5f327ed3a9e5dec01af0716d0236a71fcb",
+  "source_digest": "597fdf877fa540f82d05992da22c001b067755b6cfb91be5201d61a1304eeee9",
   "options": {
     "goal": 2,
-    "skip_great_plateau": 1,
+    "skip_great_plateau": 0,
     "chest_sanity": 1,
     "shrine_sanity": 1,
     "tower_sanity": 1,
     "miniboss_sanity": 1,
     "boss_sanity": 1,
-    "enable_the_master_trials_dlc": 0,
+    "enable_the_master_trials_dlc": 1,
     "trial_of_the_sword": 1,
-    "enable_the_champions_ballad_dlc": 0
+    "enable_the_champions_ballad_dlc": 1
   },
   "starting_inventory": {
     "Heart Container": 3,
     "Weapon Slot": 8,
     "Bow Slot": 5,
-    "Shield Slot": 4,
-    "Great Plateau Tower": 1
+    "Shield Slot": 4
   },
   "direction": "dependent -> prerequisite",
-  "semantics": "Each node requires its named dependencies. all=AND, any=OR; A counted ref sums owned copies (categories expand members); count/of sums its listed items. Received items come from AP inventory; event items depend on event locations. Menu is reachable. Cycles start unreachable. Randomized item placements are excluded.",
+  "semantics": "Each node requires its named dependencies. Gates explicitly use AND/OR with inputs; a counted ref sums owned copies (categories expand members); count/of sums its listed items. Received items come from AP inventory; event items depend on event locations. Menu is reachable. Cycles start unreachable. Randomized item placements are excluded.",
   "nodes": [
     {
       "id": "goal:Victory",
@@ -33,7 +33,9 @@
     {
       "id": "item:Beginning Trials Completed",
       "type": "item",
-      "acquisition": "unavailable"
+      "requires": {
+        "ref": "location:Beginning Trials Completed"
+      }
     },
     {
       "id": "item:Calamity Ganon Cleared Locally",
@@ -50,22 +52,142 @@
     {
       "id": "item:Completed Daruk's Song",
       "type": "item",
-      "acquisition": "unavailable"
+      "requires": {
+        "ref": "location:Completed Daruk's Song"
+      }
+    },
+    {
+      "id": "item:Completed Etsu Korima Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Etsu Korima Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Kamia Omuna Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Kamia Omuna Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Kee Dafunia Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Kee Dafunia Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Keive Tala Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Keive Tala Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Kiah Toza Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Kiah Toza Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Kihiro Moh Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Kihiro Moh Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Mah Eliya Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Mah Eliya Shrine"
+      }
     },
     {
       "id": "item:Completed Mipha's Song",
       "type": "item",
-      "acquisition": "unavailable"
+      "requires": {
+        "ref": "location:Completed Mipha's Song"
+      }
+    },
+    {
+      "id": "item:Completed Noe Rajee Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Noe Rajee Shrine"
+      }
     },
     {
       "id": "item:Completed Revali's Song",
       "type": "item",
-      "acquisition": "unavailable"
+      "requires": {
+        "ref": "location:Completed Revali's Song"
+      }
+    },
+    {
+      "id": "item:Completed Rinu Honika Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Rinu Honika Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Rohta Chigah Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Rohta Chigah Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Ruvo Korbah Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Ruvo Korbah Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Sato Koda Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Sato Koda Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Sharo Lun Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Sharo Lun Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Shira Gomar Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Shira Gomar Shrine"
+      }
+    },
+    {
+      "id": "item:Completed Takama Shiri Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Takama Shiri Shrine"
+      }
     },
     {
       "id": "item:Completed Urbosa's Song",
       "type": "item",
-      "acquisition": "unavailable"
+      "requires": {
+        "ref": "location:Completed Urbosa's Song"
+      }
+    },
+    {
+      "id": "item:Completed Yowaka Ita Shrine",
+      "type": "item",
+      "requires": {
+        "ref": "location:Completed Yowaka Ita Shrine"
+      }
     },
     {
       "id": "item:Cryonis",
@@ -100,7 +222,7 @@
     {
       "id": "item:Final Trial Controls",
       "type": "item",
-      "acquisition": "unavailable"
+      "acquisition": "received"
     },
     {
       "id": "item:Flamebreaker Armor",
@@ -168,7 +290,7 @@
     {
       "id": "item:Island Lobster Shirt",
       "type": "item",
-      "acquisition": "unavailable"
+      "acquisition": "received"
     },
     {
       "id": "item:Magnesis",
@@ -185,7 +307,9 @@
     {
       "id": "item:Middle Trials Completed",
       "type": "item",
-      "acquisition": "unavailable"
+      "requires": {
+        "ref": "location:Middle Trials Completed"
+      }
     },
     {
       "id": "item:Naboris Helm Returned",
@@ -235,9 +359,16 @@
       "acquisition": "received"
     },
     {
+      "id": "item:Obliterator Trials Completed",
+      "type": "item",
+      "requires": {
+        "ref": "location:Obliterator Trials Completed"
+      }
+    },
+    {
       "id": "item:One-Hit Obliterator",
       "type": "item",
-      "acquisition": "unavailable"
+      "acquisition": "received"
     },
     {
       "id": "item:Paraglider",
@@ -247,7 +378,7 @@
     {
       "id": "item:Progressive Master Sword",
       "type": "item",
-      "acquisition": "unavailable"
+      "acquisition": "received"
     },
     {
       "id": "item:Progressive Remote Bomb",
@@ -257,7 +388,7 @@
     {
       "id": "item:Progressive Revali's Gale",
       "type": "item",
-      "acquisition": "unavailable"
+      "acquisition": "received"
     },
     {
       "id": "item:Progressive Stasis",
@@ -267,7 +398,7 @@
     {
       "id": "item:Revali's Gale",
       "type": "item",
-      "acquisition": "received"
+      "acquisition": "unavailable"
     },
     {
       "id": "item:Ruby Circlet",
@@ -387,7 +518,8 @@
       "check_kind": "shrine",
       "check_id": 3222274056,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -403,7 +535,8 @@
       "check_kind": "chest",
       "check_id": 3036913716,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -419,7 +552,8 @@
       "check_kind": "chest",
       "check_id": 3078640570,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -427,6 +561,14 @@
             "ref": "region:Tabantha"
           }
         ]
+      }
+    },
+    {
+      "id": "location:Beginning Trials Completed",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "ref": "region:Trial of the Sword (Beginning Trials)"
       }
     },
     {
@@ -642,7 +784,8 @@
       "check_kind": "shrine",
       "check_id": 3222274055,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -658,7 +801,8 @@
       "check_kind": "chest",
       "check_id": 3016555202,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -674,7 +818,8 @@
       "check_kind": "chest",
       "check_id": 2997352430,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -690,9 +835,11 @@
       "check_kind": "boss",
       "check_id": 3254779908,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Freed Vah Rudania"
               },
@@ -702,7 +849,8 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Freed Vah Naboris"
               },
@@ -722,9 +870,11 @@
       "type": "location",
       "check_kind": "event",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Freed Vah Rudania"
               },
@@ -734,7 +884,8 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Freed Vah Naboris"
               },
@@ -777,6 +928,861 @@
       }
     },
     {
+      "id": "location:Completed Daruk's Song",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Completed Kamia Omuna Shrine"
+          },
+          {
+            "ref": "item:Completed Sharo Lun Shrine"
+          },
+          {
+            "ref": "item:Completed Rinu Honika Shrine"
+          },
+          {
+            "ref": "region:Eldin"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Etsu Korima Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "ref": "region:Great Plateau (One-Hit Obliterator)"
+      }
+    },
+    {
+      "id": "location:Completed Kamia Omuna Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Progressive Remote Bomb"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "ref": "category:Flame Resistant Body",
+                "count": 1
+              },
+              {
+                "ref": "category:Flame Resistant Legs",
+                "count": 1
+              },
+              {
+                "ref": "category:Flame Resistant Head",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Fireproof Supplies"
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Eldin"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Kee Dafunia Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Lanayru"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Keive Tala Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Freed Vah Naboris"
+          },
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Progressive Remote Bomb"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "ref": "category:Cold Resistant Head",
+                "count": 1
+              },
+              {
+                "ref": "category:Cold Resistant Legs",
+                "count": 1
+              },
+              {
+                "ref": "category:Cold Resistant Body",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Cold Protection Supplies"
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Gerudo Desert"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Kiah Toza Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Hebra"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Kihiro Moh Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "ref": "category:Cold Resistance",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Plateau Cold Protection Supplies"
+              }
+            ]
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "ref": "item:Gerudo Sirwal"
+                  },
+                  {
+                    "ref": "item:Gerudo Top"
+                  },
+                  {
+                    "ref": "item:Gerudo Veil"
+                  }
+                ]
+              },
+              {
+                "ref": "category:Heat Resistance",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Desert Protection Supplies"
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Gerudo Desert"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Mah Eliya Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Zora Armor"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Lanayru"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Mipha's Song",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Completed Kee Dafunia Shrine"
+          },
+          {
+            "ref": "item:Completed Mah Eliya Shrine"
+          },
+          {
+            "ref": "item:Completed Sato Koda Shrine"
+          },
+          {
+            "ref": "region:Lanayru"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Noe Rajee Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "ref": "region:Tabantha"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Revali's Song",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Completed Kiah Toza Shrine"
+          },
+          {
+            "ref": "item:Completed Shira Gomar Shrine"
+          },
+          {
+            "ref": "item:Completed Noe Rajee Shrine"
+          },
+          {
+            "ref": "region:Tabantha"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Rinu Honika Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Progressive Remote Bomb"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "ref": "category:Flame Resistance",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Fireproof Supplies"
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Eldin"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Rohta Chigah Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "region:Great Plateau (One-Hit Obliterator)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Ruvo Korbah Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "ref": "region:Great Plateau (One-Hit Obliterator)"
+      }
+    },
+    {
+      "id": "location:Completed Sato Koda Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Lanayru"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Sharo Lun Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Freed Vah Rudania"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Eldin"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Shira Gomar Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Progressive Remote Bomb"
+          },
+          {
+            "ref": "item:Progressive Stasis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Hyrule Ridge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Takama Shiri Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "ref": "category:Cold Resistance",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Plateau Cold Protection Supplies"
+              }
+            ]
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Gerudo Desert"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Urbosa's Song",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Completed Kihiro Moh Shrine"
+          },
+          {
+            "ref": "item:Completed Takama Shiri Shrine"
+          },
+          {
+            "ref": "item:Completed Keive Tala Shrine"
+          },
+          {
+            "ref": "region:Gerudo Desert"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Completed Yowaka Ita Shrine",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "region:Great Plateau (One-Hit Obliterator)"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Daag Chokah Shrine",
       "type": "location",
       "check_kind": "shrine",
@@ -800,7 +1806,8 @@
       "check_kind": "shrine",
       "check_id": 3222274149,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -819,7 +1826,8 @@
       "check_kind": "chest",
       "check_id": 3203418836,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -874,7 +1882,8 @@
       "check_kind": "shrine",
       "check_id": 3222274081,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -890,7 +1899,8 @@
       "check_kind": "chest",
       "check_id": 3045313681,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -906,12 +1916,14 @@
       "check_kind": "shrine",
       "check_id": 3222274080,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -922,9 +1934,11 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "item:Gerudo Sirwal"
                   },
@@ -957,12 +1971,14 @@
       "check_kind": "chest",
       "check_id": 3125875999,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -973,9 +1989,11 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "item:Gerudo Sirwal"
                   },
@@ -1008,12 +2026,14 @@
       "check_kind": "chest",
       "check_id": 3014462934,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -1024,9 +2044,11 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "item:Gerudo Sirwal"
                   },
@@ -1059,12 +2081,14 @@
       "check_kind": "chest",
       "check_id": 3138868053,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -1075,9 +2099,11 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "item:Gerudo Sirwal"
                   },
@@ -1110,12 +2136,14 @@
       "check_kind": "chest",
       "check_id": 3037685519,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -1126,9 +2154,11 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "item:Gerudo Sirwal"
                   },
@@ -1161,12 +2191,14 @@
       "check_kind": "shrine",
       "check_id": 3222274112,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -1188,9 +2220,11 @@
       "check_kind": "chest",
       "check_id": 3203822945,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -1212,12 +2246,14 @@
       "check_kind": "shrine",
       "check_id": 3222274108,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -1228,9 +2264,11 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "item:Gerudo Sirwal"
                   },
@@ -1263,12 +2301,14 @@
       "check_kind": "chest",
       "check_id": 3200403132,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -1279,9 +2319,11 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "item:Gerudo Sirwal"
                   },
@@ -1314,9 +2356,13 @@
       "check_kind": "boss",
       "check_id": 3254779910,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "location:Thunderblight Ganon - Defeated"
+          },
+          {
+            "ref": "location:Trial of the Sword - Completed"
           },
           {
             "ref": "location:Waterblight Ganon - Defeated"
@@ -1341,7 +2387,8 @@
       "type": "location",
       "check_kind": "event",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "location:Dark Beast Ganon - Defeated"
           },
@@ -1375,7 +2422,8 @@
       "check_kind": "shrine",
       "check_id": 3222274067,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -1391,7 +2439,8 @@
       "check_kind": "chest",
       "check_id": 3035238843,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -1407,7 +2456,8 @@
       "check_kind": "chest",
       "check_id": 2973587954,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -1423,7 +2473,8 @@
       "check_kind": "chest",
       "check_id": 3092050709,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -1448,7 +2499,8 @@
       "check_kind": "shrine",
       "check_id": 3222274103,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -1468,14 +2520,25 @@
       }
     },
     {
+      "id": "location:Etsu Korima Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3199805676,
+      "requires": {
+        "ref": "region:Great Plateau (One-Hit Obliterator)"
+      }
+    },
+    {
       "id": "location:Faron Tower",
       "type": "location",
       "check_kind": "tower",
       "check_id": 3223322638,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Stamina Vessels",
                 "count": 4
@@ -1495,12 +2558,165 @@
       }
     },
     {
+      "id": "location:Final Trial - Chest 5604232A",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3051491453,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "item:Progressive Stasis"
+          },
+          {
+            "ref": "region:Final Trial"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Final Trial - Chest 69B896AF",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3133007048,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Progressive Stasis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Final Trial"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Final Trial - Chest 8CEC60E6",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3012811470,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Paraglider"
+          },
+          {
+            "ref": "item:Progressive Stasis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Final Trial"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Final Trial - Chest 94BC927E",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3093884152,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Progressive Stasis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Final Trial"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Final Trial - Chest DB170E07",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3110989121,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Final Trial"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Final Trial - Chest E09D93CF",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3035969838,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Final Trial"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Final Trial - Chest EC4C9D4A",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3150006085,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "item:Paraglider"
+          },
+          {
+            "ref": "region:Final Trial"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Fireblight Ganon - Defeated",
       "type": "location",
       "check_kind": "boss",
       "check_id": 3254779905,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -1523,7 +2739,8 @@
       "type": "location",
       "check_kind": "event",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -1538,7 +2755,8 @@
       "type": "location",
       "check_kind": "event",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -1607,7 +2825,8 @@
       "check_kind": "shrine",
       "check_id": 3222274100,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -1641,7 +2860,8 @@
       "check_kind": "shrine",
       "check_id": 3222274134,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -1657,7 +2877,8 @@
       "check_kind": "chest",
       "check_id": 3205573669,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -1686,12 +2907,22 @@
       }
     },
     {
+      "id": "location:Great Plateau Tower",
+      "type": "location",
+      "check_kind": "tower",
+      "check_id": 3223322631,
+      "requires": {
+        "ref": "region:Great Plateau"
+      }
+    },
+    {
       "id": "location:Ha Dahamar Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274093,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -1707,7 +2938,8 @@
       "check_kind": "chest",
       "check_id": 2991006692,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -1732,7 +2964,8 @@
       "check_kind": "shrine",
       "check_id": 3222274051,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -1740,7 +2973,8 @@
             "ref": "item:Progressive Stasis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -1751,11 +2985,14 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -1766,7 +3003,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -1779,9 +3017,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -1792,7 +3032,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -1805,9 +3046,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -1818,7 +3061,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -1844,11 +3088,14 @@
       "check_kind": "tower",
       "check_id": 3223322625,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "category:Cold Resistant Head",
                     "count": 1
@@ -1860,7 +3107,8 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "category:Cold Resistant Head",
                     "count": 1
@@ -1872,7 +3120,8 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "category:Cold Resistant Legs",
                     "count": 1
@@ -1897,7 +3146,8 @@
       "check_kind": "shrine",
       "check_id": 3222274136,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -1913,7 +3163,8 @@
       "check_kind": "chest",
       "check_id": 3133636294,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -1929,7 +3180,8 @@
       "check_kind": "shrine",
       "check_id": 3222274077,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -2051,6 +3303,23 @@
       }
     },
     {
+      "id": "location:Igneo Talus Titan - Eldin [27CD3C67]",
+      "type": "location",
+      "check_kind": "miniboss",
+      "check_id": 3245962545,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Eldin"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Ishto Soh Shrine",
       "type": "location",
       "check_kind": "shrine",
@@ -2083,7 +3352,8 @@
       "check_kind": "shrine",
       "check_id": 3222274089,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -2099,7 +3369,8 @@
       "check_kind": "chest",
       "check_id": 3090423820,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -2115,7 +3386,8 @@
       "check_kind": "chest",
       "check_id": 2974652352,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -2131,7 +3403,8 @@
       "check_kind": "shrine",
       "check_id": 3222274049,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2150,7 +3423,8 @@
       "check_kind": "chest",
       "check_id": 3069819867,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2169,27 +3443,20 @@
       "check_kind": "shrine",
       "check_id": 3222274165,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Naydra's Scale"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
-                  },
-                  {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Head",
                         "count": 1
@@ -2198,24 +3465,10 @@
                         "ref": "item:Native Cold Protection Supplies"
                       }
                     ]
-                  }
-                ]
-              },
-              {
-                "all": [
-                  {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -2228,11 +3481,13 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
-                        "ref": "category:Cold Resistant Head",
+                        "ref": "category:Cold Resistant Legs",
                         "count": 1
                       },
                       {
@@ -2241,7 +3496,37 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -2267,27 +3552,20 @@
       "check_kind": "chest",
       "check_id": 3132989381,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Naydra's Scale"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
-                  },
-                  {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Head",
                         "count": 1
@@ -2296,24 +3574,10 @@
                         "ref": "item:Native Cold Protection Supplies"
                       }
                     ]
-                  }
-                ]
-              },
-              {
-                "all": [
-                  {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -2326,11 +3590,13 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
-                        "ref": "category:Cold Resistant Head",
+                        "ref": "category:Cold Resistant Legs",
                         "count": 1
                       },
                       {
@@ -2339,7 +3605,37 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -2365,7 +3661,8 @@
       "check_kind": "shrine",
       "check_id": 3222274078,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2373,11 +3670,14 @@
             "ref": "item:Progressive Stasis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -2388,7 +3688,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -2401,9 +3702,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -2414,7 +3717,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -2427,9 +3731,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -2440,7 +3746,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -2466,7 +3773,8 @@
       "check_kind": "chest",
       "check_id": 2952870603,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2474,11 +3782,14 @@
             "ref": "item:Progressive Stasis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -2489,7 +3800,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -2502,9 +3814,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -2515,7 +3829,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -2528,9 +3843,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -2541,7 +3858,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -2567,7 +3885,8 @@
       "check_kind": "chest",
       "check_id": 2956712893,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2575,11 +3894,14 @@
             "ref": "item:Progressive Stasis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -2590,7 +3912,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -2603,9 +3926,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -2616,7 +3941,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -2629,9 +3955,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -2642,7 +3970,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -2668,7 +3997,8 @@
       "check_kind": "shrine",
       "check_id": 3222274102,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2687,7 +4017,8 @@
       "check_kind": "chest",
       "check_id": 3203936708,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2703,7 +4034,8 @@
       "check_kind": "chest",
       "check_id": 3177501896,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2719,7 +4051,8 @@
       "check_kind": "chest",
       "check_id": 2986695694,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2735,7 +4068,8 @@
       "check_kind": "shrine",
       "check_id": 3222274088,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2754,7 +4088,8 @@
       "check_kind": "shrine",
       "check_id": 3222274114,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2773,7 +4108,8 @@
       "check_kind": "chest",
       "check_id": 3144532619,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2792,7 +4128,8 @@
       "check_kind": "shrine",
       "check_id": 3222274107,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -2811,7 +4148,8 @@
       "check_kind": "shrine",
       "check_id": 3222274082,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Camera"
           },
@@ -2854,7 +4192,8 @@
       "check_kind": "chest",
       "check_id": 3193999918,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2862,7 +4201,8 @@
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistant Body",
                 "count": 1
@@ -2928,7 +4268,8 @@
       "check_kind": "shrine",
       "check_id": 3222274058,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -2944,7 +4285,8 @@
       "check_kind": "shrine",
       "check_id": 3222274097,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -2960,7 +4302,8 @@
       "check_kind": "chest",
       "check_id": 3149115435,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -2976,7 +4319,8 @@
       "check_kind": "chest",
       "check_id": 3040824254,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -2992,9 +4336,11 @@
       "check_kind": "shrine",
       "check_id": 3222274073,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -3016,9 +4362,11 @@
       "check_kind": "chest",
       "check_id": 3118735030,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -3040,9 +4388,11 @@
       "check_kind": "chest",
       "check_id": 3031983609,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -3064,7 +4414,8 @@
       "check_kind": "shrine",
       "check_id": 3222274125,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -3080,7 +4431,8 @@
       "check_kind": "chest",
       "check_id": 3174394075,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -3091,14 +4443,36 @@
       }
     },
     {
+      "id": "location:Kee Dafunia Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3158890976,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Lanayru"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Keeha Yoog Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274148,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -3120,9 +4494,11 @@
       "check_kind": "chest",
       "check_id": 3113166755,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -3144,12 +4520,14 @@
       "check_kind": "shrine",
       "check_id": 3222274113,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -3171,12 +4549,14 @@
       "check_kind": "chest",
       "check_id": 2984710416,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -3193,12 +4573,154 @@
       }
     },
     {
+      "id": "location:Keive Tala Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 2953017199,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Freed Vah Naboris"
+          },
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Progressive Remote Bomb"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "ref": "category:Cold Resistant Head",
+                "count": 1
+              },
+              {
+                "ref": "category:Cold Resistant Legs",
+                "count": 1
+              },
+              {
+                "ref": "category:Cold Resistant Body",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Cold Protection Supplies"
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Gerudo Desert"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Kema Kosassa Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274133,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -3214,7 +4736,8 @@
       "check_kind": "chest",
       "check_id": 3198797395,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -3230,12 +4753,14 @@
       "check_kind": "shrine",
       "check_id": 3222274111,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -3246,11 +4771,14 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -3261,7 +4789,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -3274,9 +4803,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -3287,7 +4818,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -3300,9 +4832,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -3313,7 +4847,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -3339,12 +4874,14 @@
       "check_kind": "chest",
       "check_id": 3208997043,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -3355,11 +4892,14 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -3370,7 +4910,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -3383,9 +4924,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -3396,7 +4939,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -3409,9 +4953,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -3422,7 +4968,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -3479,12 +5026,91 @@
       }
     },
     {
+      "id": "location:Kiah Toza Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3052914973,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Hebra"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Kihiro Moh Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 2983438152,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "ref": "category:Cold Resistance",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Plateau Cold Protection Supplies"
+              }
+            ]
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "ref": "item:Gerudo Sirwal"
+                  },
+                  {
+                    "ref": "item:Gerudo Top"
+                  },
+                  {
+                    "ref": "item:Gerudo Veil"
+                  }
+                ]
+              },
+              {
+                "ref": "category:Heat Resistance",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Desert Protection Supplies"
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Gerudo Desert"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Korgu Chideh Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274145,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -3509,7 +5135,8 @@
       "check_kind": "chest",
       "check_id": 3137104247,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -3534,12 +5161,14 @@
       "check_kind": "shrine",
       "check_id": 3222274158,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -3550,9 +5179,11 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "item:Gerudo Sirwal"
                   },
@@ -3585,12 +5216,14 @@
       "check_kind": "chest",
       "check_id": 2959328205,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -3601,9 +5234,11 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "item:Gerudo Sirwal"
                   },
@@ -3636,27 +5271,20 @@
       "check_kind": "shrine",
       "check_id": 3222274091,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
-                  },
-                  {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Head",
                         "count": 1
@@ -3665,24 +5293,10 @@
                         "ref": "item:Native Cold Protection Supplies"
                       }
                     ]
-                  }
-                ]
-              },
-              {
-                "all": [
-                  {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -3695,11 +5309,13 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
-                        "ref": "category:Cold Resistant Head",
+                        "ref": "category:Cold Resistant Legs",
                         "count": 1
                       },
                       {
@@ -3708,7 +5324,37 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -3734,27 +5380,20 @@
       "check_kind": "chest",
       "check_id": 3167207632,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
-                  },
-                  {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Head",
                         "count": 1
@@ -3763,24 +5402,10 @@
                         "ref": "item:Native Cold Protection Supplies"
                       }
                     ]
-                  }
-                ]
-              },
-              {
-                "all": [
-                  {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -3793,11 +5418,13 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
-                        "ref": "category:Cold Resistant Head",
+                        "ref": "category:Cold Resistant Legs",
                         "count": 1
                       },
                       {
@@ -3806,7 +5433,37 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -3832,7 +5489,8 @@
       "check_kind": "shrine",
       "check_id": 3222274143,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -3848,7 +5506,8 @@
       "check_kind": "chest",
       "check_id": 3208029730,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -3873,7 +5532,8 @@
       "check_kind": "shrine",
       "check_id": 3222274160,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Camera"
           },
@@ -3889,7 +5549,8 @@
       "check_kind": "chest",
       "check_id": 3076273065,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Camera"
           },
@@ -3932,7 +5593,8 @@
       "check_kind": "shrine",
       "check_id": 3222274154,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -3948,7 +5610,8 @@
       "check_kind": "chest",
       "check_id": 2955228827,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -3964,7 +5627,8 @@
       "check_kind": "shrine",
       "check_id": 3222274140,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -3980,7 +5644,8 @@
       "check_kind": "chest",
       "check_id": 3013846396,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -3991,12 +5656,39 @@
       }
     },
     {
+      "id": "location:Mah Eliya Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3177697263,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Zora Armor"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Lanayru"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Maka Rah Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274099,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -4045,7 +5737,18 @@
       "check_kind": "chest",
       "check_id": 3003476379,
       "requires": {
-        "ref": "region:Great Plateau"
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Native Plateau Cold Protection Supplies"
+          },
+          {
+            "ref": "region:Great Plateau"
+          }
+        ]
       }
     },
     {
@@ -4072,7 +5775,8 @@
       "check_kind": "chest",
       "check_id": 2989084003,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -4106,7 +5810,15 @@
       "check_kind": "chest",
       "check_id": 3162335574,
       "requires": {
-        "ref": "region:Great Plateau"
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Native Plateau Cold Protection Supplies"
+          },
+          {
+            "ref": "region:Great Plateau"
+          }
+        ]
       }
     },
     {
@@ -4115,7 +5827,15 @@
       "check_kind": "chest",
       "check_id": 3042958897,
       "requires": {
-        "ref": "region:Great Plateau"
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Native Plateau Cold Protection Supplies"
+          },
+          {
+            "ref": "region:Great Plateau"
+          }
+        ]
       }
     },
     {
@@ -4133,7 +5853,15 @@
       "check_kind": "chest",
       "check_id": 3117400481,
       "requires": {
-        "ref": "region:Great Plateau"
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "region:Great Plateau"
+          }
+        ]
       }
     },
     {
@@ -4142,7 +5870,15 @@
       "check_kind": "chest",
       "check_id": 3149510449,
       "requires": {
-        "ref": "region:Great Plateau"
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "region:Great Plateau"
+          }
+        ]
       }
     },
     {
@@ -4151,7 +5887,15 @@
       "check_kind": "chest",
       "check_id": 3078754342,
       "requires": {
-        "ref": "region:Great Plateau"
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Native Plateau Cold Protection Supplies"
+          },
+          {
+            "ref": "region:Great Plateau"
+          }
+        ]
       }
     },
     {
@@ -4169,7 +5913,15 @@
       "check_kind": "chest",
       "check_id": 3190268708,
       "requires": {
-        "ref": "region:Great Plateau"
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Native Plateau Cold Protection Supplies"
+          },
+          {
+            "ref": "region:Great Plateau"
+          }
+        ]
       }
     },
     {
@@ -4178,7 +5930,8 @@
       "check_kind": "chest",
       "check_id": 3115036712,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4212,7 +5965,8 @@
       "check_kind": "chest",
       "check_id": 3017086259,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4228,7 +5982,8 @@
       "check_kind": "chest",
       "check_id": 3135587233,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -4253,7 +6008,8 @@
       "check_kind": "chest",
       "check_id": 3175050564,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4278,9 +6034,11 @@
       "check_kind": "chest",
       "check_id": 3141477105,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Paraglider"
               },
@@ -4307,9 +6065,11 @@
       "check_kind": "chest",
       "check_id": 3193588709,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Paraglider"
               },
@@ -4345,7 +6105,8 @@
       "check_kind": "chest",
       "check_id": 3001698022,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -4379,7 +6140,8 @@
       "check_kind": "chest",
       "check_id": 3047383936,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -4390,11 +6152,29 @@
       }
     },
     {
+      "id": "location:Maz Koshia - Defeated",
+      "type": "location",
+      "check_kind": "boss",
+      "check_id": 3254779909,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Final Trial"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Medoh Flight Range Supplies",
       "type": "location",
       "check_kind": "event",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -4410,7 +6190,8 @@
       "check_kind": "shrine",
       "check_id": 3222274072,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4432,7 +6213,8 @@
       "check_kind": "chest",
       "check_id": 3040081489,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4446,6 +6228,14 @@
             "ref": "region:Necluda"
           }
         ]
+      }
+    },
+    {
+      "id": "location:Middle Trials Completed",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "ref": "region:Trial of the Sword (Middle Trials)"
       }
     },
     {
@@ -4472,7 +6262,8 @@
       "check_kind": "shrine",
       "check_id": 3222274104,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -4488,14 +6279,7 @@
       "check_kind": "chest",
       "check_id": 3206107654,
       "requires": {
-        "all": [
-          {
-            "ref": "item:Progressive Stasis"
-          },
-          {
-            "ref": "region:Great Hyrule Forest"
-          }
-        ]
+        "ref": "region:Great Hyrule Forest"
       }
     },
     {
@@ -4504,7 +6288,8 @@
       "check_kind": "chest",
       "check_id": 2998309235,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -4520,7 +6305,8 @@
       "check_kind": "chest",
       "check_id": 3216341262,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -4536,7 +6322,8 @@
       "check_kind": "shrine",
       "check_id": 3222274155,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Gerudo Sirwal"
           },
@@ -4547,7 +6334,8 @@
             "ref": "item:Gerudo Veil"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -4558,11 +6346,14 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -4573,7 +6364,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -4586,9 +6378,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -4599,7 +6393,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -4612,9 +6407,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -4625,7 +6422,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -4651,7 +6449,8 @@
       "check_kind": "chest",
       "check_id": 3219711174,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Gerudo Sirwal"
           },
@@ -4662,7 +6461,8 @@
             "ref": "item:Gerudo Veil"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -4673,11 +6473,14 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -4688,7 +6491,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -4701,9 +6505,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -4714,7 +6520,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -4727,9 +6534,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -4740,7 +6549,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -4766,7 +6576,8 @@
       "check_kind": "shrine",
       "check_id": 3222274079,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4785,7 +6596,8 @@
       "check_kind": "chest",
       "check_id": 3023075710,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4804,7 +6616,8 @@
       "check_kind": "chest",
       "check_id": 3133969835,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4823,7 +6636,8 @@
       "check_kind": "shrine",
       "check_id": 3222274106,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4839,7 +6653,8 @@
       "check_kind": "chest",
       "check_id": 2958268527,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4855,7 +6670,8 @@
       "check_kind": "chest",
       "check_id": 3009894487,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4871,7 +6687,8 @@
       "check_kind": "chest",
       "check_id": 3156798525,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -4887,9 +6704,11 @@
       "check_kind": "miniboss",
       "check_id": 3241360167,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Medoh Flight Range Supplies"
               },
@@ -4910,9 +6729,11 @@
       "check_kind": "miniboss",
       "check_id": 3250253043,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Medoh Flight Range Supplies"
               },
@@ -4933,9 +6754,11 @@
       "check_kind": "miniboss",
       "check_id": 3254673874,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Medoh Flight Range Supplies"
               },
@@ -4956,9 +6779,39 @@
       "check_kind": "miniboss",
       "check_id": 3243145664,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
+              {
+                "ref": "item:Medoh Flight Range Supplies"
+              },
+              {
+                "ref": "item:Progressive Remote Bomb"
+              }
+            ]
+          },
+          {
+            "ref": "region:Gerudo Desert"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Molduking - Gerudo Desert [689DEA85]",
+      "type": "location",
+      "check_kind": "miniboss",
+      "check_id": 3240585444,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Medoh Flight Range Supplies"
               },
@@ -4979,7 +6832,8 @@
       "check_kind": "shrine",
       "check_id": 3222274059,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -4995,7 +6849,8 @@
       "check_kind": "chest",
       "check_id": 3154093313,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -5011,7 +6866,8 @@
       "check_kind": "shrine",
       "check_id": 3222274135,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -5027,7 +6883,8 @@
       "check_kind": "chest",
       "check_id": 3120552855,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -5078,7 +6935,8 @@
       "type": "location",
       "check_kind": "event",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -5096,7 +6954,8 @@
       "type": "location",
       "check_kind": "event",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Naboris Helm Returned"
           },
@@ -5162,7 +7021,8 @@
       "check_kind": "shrine",
       "check_id": 3222274053,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -5178,7 +7038,8 @@
       "check_kind": "chest",
       "check_id": 3199947201,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -5189,12 +7050,122 @@
       }
     },
     {
+      "id": "location:Noe Rajee Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3169897760,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "ref": "region:Tabantha"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Noya Neha Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274122,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -5210,7 +7181,8 @@
       "check_kind": "chest",
       "check_id": 2965089304,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -5221,12 +7193,38 @@
       }
     },
     {
+      "id": "location:Obliterator Trials Completed",
+      "type": "location",
+      "check_kind": "event",
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Completed Etsu Korima Shrine"
+          },
+          {
+            "ref": "item:Completed Ruvo Korbah Shrine"
+          },
+          {
+            "ref": "item:Completed Rohta Chigah Shrine"
+          },
+          {
+            "ref": "item:Completed Yowaka Ita Shrine"
+          },
+          {
+            "ref": "region:Great Plateau (One-Hit Obliterator)"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Oman Au Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274086,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -5242,7 +7240,8 @@
       "check_kind": "chest",
       "check_id": 3084005693,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -5258,7 +7257,8 @@
       "check_kind": "shrine",
       "check_id": 3222274057,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -5274,7 +7274,8 @@
       "check_kind": "chest",
       "check_id": 3085511790,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -5326,7 +7327,8 @@
       "check_kind": "shrine",
       "check_id": 3222274115,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -5334,7 +7336,8 @@
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -5374,12 +7377,14 @@
       "check_kind": "shrine",
       "check_id": 3222274141,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Freed Vah Naboris"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -5390,11 +7395,14 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -5405,7 +7413,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -5418,9 +7427,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -5431,7 +7442,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -5444,9 +7456,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -5457,7 +7471,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -5483,12 +7498,14 @@
       "check_kind": "chest",
       "check_id": 3189412373,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Freed Vah Naboris"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -5499,11 +7516,14 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -5514,7 +7534,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -5527,9 +7548,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -5540,7 +7563,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -5553,9 +7577,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -5566,7 +7592,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -5601,7 +7628,8 @@
       "check_kind": "chest",
       "check_id": 3179635968,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -5617,9 +7645,11 @@
       "check_kind": "tower",
       "check_id": 3223322639,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Cryonis"
               },
@@ -5643,7 +7673,8 @@
       "check_kind": "shrine",
       "check_id": 3222274090,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -5659,12 +7690,48 @@
       "check_kind": "chest",
       "check_id": 2953541263,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
             "ref": "region:Hebra"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Rinu Honika Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3098246609,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "item:Progressive Remote Bomb"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "ref": "category:Flame Resistance",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Fireproof Supplies"
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Eldin"
           }
         ]
       }
@@ -5688,12 +7755,30 @@
       }
     },
     {
+      "id": "location:Rohta Chigah Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3031563968,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "region:Great Plateau (One-Hit Obliterator)"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Rok Uwog Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274066,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -5762,7 +7847,8 @@
       "type": "location",
       "check_kind": "event",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Zora Armor"
           },
@@ -5827,12 +7913,33 @@
       }
     },
     {
+      "id": "location:Sato Koda Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3186278652,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Lanayru"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Sha Gehma Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274110,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -5851,7 +7958,8 @@
       "check_kind": "shrine",
       "check_id": 3222274101,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -5870,7 +7978,8 @@
       "check_kind": "chest",
       "check_id": 3171358942,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -5889,7 +7998,8 @@
       "check_kind": "chest",
       "check_id": 3157882683,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Native Cold Protection Supplies"
           },
@@ -5908,7 +8018,8 @@
       "check_kind": "shrine",
       "check_id": 3222274094,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -5927,7 +8038,8 @@
       "check_kind": "chest",
       "check_id": 3087514818,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -5943,7 +8055,8 @@
       "check_kind": "shrine",
       "check_id": 3222274161,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Farosh's Scale"
           },
@@ -5959,7 +8072,8 @@
       "check_kind": "chest",
       "check_id": 3209181045,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Farosh's Scale"
           },
@@ -5975,7 +8089,8 @@
       "check_kind": "shrine",
       "check_id": 3222274085,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -5991,7 +8106,8 @@
       "check_kind": "chest",
       "check_id": 3010758555,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -6007,7 +8123,8 @@
       "check_kind": "chest",
       "check_id": 3049062245,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Stasis"
           },
@@ -6023,9 +8140,11 @@
       "check_kind": "shrine",
       "check_id": 3222274074,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -6047,7 +8166,8 @@
       "check_kind": "shrine",
       "check_id": 3222274098,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -6069,7 +8189,8 @@
       "check_kind": "shrine",
       "check_id": 3222274162,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -6085,7 +8206,8 @@
       "check_kind": "chest",
       "check_id": 3101470904,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -6096,14 +8218,131 @@
       }
     },
     {
+      "id": "location:Sharo Lun Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 2983208431,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Cryonis"
+          },
+          {
+            "ref": "item:Freed Vah Rudania"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Flame Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Fireproof Supplies"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Eldin"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Shee Vaneer Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274065,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -6125,9 +8364,11 @@
       "check_kind": "chest",
       "check_id": 2978714051,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -6185,7 +8426,8 @@
       "check_kind": "shrine",
       "check_id": 3222274071,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -6199,12 +8441,36 @@
       }
     },
     {
+      "id": "location:Shira Gomar Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3110058259,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Progressive Remote Bomb"
+          },
+          {
+            "ref": "item:Progressive Stasis"
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Hyrule Ridge"
+          }
+        ]
+      }
+    },
+    {
       "id": "location:Sho Dantu Shrine",
       "type": "location",
       "check_kind": "shrine",
       "check_id": 3222274084,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -6220,7 +8486,8 @@
       "check_kind": "chest",
       "check_id": 3138174110,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -6245,7 +8512,8 @@
       "check_kind": "shrine",
       "check_id": 3222274128,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Camera"
           },
@@ -6261,7 +8529,8 @@
       "check_kind": "chest",
       "check_id": 2962751401,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Camera"
           },
@@ -6277,7 +8546,8 @@
       "check_kind": "shrine",
       "check_id": 3222274076,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -6285,7 +8555,8 @@
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -6307,7 +8578,8 @@
       "check_kind": "chest",
       "check_id": 3137034423,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -6315,7 +8587,8 @@
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -6337,7 +8610,8 @@
       "check_kind": "chest",
       "check_id": 3216718161,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -6345,7 +8619,8 @@
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -6367,7 +8642,8 @@
       "check_kind": "chest",
       "check_id": 2999290640,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -6375,7 +8651,8 @@
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -6397,7 +8674,8 @@
       "check_kind": "chest",
       "check_id": 3027534942,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -6405,7 +8683,8 @@
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -6427,7 +8706,8 @@
       "check_kind": "chest",
       "check_id": 2967244630,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -6435,7 +8715,8 @@
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -6457,7 +8738,8 @@
       "check_kind": "chest",
       "check_id": 3031960034,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -6465,7 +8747,8 @@
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Flame Resistance",
                 "count": 1
@@ -6865,24 +9148,17 @@
       "check_kind": "shrine",
       "check_id": 3222274138,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
-                  },
-                  {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Head",
                         "count": 1
@@ -6891,24 +9167,10 @@
                         "ref": "item:Native Cold Protection Supplies"
                       }
                     ]
-                  }
-                ]
-              },
-              {
-                "all": [
-                  {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -6921,11 +9183,13 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
-                        "ref": "category:Cold Resistant Head",
+                        "ref": "category:Cold Resistant Legs",
                         "count": 1
                       },
                       {
@@ -6934,7 +9198,37 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -6960,24 +9254,17 @@
       "check_kind": "chest",
       "check_id": 3049599666,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
-                  },
-                  {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Head",
                         "count": 1
@@ -6986,24 +9273,10 @@
                         "ref": "item:Native Cold Protection Supplies"
                       }
                     ]
-                  }
-                ]
-              },
-              {
-                "all": [
-                  {
-                    "any": [
-                      {
-                        "ref": "category:Cold Resistant Legs",
-                        "count": 1
-                      },
-                      {
-                        "ref": "item:Native Cold Protection Supplies"
-                      }
-                    ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -7016,11 +9289,13 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
-                        "ref": "category:Cold Resistant Head",
+                        "ref": "category:Cold Resistant Legs",
                         "count": 1
                       },
                       {
@@ -7029,7 +9304,37 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Cold Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Cold Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Cold Resistant Body",
                         "count": 1
@@ -7100,7 +9405,8 @@
       "check_kind": "shrine",
       "check_id": 3222274048,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7116,12 +9422,14 @@
       "check_kind": "shrine",
       "check_id": 3222274167,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -7143,12 +9451,14 @@
       "check_kind": "chest",
       "check_id": 3168431274,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -7160,6 +9470,130 @@
           },
           {
             "ref": "region:Necluda"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Takama Shiri Shrine - Chest",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3105979101,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "ref": "category:Cold Resistance",
+                "count": 1
+              },
+              {
+                "ref": "item:Native Plateau Cold Protection Supplies"
+              }
+            ]
+          },
+          {
+            "gate": "OR",
+            "inputs": [
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Head",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gate": "AND",
+                "inputs": [
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Body",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  },
+                  {
+                    "gate": "OR",
+                    "inputs": [
+                      {
+                        "ref": "category:Heat Resistant Legs",
+                        "count": 1
+                      },
+                      {
+                        "ref": "item:Native Desert Protection Supplies"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "ref": "item:Obliterator Trials Completed"
+          },
+          {
+            "ref": "region:Gerudo Desert"
           }
         ]
       }
@@ -7206,12 +9640,14 @@
       "check_kind": "shrine",
       "check_id": 3222274142,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -7222,11 +9658,14 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -7237,7 +9676,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -7250,9 +9690,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -7263,7 +9705,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -7276,9 +9719,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -7289,7 +9734,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -7315,12 +9761,14 @@
       "check_kind": "chest",
       "check_id": 2982929776,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -7331,11 +9779,14 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -7346,7 +9797,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -7359,9 +9811,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Head",
                         "count": 1
@@ -7372,7 +9826,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -7385,9 +9840,11 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Body",
                         "count": 1
@@ -7398,7 +9855,8 @@
                     ]
                   },
                   {
-                    "any": [
+                    "gate": "OR",
+                    "inputs": [
                       {
                         "ref": "category:Heat Resistant Legs",
                         "count": 1
@@ -7424,7 +9882,8 @@
       "check_kind": "boss",
       "check_id": 3254779907,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7440,9 +9899,11 @@
       "check_kind": "shrine",
       "check_id": 3222274166,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "category:Cold Resistance",
                 "count": 1
@@ -7464,7 +9925,8 @@
       "check_kind": "shrine",
       "check_id": 3222274069,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7486,7 +9948,8 @@
       "check_kind": "chest",
       "check_id": 3186856833,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7508,7 +9971,8 @@
       "check_kind": "chest",
       "check_id": 3042581050,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7530,7 +9994,8 @@
       "check_kind": "shrine",
       "check_id": 3222274063,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -7538,6 +10003,15 @@
             "ref": "region:Dueling Peaks"
           }
         ]
+      }
+    },
+    {
+      "id": "location:Trial of the Sword - Completed",
+      "type": "location",
+      "check_kind": "objective",
+      "check_id": 3255828480,
+      "requires": {
+        "ref": "region:Trial of the Sword (Final Trials)"
       }
     },
     {
@@ -7564,7 +10038,8 @@
       "check_kind": "shrine",
       "check_id": 3222274132,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Dinraal's Scale"
           },
@@ -7580,7 +10055,8 @@
       "check_kind": "chest",
       "check_id": 3203255293,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Dinraal's Scale"
           },
@@ -7596,7 +10072,8 @@
       "check_kind": "shrine",
       "check_id": 3222274060,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Freed Vah Medoh"
           },
@@ -7615,7 +10092,8 @@
       "check_kind": "chest",
       "check_id": 3033159277,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Freed Vah Medoh"
           },
@@ -7634,7 +10112,8 @@
       "check_kind": "shrine",
       "check_id": 3222274105,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7650,14 +10129,7 @@
       "check_kind": "chest",
       "check_id": 3079889459,
       "requires": {
-        "all": [
-          {
-            "ref": "item:Magnesis"
-          },
-          {
-            "ref": "region:Central Hyrule"
-          }
-        ]
+        "ref": "region:Central Hyrule"
       }
     },
     {
@@ -7702,7 +10174,8 @@
       "check_kind": "shrine",
       "check_id": 3222274116,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -7718,7 +10191,8 @@
       "check_kind": "chest",
       "check_id": 3010964048,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -7734,7 +10208,8 @@
       "check_kind": "shrine",
       "check_id": 3222274054,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7750,7 +10225,8 @@
       "check_kind": "chest",
       "check_id": 2959211505,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7766,12 +10242,47 @@
       "check_kind": "chest",
       "check_id": 3039091873,
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
             "ref": "region:Faron"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Yowaka Ita Shrine - Chest 1",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3155898676,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "region:Great Plateau (One-Hit Obliterator)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location:Yowaka Ita Shrine - Chest 2",
+      "type": "location",
+      "check_kind": "chest",
+      "check_id": 3181719341,
+      "requires": {
+        "gate": "AND",
+        "inputs": [
+          {
+            "ref": "item:Magnesis"
+          },
+          {
+            "ref": "region:Great Plateau (One-Hit Obliterator)"
           }
         ]
       }
@@ -7834,7 +10345,8 @@
       "id": "region:Akkala",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -7848,7 +10360,8 @@
       "id": "region:Central Hyrule",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -7862,7 +10375,8 @@
       "id": "region:Divine Beast Vah Medoh",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7885,7 +10399,8 @@
       "id": "region:Divine Beast Vah Naboris",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7905,7 +10420,8 @@
       "id": "region:Divine Beast Vah Rudania",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
@@ -7928,7 +10444,8 @@
       "id": "region:Divine Beast Vah Ruta",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -7948,7 +10465,8 @@
       "id": "region:Dueling Peaks",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -7962,7 +10480,8 @@
       "id": "region:Eldin",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -7976,7 +10495,8 @@
       "id": "region:Faron",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -7990,7 +10510,8 @@
       "id": "region:Final Trial",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Completed Mipha's Song"
           },
@@ -8031,7 +10552,8 @@
       "id": "region:Gerudo Desert",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -8045,7 +10567,8 @@
       "id": "region:Gerudo Highlands",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -8059,12 +10582,14 @@
       "id": "region:Gerudo Town",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Gerudo Top"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Gerudo Veil"
               },
@@ -8074,7 +10599,8 @@
             ]
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Gerudo Sirwal"
               },
@@ -8096,7 +10622,8 @@
       "id": "region:Great Hyrule Forest",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -8117,7 +10644,8 @@
       "id": "region:Great Plateau (One-Hit Obliterator)",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Freed Vah Naboris"
           },
@@ -8146,7 +10674,8 @@
       "id": "region:Hebra",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -8160,7 +10689,8 @@
       "id": "region:Hyrule Castle",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -8174,7 +10704,8 @@
       "id": "region:Hyrule Ridge",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -8188,7 +10719,8 @@
       "id": "region:Lake Hylia",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -8202,7 +10734,8 @@
       "id": "region:Lanayru",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -8221,7 +10754,8 @@
       "id": "region:Necluda",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -8235,7 +10769,8 @@
       "id": "region:Tabantha",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Paraglider"
           },
@@ -8249,7 +10784,8 @@
       "id": "region:Trial of the Sword (Beginning Trials)",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "category:Heart Containers",
             "count": 13
@@ -8282,7 +10818,8 @@
       "id": "region:Trial of the Sword (Final Trials)",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "category:Heart Containers",
             "count": 25
@@ -8318,7 +10855,8 @@
       "id": "region:Trial of the Sword (Middle Trials)",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "category:Heart Containers",
             "count": 19
@@ -8354,17 +10892,20 @@
       "id": "region:Vah Medoh Boarding",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Medoh Flight Range Supplies"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Native Cold Protection Supplies"
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "category:Cold Resistant Head",
                     "count": 1
@@ -8376,7 +10917,8 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "category:Cold Resistant Head",
                     "count": 1
@@ -8388,7 +10930,8 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "category:Cold Resistant Legs",
                     "count": 1
@@ -8414,18 +10957,19 @@
       "id": "region:Vah Naboris Boarding",
       "type": "region",
       "requires": {
-        "all": [
-          {
-            "ref": "item:Naboris Riju Supplies"
-          },
-          {
-            "ref": "item:Native Desert Protection Supplies"
-          },
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Magnesis"
           },
           {
             "ref": "item:Thunder Helm"
+          },
+          {
+            "ref": "item:Naboris Riju Supplies"
+          },
+          {
+            "ref": "item:Native Desert Protection Supplies"
           },
           {
             "ref": "region:Gerudo Town"
@@ -8437,7 +10981,8 @@
       "id": "region:Vah Rudania Boarding",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Progressive Remote Bomb"
           },
@@ -8445,12 +10990,14 @@
             "ref": "item:Progressive Stasis"
           },
           {
-            "any": [
+            "gate": "OR",
+            "inputs": [
               {
                 "ref": "item:Native Fireproof Supplies"
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "category:Flame Resistant Body",
                     "count": 1
@@ -8462,7 +11009,8 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "category:Flame Resistant Legs",
                     "count": 1
@@ -8474,7 +11022,8 @@
                 ]
               },
               {
-                "all": [
+                "gate": "AND",
+                "inputs": [
                   {
                     "ref": "category:Flame Resistant Body",
                     "count": 1
@@ -8497,7 +11046,8 @@
       "id": "region:Vah Ruta Boarding",
       "type": "region",
       "requires": {
-        "all": [
+        "gate": "AND",
+        "inputs": [
           {
             "ref": "item:Cryonis"
           },
@@ -8687,5 +11237,11 @@
         }
       ]
     }
-  ]
+  ],
+  "coverage": {
+    "checks": 416,
+    "events": 37,
+    "AND_gates": 374,
+    "OR_gates": 262
+  }
 }

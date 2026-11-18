@@ -1,7 +1,7 @@
 """Export effective BotW APWorld dependencies using an Archipelago checkout.
 
 Example (use the checkout's Python environment):
-  python tools/export_logic_graph.py --archipelago /path/to/Archipelago
+  python tools/export_logic_graph.py --archipelago /path/to/Archipelago --all-locations
   python tools/export_logic_graph.py --archipelago /path/to/Archipelago --options options.json
 
 Imports the actual World and AP classes, calls generate_early/create_regions/set_rules,
@@ -150,7 +150,7 @@ class Graph:
                             else self.node('false', 'unreachable')))
 
     def export(self, world):
-        """Adjacency expressions: expand boolean gates, retain named dependencies."""
+        """Named dependencies with explicit inline AND/OR gates."""
         from worlds.botw.reference import item_data, item_groups
         category_names = {tuple(sorted(names)): name for name, names in sorted(item_groups.items(), reverse=True)}
         used_categories = {}
@@ -159,14 +159,17 @@ class Graph:
             adjacency.setdefault(owner, []).append(dependency)
 
         def group(operator, children):
+            gate_type = 'AND' if operator == 'all' else 'OR'
             result = []
             for child in children:
-                for value in child.get(operator, [child]) if isinstance(child, dict) else [child]:
+                values = (child['inputs'] if isinstance(child, dict) and
+                          child.get('gate') == gate_type else [child])
+                for value in values:
                     if value not in result:
                         result.append(value)
             if not result:
                 return operator == 'all'
-            return result[0] if len(result) == 1 else {operator: result}
+            return result[0] if len(result) == 1 else {'gate': gate_type, 'inputs': result}
 
         def expression(key):
             kind = self.nodes[key]['type']
@@ -400,10 +403,10 @@ def verify(world, graph, traced):
             if 'count' in expression:
                 return sum(max(inventory[c['ref'].removeprefix('item:')], int(values[c['ref']]))
                            for c in expression['of']) >= expression['count']
-            if 'all' in expression:
-                return all(map(evaluate_export, expression['all']))
-            if 'any' in expression:
-                return any(map(evaluate_export, expression['any']))
+            if expression.get('gate') == 'AND':
+                return all(map(evaluate_export, expression['inputs']))
+            if expression.get('gate') == 'OR':
+                return any(map(evaluate_export, expression['inputs']))
             if 'not' in expression:
                 return not evaluate_export(expression['not'])
             raise ValueError(expression)
@@ -421,11 +424,27 @@ def verify(world, graph, traced):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archipelago', required=True, type=Path)
+    parser.add_argument('--all-locations', action='store_true',
+                        help='Enable every AP check and DLC and retain the Plateau tower; use the default goal')
     parser.add_argument('--options', type=Path, help='JSON object of game options; omitted values use APWorld defaults')
     parser.add_argument('--output', type=Path, default=ROOT / 'docs/logic_dependency_research.json')
     args = parser.parse_args()
     sys.setrecursionlimit(20000)
-    world = load_world(args.archipelago.resolve(), json.loads(args.options.read_text()) if args.options else {})
+    overrides = json.loads(args.options.read_text()) if args.options else {}
+    if args.all_locations:
+        if args.options:
+            parser.error('--all-locations and --options are mutually exclusive')
+        overrides = dict(skip_great_plateau=False, chest_sanity=True,
+                         shrine_sanity=True, tower_sanity=True, miniboss_sanity=True,
+                         boss_sanity=True, enable_the_master_trials_dlc=True,
+                         trial_of_the_sword=True, enable_the_champions_ballad_dlc=True)
+    world = load_world(args.archipelago.resolve(), overrides)
+    if args.all_locations:
+        from worlds.botw.Locations import botw_locations
+        actual = {location.address for location in world.multiworld.get_locations(1)
+                  if location.address is not None}
+        assert actual == set(botw_locations.values()), 'An AP location was omitted from the full export'
+
     graph, traced = build_graph(world)
     verified = verify(world, graph, traced)
     # Compact provenance: hashes only, never embedded source code/catalog copies.
@@ -433,18 +452,35 @@ def main():
                for p in sorted(BASE.rglob('*')) if p.is_file() and p.suffix in ('.py', '.json')
                and 'test' not in p.parts}
     output = {
+        'scope': 'all_generatable_ap_locations' if args.all_locations else 'selected_option_locations',
         'generated_by': 'tools/export_logic_graph.py',
         'source_digest': hashlib.sha256(json.dumps(sources, sort_keys=True).encode()).hexdigest(),
         'options': {name: getattr(world.options, name).value
                     for name in world.options.__annotations__},
         'starting_inventory': world.starting_state['logical_inventory'],
         'direction': 'dependent -> prerequisite',
-        'semantics': 'Each node requires its named dependencies. all=AND, any=OR; A counted ref sums owned copies (categories expand members); count/of sums its listed items. Received items come from AP inventory; event items depend on event locations. Menu is reachable. Cycles start unreachable. Randomized item placements are excluded.',
+        'semantics': 'Each node requires its named dependencies. Gates explicitly use AND/OR with inputs; a counted ref sums owned copies (categories expand members); count/of sums its listed items. Received items come from AP inventory; event items depend on event locations. Menu is reachable. Cycles start unreachable. Randomized item placements are excluded.',
         **graph.export(world),
     }
+    locations = [node for node in output['nodes'] if node['type'] == 'location']
+    gate_counts = Counter()
+    def count_gates(value):
+        if isinstance(value, dict):
+            if 'gate' in value:
+                gate_counts[value['gate']] += 1
+            for child in value.values():
+                count_gates(child)
+        elif isinstance(value, list):
+            for child in value:
+                count_gates(child)
+    count_gates(output['nodes'])
+    output['coverage'] = dict(checks=sum('check_id' in node for node in locations),
+                              events=sum('check_id' not in node for node in locations),
+                              AND_gates=gate_counts['AND'], OR_gates=gate_counts['OR'])
     ids = {n['id'] for n in output['nodes']}
     assert len(ids) == len(output['nodes'])
     args.output.write_text(json.dumps(output, indent=2, ensure_ascii=False) + '\n')
+    print(f'Coverage: {output["coverage"]}')
     print(f'Exported {len(ids)} named dependency nodes. Verified {verified} rules and 24 complete reachability scenarios against Archipelago.')
 
 
