@@ -1,5 +1,9 @@
 # Unattended Cemu integration test
 
+For physical goal completion, prerequisite locking, reconnect, and save/load
+acceptance tests, use [Live goal tests](live_goal_tests.md). These require a live
+AP session and are separate from the automated item-delivery smoke suite.
+
 Run from the repository root on Linux, selecting the coverage with `--items`:
 
 ```sh

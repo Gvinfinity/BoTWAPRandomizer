@@ -32,7 +32,7 @@ internal static class CemuIntegrationTest
             if (itemLimit <= TimeSpan.Zero || itemLimit > TimeSpan.FromMinutes(2)) throw new ArgumentException("Invalid item timeout");
             TimeSpan deadline = limit;
             string stateDirectory = config.GetProperty("state_directory").GetString()!;
-            if (Directory.Exists(stateDirectory)) throw new IOException("Test requires a new journal directory");
+            if (Directory.Exists(stateDirectory) && !(config.TryGetProperty("resume_journal", out var resume) && resume.GetBoolean())) throw new IOException("Test requires a new journal directory");
             uint location = config.GetProperty("location").GetUInt32();
             var data = config.GetProperty("slot_data");
             bool physical = config.TryGetProperty("physical_check", out var physicalCheck);
@@ -87,8 +87,23 @@ internal static class CemuIntegrationTest
                 if (!server.Checks.Task.GetAwaiter().GetResult().Contains(location)) throw new InvalidDataException("Wrong location check");
                 chestChecked = true; Progress();
             }
-            else if (mailbox.OutHead != 0 || server.HasCheck(location))
-                throw new InvalidDataException("Physical check fired before the fixture enabled interaction");
+            else
+            {
+                if (config.TryGetProperty("resume_journal", out var continuation) && continuation.GetBoolean())
+                {
+                    // A reloaded save can re-emit earlier physical completions.
+                    // Only previously journaled checks may precede this visit.
+                    var prior = bridge.TrackerChecks.ToHashSet();
+                    while (mailbox.PeekCheck() is { } previous)
+                    {
+                        Require(prior.Contains((long)previous.ApLocationId),
+                            "Unjournaled physical check fired before interaction");
+                        mailbox.AcknowledgeCheck(previous.SeqId);
+                    }
+                }
+                else if (mailbox.OutHead != 0 || server.HasCheck(location))
+                    throw new InvalidDataException("Physical check fired before the fixture enabled interaction");
+            }
             uint checkHeadBeforeGrant = mailbox.OutHead;
 
             // The fixture gates receipts. Observation and test cleanup RPCs run only while
@@ -130,7 +145,7 @@ internal static class CemuIntegrationTest
                     uint previous = mailbox.Word(28);
                     Wait(() => { bridge.Pump(session); return mailbox.Word(28) != previous; }, "checking grant/check isolation");
                 }
-                Require(mailbox.OutHead == checkHeadBeforeGrant && !server.HasCheck(location),
+                Require(mailbox.OutHead == checkHeadBeforeGrant,
                     "Incoming item grant incorrectly emitted the physical location check");
                 uint orbsBefore = Pouch("Obj_DungeonClearSeal").Sum;
                 if (config.TryGetProperty("expected_position", out var expectedPosition))
@@ -159,6 +174,11 @@ internal static class CemuIntegrationTest
                     uint finder = mailbox.ReadGuestWord(exports + 4), zeroLife = mailbox.ReadGuestWord(exports + 8);
                     uint enemy = 0;
                     string targetName = physicalCheck.GetProperty("actor").GetString()!;
+                    // Some Beast arenas need an A interaction to start their
+                    // encounter before the boss actor exists. Do not suppress
+                    // runner input while waiting for that actor to spawn.
+                    inputAllowed = true;
+                    Progress();
                     void SpawnPrerequisite(string flag)
                     {
                         Require(flag is "LastBossIncompleteGanonGenerateFlag" or "FinalTrial_InBossBattleArea"
@@ -216,7 +236,7 @@ internal static class CemuIntegrationTest
                 double nextPositionSample = 0;
                 Wait(() => {
                     bridge.Pump(session);
-                    if (server.HasCheck(location)) return true;
+                    if (server.HasCheck(location) && mailbox.OutHead != checkHeadBeforeGrant) return true;
                     if (assistTick is not null && timer.Elapsed.TotalSeconds >= nextAssist)
                     {
                         assistTick(); nextAssist = timer.Elapsed.TotalSeconds + 2;
@@ -233,12 +253,16 @@ internal static class CemuIntegrationTest
                             completionFlag = ReadFlag(watched.GetString()!, physicalCheck.GetProperty("watch_type").GetString()!);
                         nextPositionSample = timer.Elapsed.TotalSeconds + .5; Progress();
                     }
-                    return server.HasCheck(location);
+                    return server.HasCheck(location) && mailbox.OutHead != checkHeadBeforeGrant;
                 },
                     "physical completion: " + physicalCheck.GetProperty("name").GetString());
                 inputAllowed = false; chestChecked = true;
                 if (physicalCheck.TryGetProperty("watch_flag", out var completedFlag))
+                {
                     completionFlag = ReadFlag(completedFlag.GetString()!, physicalCheck.GetProperty("watch_type").GetString()!);
+                    Require(completionFlag >= physicalCheck.GetProperty("watch_threshold").GetDouble(),
+                        "Physical encounter completion flag did not reach its threshold");
+                }
                 Progress();
                 Require(physicalCheck.GetProperty("kind").GetString() != "shrine" || Pouch("Obj_DungeonClearSeal").Sum == orbsBefore, "Tracked shrine granted a vanilla Spirit Orb");
             }
@@ -294,7 +318,7 @@ internal static class CemuIntegrationTest
                 inputAllowed = false; Progress();
             }
             if (physical && deliveryAfterCheck && !runeTerminalTest) CollectPhysical();
-            foreach (var test in cases)
+            foreach (var test in config.TryGetProperty("checks_only", out var checksOnly) && checksOnly.GetBoolean() ? Array.Empty<JsonElement>() : cases)
             {
                 currentCase = test;
                 int index = results.Count;
@@ -409,7 +433,30 @@ internal static class CemuIntegrationTest
                 foreach (string id in data.GetProperty("locations").EnumerateObject().Select(e => e.Name))
                     if (uint.Parse(id) != location) Require(!server.HasCheck(long.Parse(id)), "Unexpected encounter check " + id);
             }
-            WriteResult(new { passed = true, elapsed_seconds = timer.Elapsed.TotalSeconds, location, fingerprint = mailbox.Fingerprint,
+            string? goalTest = config.TryGetProperty("goal_test", out var gt) ? gt.GetString() : null;
+            if (goalTest is not null)
+            {
+                Require(server.HasCheck(location), "Goal fixture check never reached AP");
+                if (goalTest == "complete")
+                {
+                    Wait(() => { bridge.Pump(session); return server.GoalStatus.Task.IsCompleted; }, "AP goal status");
+                    Require(server.GoalStatus.Task.GetAwaiter().GetResult() == 30, "Expected CLIENT_GOAL");
+                }
+                else if (goalTest == "locked")
+                {
+                    var observation = Stopwatch.StartNew();
+                    while (observation.Elapsed < TimeSpan.FromSeconds(10))
+                    {
+                        CheckDeadline();
+                        bridge.Pump(session);
+                        Require(!server.GoalStatus.Task.IsCompleted, "Missing prerequisite allowed Victory");
+                        Require(data.GetProperty("goal_required_location_ids").EnumerateArray().Any(required => !server.HasCheck(required.GetInt64())), "Lock fixture has no missing prerequisite");
+                        Thread.Sleep(10);
+                    }
+                }
+                else throw new InvalidDataException("Unknown goal test");
+            }
+            WriteResult(new { passed = true, goal_test = goalTest, elapsed_seconds = timer.Elapsed.TotalSeconds, location, fingerprint = mailbox.Fingerprint,
                 physical_check_passed = physical && !runeTerminalTest, rune_terminal_passed = runeTerminalTest,
                 completion_flag = completionFlag, assisted_fast_events = config.TryGetProperty("fast_fixtures", out var fast) && fast.GetBoolean(), assisted_native_defeat = config.TryGetProperty("assisted_combat", out var aid) && aid.GetBoolean(), player_position = playerPosition, delivery_after_check = deliveryAfterCheck, planned, completed = results.Count, items = results });
             return 0;

@@ -90,6 +90,11 @@ def prepare(args, run):
         if not cases: raise ValueError('Unknown reward item: ' + name)
     location, item = (completion or chest)['id'], cases[0]["item"]
     locations = [completion or chest]
+    if args.beast_goal:
+        from botw_static.combat import catalog as combat_catalog
+        locations = [e for e in combat_catalog()['locations'] if e['name'] in {
+            'Dark Beast Ganon - Defeated', 'Windblight Ganon - Defeated', 'Fireblight Ganon - Defeated',
+            'Waterblight Ganon - Defeated', 'Thunderblight Ganon - Defeated'}]
     if args.watch_combat:
         from botw_static.combat import catalog as combat_catalog
         locations.extend(e for e in combat_catalog()['locations'] if e['id'] != location)
@@ -99,9 +104,21 @@ def prepare(args, run):
         locations.extend(entry for entry in [*world_reference().load_chests(), *world_reference().load_completions(),
                                              *combat_catalog()['locations']] if entry['id'] not in known)
     fingerprint = seed_fingerprint('test', 1, [e['id'] for e in locations])
+    goal_required = []
+    if args.goal_test == 'locked' and not args.beast_goal:
+        prerequisite = next(e for e in world_reference().load_chests() if e['id'] != location)
+        if prerequisite['id'] not in {e['id'] for e in locations}:
+            locations.append(prerequisite)
+        goal_required = [prerequisite['id']]
+        fingerprint = seed_fingerprint('test', 1, [e['id'] for e in locations])
     slot = dict(protocol_version=2, player=1, seed='test', seed_fingerprint=fingerprint,
                 check_actor_prefix='AP_Check_', locations={str(e['id']):f'AP_Check_{e["id"]:08X}' for e in locations},
                 items={str(case['item']): case['delivery'] for case in cases})
+    if args.goal_test:
+        slot.update(goal_location_id=location, goal_required_location_ids=goal_required)
+    if args.beast_goal:
+        slot.update(goal_location_id=3254779910,
+                    goal_required_location_ids=[e['id'] for e in locations if e['id'] != 3254779910])
     planned_locations = [dict(entry, placed_item=dict(
         name=cases[0]['name'], id=cases[0]['item'], player=1, player_name='Test'))
         if entry['id'] == location else dict(entry) for entry in locations]
@@ -192,8 +209,20 @@ def prepare(args, run):
                 angle = math.degrees(yaw)+180
         if completion and completion.get('actor') == 'Enemy_Giant_Bone':
             angle = 0.0  # Stalnox cannot materialize while its spawn point is in view.
+        if completion and completion.get('scene') == 'RemainsWater':
+            arena = decode_byml(dump.read('content/Pack/RemainsWater.pack!Map/MainFieldDungeon/RemainsWater/RemainsWater_Static.smubin'))
+            terminal = next(o for o in arena['Objs'] if o['UnitConfigName'] == 'RemainsClearTerminal')
+            x, y, z = map(float, terminal['Translate'])
+            y += .1
+            z += 1.7
+            angle = 180.0
         edited = patch_save(original, [x,y,z], angle, chest_hash, map_type, map_name, chest_actor)
-        edited = reset_delivery_state(edited)
+        if not args.preserve_save_state:
+            edited = reset_delivery_state(edited)
+        elif completion and completion.get('watch_flag'):
+            edited = set_save_values(edited, {completion['watch_flag']: 0})
+        if args.record_fight or args.beast_goal:
+            edited = set_save_values(edited, {'MaxHartValue': 120, 'CurrentHart': 120})
         if completion:
             # Physical checks outside the Plateau require its exit prerequisite.
             # Set this only in the isolated fixture, before the player is spawned.
@@ -281,7 +310,7 @@ def prepare(args, run):
     for name,value in [('api','Keyboard'),('uuid','keyboard'),('display_name','Keyboard')]:
         ET.SubElement(ctrl,name).text = value
     mappings = ET.SubElement(ctrl,'mappings')
-    for mapping,key in [(1,ord('e')),(2,ord('q')),(3,ord('x')),(4,ord('f')),(9,ord('p')),(12,65362),(13,65364),
+    for mapping,key in [(1,ord('e')),(2,ord('q')),(3,ord('x')),(4,ord('f')),(6,ord('o')),(9,ord('p')),(12,65362),(13,65364),
                         (18,ord('w')),(19,ord('s')),(20,ord('a')),(21,ord('d')),
                         (22,ord('i')),(23,ord('k')),(24,ord('j')),(25,ord('l'))]:
         entry=ET.SubElement(mappings,'entry')
@@ -292,6 +321,11 @@ def prepare(args, run):
                     item_timeout_seconds=args.item_timeout, progress_path=str(run/'progress.json'),
                     timeout_seconds=args.timeout, state_directory=str(run/'journal'), result_path=str(run/'probe.json'))
     scenario['watch_combat'] = args.watch_combat
+    scenario['goal_test'] = args.goal_test
+    scenario['checks_only'] = args.beast_goal
+    if args.journal_directory:
+        scenario['state_directory'] = str(args.journal_directory.resolve())
+        scenario['resume_journal'] = True
     scenario['assisted_combat'] = args.assisted_combat
     scenario['fast_fixtures'] = args.fast_fixtures
     scenario['delivery_after_check'] = args.location_id is not None
@@ -311,11 +345,22 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cemu-data',type=Path,default=Path.home()/'.local/share/Cemu')
     parser.add_argument('--cemu-config',type=Path,default=Path.home()/'.config/Cemu')
+    parser.add_argument('--shader-cache', type=Path, default=ROOT/'out/cemu-test-cache',
+                        help='Persistent XDG cache shared across serialized test runs (Cemu and GPU driver shaders)')
+    parser.add_argument('--beast-goal', action='store_true', help='Use the four Blight checks as goal prerequisites; check-only fixture')
+    parser.add_argument('--journal-directory', type=Path)
+    parser.add_argument('--save-after-test', action='store_true', help='Request an in-game menu save and require a changed save file')
+    parser.add_argument('--post-fight-wait', type=float, default=90,
+                        help='Seconds to wait without input after observing the check before opening the save menu (default: 90)')
+    parser.add_argument('--preserve-save-state', action='store_true', help='Keep prior encounter progress when positioning a continuation save')
+    parser.add_argument('--record-fight', action='store_true', help='Start with 30 full hearts and leave Cemu open after the automated fight')
     parser.add_argument('--save-source',type=Path,default=ROOT/'out/botw-save-backup-20261005-014705.zip')
     parser.add_argument('--catalog',type=Path,default=ROOT/'out/chests-dlc-fixed.json')
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--fast-fixtures', action='store_true', help='Test-pack-only omission of decorative monk cinematics; still requires physical interaction')
     parser.add_argument('--all-checks', action='store_true', help='Load the complete production check overlay and native watch table')
+    parser.add_argument('--goal-test', choices=('complete', 'locked'),
+                        help='Use the physical test check as a fixture goal; verify AP completion or a missing-prerequisite lock')
     parser.add_argument('--assisted-combat', action='store_true', help='Test-only native zero-life assistance; requires the real enemy death lifecycle to generate the check')
     parser.add_argument('--location-id', type=lambda value: int(value, 0), help='Visit and physically collect a production location before its reward is sent')
     parser.add_argument('--reward', help='Production item name to verify after the location check')
@@ -343,8 +388,10 @@ def main():
         parser.error('No X display found; set DISPLAY or pass --headless')
     if not 1 <= args.item_timeout <= 120: parser.error('--item-timeout must be between 1 and 120 seconds')
     if not 30 <= args.timeout <= 1800: parser.error('--timeout must be between 30 and 1800 seconds')
+    if not math.isfinite(args.post_fight_wait) or not 0 <= args.post_fight_wait <= 300:
+        parser.error('--post-fight-wait must be between 0 and 300 seconds')
     run=args.output.resolve(); run.mkdir(parents=True,exist_ok=False)
-    children=[]; logs=[]; started=time.monotonic(); result={'passed':False}
+    children=[]; logs=[]; started=time.monotonic(); result={'passed':False}; cemu=None
     def interrupted(signum, frame): raise RuntimeError(f'Interrupted by signal {signum}')
     signal.signal(signal.SIGTERM, interrupted)
     signal.signal(signal.SIGINT, interrupted)
@@ -365,8 +412,10 @@ def main():
         game,mlc=prepare(args,run)
         if args.prepare_only:
             result={'prepared':True,'passed':False}; return 0
+        shader_cache = args.shader_cache.resolve()
+        shader_cache.mkdir(parents=True, exist_ok=True)
         env=os.environ.copy();env.update(XDG_CONFIG_HOME=str(run/'config'),XDG_DATA_HOME=str(run/'data'),
-                                        XDG_CACHE_HOME=str(run/'cache'),GDK_BACKEND='x11')
+                                        XDG_CACHE_HOME=str(shader_cache),GDK_BACKEND='x11')
         # Use the user's accelerated display unless headless mode was requested.
         if args.display and not args.headless:
             env['DISPLAY']=args.display
@@ -406,6 +455,7 @@ def main():
         command('xdotool','windowfocus',window)
         # Press A through title/Continue/save confirmation. The probe establishes gameplay readiness.
         last_capture=0; last_press=0; last_pack_check=0; rune_interaction_sent=False; chest_captured=False
+        physical_checked_at = None
         last_pickup_capture=0; pickup_frame=0
         while time.monotonic()-started<args.timeout:
             if time.monotonic()-last_pack_check > 1:
@@ -421,6 +471,7 @@ def main():
                 capture(f'pickup-{pickup_frame:03}.png')
                 pickup_frame += 1; last_pickup_capture=time.monotonic()
             if progress.get('chest_checked') and not chest_captured:
+                physical_checked_at = time.monotonic()
                 capture('chest_reward.png'); chest_captured=True
             allow_input = progress.get('input_allowed', True) if (args.completion or args.location_id is not None or args.rune_terminal) else (not progress.get('chest_checked') or progress.get('completed', 0) == 0)
             stage = progress.get('stage', '')
@@ -437,15 +488,75 @@ def main():
             if probe is not None and probe.poll() is not None:
                 result=json.loads((run/'probe.json').read_text())
                 if probe.returncode: return 1
+                if args.save_after_test:
+                    save_root = mlc/'usr/save/00050000/101c9500/user/80000001'
+                    before = {p: p.stat().st_mtime_ns for p in save_root.glob('*/game_data.sav')}
+                    def tap(key):
+                        command('xdotool', 'keydown', key)
+                        time.sleep(.15)
+                        command('xdotool', 'keyup', key)
+                    # Timing is measured from check verification, not from the
+                    # beginning of the defeat sequence. Keep this input-free.
+                    ready_at = (physical_checked_at or time.monotonic()) + args.post_fight_wait
+                    print(f'Waiting {args.post_fight_wait:g}s for post-fight control before saving', flush=True)
+                    while time.monotonic() < ready_at:
+                        if cemu.poll() is not None:
+                            raise RuntimeError('Cemu exited during post-fight transition')
+                        time.sleep(min(2, max(0, ready_at-time.monotonic())))
+                    for key in ('q', 'p', 'o', 'e'):
+                        tap(key)
+                        time.sleep(1)
+                    capture('save-confirm-before.png')
+                    # Use the mapped left stick to select Save above Cancel.
+                    # The arrow-key input left Cancel selected in live captures.
+                    tap('w')
+                    time.sleep(1)
+                    capture('save-confirm-selected.png')
+                    tap('e')
+                    time.sleep(1)
+                    capture('save-menu.png')
+                    until = time.monotonic() + 30
+                    saved = None
+                    while time.monotonic() < until:
+                        changed = [p for p in save_root.glob('*/game_data.sav') if p.stat().st_mtime_ns != before.get(p)]
+                        if changed:
+                            saved = max(changed, key=lambda p: p.stat().st_mtime_ns)
+                            break
+                        time.sleep(.5)
+                    if saved is None: raise RuntimeError('In-game save was not written; cannot continue the beast route')
+                    time.sleep(2)
+                    if args.beast_goal:
+                        persisted = saved.read_bytes()
+                        from botw_static.combat import catalog as combat_catalog
+                        journals = list(args.journal_directory.glob('*.json'))
+                        checked = set(json.loads(journals[0].read_text())['Checks'])
+                        for entry in combat_catalog()['locations']:
+                            if entry['id'] not in checked or entry['id'] == 3254779910:
+                                continue
+                            key = zlib.crc32(entry['watch_flag'].encode())
+                            values = [struct.unpack_from('>I', persisted, at+4)[0]
+                                      for at in range(12, len(persisted)-4, 8)
+                                      if struct.unpack_from('>I', persisted, at)[0] == key]
+                            if not values or not all(v >= entry['watch_threshold'] for v in values):
+                                raise RuntimeError('Saved game lacks defeated encounter: '+entry['name'])
+                    with zipfile.ZipFile(run/'saved-game.zip', 'w') as archive:
+                        prefix = '00050000/101c9500/user/80000001/'
+                        for filename in ('game_data.sav', 'caption.sav', 'caption.jpg'):
+                            archive.write(saved.parent/filename, prefix+'0/'+filename)
+                        archive.write(save_root/'option.sav', prefix+'option.sav')
+                    result['saved_game'] = str(run/'saved-game.zip')
                 capture();return 0
             if time.monotonic()-last_capture>10:
                 capture();last_capture=time.monotonic()
             time.sleep(.1)
         raise TimeoutError('End-to-end deadline exceeded')
     except Exception as error:
+        result['passed']=False
         result['error']=str(error);print(error,file=sys.stderr);return 1
     finally:
         for child in reversed(children):
+            if args.record_fight and child is cemu:
+                continue
             # Signal the whole group even if its leader exited; Cemu can leave
             # renderer/helper children behind after its main process terminates.
             try: os.killpg(child.pid,signal.SIGTERM)
