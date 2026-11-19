@@ -5,7 +5,9 @@ from pathlib import Path
 
 from BaseClasses import ItemClassification
 from worlds.AutoWorld import World, WebWorld
+from worlds.LauncherComponents import components
 
+from .Launcher import register
 from .Items import BotWItem, botw_items, classification
 from .Locations import botw_locations, chest_data, completion_data, combat_data
 from .Options import BotWOptions, Goal
@@ -155,3 +157,6 @@ class BotWWorld(World):
                 "slot_data": self.fill_slot_data()}
         filename = Path(output_directory) / (self.multiworld.get_out_file_name_base(self.player) + ".apbotw")
         BotWPatch(str(filename), self.player, self.player_name, plan=plan).write()
+
+
+register(components)

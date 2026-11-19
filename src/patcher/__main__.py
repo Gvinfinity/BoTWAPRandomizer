@@ -14,6 +14,17 @@ from botw_static.resources import GameDump
 from botw_static.version import WORLD_VERSION
 
 
+def runtime_payload(value: str) -> tuple[str, Path]:
+    rid, separator, filename = value.partition("=")
+    platforms = {"win-x64", "win-arm64", "linux-x64", "linux-arm64"}
+    if not separator or rid not in platforms or not filename:
+        raise argparse.ArgumentTypeError("Expected RID=PATH for a Windows or Linux x64/ARM64 payload")
+    path = Path(filename)
+    if not path.is_file():
+        raise argparse.ArgumentTypeError(f"Payload not found: {path}")
+    return rid, path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="BotW AP static chest patcher (Wii U v208)")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -27,11 +38,26 @@ def main() -> None:
     discover.add_argument("--bind-reference", action="store_true")
     apply.add_argument("patch", help="Generated .apbotw or JSON patch plan")
     bundle = commands.add_parser("bundle-world", help="Package the versioned BotW APWorld")
-    bundle.add_argument("--output", default=f"out/botw-{WORLD_VERSION}.apworld",
-                        help=f"Output archive (default: out/botw-{WORLD_VERSION}.apworld)")
+    bundle.add_argument("--output", type=Path,
+                        help="Output archive (defaults to out/botw-VERSION[-RID].apworld)")
+    bundle.add_argument("--client", action="append", type=runtime_payload, default=[],
+                        metavar="RID=PATH", help="Embed a published single-file client (repeat for each platform)")
+    bundle.add_argument("--patcher", action="append", type=runtime_payload, default=[],
+                        metavar="RID=ZIP", help="Embed a self-contained patcher ZIP (repeat for each platform)")
     args = parser.parse_args()
     if args.command == "bundle-world":
-        output = Path(args.output)
+        if len(dict(args.client)) != len(args.client):
+            parser.error("Supply at most one client executable per RID")
+        if len(dict(args.patcher)) != len(args.patcher):
+            parser.error("Supply at most one patcher ZIP per RID")
+        for rid, path in args.patcher:
+            with zipfile.ZipFile(path) as payload:
+                expected = {"python.exe", "player.py"} if rid.startswith("win-") else {"BotWPatcher"}
+                if not expected.issubset(payload.namelist()):
+                    parser.error(f"Patcher ZIP for {rid} must contain {', '.join(sorted(expected))}")
+        platforms = {rid for rid, _ in args.client + args.patcher}
+        suffix = f"-{next(iter(platforms))}" if len(platforms) == 1 else ""
+        output = args.output or Path(f"out/botw-{WORLD_VERSION}{suffix}.apworld")
         if output.exists():
             raise FileExistsError(output)
         output.parent.mkdir(parents=True, exist_ok=True)
@@ -44,6 +70,11 @@ def main() -> None:
             for path in sorted((ROOT / "worlds/botw").rglob("*")):
                 if path.is_file() and "__pycache__" not in path.parts and "test" not in path.parts:
                     archive.write(path, f"botw/{path.relative_to(ROOT / 'worlds/botw').as_posix()}")
+            for rid, path in args.client:
+                name = "BotWClient.exe" if rid.startswith("win-") else "BotWClient"
+                archive.write(path, f"botw/client_payloads/{rid}/{name}")
+            for rid, path in args.patcher:
+                archive.write(path, f"botw/patcher_payloads/{rid}.zip", compress_type=zipfile.ZIP_STORED)
         print(output)
         return
     dump = GameDump(args.base, args.update, args.dlc)

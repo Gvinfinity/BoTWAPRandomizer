@@ -2,6 +2,27 @@
 
 This repository contains the Breath of the Wild Archipelago world, the static game patcher, and the Cemu client and hook components. The supported game is the Wii U release updated to v1.5.0 (v208).
 
+## Play through the Archipelago Launcher
+
+1. Install Breath of the Wild Wii U **v1.5.0 (v208)** in Cemu. Install the BotW
+   `.apworld` with the Archipelago Launcher, then restart the Launcher.
+2. Get your player's `.apbotw` seed file. In the Launcher, choose **Open Patch**
+   or **Install BotW Seed Pack** and select the file.
+3. Select your extracted base and update `content` folders, the DLC folder
+   containing `0010` if you play with DLC, and Cemu's Graphic Packs folder.
+   The installer creates the pack there and remembers your folder choices as
+   defaults. If you're replacing a seed for the same player number, move the
+   existing pack out of the Graphic Packs folder first.
+4. Refresh **Options → Graphic Packs** in Cemu, enable the seed pack, and load
+   your save. In the Launcher, choose **BotW Client** and enter the room
+   address, player name and password if required. Use an APWorld built with a
+   bundled client for your platform.
+
+The Windows x64 and Linux x64 player bundles include the patcher and client.
+Players only need Archipelago, Cemu, and their own game files. If you built
+a world archive without a patcher, use the
+[standalone player setup](#standalone-player-setup).
+
 ## Development setup
 
 You will need Python 3.10 or newer for the world and patcher, and the .NET SDK required by `src/client/BotWClient.csproj` (currently .NET 10). To develop against the Archipelago framework, install this world into an Archipelago checkout or bundle it as an `.apworld`.
@@ -18,7 +39,7 @@ Build the world bundle from the repository root:
 python -m src.patcher bundle-world
 ```
 
-This creates `out/botw-0.5.3.apworld`. Release bundles use `botw-VERSION.apworld`,
+This creates `out/botw-0.5.6.apworld`,
 with the version defined in `worlds/botw/static/version.py` and recorded in the
 archive manifest. Install only one BotW APWorld version in Archipelago.
 
@@ -32,6 +53,40 @@ Build the client from the repository root:
 ```sh
 dotnet build src/client/BotWClient.csproj
 ```
+
+To ship the client inside the APWorld, publish a self-contained single-file
+executable and pass it into the bundler. For example, on Linux x64:
+
+```sh
+dotnet publish src/client -c Release -r linux-x64 --self-contained true \
+  -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true \
+  -o out/client/linux-x64
+python -m src.patcher bundle-world \
+  --client linux-x64=out/client/linux-x64/BotWClient
+```
+
+Repeat `--client RID=PATH` to ship multiple platforms in one APWorld. Supported
+RIDs are `linux-x64`, `linux-arm64`, `win-x64`, and `win-arm64`. Use
+`BotWClient.exe` for Windows publish outputs. A bundle without these options can
+be used for generation and patching.
+
+For a player release, also build and include the self-contained patcher.
+From a Python 3.12 environment with the patcher requirements installed:
+
+```sh
+python -m pip install PyInstaller
+python -m src.patcher.build_player linux-x64 out/patcher-linux-x64.zip
+python -m src.patcher.build_player win-x64 out/patcher-win-x64.zip \
+  --windows-python /path/to/python-3.12-embed-amd64.zip
+```
+
+The Windows build uses the official CPython 3.12 Windows x64 embeddable ZIP
+and installs Windows wheels into it at build time. The Linux build runs on
+Linux x64. Pass `--patcher linux-x64=out/patcher-linux-x64.zip` or
+`--patcher win-x64=out/patcher-win-x64.zip` to `bundle-world` alongside the
+matching `--client` argument. The default filenames for single-platform player
+bundles are `out/botw-0.5.6-linux-x64.apworld` and
+`out/botw-0.5.6-win-x64.apworld`. Repeat both options for a multi-platform bundle.
 
 Add `--tracker` to the client command for an offline map tracker at
 `http://127.0.0.1:38282/`. Checks overlay the actual BotW map extracted from your
@@ -82,6 +137,8 @@ For older YAMLs, rename `chest_shuffle` to `chest_sanity`, and replace the
 The goal controls generation logic and the client's Victory report; it does not
 prevent an early Ganon fight. Use the updated client and generate a new seed and
 Graphic Pack after changing this option.
+
+## Standalone player setup
 
 1. Install Breath of the Wild for Wii U in Cemu and apply the update to **v1.5.0 (v208)**. Keep your own legally obtained game, update, and DLC files.
 2. Generate an Archipelago seed using the BotW world and download that player's `.apbotw` file.

@@ -512,7 +512,7 @@ internal static class TestHarness
         File.WriteAllBytes(pfx, certificate.Export(X509ContentType.Pfx));
         File.WriteAllText(pem, certificate.ExportCertificatePem());
         var start = new ProcessStartInfo(Environment.ProcessPath!) { RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false };
-        if (Path.GetFileNameWithoutExtension(Environment.ProcessPath) == "dotnet") start.ArgumentList.Add(typeof(TestHarness).Assembly.Location);
+        if (Path.GetFileNameWithoutExtension(Environment.ProcessPath) == "dotnet") start.ArgumentList.Add(Path.Combine(AppContext.BaseDirectory, "BotWClient.dll"));
         start.ArgumentList.Add("--self-test-tls"); start.ArgumentList.Add(pfx);
         start.Environment["SSL_CERT_FILE"] = pem;
         using var process = Process.Start(start)!;

@@ -28,17 +28,37 @@ internal static class Program
             catch (Exception ex) { Console.Error.WriteLine(ex.Message); return 1; }
         }
         string? server = Option("--server"), slot = Option("--slot");
-        if (server is null || slot is null)
+        string? password = Option("--password");
+        if (args.Contains("--interactive") && !Console.IsInputRedirected)
+        {
+            if (server is null) { Console.Write("Archipelago server (host:port): "); server = Console.ReadLine()?.Trim(); }
+            if (slot is null) { Console.Write("Player name: "); slot = Console.ReadLine()?.Trim(); }
+            if (password is null && !args.Contains("--password") &&
+                !string.IsNullOrWhiteSpace(server) && !string.IsNullOrWhiteSpace(slot))
+            {
+                Console.Write("Room password (Enter if none): ");
+                var input = new System.Text.StringBuilder();
+                for (var key = Console.ReadKey(intercept: true); key.Key != ConsoleKey.Enter;
+                     key = Console.ReadKey(intercept: true))
+                {
+                    if (key.Key == ConsoleKey.Backspace && input.Length > 0) input.Length--;
+                    else if (!char.IsControl(key.KeyChar)) input.Append(key.KeyChar);
+                }
+                Console.WriteLine();
+                if (input.Length > 0) password = input.ToString();
+            }
+        }
+        if (string.IsNullOrWhiteSpace(server) || string.IsNullOrWhiteSpace(slot))
         {
             Console.WriteLine("Tracker: add --tracker [--tracker-port 38282] for a local browser map. Use --tracker-only to preview without Cemu or AP.\n       Tests: --self-test-tracker\n");
-            Console.WriteLine("Usage: BotWClient --server host[:port]|ws://host[:port]|wss://host[:port] [--port number] --slot name [--password value] [--state-dir path] [--verbose]\n       Bare hosts negotiate WSS then WS, default port 38281. Explicit URLs use ports 80/443 unless specified.\n       BotWClient --self-test");
+            Console.WriteLine("Usage: BotWClient --server host[:port]|ws://host[:port]|wss://host[:port] [--port number] --slot name [--password value] [--state-dir path] [--verbose]\n       Bare hosts negotiate WSS then WS, default port 38281. Explicit URLs use ports 80/443 unless specified.\n       BotWClient --interactive | --self-test");
             return 1;
         }
         string directory = Option("--state-dir") ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "BotWAP", "state");
         using var cancellation = new CancellationTokenSource();
         Console.CancelKeyPress += (_, e) => { e.Cancel = true; cancellation.Cancel(); };
         bool verbose = args.Contains("--verbose");
-        var log = new ClientLog(verbose, Option("--password"));
+        var log = new ClientLog(verbose, password);
         try
         {
             foreach (string option in new[] { "--server", "--port", "--slot", "--password", "--state-dir" })
@@ -46,16 +66,16 @@ internal static class Program
                     throw new ArgumentException($"{option} requires a value.");
             var endpoint = ServerEndpoint.Parse(server, Option("--port"));
             log.Write($"BotWClient {typeof(Program).Assembly.GetName().Version}; .NET {Environment.Version}; {System.Runtime.InteropServices.RuntimeInformation.OSDescription}");
-            log.Write($"AP endpoint: {ServerEndpoint.Describe(endpoint)}; slot={slot}; password={(Option("--password") is null ? "not supplied" : "supplied")}");
+            log.Write($"AP endpoint: {ServerEndpoint.Describe(endpoint)}; slot={slot}; password={(password is null ? "not supplied" : "supplied")}");
             log.Write($"Journal directory: {Path.GetFullPath(directory)}");
             if (args.Contains("--diagnose"))
             {
-                APSessionManager.DiagnoseConnection(endpoint.AbsoluteUri, slot, Option("--password"), log.Write);
+                APSessionManager.DiagnoseConnection(endpoint.AbsoluteUri, slot, password, log.Write);
                 return 0;
             }
             using var mailbox = new Mailbox(CemuMemoryReader.Attach(verbose, log.Write));
             log.Write($"Mailbox fingerprint={mailbox.Fingerprint}, guest_addr=0x{mailbox.GuestAddress:X8}, incoming={mailbox.InHead}/{mailbox.InTail}, outgoing={mailbox.OutHead}/{mailbox.OutTail}, ack={mailbox.AckSequence}");
-            using var initial = new APSessionManager(endpoint.AbsoluteUri, slot, Option("--password"), mailbox, log.Write);
+            using var initial = new APSessionManager(endpoint.AbsoluteUri, slot, password, mailbox, log.Write);
             using var bridge = new ClientBridge(mailbox, initial.Contract, directory, initial.Team, initial.Slot, log.Write);
             APSessionManager current = initial;
             using var tracker = args.Contains("--tracker")
@@ -83,7 +103,7 @@ internal static class Program
                         try
                         {
                             log.Write("Starting AP reconnect attempt.");
-                            var replacement = new APSessionManager(endpoint.AbsoluteUri, slot, Option("--password"), mailbox, log.Write);
+                            var replacement = new APSessionManager(endpoint.AbsoluteUri, slot, password, mailbox, log.Write);
                             if (replacement.Team != initial.Team || replacement.Slot != initial.Slot) { replacement.Dispose(); throw new InvalidDataException("AP login identity changed"); }
                             if (!ReferenceEquals(current, initial)) current.Dispose();
                             current = replacement; bridge.Reconnected();
