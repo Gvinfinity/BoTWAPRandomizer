@@ -68,3 +68,13 @@ Camera gating, DLC stage ordering and trial sequencing. Three four-player BotW
 seeds with mixed goal/DLC/check settings were filled and all selected locations
 were reachable. Fresh generated patches were validated against the catalogs.
 This is not a physical playthrough of all four boarding quests in Cemu.
+
+## Explore logic for a player YAML
+
+Run `python tools/visualize_logic.py --interactive --yaml /path/to/player.yaml --archipelago /path/to/Archipelago` to open the searchable logic viewer using that YAML's BotW options. This regenerates and verifies the graph using the local world and the Archipelago checkout; it may take a moment. PyYAML and the checkout's Python dependencies must be installed in the Python environment used to run the command. Omit `--interactive` to render an SVG, or add `--full` to render every node.
+
+The YAML must specify `game: Breath of the Wild` and fixed option values. Weighted choices are accepted when exactly one choice has a positive weight. Choices with multiple positive weights and random settings are rejected because their actual values are only known after generation. The graph represents logic and options, not the seed's randomized item placements.
+
+Item and location configuration (including starting inventory, placement, exclusions, hints, and item links) is ignored by this viewer; its starting inventory therefore may differ from the player YAML.
+
+In the interactive viewer, select the **Graph** tab to see the selected node's prerequisites. Set the depth and press Refresh to expand more levels, use the zoom buttons and scrollbars to navigate, and click a named node to make it the new focus. This view requires Graphviz's `dot` executable.

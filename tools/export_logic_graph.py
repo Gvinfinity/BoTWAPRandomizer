@@ -240,7 +240,7 @@ def load_world(checkout, overrides):
     spec.loader.exec_module(botw)
     from BaseClasses import MultiWorld, CollectionState
     hints = botw.BotWOptions.type_hints
-    unknown = overrides.keys() - botw.BotWOptions.__annotations__.keys()
+    unknown = overrides.keys() - hints.keys()
     if unknown:
         raise ValueError(f'Unknown options: {sorted(unknown)}')
     multiworld = MultiWorld(1)
@@ -421,16 +421,70 @@ def verify(world, graph, traced):
     return len(traced)
 
 
+def resolve_weighted(value, name):
+    """Resolve an AP weighted choice only when its outcome is deterministic."""
+    if isinstance(value, dict):
+        if not value:
+            raise ValueError(f"YAML option {name!r} has no weighted choices")
+        positive = []
+        for choice, weight in value.items():
+            try:
+                number = int(weight)
+            except (ValueError, TypeError, OverflowError):
+                raise ValueError(f"YAML option {name!r} has an invalid weight for {choice!r}") from None
+            if number < 0 or isinstance(weight, float) and weight != number:
+                raise ValueError(f"YAML option {name!r} has an invalid weight for {choice!r}")
+            if number > 0:
+                positive.append(choice)
+        if len(positive) != 1:
+            raise ValueError(f"YAML option {name!r} must have exactly one positive-weight choice (found {len(positive)})")
+        value = positive[0]
+    if isinstance(value, list) or (isinstance(value, str) and value.lower().startswith('random')):
+        raise ValueError(f"YAML option {name!r} must resolve to a fixed value")
+    return value
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archipelago', required=True, type=Path)
     parser.add_argument('--all-locations', action='store_true',
                         help='Enable every AP check and DLC and retain the Plateau tower; use the default goal')
     parser.add_argument('--options', type=Path, help='JSON object of game options; omitted values use APWorld defaults')
+    parser.add_argument('--yaml', type=Path, help='Archipelago player YAML with fixed BotW options')
     parser.add_argument('--output', type=Path, default=ROOT / 'docs/logic_dependency_research.json')
     args = parser.parse_args()
     sys.setrecursionlimit(20000)
+    if args.yaml and (args.options or args.all_locations):
+        parser.error('--yaml cannot be combined with --options or --all-locations')
     overrides = json.loads(args.options.read_text()) if args.options else {}
+    if args.yaml:
+        try:
+            import yaml
+        except ImportError:
+            parser.error('Reading player YAML requires PyYAML (pip install PyYAML)')
+        document = yaml.safe_load(args.yaml.read_text())
+        if not isinstance(document, dict):
+            parser.error('YAML must be a mapping')
+        try:
+            game = resolve_weighted(document.get('game'), 'game')
+        except ValueError as error:
+            parser.error(str(error))
+        if game != 'Breath of the Wild':
+            parser.error('YAML must specify game: Breath of the Wild')
+        overrides = document.get('Breath of the Wild', {})
+        if not isinstance(overrides, dict):
+            parser.error('The Breath of the Wild section must be a mapping')
+        # Placement, hint and inventory configuration is outside this graph's
+        # logic model; these structured values are not weighted choices.
+        ignored = {'local_items', 'non_local_items', 'start_inventory',
+                   'start_inventory_from_pool', 'start_hints', 'start_location_hints',
+                   'exclude_locations', 'priority_locations', 'item_links', 'plando_items'}
+        try:
+            overrides = {name: resolve_weighted(value, name)
+                         for name, value in overrides.items() if name not in ignored}
+        except ValueError as error:
+            parser.error(str(error))
+
     if args.all_locations:
         if args.options:
             parser.error('--all-locations and --options are mutually exclusive')
@@ -479,7 +533,7 @@ def main():
                               AND_gates=gate_counts['AND'], OR_gates=gate_counts['OR'])
     ids = {n['id'] for n in output['nodes']}
     assert len(ids) == len(output['nodes'])
-    args.output.write_text(json.dumps(output, indent=2, ensure_ascii=False) + '\n')
+    args.output.write_text(json.dumps(output, indent=2, ensure_ascii=False, default=lambda value: sorted(value) if isinstance(value, set) else (_ for _ in ()).throw(TypeError(f'Cannot serialize {type(value).__name__}'))) + '\n')
     print(f'Coverage: {output["coverage"]}')
     print(f'Exported {len(ids)} named dependency nodes. Verified {verified} rules and 24 complete reachability scenarios against Archipelago.')
 
