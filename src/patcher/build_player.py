@@ -29,6 +29,7 @@ def main():
         runtime.mkdir()
         shutil.copyfile(ROOT / "src/patcher/player.py", source / "player.py")
         shutil.copytree(ROOT / "worlds/botw/static", source / "static", ignore=shutil.ignore_patterns("__pycache__"))
+        shutil.copyfile(ROOT / "worlds/botw/data/chests.json", source / "static/tracker_chests.json")
         shutil.copyfile(ROOT / "src/hook/patch_Archipelago.asm", source / "static/hook_template.asm")
         if args.rid == "win-x64":
             with zipfile.ZipFile(args.windows_python) as archive:
@@ -39,7 +40,7 @@ def main():
                 sys.executable, "-m", "pip", "install", "--target", str(runtime / "packages"),
                 "--only-binary=:all:", "--platform", "win_amd64", "--python-version", "3.12",
                 "--implementation", "cp", "--abi", "cp312",
-                "-r", str(ROOT / "src/patcher/requirements.txt"),
+                "-r", str(ROOT / "src/patcher/requirements-tracker.txt"),
             ], check=True)
         else:
             subprocess.run([

@@ -39,8 +39,10 @@ class BotWWorld(World):
         for category in entry.get("category", []):
             for condition in categories.get(category, {}).get("yaml_option", []):
                 option_name = condition.removeprefix("!")
-                # This first world does not expose Manual-only check types.
-                enabled = option_name == "shuffle_shrine_chests" or bool(getattr(self.options, option_name, False))
+                if option_name == "shuffle_shrine_chests":
+                    enabled = bool(self.options.chest_sanity or self.options.shrine_sanity)
+                else:
+                    enabled = bool(getattr(self.options, option_name, False))
                 if enabled == condition.startswith("!"):
                     return False
         return True
@@ -56,12 +58,12 @@ class BotWWorld(World):
                 raise ValueError(f"{category} requires a chest catalog discovered with --dlc")
         self.trial_of_the_sword_enabled = bool(self.options.enable_the_master_trials_dlc
                                                and self.options.trial_of_the_sword)
+        if not chest_data:
+            raise ValueError("No mapped checks; create worlds/botw/data/chests.json using the static patcher")
         self.active_chests = [entry for entry in chest_data if self.category_enabled(entry)
                               and (self.trial_of_the_sword_enabled
                                    or not entry['region'].startswith('Trial of the Sword ('))
-                              and (self.options.chest_sanity or "Overworld Chests" not in entry.get("category", []))]
-        if not self.active_chests:
-            raise ValueError("No mapped checks; create worlds/botw/data/chests.json using the static patcher")
+                              and (self.options.chest_sanity or "Shrine Chests" in entry.get("category", []))]
         self.active_completions = [entry for entry in completion_data
                                    if (entry["kind"] == "shrine" and self.options.shrine_sanity)
                                    or (entry["kind"] == "tower" and self.options.tower_sanity

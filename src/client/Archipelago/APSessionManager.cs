@@ -31,10 +31,10 @@ public sealed class APSessionManager : IServerLink, IDisposable
     }
     public IReadOnlyList<ReceivedItem> ReceivedItems => session.Items.AllItemsReceived
         .Select(item => new ReceivedItem(item.ItemId, item.LocationId)).ToArray();
-    public APSessionManager(string uri, string slotName, string? password, Mailbox mailbox, Action<string>? log = null)
+    public APSessionManager(string uri, string slotName, string? password, Mailbox mailbox, Action<string>? log = null, Action<object>? events = null)
     {
         this.log = log;
-        session = OpenSession(uri, slotName, password, log, out var login);
+        session = OpenSession(uri, slotName, password, log, out var login, events);
         Team = login.Team; Slot = login.Slot;
         try
         {
@@ -42,6 +42,21 @@ public sealed class APSessionManager : IServerLink, IDisposable
             using var data = JsonDocument.Parse(JsonConvert.SerializeObject(login.SlotData));
             Contract = new SlotContract(data.RootElement, mailbox, Slot, session.RoomState.Seed, session.Locations.AllLocations);
             log?.Invoke($"AP slot verified: fingerprint={Contract.Fingerprint}, locations={Contract.Locations.Count}, starting item types={Contract.StartingInventory.Count}");
+            if (events is not null)
+                session.DataStorage.TrackHints(hints =>
+                {
+                    try
+                    {
+                        events(new { type = "hints", hints = hints.Select(hint => new {
+                            item = session.Items.GetItemName(hint.ItemId, session.Players.GetPlayerInfo(hint.ReceivingPlayer).Game),
+                            location = session.Locations.GetLocationNameFromId(hint.LocationId, session.Players.GetPlayerInfo(hint.FindingPlayer).Game),
+                            receiving = session.Players.GetPlayerAlias(hint.ReceivingPlayer),
+                            finding = session.Players.GetPlayerAlias(hint.FindingPlayer),
+                            hint.Found, hint.Entrance
+                        }).ToArray() });
+                    }
+                    catch (Exception ex) { log?.Invoke($"Unable to update hints: {ex.Message}"); }
+                }, true);
         }
         catch { Dispose(); throw; }
     }
@@ -59,12 +74,14 @@ public sealed class APSessionManager : IServerLink, IDisposable
     }
 
     private static ArchipelagoSession OpenSession(string uri, string slotName, string? password,
-        Action<string>? log, out LoginSuccessful login)
+        Action<string>? log, out LoginSuccessful login, Action<object>? events = null)
     {
         var elapsed = Stopwatch.StartNew();
         string stage = "opening WebSocket / waiting for RoomInfo";
         Exception? socketError = null;
         var connection = ArchipelagoSessionFactory.CreateSession(new Uri(uri));
+        if (events is not null)
+            connection.MessageLog.OnMessageReceived += message => events(new { type = "message", text = message.ToString() });
         connection.Socket.SocketOpened += () => log?.Invoke($"AP WebSocket opened after {elapsed.Elapsed.TotalMilliseconds:F0} ms; waiting for RoomInfo.");
         connection.Socket.SocketClosed += reason => log?.Invoke($"AP WebSocket closed: {(string.IsNullOrEmpty(reason) ? "no close reason supplied by SDK" : reason)}; stage={stage}");
         connection.Socket.ErrorReceived += (exception, message) =>
@@ -109,6 +126,11 @@ public sealed class APSessionManager : IServerLink, IDisposable
         LocationChecksPacket checks => $"LocationChecks count={checks.Locations.Length}, ids=[{string.Join(", ", checks.Locations)}]",
         _ => packet.GetType().Name
     };
+    public void SendMessage(string text)
+    {
+        session.Socket.SendPacketAsync(new SayPacket { Text = text }).GetAwaiter().GetResult();
+    }
+
     public void SendChecks(long[] ids)
     {
         try

@@ -17,7 +17,7 @@
 <main>
   <canvas id="map" tabindex="0" aria-label="Breath of the Wild map with Archipelago checks. Drag to pan, scroll to zoom, or select checks from the list. Arrow keys pan; plus and minus zoom."></canvas>
   <div class="map-heading"><strong>Hyrule</strong><span id="mode" role="status">Loading game map…</span></div>
-  <div id="map-error" hidden role="alert"><h2>Game map unavailable</h2><p>Build the map from your installed game files, then restart the tracker:</p><code>.venv-patcher/bin/python -m src.patcher.build_tracker_map</code><p>Setup instructions: docs/tracker.md</p></div>
+  <div id="map-error" hidden role="alert"><h2>Game map unavailable</h2><p>In BotW Client, select Tracker → Generate map, then refresh this page.</p></div>
   <div class="map-controls"><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button><button id="reset">Fit map</button></div>
   <div class="map-legend"><span class="chest">●</span> Chest <span class="shrine">◆</span> Shrine / tower <span class="enemy">▲</span> Enemy <span class="complete">●</span> Completed<br><small>Numbers group checks at the same entrance · North ↑</small></div>
   <div id="hover" hidden></div><article id="detail" hidden></article>

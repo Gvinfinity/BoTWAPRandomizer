@@ -72,9 +72,9 @@ internal sealed class LinuxProcessMemoryFull : IProcessMemoryBackend
     private readonly SafeFileHandle _handle;
     private readonly string _mapsPath;
 
-    public LinuxProcessMemoryFull(int pid)
+    public LinuxProcessMemoryFull(int pid, SafeFileHandle? inheritedHandle = null)
     {
-        _handle   = File.OpenHandle($"/proc/{pid}/mem", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
+        _handle   = inheritedHandle ?? File.OpenHandle($"/proc/{pid}/mem", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
         _mapsPath = $"/proc/{pid}/maps";
     }
 
@@ -248,6 +248,9 @@ public sealed class CemuMemoryReader : IMemory
         FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None, 4096, FileOptions.DeleteOnClose);
 
     public static CemuMemoryReader Attach(bool verbose = false, Action<string>? log = null, int? processId = null)
+        => Attach(verbose, log, processId, null);
+
+    internal static CemuMemoryReader Attach(bool verbose, Action<string>? log, int? processId, SafeFileHandle? inheritedHandle)
     {
         if (verbose && log is null) log = new ClientLog(true).Write;
         log?.Invoke("Searching for Cemu processes and a configured AP v2 mailbox.");
@@ -258,8 +261,9 @@ public sealed class CemuMemoryReader : IMemory
             throw new PlatformNotSupportedException("Cemu attachment requires Linux or Windows.");
 
         foreach (var process in Process.GetProcesses()
-            .Where(p => p.ProcessName.Equals("Cemu", StringComparison.OrdinalIgnoreCase)
-                     && (!processId.HasValue || p.Id == processId.Value)))
+            .Where(p => processId.HasValue
+                ? p.Id == processId.Value
+                : p.ProcessName.Equals("Cemu", StringComparison.OrdinalIgnoreCase)))
         {
             var timer  = Stopwatch.StartNew();
             long scanned = 0;
@@ -273,7 +277,7 @@ public sealed class CemuMemoryReader : IMemory
             try
             {
                 backend = isLinux
-                    ? new LinuxProcessMemoryFull(process.Id)
+                    ? new LinuxProcessMemoryFull(process.Id, inheritedHandle)
                     : new WindowsProcessMemory(process.Id);
 
                 byte[] buffer = new byte[1024 * 1024];

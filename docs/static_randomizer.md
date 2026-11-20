@@ -257,7 +257,8 @@ other entries, and updates the RSTB for the rebuilt resources. The four Plateau 
 terminals use an AP clone with the vanilla `DemoGetItem` action disabled, so
 Magnesis, Remote Bombs, Stasis and Cryonis are granted through AP item receipts.
 The clone is bound only to those four placements; other download terminals keep
-their vanilla behavior. Shrine chests remain checks.
+their vanilla behavior. Mapped shrine chests are checks when either `chest_sanity` or
+`shrine_sanity` is enabled.
 
 Slot data records the exact applied AP starting-item counts. The client accepts
 only that many precollected receipts (AP location `-2`) as already applied; ordinary

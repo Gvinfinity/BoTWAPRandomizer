@@ -247,11 +247,43 @@ class TestTrialDisabledWithAllChecksGoal(TestTrialOfTheSwordDisabled):
 
 
 class TestShrineSanityOnly(BotWTestBase):
-    options = {'shrine_sanity': True, 'tower_sanity': False}
+    options = {'chest_sanity': False, 'shrine_sanity': True, 'tower_sanity': False,
+               'enable_the_champions_ballad_dlc': True, 'enable_the_master_trials_dlc': True}
 
     def test_only_shrine_completions(self):
         self.assertEqual(len(self.world.active_completions), 120)
         self.assertTrue(all(e['kind'] == 'shrine' for e in self.world.active_completions))
+
+    def test_only_shrine_chests_are_included_in_slot_data(self):
+        from ..Locations import chest_data
+
+        enabled = {int(code) for code in self.world.fill_slot_data()['locations']}
+        expected = {entry['id'] for entry in chest_data if 'Shrine Chests' in entry.get('category', [])}
+        self.assertTrue(expected)
+        self.assertEqual(enabled & {entry['id'] for entry in chest_data}, expected)
+
+
+class TestChestSanityWithoutShrines(BotWTestBase):
+    options = {'chest_sanity': True, 'shrine_sanity': False,
+               'enable_the_champions_ballad_dlc': True}
+
+    def test_chests_remain_enabled_with_chestsanity(self):
+        self.assertEqual(sum(entry['region'] == 'Final Trial' for entry in self.world.active_chests), 7)
+        self.assertIn('Oman Au Shrine - Chest', {entry['name'] for entry in self.world.active_chests})
+        self.assertFalse(any(entry['kind'] == 'shrine' for entry in self.world.active_completions))
+
+
+class TestBothChestOptionsOff(BotWTestBase):
+    options = {'chest_sanity': False, 'shrine_sanity': False}
+
+    auto_construct = False
+    run_default_tests = False
+
+    def test_no_chest_checks(self):
+        with self.assertRaisesRegex(ValueError, 'mapped checks cannot hold'):
+            self.world_setup()
+        self.assertEqual(self.world.active_chests, [])
+        self.assertFalse(any(entry['kind'] == 'shrine' for entry in self.world.active_completions))
 
 
 class TestTowerSanityOnly(BotWTestBase):

@@ -13,10 +13,17 @@ This repository contains the Breath of the Wild Archipelago world, the static ga
    The installer creates the pack there and remembers your folder choices as
    defaults. If you're replacing a seed for the same player number, move the
    existing pack out of the Graphic Packs folder first.
-4. Refresh **Options → Graphic Packs** in Cemu, enable the seed pack, and load
-   your save. In the Launcher, choose **BotW Client** and enter the room
-   address, player name and password if required. Use an APWorld built with a
-   bundled client for your platform.
+4. Refresh **Options → Graphic Packs** in Cemu and enable the seed pack. Close
+   Cemu, then choose **BotW Client** in the Archipelago Launcher. Select the
+   Cemu executable if prompted. The client starts Breath of the Wild by title
+   ID from Cemu's game list. Load your save in
+   that Cemu window, enter the room address, and choose **Connect**. Enter your
+   player name and the room password if required. The Launcher client can access
+   the Cemu process it starts on Linux without sudo.
+   Room messages appear in the Archipelago tab, and the Hints tab shows your
+   saved hints. Enter chat or server commands such as `!hint <item>` in the
+   command field. In the **Tracker** tab, choose **Generate map** once and enable
+   the tracker before connecting to see your live checks.
 
 The Windows x64 and Linux x64 player bundles include the patcher and client.
 Players only need Archipelago, Cemu, and their own game files. If you built
@@ -39,7 +46,7 @@ Build the world bundle from the repository root:
 python -m src.patcher bundle-world
 ```
 
-This creates `out/botw-0.5.6.apworld`,
+This creates `out/botw-0.5.8.apworld`,
 with the version defined in `worlds/botw/static/version.py` and recorded in the
 archive manifest. Install only one BotW APWorld version in Archipelago.
 
@@ -71,10 +78,10 @@ RIDs are `linux-x64`, `linux-arm64`, `win-x64`, and `win-arm64`. Use
 be used for generation and patching.
 
 For a player release, also build and include the self-contained patcher.
-From a Python 3.12 environment with the patcher requirements installed:
+From a Python 3.12 environment:
 
 ```sh
-python -m pip install PyInstaller
+python -m pip install PyInstaller -r src/patcher/requirements-tracker.txt
 python -m src.patcher.build_player linux-x64 out/patcher-linux-x64.zip
 python -m src.patcher.build_player win-x64 out/patcher-win-x64.zip \
   --windows-python /path/to/python-3.12-embed-amd64.zip
@@ -85,8 +92,8 @@ and installs Windows wheels into it at build time. The Linux build runs on
 Linux x64. Pass `--patcher linux-x64=out/patcher-linux-x64.zip` or
 `--patcher win-x64=out/patcher-win-x64.zip` to `bundle-world` alongside the
 matching `--client` argument. The default filenames for single-platform player
-bundles are `out/botw-0.5.6-linux-x64.apworld` and
-`out/botw-0.5.6-win-x64.apworld`. Repeat both options for a multi-platform bundle.
+bundles are `out/botw-0.5.8-linux-x64.apworld` and
+`out/botw-0.5.8-win-x64.apworld`. Repeat both options for a multi-platform bundle.
 
 Add `--tracker` to the client command for an offline map tracker at
 `http://127.0.0.1:38282/`. Checks overlay the actual BotW map extracted from your
@@ -127,11 +134,11 @@ Set `trial_of_the_sword: false` to exclude all trial chests and its completion
 check, including its Victory requirement. Other Master Trials DLC content remains
 enabled. The option defaults to `true` and only takes effect with
 `enable_the_master_trials_dlc: true`; it does not block entering the trial in-game.
-All five Sanity options default to `true`. ChestSanity adds overworld chests;
-mapped shrine chests remain enabled. ShrineSanity adds shrine completion rewards,
+All five Sanity options default to `true`. ChestSanity adds all mapped chests.
+ShrineSanity adds mapped shrine chests and shrine completion rewards.
 TowerSanity adds tower activations, and MinibossSanity/BossSanity add defeats.
-Currently, keep `chest_sanity: true` with the default starting inventory: disabling
-it removes all initially reachable checks and can prevent seed generation.
+Keep at least one of `chest_sanity` and `shrine_sanity` enabled with the
+default starting inventory so there are enough checks for progression items.
 For older YAMLs, rename `chest_shuffle` to `chest_sanity`, and replace the
 `_checks` suffix with `_sanity` on `shrine`, `tower`, `miniboss`, and `boss`.
 The goal controls generation logic and the client's Victory report; it does not

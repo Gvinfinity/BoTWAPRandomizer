@@ -27,12 +27,17 @@ the port; `--tracker-map-dir /path/to/tracker` selects a prepared map directory.
 
 ## Prepare the game map once
 
-The current workspace already has a prepared map in `out/tracker/`. On a fresh
-checkout, prepare it from your installed game:
+In the Archipelago Launcher, open **BotW Client → Tracker → Generate map**. The
+client uses the content folders from seed pack setup or asks for the base game
+content folder. When generation finishes, open the tracker or refresh its page.
+**Open tracker in browser** opens the live tracker when connected with tracking
+enabled and a catalog preview otherwise. The Launcher uses an available
+loopback port and displays the URL for you to copy.
+
+To generate the map from a repository checkout:
 
 ```sh
 .venv-patcher/bin/pip install -r src/patcher/requirements-tracker.txt
-git clone --depth 1 https://github.com/aboood40091/BFRES-Tool.git out/tools/BFRES-Tool
 .venv-patcher/bin/python -m src.patcher.build_tracker_map
 ```
 
@@ -47,16 +52,14 @@ installations, pass `--cemu-data /path/to/Cemu`, or supply extracted content roo
 The exporter decodes the game's fully revealed `MapTex1` tiles, writes a
 6720×5600 WebP background, and extracts shrine/tower map landmarks into `map.json`.
 Fog variants are excluded. Use `--lod 2` or `--lod 3` for smaller backgrounds.
-Both files stay in ignored `out/tracker/`; game images are not committed or
-redistributed. The client searches `out/tracker/` relative to the working directory
-and executable's ancestors, followed by the local application data directory
-`BotWAP/tracker/`. Restart the tracker after rebuilding the map. A missing map
-shows setup instructions instead of substituting a grid.
+The exporter writes both files to the installed client's map directory by default.
+On Linux this is `$XDG_DATA_HOME/BotWAP/tracker/`, with `~/.local/share` as the
+default data directory. On Windows it is `%LOCALAPPDATA%\BotWAP\tracker\`.
+For repository previews, the client also checks `out/tracker/` relative to the
+working directory and executable's ancestors. Use `--output out/tracker` if you
+want to export there. Restart the tracker after rebuilding the map.
 
-Texture decoding uses the independent, GPL-licensed
-[BFRES-Tool addrlib](https://github.com/aboood40091/BFRES-Tool); the tested revision
-is `e00e9bcf6ca0e0dd5885a8cc9927f15c3e3892d9`. The decoder is a local build tool,
-not part of the runtime. The full map's X ±6000, Z ±5000 bounds agree with the
+The full map's X ±6000, Z ±5000 bounds agree with the
 [BotW Object Map coordinate system](https://github.com/zeldamods/objmap/blob/master/src/util/map.ts).
 Game artwork belongs to Nintendo.
 

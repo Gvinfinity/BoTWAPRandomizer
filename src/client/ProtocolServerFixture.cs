@@ -38,6 +38,7 @@ internal sealed class ProtocolServerFixture : IDisposable
     public bool HasCheck(long id) { lock (observedChecks) return observedChecks.Contains(id); }
     public string Uri { get; }
     public TaskCompletionSource<long[]> Checks { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+    public TaskCompletionSource<string> Chat { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
     public TaskCompletionSource<int> GoalStatus { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
     public ProtocolServerFixture(JsonElement slotData, uint location, uint item, TimeSpan? timeout = null, bool manualItems = false)
     {
@@ -104,6 +105,19 @@ internal sealed class ProtocolServerFixture : IDisposable
                             else
                                 await SendPackets(new { cmd = "ReceivedItems", index = 0,
                                     items = new[] { new { item, location, player = 1, flags = 1, @class = "NetworkItem" } } });
+                            break;
+                        case "Say":
+                            string text = packet.GetProperty("text").GetString()!;
+                            Chat.TrySetResult(text);
+                            await SendPackets(new { cmd = "PrintJSON", type = "Chat", data = new[] {
+                                new { text = "Room says hello", type = "text" } } });
+                            break;
+                        case "Get":
+                            var keys = packet.GetProperty("keys").EnumerateArray().Select(x => x.GetString()!).ToArray();
+                            var values = keys.ToDictionary(key => key, key => (object)new[] {
+                                new { receiving_player = 1, finding_player = 1, item, location,
+                                      found = false, entrance = "", item_flags = 1, @class = "Hint" } });
+                            await SendPackets(new { cmd = "Retrieved", keys = values });
                             break;
                         case "LocationChecks":
                             var receivedChecks = packet.GetProperty("locations").EnumerateArray().Select(x => x.GetInt64()).ToArray();

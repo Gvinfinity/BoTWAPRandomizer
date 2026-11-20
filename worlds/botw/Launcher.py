@@ -11,7 +11,7 @@ import zipfile
 
 from Launcher import launch
 from Utils import env_cleared_lib_path, messagebox, open_directory, open_filename, user_path
-from worlds.LauncherComponents import Component, SuffixIdentifier, Type
+from worlds.LauncherComponents import Component, SuffixIdentifier, Type, launch as launch_component
 
 from .static.plan import read_plan
 from .static.resources import GameDump
@@ -117,6 +117,15 @@ def bundled_patcher():
     return [str(cache / "BotWPatcher")], {"env": environment}
 
 
+def run_client_window(executable, windows):
+    try:
+        from .ClientWindow import show_client_window
+
+        show_client_window(executable, windows)
+    except Exception as exc:
+        messagebox("BotW client window failed", str(exc), error=True)
+
+
 def launch_client(*args):
     try:
         rid, name = client_platform()
@@ -143,7 +152,10 @@ def launch_client(*args):
                                 raise
         else:
             raise RuntimeError(f"This APWorld has no bundled client for {rid}. Use a client-enabled build or run the standalone BotWClient.")
-        command = [str(executable), *(args or ("--interactive",))]
+        if not args:
+            launch_component(run_client_window, name="BotWClient", args=(executable, rid.startswith("win-")))
+            return
+        command = [str(executable), *args]
         if rid.startswith("win-"):
             subprocess.Popen(command, creationflags=subprocess.CREATE_NEW_CONSOLE)
         else:

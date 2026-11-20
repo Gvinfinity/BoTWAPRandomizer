@@ -156,9 +156,14 @@ function renderInventory() {
 async function json(path) { const response = await fetch(path); if (!response.ok) throw Error(`HTTP ${response.status}`); return response.json(); }
 async function loadMap() {
   try {
-    const info = await json('/api/map'); if (!info.available) throw Error('Map not built');
-    const response = await fetch('/map.webp'); if (!response.ok) throw Error('Could not load map image');
-    image = await createImageBitmap(await response.blob()); $('mode').textContent = 'Game map · offline'; draw();
+    const info = await json('/api/map'); if (!info.available) throw Error(info.error || 'Map not built');
+    const background = new Image();
+    await new Promise((resolve, reject) => {
+      background.onload = resolve;
+      background.onerror = () => reject(Error('Could not load map image'));
+      background.src = '/map.webp';
+    });
+    image = background; $('mode').textContent = 'Game map · offline'; draw();
   } catch (error) { $('mode').textContent = error.message; $('map-error').hidden = false; }
 }
 async function poll() {

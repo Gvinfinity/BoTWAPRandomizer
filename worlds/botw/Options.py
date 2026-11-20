@@ -21,12 +21,12 @@ class Goal(Choice):
 
 
 class ChestSanity(DefaultOnToggle):
-    """Include the mapped overworld chests in addition to mapped shrine chests."""
+    """Include all mapped chests as Archipelago checks."""
     display_name = "ChestSanity"
 
 
 class ShrineSanity(DefaultOnToggle):
-    """Replace base-game monk Spirit Orb rewards with Archipelago checks."""
+    """Include mapped shrine chests and base-game monk rewards as Archipelago checks."""
     display_name = "ShrineSanity"
 
 
@@ -59,8 +59,9 @@ class MasterTrials(Toggle):
 class TrialOfTheSword(DefaultOnToggle):
     """Include Trial of the Sword chests and its completion check.
 
-    Requires The Master Trials DLC. Disable to remove these checks and the
-    trial's Victory requirement while retaining the DLC's other content.
+    Requires The Master Trials DLC. Trial chests also require ChestSanity.
+    Disable to remove the trial checks and Victory requirement while retaining
+    the DLC's other content.
     This changes the randomizer's checks and logic, not physical access to the trial.
     """
     display_name = "Trial of the Sword"

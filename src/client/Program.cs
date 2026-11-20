@@ -1,6 +1,9 @@
+using System.Collections.Concurrent;
+using System.Text.Json;
 using BotWClient.Memory;
 using BotWClient.Archipelago;
 using BotWClient.Tracker;
+using Microsoft.Win32.SafeHandles;
 
 namespace BotWClient;
 
@@ -28,7 +31,14 @@ internal static class Program
             catch (Exception ex) { Console.Error.WriteLine(ex.Message); return 1; }
         }
         string? server = Option("--server"), slot = Option("--slot");
+        bool launchedFromGui = args.Contains("--launcher");
         string? password = Option("--password");
+        if (launchedFromGui && password is null)
+        {
+            password = Environment.GetEnvironmentVariable("BOTWAP_ROOM_PASSWORD");
+            Environment.SetEnvironmentVariable("BOTWAP_ROOM_PASSWORD", null);
+            if (password == "") password = null;
+        }
         if (args.Contains("--interactive") && !Console.IsInputRedirected)
         {
             if (server is null) { Console.Write("Archipelago server (host:port): "); server = Console.ReadLine()?.Trim(); }
@@ -57,11 +67,26 @@ internal static class Program
         string directory = Option("--state-dir") ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "BotWAP", "state");
         using var cancellation = new CancellationTokenSource();
         Console.CancelKeyPress += (_, e) => { e.Cancel = true; cancellation.Cancel(); };
+        var commands = new ConcurrentQueue<string>();
+        if (launchedFromGui)
+        {
+            _ = Task.Run(() =>
+            {
+                string? line;
+                while ((line = Console.ReadLine()) is not null) commands.Enqueue(line);
+                cancellation.Cancel();
+            });
+        }
+        void Emit(object message)
+        {
+            Console.WriteLine("@BOTWAP@" + JsonSerializer.Serialize(message));
+        }
+        Action<object>? events = launchedFromGui ? Emit : null;
         bool verbose = args.Contains("--verbose");
         var log = new ClientLog(verbose, password);
         try
         {
-            foreach (string option in new[] { "--server", "--port", "--slot", "--password", "--state-dir" })
+            foreach (string option in new[] { "--server", "--port", "--slot", "--password", "--state-dir", "--cemu-pid", "--cemu-mem-fd" })
                 if (args.Contains(option) && (Option(option) is not { } value || value.StartsWith("--", StringComparison.Ordinal)))
                     throw new ArgumentException($"{option} requires a value.");
             var endpoint = ServerEndpoint.Parse(server, Option("--port"));
@@ -73,9 +98,16 @@ internal static class Program
                 APSessionManager.DiagnoseConnection(endpoint.AbsoluteUri, slot, password, log.Write);
                 return 0;
             }
-            using var mailbox = new Mailbox(CemuMemoryReader.Attach(verbose, log.Write));
+            int? cemuPid = Option("--cemu-pid") is { } pid ? int.Parse(pid) : null;
+            int? memoryFd = Option("--cemu-mem-fd") is { } fd ? int.Parse(fd) : null;
+            if (cemuPid is <= 0 || (memoryFd.HasValue &&
+                (!launchedFromGui || !OperatingSystem.IsLinux() || cemuPid is null || memoryFd < 3)))
+                throw new ArgumentException("Invalid Cemu process or inherited memory descriptor.");
+            using var memoryHandle = memoryFd is { } descriptor
+                ? new SafeFileHandle((nint)descriptor, ownsHandle: true) : null;
+            using var mailbox = new Mailbox(CemuMemoryReader.Attach(verbose, log.Write, cemuPid, memoryHandle));
             log.Write($"Mailbox fingerprint={mailbox.Fingerprint}, guest_addr=0x{mailbox.GuestAddress:X8}, incoming={mailbox.InHead}/{mailbox.InTail}, outgoing={mailbox.OutHead}/{mailbox.OutTail}, ack={mailbox.AckSequence}");
-            using var initial = new APSessionManager(endpoint.AbsoluteUri, slot, password, mailbox, log.Write);
+            using var initial = new APSessionManager(endpoint.AbsoluteUri, slot, password, mailbox, log.Write, events);
             using var bridge = new ClientBridge(mailbox, initial.Contract, directory, initial.Team, initial.Slot, log.Write);
             APSessionManager current = initial;
             using var tracker = args.Contains("--tracker")
@@ -103,12 +135,25 @@ internal static class Program
                         try
                         {
                             log.Write("Starting AP reconnect attempt.");
-                            var replacement = new APSessionManager(endpoint.AbsoluteUri, slot, password, mailbox, log.Write);
+                            var replacement = new APSessionManager(endpoint.AbsoluteUri, slot, password, mailbox, log.Write, events);
                             if (replacement.Team != initial.Team || replacement.Slot != initial.Slot) { replacement.Dispose(); throw new InvalidDataException("AP login identity changed"); }
                             if (!ReferenceEquals(current, initial)) current.Dispose();
                             current = replacement; bridge.Reconnected();
                         }
                         catch (IOException ex) { log.Write(ex.ToString()); Console.WriteLine(ex.Message); continue; }
+                    }
+                    while (commands.TryDequeue(out string? command))
+                    {
+                        if (command == "/help")
+                            Console.WriteLine("Enter chat or server commands such as !help, !hint, and !remaining. Use /help for this message.");
+                        else if (command.StartsWith('/'))
+                            Console.WriteLine($"Unknown client command: {command}");
+                        else if (current.Connected)
+                        {
+                            try { current.SendMessage(command); }
+                            catch (Exception ex) { Console.WriteLine($"Unable to send message: {ex.Message}"); }
+                        }
+                        else Console.WriteLine("Message not sent. The server is disconnected.");
                     }
                     try { bridge.Pump(current); }
                     catch (IOException ex) when (!current.Connected) { log.Write(ex.ToString()); continue; }

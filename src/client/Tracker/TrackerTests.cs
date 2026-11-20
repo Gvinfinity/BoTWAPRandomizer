@@ -50,6 +50,22 @@ internal static class TrackerTests
         }
         using var missing = await http.GetAsync("not-a-file"); Require(missing.StatusCode == HttpStatusCode.NotFound, "Unknown route");
         using var post = await http.PostAsync("api/state", new StringContent("{}")); Require(post.StatusCode == HttpStatusCode.MethodNotAllowed, "No game mutation endpoint");
+
+        tracker.Dispose();
+        var incomplete = Directory.CreateTempSubdirectory("botw-tracker-test-");
+        try
+        {
+            File.WriteAllText(Path.Combine(incomplete.FullName, "map.json"),
+                """{"version":1,"bounds":[-6000,-5000,6000,5000],"positions":{}}""");
+            File.WriteAllText(Path.Combine(incomplete.FullName, "map.webp"), "incomplete");
+            using var fallback = new TrackerServer(port, [id], incomplete.FullName);
+            using var info = JsonDocument.Parse(await http.GetStringAsync("api/map"));
+            Require(!info.RootElement.GetProperty("available").GetBoolean() &&
+                info.RootElement.GetProperty("error").GetString()!.Contains("WebP"), "Incomplete image reports a map error");
+            using var checksWithoutMap = JsonDocument.Parse(await http.GetStringAsync("api/locations"));
+            Require(checksWithoutMap.RootElement.GetArrayLength() == 1, "Checks remain available with a broken map");
+        }
+        finally { incomplete.Delete(recursive: true); }
     }
     private static void Require(bool condition, string message) { if (!condition) throw new InvalidDataException(message); }
 }

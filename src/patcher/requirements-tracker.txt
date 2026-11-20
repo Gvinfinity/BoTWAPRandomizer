@@ -1,4 +1,2 @@
 -r requirements.txt
 Pillow>=10,<14
-# GX2 texture layout decoder: clone https://github.com/aboood40091/BFRES-Tool
-# to out/tools/BFRES-Tool (or pass --bfres-tool to build_tracker_map).

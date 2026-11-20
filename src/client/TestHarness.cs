@@ -876,9 +876,18 @@ internal static class TestHarness
             using (var fixture = new ProtocolServerFixture(data.RootElement, location, swordItem))
             using (var tls = tlsCertificate is null ? null : new TlsServerFixture(fixture.Uri, tlsCertificate))
             using (var output = new StringWriter())
-            using (var session = new APSessionManager(tls?.Uri ?? fixture.Uri, "Test", "test-secret", mailbox, new ClientLog(true, "test-secret", output).Write))
-            using (var bridge = new ClientBridge(mailbox, session.Contract, Path.Combine(directory, "network"), session.Team, session.Slot))
             {
+            var events = new System.Collections.Concurrent.ConcurrentQueue<string>();
+            using var session = new APSessionManager(tls?.Uri ?? fixture.Uri, "Test", "test-secret", mailbox,
+                new ClientLog(true, "test-secret", output).Write, evt => events.Enqueue(JsonSerializer.Serialize(evt)));
+            using var bridge = new ClientBridge(mailbox, session.Contract, Path.Combine(directory, "network"), session.Team, session.Slot);
+            session.SendMessage("!hint Test");
+            Require(fixture.Chat.Task.WaitAsync(TimeSpan.FromSeconds(5)).GetAwaiter().GetResult() == "!hint Test",
+                    "Chat command did not reach server");
+            Require(SpinWait.SpinUntil(() => events.Any(evt => evt.Contains("Room says hello")), 5000),
+                    "Server chat was not delivered to client window");
+            Require(SpinWait.SpinUntil(() => events.Any(evt => evt.Contains("Test Chest")), 5000),
+                    "Existing hints were not delivered to client window");
                 Require(SpinWait.SpinUntil(() => session.ReceivedItems.Count == 1, 5000), "AP SDK did not receive item history");
                 int offset = Protocol.Get("outgoing_offset");
                 mailbox.SetWord(offset, 0); mailbox.SetWord(offset + 4, 0); mailbox.SetWord(offset + 8, location); mailbox.SetWord(offset + 12, 0); mailbox.SetWord(20, 1);

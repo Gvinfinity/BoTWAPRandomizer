@@ -18,4 +18,4 @@ def test_invalid_texture_is_rejected(tmp_path):
     tile = tmp_path / 'MapTex1_A-4.sbmaptex'
     tile.write_bytes(b'not a game texture')
     with pytest.raises(ValueError, match='Not a Wii U BFRES'):
-        decode_tile(tile, None)
+        decode_tile(tile)

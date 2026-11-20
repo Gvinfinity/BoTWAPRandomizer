@@ -2,7 +2,8 @@
 
 The world now supports independent `shrine_sanity`, `tower_sanity`,
 `miniboss_sanity` and `boss_sanity` options. They default on. `chest_sanity`
-adds mapped overworld chests; mapped shrine chests remain included. Tower items
+adds all mapped chests. `shrine_sanity` adds mapped shrine chests
+and shrine completion rewards. Tower items
 reveal maps without locking access to regions or their tower checks. The Plateau
 tower check is omitted when its tutorial is skipped. Boss checks required by the
 selected goal remain enabled with `boss_sanity` off.
